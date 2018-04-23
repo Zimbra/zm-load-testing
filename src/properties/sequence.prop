@@ -1,0 +1,5 @@
+PROFILE.SOAP.type=sequence
+PROFILE.SOAP.sequence.1=AuthRequest(AUTHTYPE=user)
+PROFILE.SOAP.sequence.4=SendMsgRequest
+PROFILE.SOAP.sequence.3=GetMsgRequest
+PROFILE.SOAP.sequence.2=SearchRequest(SEARCHTYPE=message,SEARCH=test)
