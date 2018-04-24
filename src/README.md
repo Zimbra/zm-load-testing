@@ -1,5 +1,7 @@
 # ant build
-requires java 7, ant 1.9, junit, and hamcrest
+
+requires: java 7, ant 1.9, junit, and hamcrest
+
 centos: yum install java ant ant-contrib ant-junit
 
 ```
@@ -8,10 +10,10 @@ $ ant
 
 all generated items are in build directory.
 
-jar = zjmeter jar file
-doc = zjmeter documentation
-classes = zjmeter classes
-test = zjmeter test classes
+* jar = zjmeter jar file
+* doc = zjmeter documentation
+* classes = zjmeter classes
+* test = zjmeter test classes
 
 ```
 $ ant clean 
@@ -56,7 +58,7 @@ rm java/**/*.class
 
 ## junit test
 
-````
+```
 mkdir lib
 cd lib
 wget http://search.maven.org/remotecontent?filepath=junit/junit/4.12/junit-4.12.jar -O junit-4.12.jar
