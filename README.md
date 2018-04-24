@@ -4,13 +4,17 @@ This contains zimbra jmeter load tests.
 
 # Directories
 
+* tests
+
+  Directory of jmeter tests. See tests [README.md](tests/README.md) for more details.
+
 * src
 
-  Source code for Zimbra Java Library.
+  Source code for Zimbra JMeter Java Library. See src [README.md](src/README.md) for more details.
 
 * jar
 
-  Pre-compiled Zimbra Java Library jar file.
+  Pre-compiled Zimbra JMeter Java Library jar file.
 
 # Notes
 

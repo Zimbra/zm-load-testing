@@ -1,0 +1,5 @@
+PROFILE.POP.type=sequence
+PROFILE.POP.sequence.1=USER
+PROFILE.POP.sequence.2=PASS
+PROFILE.POP.sequence.3=LIST
+PROFILE.POP.sequence.4=QUIT

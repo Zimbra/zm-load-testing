@@ -1,0 +1,2184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.9" jmeter="3.0 r1743807">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>false</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>false</threadName>
+            <dataType>false</dataType>
+            <encoding>false</encoding>
+            <assertions>false</assertions>
+            <subresults>false</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <url>true</url>
+          </value>
+        </objProp>
+        <objProp>
+          <name></name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>false</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>false</threadName>
+            <dataType>false</dataType>
+            <encoding>false</encoding>
+            <assertions>false</assertions>
+            <subresults>false</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename">${__P(jmetercsv,/tmp/jmeter.csv)}</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <objProp>
+          <name></name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Accounts" enabled="true">
+        <stringProp name="filename">${__P(ACCOUNTS.csv)}</stringProp>
+        <stringProp name="fileEncoding"></stringProp>
+        <stringProp name="variableNames">USER,PASS</stringProp>
+        <stringProp name="delimiter">,</stringProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+      </CSVDataSet>
+      <hashTree/>
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="SOAP HTTP Config" enabled="true">
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+        <stringProp name="HTTPSampler.domain">${__P(SOAP.server)}</stringProp>
+        <stringProp name="HTTPSampler.port">${__P(SOAP.port)}</stringProp>
+        <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+        <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        <stringProp name="HTTPSampler.protocol"></stringProp>
+        <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+        <stringProp name="HTTPSampler.path"></stringProp>
+        <stringProp name="HTTPSampler.implementation">Java</stringProp>
+        <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="SOAP Setup" enabled="true">
+        <stringProp name="filename"></stringProp>
+        <stringProp name="parameters"></stringProp>
+        <boolProp name="resetInterpreter">false</boolProp>
+        <stringProp name="script">import com.zimbra.jmeter.Zimbra;
+//debug();
+Zimbra soap = new Zimbra(props,&quot;SOAP&quot;);
+vars.putObject(&quot;SOAP&quot;,soap);
+
+String url = &quot;https://&quot;+props.get(&quot;SOAP.server&quot;);
+String admin = url+&quot;:7071/service/admin/soap&quot;;
+vars.put(&quot;ADMIN&quot;,admin);
+if (!props.get(&quot;SOAP.port&quot;).equals(&quot;&quot;) ) {
+  url = url + &quot;:&quot; + props.get(&quot;SOAP.port&quot;); 
+}
+url = url+&quot;/service/soap&quot;;
+log.info(url);
+vars.put(&quot;URL&quot;,url);</stringProp>
+      </BeanShellPreProcessor>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="SOAP User" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">${__P(LOAD.SOAP.loopcount)}</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.SOAP.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.SOAP.rampup)}</stringProp>
+        <longProp name="ThreadGroup.start_time">1505165237000</longProp>
+        <longProp name="ThreadGroup.end_time">1505165237000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.SOAP.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
+          <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Zimbra;
+import com.zimbra.jmeter.Command;
+
+Zimbra soap = vars.getObject(&quot;SOAP&quot;);
+ArrayList commands = soap.getcommands();
+
+vars.putObject(&quot;COMMANDS&quot;,commands);
+// generate command DELAY
+if (props.get(&quot;LOAD.SOAP.userduration&quot;) == null || commands.size() == 0) {
+  vars.putObject(&quot;DELAY&quot;,&quot;0&quot;);
+} else {
+  int delay = Integer.parseInt(props.get(&quot;LOAD.SOAP.userduration&quot;))*1000/commands.size();
+  vars.putObject(&quot;DELAY&quot;,delay.toString());
+}
+// initialize CONTINUE
+if (commands.size() &gt; 0) {
+  vars.put(&quot;CONTINUE&quot;,&quot;true&quot;);
+} else {
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+} </stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Run Commands" enabled="true">
+          <stringProp name="WhileController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+        </WhileController>
+        <hashTree>
+          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Next Command" enabled="true">
+            <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Command;
+
+ArrayList commands = vars.getObject(&quot;COMMANDS&quot;);
+if (commands.size() &gt; 0) {
+  //log.info(&quot;Testing: &quot;+commands);
+  Command c = commands.remove(0);
+  vars.put(&quot;COMMAND&quot;,c.getName());
+  for (Map.Entry a: c.argsSet()) {
+  	vars.put(a.getKey(),a.getValue());
+  }
+  //Should find better home and approach for this but for now default types
+  if (c.getName().equals(&quot;FolderActionRequest&quot;)) {
+    if (c.getArg(&quot;FOLDERACTIONTYPE&quot;) == null) {
+    	 vars.put(&quot;FOLDERACTIONTYPE&quot;,&quot;read&quot;);
+    }
+  }
+  if (c.getName().equals(&quot;GetFolderRequest&quot;)) {
+    if (c.getArg(&quot;PATH&quot;) == null) {
+      vars.put(&quot;PATH&quot;,&quot;/inbox&quot;);
+    }
+  }
+  if (c.getName().equals(&quot;TagActionRequest&quot;)) {
+    if (c.getArg(&quot;TAGACTIONTYPE&quot;) == null) {
+      vars.put(&quot;TAGACTIONTYPE&quot;,&quot;read&quot;);
+    }
+  }
+  //log.info(vars.get(&quot;COMMAND&quot;));
+}
+if (commands.size() == 0) {
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+}</stringProp>
+            <stringProp name="BeanShellSampler.filename"></stringProp>
+            <stringProp name="BeanShellSampler.parameters"></stringProp>
+            <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+          </BeanShellSampler>
+          <hashTree/>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Command Execution" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Command Delay" enabled="true">
+              <stringProp name="ConstantTimer.delay">${DELAY}</stringProp>
+            </ConstantTimer>
+            <hashTree/>
+            <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="Commands" enabled="true">
+              <stringProp name="SwitchController.value">${COMMAND}</stringProp>
+            </SwitchController>
+            <hashTree>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="default" enabled="true">
+                <stringProp name="BeanShellSampler.query">log.info(Thread.currentThread().getName()+&quot; &quot;+vars.get(&quot;COMMAND&quot;)+&quot; not currently supported&quot;);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="ApplyFilterRulesRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;ApplyFilterRulesRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;filterRules&gt;&lt;filterRule name=&quot;${FILTER}&quot;/&gt;&lt;/filterRules&gt;
+      &lt;query&gt;test&lt;/query&gt;
+    &lt;/ApplyFilterRulesRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt; </stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="AuthRequest" enabled="true">
+                <stringProp name="SwitchController.value">${AUTHTYPE}</stringProp>
+              </SwitchController>
+              <hashTree>
+                <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="user" enabled="true">
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments"/>
+                  </elementProp>
+                  <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                  <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+       &lt;authToken/&gt;
+       &lt;nosession/&gt;
+       &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+   &lt;AuthRequest xmlns=&quot;urn:zimbraAccount&quot; csrfTokenSecured=&quot;1&quot;&gt;
+     &lt;account by=&quot;name&quot;&gt;${USER}&lt;/account&gt;
+     &lt;password&gt;${PASS}&lt;/password&gt;
+   &lt;/AuthRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                  <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                  <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                  <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                </SoapSampler>
+                <hashTree>
+                  <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="AUTHTOKEN" enabled="true">
+                    <stringProp name="XPathExtractor.default"></stringProp>
+                    <stringProp name="XPathExtractor.refname">AUTHTOKEN</stringProp>
+                    <stringProp name="XPathExtractor.xpathQuery">//authToken</stringProp>
+                    <boolProp name="XPathExtractor.validate">false</boolProp>
+                    <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                    <boolProp name="XPathExtractor.namespace">false</boolProp>
+                    <stringProp name="Scope.variable">authToken</stringProp>
+                    <boolProp name="XPathExtractor.quiet">false</boolProp>
+                  </XPathExtractor>
+                  <hashTree/>
+                </hashTree>
+                <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="admin" enabled="true">
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments"/>
+                  </elementProp>
+                  <stringProp name="SoapSampler.URL_DATA">${ADMIN}</stringProp>
+                  <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+       &lt;authToken/&gt;
+       &lt;nosession/&gt;
+       &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+   &lt;AuthRequest xmlns=&quot;urn:zimbraAdmin&quot; csrfTokenSecured=&quot;1&quot;&gt;
+     &lt;account by=&quot;name&quot;&gt;${__P(SOAP.admin.user)}&lt;/account&gt;
+     &lt;password&gt;${__P(SOAP.admin.pass)}&lt;/password&gt;
+   &lt;/AuthRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                  <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                  <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                  <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                </SoapSampler>
+                <hashTree>
+                  <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="ADMINAUTHTOKEN" enabled="true">
+                    <stringProp name="XPathExtractor.default"></stringProp>
+                    <stringProp name="XPathExtractor.refname">ADMINAUTHTOKEN</stringProp>
+                    <stringProp name="XPathExtractor.xpathQuery">//authToken</stringProp>
+                    <boolProp name="XPathExtractor.validate">false</boolProp>
+                    <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                    <boolProp name="XPathExtractor.namespace">false</boolProp>
+                    <stringProp name="Scope.variable">authToken</stringProp>
+                    <boolProp name="XPathExtractor.quiet">false</boolProp>
+                  </XPathExtractor>
+                  <hashTree/>
+                </hashTree>
+              </hashTree>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="AutoCompleteRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;AutoCompleteRequest xmlns=&quot;urn:zimbraMail&quot; name=&quot;user&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="BrowseRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;BrowseRequest browseBy=&quot;domains&quot; xmlns=&quot;urn:zimbraMail&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="CheckSpellingRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;CheckSpellingRequest xmlns=&quot;urn:zimbraMail&quot;&gt;This is a spelling chck tert.&lt;/CheckSpellingRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="ContactActionRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;ContactActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;action id=&quot;${CONTACT}&quot; op=&quot;tag&quot; tn=&quot;test&quot;/&gt;
+    &lt;/ContactActionRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="ConvActionRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;ConvActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;action id=&quot;${CONVERSATION}&quot; op=&quot;read&quot;/&gt;
+    &lt;/ConvActionRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="CreateAppointmentRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;CreateAppointmentRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;m name=&quot;soaptest appointment&quot;&gt;
+        &lt;content&gt;Just a test&lt;/content&gt;
+        &lt;inv&gt;
+          &lt;comp&gt;
+            &lt;s d=&quot;20170628T110000&quot;/&gt;
+            &lt;e d=&quot;20170628T120000&quot;/&gt;
+          &lt;/comp&gt;
+        &lt;/inv&gt;
+      &lt;/m&gt;
+    &lt;/CreateAppointmentRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="CreateContactRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;CreateContactRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;cn&gt;
+        &lt;a n=&quot;lastName&quot;&gt;Testing&lt;/a&gt;
+      &lt;/cn&gt;
+    &lt;/CreateContactRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="CreateFolderRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;CreateFolderRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;folder name=&quot;soaptest&quot;/&gt;
+    &lt;/CreateFolderRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="CreateSearchFolderRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;CreateSearchFolderRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;search name=&quot;soapsearchtest&quot; query=&quot;Testing&quot; l=&quot;1&quot;/&gt;
+    &lt;/CreateSearchFolderRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="CreateTagRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;CreateTagRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;tag name=&quot;soaptest&quot;/&gt;
+    &lt;/CreateTagRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="CreateWaitSetRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+     &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;CreateWaitSetRequest xmlns=&quot;urn:zimbraMail&quot; defTypes=&quot;all&quot;&gt;
+      &lt;add/&gt; 
+    &lt;/CreateWaitSetRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="WAITSETID" enabled="true">
+                  <stringProp name="XPathExtractor.default"></stringProp>
+                  <stringProp name="XPathExtractor.refname">WAITSETID</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//CreateWaitSetResponse/@waitSet</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="Scope.variable">authToken</stringProp>
+                  <boolProp name="XPathExtractor.quiet">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="WAITSETSEQ" enabled="true">
+                  <stringProp name="XPathExtractor.default"></stringProp>
+                  <stringProp name="XPathExtractor.refname">WAITSETSEQ</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//CreateWaitSetResponse/@seq</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="Scope.variable">authToken</stringProp>
+                  <boolProp name="XPathExtractor.quiet">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+              </hashTree>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="DestroyWaitSetRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;DestroyWaitSetRequest xmlns=&quot;urn:zimbraMail&quot; waitSet=&quot;${WAITSETID}&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="DiscoverRightsRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;DiscoverRightsRequest xmlns=&quot;urn:zimbraAccount&quot;&gt;
+      &lt;right&gt;sendAs&lt;/right&gt;
+    &lt;/DiscoverRightsRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="DismissCalendarItemAlarmRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;DismissCalendarItemAlarmRequest xmlns=&quot;urn:zimbraMail&quot;/&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="EndSessionRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;EndSessionRequest xmlns=&quot;urn:zimbraAccount&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="FlushCacheRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${ADMIN}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${ADMINAUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;FlushCacheRequest xmlns=&quot;urn:zimbraAdmin&quot;&gt;
+      &lt;cache type=&quot;account&quot;&gt;
+        &lt;entry by=&quot;name&quot;&gt;${USER}&lt;/entry&gt;
+      &lt;/cache&gt;
+    &lt;/FlushCacheRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="FolderActionRequest" enabled="true">
+                <stringProp name="SwitchController.value">${FOLDERACTIONTYPE}</stringProp>
+              </SwitchController>
+              <hashTree>
+                <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="read" enabled="true">
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments"/>
+                  </elementProp>
+                  <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                  <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;FolderActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;action op=&quot;read&quot; id=&quot;${FOLDER}&quot;/&gt;
+    &lt;/FolderActionRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                  <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                  <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                  <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                </SoapSampler>
+                <hashTree/>
+                <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="delete" enabled="true">
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments"/>
+                  </elementProp>
+                  <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                  <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;FolderActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;action op=&quot;delete&quot; id=&quot;${FOLDER}&quot;/&gt;
+    &lt;/FolderActionRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                  <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                  <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                  <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                </SoapSampler>
+                <hashTree/>
+              </hashTree>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetAccountRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${ADMIN}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${ADMINAUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetAccountRequest xmlns=&quot;urn:zimbraAdmin&quot;&gt;
+      &lt;account by=&quot;name&quot;&gt;${USER}&lt;/account&gt;
+    &lt;/GetAccountRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="ACCOUNTID" enabled="true">
+                  <stringProp name="XPathExtractor.default"></stringProp>
+                  <stringProp name="XPathExtractor.refname">ACCOUNTID</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//account/@id</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+              </hashTree>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetAccountInfoRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetAccountInfoRequest xmlns=&quot;urn:zimbraAccount&quot;&gt;
+      &lt;account by=&quot;name&quot;&gt;${USER}&lt;/account&gt;
+    &lt;/GetAccountInfoRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetAggregateQuotaUsageOnServerRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${ADMIN}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${ADMINAUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetAggregateQuotaUsageOnServerRequest xmlns=&quot;urn:zimbraAdmin&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetAppointmentRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetAppointmentRequest id=&quot;${APPOINTMENT}&quot; xmlns=&quot;urn:zimbraMail&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetAvailableCsvFormatsRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetAvailableCsvFormatsRequest xmlns=&quot;urn:zimbraAccount&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetAvailableLocalesRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetAvailableLocalesRequest xmlns=&quot;urn:zimbraAccount&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetAvailableSkinsRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetAvailableSkinsRequest xmlns=&quot;urn:zimbraAccount&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetContactsRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetContactsRequest xmlns=&quot;urn:zimbraMail&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="CONTACT" enabled="true">
+                  <stringProp name="XPathExtractor.default"></stringProp>
+                  <stringProp name="XPathExtractor.refname">CONTACT</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//cn/@id</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+              </hashTree>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetConvRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetConvRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;c id=&quot;${CONVERSATION}&quot;/&gt;
+    &lt;/GetConvRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetCosRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${ADMIN}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${ADMINAUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetCosRequest xmlns=&quot;urn:zimbraAdmin&quot;&gt;
+      &lt;cos by=&quot;name&quot;&gt;default&lt;/cos&gt;
+    &lt;/GetCosRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetDataSourcesRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${ADMIN}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetDataSourcesRequest xmlns=&quot;urn:zimbraMail&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetDomainInfoRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${ADMIN}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken/&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetDomainInfoRequest xmlns=&quot;urn:zimbraAdmin&quot;&gt;
+      &lt;domain by=&quot;name&quot;&gt;zimbra07.loadtest.synacor.ocm&lt;/domain&gt;
+    &lt;/GetDomainInfoRequest&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetFilterRulesRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetFilterRulesRequest xmlns=&quot;urn:zimbraMail&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="FILTER" enabled="true">
+                  <stringProp name="XPathExtractor.default"></stringProp>
+                  <stringProp name="XPathExtractor.refname">FILTER</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//filterRule/@name</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+              </hashTree>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetFolderRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetFolderRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;folder path=&quot;${PATH}&quot;/&gt;
+    &lt;/GetFolderRequest&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="FOLDER" enabled="true">
+                  <stringProp name="XPathExtractor.default"></stringProp>
+                  <stringProp name="XPathExtractor.refname">FOLDER</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//folder/@id | //search/@id</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+              </hashTree>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetFreeBusyRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+       &lt;GetFreeBusyRequest s=&quot;1501570800000&quot; e=&quot;1504249200000&quot; xmlns=&quot;urn:zimbraMail&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetInfoRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+       &lt;GetInfoRequest xmlns=&quot;urn:zimbraAccount&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                <stringProp name="TestPlan.comments">s</stringProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetMailboxRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${ADMIN}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${ADMINAUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetMailboxRequest xmlns=&quot;urn:zimbraAdmin&quot;&gt;
+      &lt;mbox id=&quot;${ACCOUNTID}&quot;/&gt;
+    &lt;/GetMailboxRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetMailboxMetadataRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetMailboxMetadataRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;meta section=&quot;zwc:test&quot;/&gt;
+    &lt;/GetMailboxMetadataRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetMiniCalRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetMiniCalRequest s=&quot;1501570800000&quot; e=&quot;1504249200000&quot; xmlns=&quot;urn:zimbraMail&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetMsgRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetMsgRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;m id=&quot;${MESSAGE}&quot;/&gt;
+    &lt;/GetMsgRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetPrefsRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetPrefsRequest xmlns=&quot;urn:zimbraAccount&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetRightsRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetRightsRequest xmlns=&quot;urn:zimbraAccount&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetShareInfoRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetShareInfoRequest xmlns=&quot;urn:zimbraAccount&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetTagRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetTagRequest xmlns=&quot;urn:zimbraMail&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="TAG" enabled="true">
+                  <stringProp name="XPathExtractor.default"></stringProp>
+                  <stringProp name="XPathExtractor.refname">TAG</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//tag/@id</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+              </hashTree>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="GetWhiteBlackListRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetWhiteBlackListRequest xmlns=&quot;urn:zimbraAccount&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="ModifyAccountRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${ADMIN}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${ADMINAUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;ModifyAccountRequest id=&quot;${ACCOUNTID}&quot; xmlns=&quot;urn:zimbraAdmin&quot;&gt;
+      &lt;a n=&quot;zimbraPrefIMFlashTitle&quot;&gt;FALSE&lt;/a&gt;
+    &lt;/ModifyAccountRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="ModifyContactRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;ModifyContactRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;cn id=&quot;${CONTACT}&quot;&gt;
+        &lt;a n=&quot;lastName&quot;&gt;Testing&lt;/a&gt;
+      &lt;/cn&gt;
+    &lt;/ModifyContactRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="ModifyFilterRulesRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;ModifyFilterRulesRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;filterRules&gt;
+        &lt;filterRule name=&quot;Testing&quot; active=&quot;0&quot;&gt;
+          &lt;filterTests condition=&quot;anyof&quot;&gt;
+            &lt;bodyTest value=&quot;Testing&quot;/&gt;
+          &lt;/filterTests&gt;
+          &lt;filterActions&gt;
+            &lt;actionDiscard/&gt;
+          &lt;/filterActions&gt;
+        &lt;/filterRule&gt;
+      &lt;/filterRules&gt;
+    &lt;/ModifyFilterRulesRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="ModifyPrefsRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;ModifyPrefsRequest xmlns=&quot;urn:zimbraAccount&quot;&gt;
+      &lt;pref name=&quot;zimbraPrefIMFlashIcon&quot;&gt;FALSE&lt;/pref&gt;
+    &lt;/ModifyPrefsRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="MsgActionRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;MsgActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;action id=&quot;${MESSAGE}&quot; op=&quot;read&quot;/&gt;
+    &lt;/MsgActionRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="NoOpRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;NoOpRequest xmlns=&quot;urn:zimbraMail&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="RankingActionRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;RankingActionRequest op=&quot;reset&quot; xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;action op=&quot;reset&quot;/&gt;
+    &lt;/RankingActionRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="SaveDraftRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;SaveDraftRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;m su=&quot;Save Draft Test&quot;&gt;
+        &lt;content&gt;Save Draft Request Test Case&lt;/content&gt;
+      &lt;/m&gt;
+    &lt;/SaveDraftRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="SearchConvRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;SearchConvRequest cid=&quot;${CONVERSATION}&quot; xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;query&gt;Test&lt;/query&gt;
+    &lt;/SearchConvRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="SearchRequest" enabled="true">
+                <stringProp name="SwitchController.value">${SEARCHTYPE}</stringProp>
+              </SwitchController>
+              <hashTree>
+                <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="message" enabled="true">
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments"/>
+                  </elementProp>
+                  <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                  <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;SearchRequest types=&quot;${SEARCHTYPE}&quot; xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;query&gt;${__evalVar(SEARCH)}&lt;/query&gt;
+    &lt;/SearchRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                  <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                  <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                  <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                </SoapSampler>
+                <hashTree>
+                  <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="COMPNUM" enabled="true">
+                    <stringProp name="XPathExtractor.default"></stringProp>
+                    <stringProp name="XPathExtractor.refname">COMPNUM</stringProp>
+                    <stringProp name="XPathExtractor.xpathQuery">//comp/@compNum</stringProp>
+                    <boolProp name="XPathExtractor.validate">false</boolProp>
+                    <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                    <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  </XPathExtractor>
+                  <hashTree/>
+                  <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="MESSAGE" enabled="true">
+                    <stringProp name="XPathExtractor.default"></stringProp>
+                    <stringProp name="XPathExtractor.refname">MESSAGE</stringProp>
+                    <stringProp name="XPathExtractor.xpathQuery">//m/@id</stringProp>
+                    <boolProp name="XPathExtractor.validate">false</boolProp>
+                    <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                    <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  </XPathExtractor>
+                  <hashTree/>
+                </hashTree>
+                <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="appointment" enabled="true">
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments"/>
+                  </elementProp>
+                  <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                  <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;SearchRequest types=&quot;${SEARCHTYPE}&quot; xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;query&gt;${__evalVar(SEARCH)}&lt;/query&gt;
+    &lt;/SearchRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                  <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                  <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                  <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                </SoapSampler>
+                <hashTree>
+                  <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="APPOINTMENT" enabled="true">
+                    <stringProp name="XPathExtractor.default"></stringProp>
+                    <stringProp name="XPathExtractor.refname">APPOINTMENT</stringProp>
+                    <stringProp name="XPathExtractor.xpathQuery">//appt/@id</stringProp>
+                    <boolProp name="XPathExtractor.validate">false</boolProp>
+                    <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                    <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  </XPathExtractor>
+                  <hashTree/>
+                </hashTree>
+                <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="conversation" enabled="true">
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments"/>
+                  </elementProp>
+                  <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                  <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;SearchRequest types=&quot;${SEARCHTYPE}&quot; xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;query&gt;${__evalVar(SEARCH)}&lt;/query&gt;
+    &lt;/SearchRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                  <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                  <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                  <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                </SoapSampler>
+                <hashTree>
+                  <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="CONVERSATION" enabled="true">
+                    <stringProp name="XPathExtractor.default"></stringProp>
+                    <stringProp name="XPathExtractor.refname">CONVERSATION</stringProp>
+                    <stringProp name="XPathExtractor.xpathQuery">//c/@id</stringProp>
+                    <boolProp name="XPathExtractor.validate">false</boolProp>
+                    <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                    <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  </XPathExtractor>
+                  <hashTree/>
+                </hashTree>
+              </hashTree>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="SendDeliveryReportRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;SendDeliveryReportRequest mid=&quot;${MESSAGE}&quot; xmlns=&quot;urn:zimbraMail&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="SendInviteReplyRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;SendInviteReplyRequest id=&quot;${MESSAGE}&quot; compNum=&quot;${COMPNUM}&quot; verb=&quot;ACCEPT&quot; xmlns=&quot;urn:zimbraMail&quot;/&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="SendMsgRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;SendMsgRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;m su=&quot;Hello World&quot;&gt;
+        &lt;e a=&quot;${USER}@${__P(SOAP.domain)}&quot; t=&quot;f&quot;/&gt;
+        &lt;e a=&quot;${USER}@${__P(SOAP.domain)}&quot; t=&quot;t&quot;/&gt;
+       &lt;content&gt;Send a Message Request&lt;/content&gt;
+      &lt;/m&gt;
+    &lt;/SendMsgRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="SetCustomMetadataRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;SetCustomMetadataRequest id=&quot;${MESSAGE}&quot; xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;meta section=&quot;zwc:test&quot;&gt;
+        &lt;a n=&quot;foo&quot;&gt;bar&lt;/a&gt;
+      &lt;/meta&gt;
+    &lt;/SetCustomMetadataRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="SetMailboxMetadataRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;SetMailboxMetadataRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;meta section=&quot;zwc:test&quot;&gt;
+        &lt;a n=&quot;foo&quot;&gt;bar&lt;/a&gt;
+      &lt;/meta&gt;
+    &lt;/SetMailboxMetadataRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="SnoozeCalendarItemAlarmRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;SnoozeCalendarItemAlarmRequest xmlns=&quot;urn:zimbraMail&quot;/&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="SyncGalRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;SyncGalRequest xmlns=&quot;urn:zimbraAccount&quot;${__BeanShell(if (vars.get(&quot;GALTOKEN&quot;) == null) { return &quot;&quot;; } else {return &quot; token=\&quot;&quot;+vars.get(&quot;GALTOKEN&quot;)+&quot;\&quot;&quot;;})}/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="GALTOKEN" enabled="true">
+                  <stringProp name="XPathExtractor.default"></stringProp>
+                  <stringProp name="XPathExtractor.refname">GALTOKEN</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//SyncGalResponse/@token</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="Scope.variable">authToken</stringProp>
+                  <boolProp name="XPathExtractor.quiet">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+              </hashTree>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="SyncRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;SyncRequest xmlns=&quot;urn:zimbraMail&quot;${__BeanShell(if (vars.get(&quot;SYNCTOKEN&quot;) == null) { return &quot;&quot;; } else {return &quot; token=\&quot;&quot;+vars.get(&quot;SYNCTOKEN&quot;)+&quot;\&quot;&quot;;})}/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="SYNCTOKEN" enabled="true">
+                  <stringProp name="XPathExtractor.default"></stringProp>
+                  <stringProp name="XPathExtractor.refname">SYNCTOKEN</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//SyncResponse/@token</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="Scope.variable">authToken</stringProp>
+                  <boolProp name="XPathExtractor.quiet">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+              </hashTree>
+              <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="TagActionRequest" enabled="true">
+                <stringProp name="SwitchController.value">${TAGACTIONTYPE}</stringProp>
+              </SwitchController>
+              <hashTree>
+                <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="read" enabled="true">
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments"/>
+                  </elementProp>
+                  <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                  <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;TagActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;action id=&quot;${TAG}&quot; op=&quot;read&quot;/&gt;
+    &lt;/TagActionRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                  <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                  <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                  <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                </SoapSampler>
+                <hashTree/>
+                <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="delete" enabled="true">
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments"/>
+                  </elementProp>
+                  <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                  <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;TagActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;action id=&quot;${TAG}&quot; op=&quot;delete&quot;/&gt;
+    &lt;/TagActionRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                  <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                  <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                  <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                </SoapSampler>
+                <hashTree/>
+              </hashTree>
+              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="WaitSetRequest" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;WaitSetRequest xmlns=&quot;urn:zimbraMail&quot; waitSet=&quot;${WAITSETID}&quot; seq=&quot;${WAITSETSEQ}&quot;/&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              </SoapSampler>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+          <boolProp name="displayJMeterProperties">true</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+    <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
+      <boolProp name="WorkBench.save">true</boolProp>
+    </WorkBench>
+    <hashTree/>
+  </hashTree>
+</jmeterTestPlan>
