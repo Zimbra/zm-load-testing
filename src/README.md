@@ -21,7 +21,7 @@ $ ant clean
 
 remove build directory.
 
-# manual generation of code
+# manual build
 ## build
 
 ```
