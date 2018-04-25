@@ -18,7 +18,7 @@ This contains zimbra jmeter load tests.
 
 # Quick Start
 
-Assumes you have jmeter 3.0 installed.
+Assumes you have [jmeter 3.0](https://archive.apache.org/dist/jmeter/binaries/) installed.
 
 ```
 # grab a copy of this repo
