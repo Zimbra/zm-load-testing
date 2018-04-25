@@ -11,23 +11,23 @@ The tests are broken up into two groups
   A typical execution of a fixed test is of the form:
   
   ```
-jmeter -q env.prop -q load.prop -t test.jmx
-```
-
+  jmeter -q env.prop -q load.prop -t test.jmx
+  ```
+  
   For more details and example of running fixed tests see fixed [README.md](fixed/README.md).
 
 * generic 
-    
+  
   The generic tests can be run against different environments, with different loads, and using a profile can performe different sequences of protocol commands.
-    
+  
   All the generic tests depend on the lib/zjmeter.jar to generate the sequince of commands from the profile property file.
-    
+  
   A typical execution of a generic test is of the form:
-    
+  
   ```
-jmeter -q env.prop -q load.prop -q profile.prop -t test.jmx
-```
-    
+  jmeter -q env.prop -q load.prop -q profile.prop -t test.jmx
+  ```
+  
   For more details and example of running generic tests see generic [README.md](generic/README.md).
 
 # Scaling
