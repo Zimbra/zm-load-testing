@@ -8,23 +8,23 @@ The following protocols currently have a basic level of support:
 
 * smtp
   
-  [Simple Mail Transfer Protocol](https://tools.ietf.org/html/rfc5321) view [smtp](smtp/smtp.html) for a list of currently supported commands in the jmx.
+  [Simple Mail Transfer Protocol](https://tools.ietf.org/html/rfc5321) view [smtp](smtp/smtp.md) for a list of currently supported commands in the jmx.
   
 * lmtp
   
-  [Local Mail Transfer Protocol](https://tools.ietf.org/html/rfc2033) view [smtp](lmtp/lmtp.html) for a list of currently supported commands in the jmx.
+  [Local Mail Transfer Protocol](https://tools.ietf.org/html/rfc2033) view [lmtp](lmtp/lmtp.md) for a list of currently supported commands in the jmx.
   
 * imap
   
-  [Internet Message Access Protocol](https://tools.ietf.org/html/rfc3501) view [imap](imap/imap.html) for a list of currently supported commands in the jmx.
+  [Internet Message Access Protocol](https://tools.ietf.org/html/rfc3501) view [imap](imap/imap.md) for a list of currently supported commands in the jmx.
   
 * pop
   
-  [Post Office Protocol](https://tools.ietf.org/html/rfc5321) view [pop](pop/pop.html) for a list of currently supported commands in the jmx.
+  [Post Office Protocol](https://tools.ietf.org/html/rfc5321) view [pop](pop/pop.md) for a list of currently supported commands in the jmx.
   
 * zsoap
   
-  [Zimbra SOAP API](https://wiki.zimbra.com/wiki/SOAP_API_Reference_Material_Beginning_with_ZCS_8) view [zsoap](zsoap/zsoap.html) for list of currently supported commands in the jmx.
+  [Zimbra SOAP API](https://wiki.zimbra.com/wiki/SOAP_API_Reference_Material_Beginning_with_ZCS_8) view [zsoap](zsoap/zsoap.md) for list of currently supported commands in the jmx.
 
 This directory also contains a test mix this jmx combines all the above tests into one jmx file that can be used for very low combined user count tests.
 
