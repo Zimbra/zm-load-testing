@@ -2,7 +2,7 @@
 
 These tests provide generic Zimbra supported protocol performance testing.
 
-All these tests depend on the Zimbra JMeter Library zjmeter.jar.
+All these tests depend on the Zimbra JMeter Library zjmeter.jar and assume no SSL usage.
 
 The following protocols currently have a basic level of support:
 
