@@ -69,7 +69,7 @@
             <threadCounts>true</threadCounts>
           </value>
         </objProp>
-        <stringProp name="filename">${__P(jmetercsv,/tmp/jmeter.csv)}</stringProp>
+        <stringProp name="filename">${__P(jmetercsv,${__P(REQUEST.log)})}</stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">

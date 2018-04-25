@@ -14,9 +14,11 @@ A typical execution of a fixed test is of the form:
 jmeter -q env.prop -q load.prop -t test.jmx
 ```
 
+For more details and example of running fixed tests see generic [README.md](fixed/README.md).
+
 * generic 
 
-The generic tests can be run against different environments, with different loads and using a profile can performe different sequences of protocol requests.
+The generic tests can be run against different environments, with different loads, and using a profile can performe different sequences of protocol commands.
 
 A typical execution of a generic test is of the form:
 
