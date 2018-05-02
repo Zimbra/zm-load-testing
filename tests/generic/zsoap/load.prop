@@ -1,0 +1,4 @@
+LOAD.SOAP.users=1
+LOAD.SOAP.userduration=1
+LOAD.SOAP.rampup=0
+LOAD.SOAP.loopcount=1

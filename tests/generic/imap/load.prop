@@ -1,0 +1,4 @@
+LOAD.IMAP.users=1
+LOAD.IMAP.userduration=1
+LOAD.IMAP.rampup=0
+LOAD.IMAP.loopcount=1

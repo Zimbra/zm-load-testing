@@ -1,0 +1,12 @@
+PROFILE.SOAP.type=sequence
+PROFILE.SOAP.sequence.1=AuthRequest(AUTHTYPE=admin)
+PROFILE.SOAP.sequence.2=GetAccountRequest
+PROFILE.SOAP.sequence.3=AuthRequest(AUTHTYPE=user)
+PROFILE.SOAP.sequence.4=SearchRequest(SEARCHTYPE=message,SEARCH=test)
+PROFILE.SOAP.sequence.5=GetMsgRequest
+PROFILE.SOAP.sequence.6=SearchRequest(SEARCHTYPE=conversation,SEARCH=test)
+PROFILE.SOAP.sequence.7=GetConvRequest
+PROFILE.SOAP.sequence.8=SearchRequest(SEARCHTYPE=appointment,SEARCH=*)
+PROFILE.SOAP.sequence.9=GetAppointmentRequest
+PROFILE.SOAP.sequence.10=SearchRequest(SEARCHTYPE=message,SEARCH="is:invite not from:${USER}")
+PROFILE.SOAP.sequence.11=SendInviteReplyRequest

@@ -1,0 +1,42 @@
+<project name="zjmeter" default="all">
+  <property name="src" location="java"/>
+  <property name="testsrc" location="java-test"/>
+  <property name="build" location="build"/>
+  <property name="classes" location="${build}/classes"/>
+  <property name="test" location="${build}/test"/>
+  <property name="jar" location="${build}/jar"/>
+  <property name="doc" location="${build}/doc"/>
+  <path id="test.path">
+    <pathelement location="${jar}/zjmeter.jar"/>
+  </path>
+  <target name="all">
+    <antcall target="build"/>
+    <antcall target="jar"/>
+    <antcall target="test"/>
+    <antcall target="doc"/>
+  </target>
+  <target name="build">
+    <mkdir dir="${classes}"/>
+    <javac srcdir="${src}" destdir="${classes}" fork="yes"
+           includeAntRuntime="false"/>
+  </target>
+  <target name="jar" depends="build">
+    <jar destfile="${jar}/zjmeter.jar" basedir="${classes}"/>
+  </target>
+  <target name="test" depends="jar">
+    <mkdir dir="${test}"/>
+    <javac srcdir="${testsrc}" destdir="${test}" fork="yes"
+           includeAntRuntime="true" classpathref="test.path"/>
+    <junit fork="yes" printsummary="yes">
+      <classpath refid="test.path"/> 
+      <classpath location="${test}"/> 
+      <test name="com.zimbra.jmeter.TestCommand"/>
+    </junit>
+  </target>
+  <target name="doc">
+    <javadoc sourcepath="${src}" destdir="${doc}"/>
+  </target>
+  <target name="clean">
+    <delete dir="${build}"/>
+  </target>
+</project>
