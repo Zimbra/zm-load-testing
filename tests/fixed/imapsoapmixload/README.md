@@ -2,6 +2,10 @@
 
 This combines the imapbenchmarking and soapbenchmarking into one test.
 
+# Properties
+
+See imapbenchmarking [README.md](../imapbenchmarking/README.md) and soapbenchmarking [README.md](../soapbenchmarking/README.md) for details.
+
 # Example
 
 ```

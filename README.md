@@ -18,6 +18,44 @@ This contains zimbra jmeter load tests.
 
 # Quick Start
 
+## Ant
+
+### Assumptions
+
+1. Assumes you have Java Developer Kit (JDK) 7 or higher installed.
+2. Assumes you have [jmeter 3.0](https://archive.apache.org/dist/jmeter/binaries/) installed at /opt/apache-jmeter-3.0 if not modify build.xml jmeter.home appropriately.
+3. config/env.prop is configured for the Zimbra environment to be tested.
+4. user1 account exists and has password of userpass in the Zimbra environment (modify config/users.csv if other account is requried).
+5. See src [README.md](src/README.md) for addtional requirements to generate Zimbra JMeter Java Library.
+
+### Execution
+
+```
+$ get clone https://github.com/Zimbra/zm-load-testing.git
+$ cd zm-load-testing
+$ ant
+```
+
+To run a specific test use that path name of the tests seperated by hypen example:
+
+```
+$ ant fixed-ephemeral
+```
+
+To specify a particular environment file:
+
+```
+$ ant -Denv=config/myenv.prop
+```
+
+To generate the Zimbra JMeter Java Library only:
+
+```
+$ ant src
+```
+
+## Manual
+
 Assumes you have [jmeter 3.0](https://archive.apache.org/dist/jmeter/binaries/) installed.
 
 ```
@@ -38,7 +76,7 @@ modify file appropriately for the zimbra environment you plan to test
 update the users.csv file to the csv file created
 
 # run the test
-$ jmeter -n -q /tmp/imapbm.prop -q tests/fixed/imapbenchmarking/load.prop -q tests/fixed/imapbenchmarking/imapbenchmarking.jmx
+$ jmeter -n -q /tmp/imapbm.prop -q tests/fixed/imapbenchmarking/load.prop -t tests/fixed/imapbenchmarking/imapbenchmarking.jmx
 ```
 
 # Notes

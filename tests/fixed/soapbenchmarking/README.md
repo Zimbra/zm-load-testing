@@ -2,6 +2,27 @@
 
 Login check the inbox periodically until a message is availble then perform a specific set of additional steps.
 
+# Properties
+
+## Environment
+
+|Key         |Value          |Description                                 |
+|------------|---------------|--------------------------------------------|
+|SOAP.server |host.domain.com|name to use to connect to web server        |
+|SOAP.domain |domain.com     |domain to use in e-mail addresses           |
+|SOAP.port   |443            |port to use with web server                 |
+|ACCOUNTS.csv|users.csv      |csv file of test accounts (user,pass,touser)|
+|REQUEST.log |requests.log   |file to log requests to                     |
+
+## Load
+
+|Key                   |Value|Description                                 |
+|----------------------|-----|--------------------------------------------|
+|LOAD.SOAP.users       |1    |concurrent users/threads to run during tests|
+|LOAD.SOAP.rampup      |0    |how long to spend ramping up threads        |
+|LOAD.SOAP.loopcount   |1    |how many times the user/thread repeats      |
+|LOAD.SOAP.duration    |60   |duration of the test in seconds             |
+
 # Example
 
 ```

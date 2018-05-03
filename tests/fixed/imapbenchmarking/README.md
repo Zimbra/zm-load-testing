@@ -2,6 +2,25 @@
 
 Login and list first 10 messages of inbox.
 
+# Properties
+
+## Environment
+
+|Key         |Value          |Description                              |
+|------------|---------------|-----------------------------------------|
+|IMAP.server |host.domain.com|name to use to connect to web server     |
+|ACCOUNTS.csv|users.csv      |csv file of test accounts (user,password)|
+|REQUEST.log |requests.log   |file to log requests to                  |
+
+## Load
+
+|Key                 |Value|Description                                 |
+|--------------------|-----|--------------------------------------------|
+|LOAD.IMAP.users     |1    |concurrent users/threads to run during tests|
+|LOAD.IMAP.rampup    |0    |how long to spend ramping up threads        |
+|LOAD.IMAP.loopcount |1    |how many times the user/thread repeats      |
+|LOAD.IMAP.duration  |30   |duration of the test in seconds             |
+
 # Example
 
 ```

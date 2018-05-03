@@ -60,7 +60,7 @@
           <collectionProp name="Arguments.arguments"/>
         </elementProp>
         <stringProp name="HTTPSampler.domain">${__P(SOAP.server)}</stringProp>
-        <stringProp name="HTTPSampler.port">${__P(SOAP.server)}</stringProp>
+        <stringProp name="HTTPSampler.port">${__P(SOAP.port)}</stringProp>
         <stringProp name="HTTPSampler.connect_timeout">120000</stringProp>
         <stringProp name="HTTPSampler.response_timeout">1200000</stringProp>
         <stringProp name="HTTPSampler.protocol"></stringProp>

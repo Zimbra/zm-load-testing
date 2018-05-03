@@ -1,7 +1,7 @@
 <project name="zjmeter" default="all">
-  <property name="src" location="java"/>
-  <property name="testsrc" location="java-test"/>
-  <property name="build" location="build"/>
+  <property name="src" location="${basedir}/java"/>
+  <property name="testsrc" location="${basedir}/java-test"/>
+  <property name="build" location="${basedir}/build"/>
   <property name="classes" location="${build}/classes"/>
   <property name="test" location="${build}/test"/>
   <property name="jar" location="${build}/jar"/>

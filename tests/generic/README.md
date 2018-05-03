@@ -2,7 +2,7 @@
 
 These tests provide generic Zimbra supported protocol performance testing.
 
-All these tests depend on the Zimbra JMeter Library zjmeter.jar and assume no SSL usage.
+All these tests depend on the Zimbra JMeter Library zjmeter.jar and assume no SSL usage. See [README.md](../../src/README.md) for details on generating the jar.
 
 The following protocols currently have a basic level of support:
 
@@ -27,6 +27,14 @@ The following protocols currently have a basic level of support:
   [Zimbra SOAP API](https://wiki.zimbra.com/wiki/SOAP_API_Reference_Material_Beginning_with_ZCS_8) view [zsoap](zsoap/zsoap.md) for list of currently supported commands in the jmx.
 
 This directory also contains a test mix this jmx combines all the above tests into one jmx file that can be used for very low combined user count tests.
+
+# Properties
+
+## Env
+
+## Load
+
+## Profile
 
 # Example
 
