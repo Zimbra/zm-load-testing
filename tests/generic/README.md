@@ -91,35 +91,35 @@ Any of these tests can be used following this basic outline of steps:
 1. grab a copy of the tests
 
    ```
-$ get clone https://github.com/Zimbra/zm-load-testing.git 
-$ cd zm-load-testing
-```
+   $ get clone https://github.com/Zimbra/zm-load-testing.git 
+   $ cd zm-load-testing
+   ```
 
 2. create a user.csv file of accounts that can be used for testing zimbra
-   generic tests use a csv file of the form: <user>,<password>
+   generic tests use a csv file of the form: &lt;user&gt;,&lt;password&gt;
    add as many users as you want to test with
 
    ``` 
-$ vi /tmp/users.csv
-user1,userpass
-...
-```
+   $ vi /tmp/users.csv
+   user1,userpass
+   ...
+   ```
 
 3. create zimbra environment specific property file
 
    ```
-$ cp tests/generic/zsoap/env.prop /tmp/myenv.prop
-$ vi /tmp/myenv.prop
-modify file appropriately for the zimbra environment you plan to test
-update the users.csv file to the csv file created above
-```
+   $ cp tests/generic/zsoap/env.prop /tmp/myenv.prop
+   $ vi /tmp/myenv.prop
+   modify file appropriately for the zimbra environment you plan to test
+   update the users.csv file to the csv file created above
+   ```
 
 4. run the test
    note: some property files use relative paths that assume jmeter is run from the repo's top directory
 
    ```
-$ jmeter -n -q /tmp/myenv.prop -q tests/generic/zsoap/load.prop -q tests/generic/zsoap/profile/basic.prop -t tests/generic/zsoap/zsoap.jmx
-```
+   $ jmeter -n -q /tmp/myenv.prop -q tests/generic/zsoap/load.prop -q tests/generic/zsoap/profile/basic.prop -t tests/generic/zsoap/zsoap.jmx
+   ```
 
 The default load.prop file for all the tests is a single user that runs the specified profile once then exits. Just as you created a custom env.prop you can copy the load.prop file to adjust load as desired.
 

@@ -72,7 +72,7 @@ $ ant src
 
 2. create a users.csv file with accounts that can be used for testing zimbra
    see specific test details for required contents for this example:
-   <user>,<password>
+   &lt;user&gt;,&lt;password&gt;
 
    ```
    $ vi /tmp/users.csv
