@@ -82,7 +82,7 @@ For any of the generic tests you can define a sequence of commands to execute us
 
 The command can be of the form: name(arg1=value,arg2=value,...)
 
-See each tests READEM.md for complete list of currently supported commands and look at the files in the tests profile directory for example profiles.
+See each tests &lt;test&gt;.md file for complete list of currently supported commands and look at the files in the tests profile directory for example profiles.
 
 # Example
 
