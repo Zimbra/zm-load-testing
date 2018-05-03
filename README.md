@@ -64,7 +64,7 @@ $ ant src
 ### Execution
 
 1. grab a copy of this repo
-
+   
    ```
 $ get clone https://github.com/Zimbra/zm-load-testing.git
 $ cd zm-load-testing
@@ -73,7 +73,7 @@ $ cd zm-load-testing
 2. create a users.csv file with accounts that can be used for testing zimbra
    see specific test details for required contents for this example:
    <user>,<password>
-
+   
    ```
 $ vi /tmp/users.csv
 user1,userpass
@@ -82,7 +82,7 @@ user1,userpass
 
 3. create zimbra environment specific property file
    example: tests/fixed/imapbenchmarking
-
+   
    ```
 $ cp tests/fixed/imapbenchmarking/env.prop /tmp/imapbm.prop
 $ vi /tmp/imapbm.prop
@@ -91,7 +91,7 @@ update the users.csv file to the csv file created
    ```
 
 4. run the test
-
+   
    ```
 $ jmeter -n -q /tmp/imapbm.prop -q tests/fixed/imapbenchmarking/load.prop -t tests/fixed/imapbenchmarking/imapbenchmarking.jmx
    ```
