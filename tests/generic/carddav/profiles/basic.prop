@@ -1,3 +1,4 @@
+PROFILE.CardDAV.cards=tests/generic/carddav/profiles/cards.csv
 PROFILE.CardDAV.type=sequence
 PROFILE.CardDAV.sequence.1=PUT
 PROFILE.CardDAV.sequence.2=GET

@@ -1,3 +1,4 @@
+PROFILE.CalDAV.appointments=tests/generic/caldav/profiles/appointments.csv
 PROFILE.CalDAV.type=sequence
 PROFILE.CalDAV.sequence.1=PUT
 PROFILE.CalDAV.sequence.2=GET

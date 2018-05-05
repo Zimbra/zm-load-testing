@@ -1,7 +1,7 @@
-LOAD.SOAP.users=1
-LOAD.SOAP.userduration=1
-LOAD.SOAP.rampup=0
-LOAD.SOAP.loopcount=1
+LOAD.ZSOAP.users=1
+LOAD.ZSOAP.userduration=1
+LOAD.ZSOAP.rampup=0
+LOAD.ZSOAP.loopcount=1
 LOAD.SMTP.users=1
 LOAD.SMTP.userduration=1
 LOAD.SMTP.rampup=0

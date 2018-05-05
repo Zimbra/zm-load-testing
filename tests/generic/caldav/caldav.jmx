@@ -145,7 +145,7 @@
       </CSVDataSet>
       <hashTree/>
       <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Appointments" enabled="true">
-        <stringProp name="filename">${__P(APPOINTMENTS.csv)}</stringProp>
+        <stringProp name="filename">${__P(PROFILE.CalDAV.appointments)}</stringProp>
         <stringProp name="fileEncoding"></stringProp>
         <stringProp name="variableNames">APPTTEMPLATE</stringProp>
         <stringProp name="delimiter">,</stringProp>

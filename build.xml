@@ -2,9 +2,9 @@
   <property name="jmeter.home" location="/opt/apache-jmeter-3.0"/>
   <property name="env" location="config/env.prop"/>
   <property name="users" location="config/users.csv"/>
-  <property name="appointments" location="tests/generic/caldav/appointments.csv"/>
+  <property name="appointments" location="tests/generic/caldav/profiles/appointments.csv"/>
   <property name="book" location="tests/fixed/smtpbenchmarking/book.csv"/>
-  <property name="cards" location="tests/generic/carddav/cards.csv"/>
+  <property name="cards" location="tests/generic/carddav/profiles/cards.csv"/>
   <property name="tests" location="tests"/>
   <property name="zjmeter" location="${basedir}/src/build/jar/zjmeter.jar"/>
   <target name="all">
@@ -95,7 +95,7 @@
             jmeterlogfile="${basedir}/jmeter.log"
             resultlog="${basedir}/Results.jtl"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
-      <property name="APPOINTMENTS.csv" value="${appointments}"/>
+      <property name="PROFILE.CalDAV.appointments" value="${appointments}"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/generic/caldav/load.prop"/>
@@ -108,7 +108,7 @@
             jmeterlogfile="${basedir}/jmeter.log"
             resultlog="${basedir}/Results.jtl"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
-      <property name="CARDS.csv" value="${cards}"/>
+      <property name="PROFILE.CardDAV.cards" value="${cards}"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/generic/carddav/load.prop"/>
