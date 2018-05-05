@@ -148,8 +148,8 @@
         <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
           <collectionProp name="Arguments.arguments"/>
         </elementProp>
-        <stringProp name="HTTPSampler.domain">${__P(SOAP.server)}</stringProp>
-        <stringProp name="HTTPSampler.port">${__P(SOAP.port)}</stringProp>
+        <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+        <stringProp name="HTTPSampler.port">${__P(HTTP.port)}</stringProp>
         <stringProp name="HTTPSampler.connect_timeout"></stringProp>
         <stringProp name="HTTPSampler.response_timeout"></stringProp>
         <stringProp name="HTTPSampler.protocol"></stringProp>
@@ -168,11 +168,11 @@
 Zimbra soap = new Zimbra(props,&quot;SOAP&quot;);
 vars.putObject(&quot;SOAP&quot;,soap);
 
-String url = &quot;https://&quot;+props.get(&quot;SOAP.server&quot;);
+String url = &quot;https://&quot;+props.get(&quot;HTTP.server&quot;);
 String admin = url+&quot;:7071/service/admin/soap&quot;;
 vars.put(&quot;ADMIN&quot;,admin);
-if (!props.get(&quot;SOAP.port&quot;).equals(&quot;&quot;) ) {
-  url = url + &quot;:&quot; + props.get(&quot;SOAP.port&quot;); 
+if (!props.get(&quot;HTTP.port&quot;).equals(&quot;&quot;) ) {
+  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;); 
 }
 url = url+&quot;/service/soap&quot;;
 log.info(url);
@@ -364,8 +364,8 @@ if (commands.size() == 0) {
   &lt;/soap:Header&gt;
   &lt;soap:Body&gt;
    &lt;AuthRequest xmlns=&quot;urn:zimbraAdmin&quot; csrfTokenSecured=&quot;1&quot;&gt;
-     &lt;account by=&quot;name&quot;&gt;${__P(SOAP.admin.user)}&lt;/account&gt;
-     &lt;password&gt;${__P(SOAP.admin.pass)}&lt;/password&gt;
+     &lt;account by=&quot;name&quot;&gt;${__P(HTTP.admin.user)}&lt;/account&gt;
+     &lt;password&gt;${__P(HTTP.admin.pass)}&lt;/password&gt;
    &lt;/AuthRequest&gt;
   &lt;/soap:Body&gt;
 &lt;/soap:Envelope&gt;</stringProp>
@@ -1927,8 +1927,8 @@ if (commands.size() == 0) {
   &lt;soap:Body&gt;
     &lt;SendMsgRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
       &lt;m su=&quot;Hello World&quot;&gt;
-        &lt;e a=&quot;${USER}@${__P(SOAP.domain)}&quot; t=&quot;f&quot;/&gt;
-        &lt;e a=&quot;${USER}@${__P(SOAP.domain)}&quot; t=&quot;t&quot;/&gt;
+        &lt;e a=&quot;${USER}@${__P(HTTP.domain)}&quot; t=&quot;f&quot;/&gt;
+        &lt;e a=&quot;${USER}@${__P(HTTP.domain)}&quot; t=&quot;t&quot;/&gt;
        &lt;content&gt;Send a Message Request&lt;/content&gt;
       &lt;/m&gt;
     &lt;/SendMsgRequest&gt;

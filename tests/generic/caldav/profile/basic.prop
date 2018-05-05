@@ -1,0 +1,7 @@
+PROFILE.CalDAV.type=sequence
+PROFILE.CalDAV.sequence.1=PUT
+PROFILE.CalDAV.sequence.2=GET
+PROFILE.CalDAV.sequence.3=PUT
+PROFILE.CalDAV.sequence.4=DELETE
+PROFILE.CalDAV.sequence.5=PROPFIND
+PROFILE.CalDAV.sequence.6=GET

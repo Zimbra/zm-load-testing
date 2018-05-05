@@ -1,0 +1,7 @@
+PROFILE.CardDAV.type=sequence
+PROFILE.CardDAV.sequence.1=PUT
+PROFILE.CardDAV.sequence.2=GET
+PROFILE.CardDAV.sequence.3=PUT
+PROFILE.CardDAV.sequence.4=DELETE
+PROFILE.CardDAV.sequence.5=PROPFIND
+PROFILE.CardDAV.sequence.6=GET

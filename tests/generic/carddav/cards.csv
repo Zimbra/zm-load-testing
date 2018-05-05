@@ -1,0 +1,18 @@
+"BEGIN:VCARD
+N:Testing;Test;;;
+FN:Test Testing
+ORG:Foobar Inc;
+EMAIL;type=INTERNET;type=HOME;type=pref:test@gmail.com
+EMAIL;type=INTERNET;type=WORK:test@foobar.com
+TEL;type=CELL;type=VOICE;type=pref:444-555-7777
+UID:$UUID}
+END:VCARD"
+"BEGIN:VCARD
+N:Bar;Foo;;;
+FN:Test Testing
+ORG:Test Inc;
+EMAIL;type=INTERNET;type=HOME;type=pref:foo@gmail.com
+EMAIL;type=INTERNET;type=WORK:foo@test.com
+TEL;type=CELL;type=VOICE;type=pref:444-555-7777
+UID:${UUID}
+END:VCARD"
