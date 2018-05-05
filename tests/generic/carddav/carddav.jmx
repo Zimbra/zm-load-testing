@@ -144,7 +144,7 @@
         <stringProp name="shareMode">shareMode.all</stringProp>
       </CSVDataSet>
       <hashTree/>
-      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CARDS" enabled="true">
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Cards" enabled="true">
         <stringProp name="filename">${__P(PROFILE.CardDAV.cards)}</stringProp>
         <stringProp name="fileEncoding"></stringProp>
         <stringProp name="variableNames">CARDTEMPLATE</stringProp>
@@ -165,27 +165,6 @@ Zimbra cd = new Zimbra(props,&quot;CardDAV&quot;);
 vars.putObject(&quot;CardDAV&quot;,cd);</stringProp>
       </BeanShellPreProcessor>
       <hashTree/>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Variables" enabled="true">
-        <collectionProp name="Arguments.arguments">
-          <elementProp name="UUID" elementType="Argument">
-            <stringProp name="Argument.name">UUID</stringProp>
-            <stringProp name="Argument.value">${__UUID()}</stringProp>
-            <stringProp name="Argument.desc">ID to use with put</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-        </collectionProp>
-      </Arguments>
-      <hashTree/>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Dependent Variables" enabled="true">
-        <collectionProp name="Arguments.arguments">
-          <elementProp name="CARDURL" elementType="Argument">
-            <stringProp name="Argument.name">CARDURL</stringProp>
-            <stringProp name="Argument.value">/dav/user1/Contacts/${UUID}.vcf</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-        </collectionProp>
-      </Arguments>
-      <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="CardDAV" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -201,6 +180,27 @@ vars.putObject(&quot;CardDAV&quot;,cd);</stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="CardDAV Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="CARDUUID" elementType="Argument">
+              <stringProp name="Argument.name">CARDUUID</stringProp>
+              <stringProp name="Argument.value">${__UUID()}</stringProp>
+              <stringProp name="Argument.desc">ID to use with put</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="CardDAV Dependent Variables" enabled="false">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="CARDURL" elementType="Argument">
+              <stringProp name="Argument.name">CARDURL</stringProp>
+              <stringProp name="Argument.value">/dav/user1/Contacts/${CARDUUID}.vcf</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
         <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="CardDAV HTTP Config" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
@@ -275,6 +275,9 @@ if (commands.size() &gt; 0) {
   	}
   }
   //log.info(vars.get(&quot;COMMAND&quot;));
+}
+if (vars.get(&quot;CARDURL&quot;) == null || vars.get(&quot;CARDURL&quot;).equals(&quot;&quot;)) {
+  vars.put(&quot;CARDURL&quot;,&quot;/dav/&quot;+vars.get(&quot;USER&quot;)+&quot;/Contacts/&quot;+vars.get(&quot;CARDUUID&quot;)+&quot;.vcf&quot;);
 }
 if (commands.size() == 0) {
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);

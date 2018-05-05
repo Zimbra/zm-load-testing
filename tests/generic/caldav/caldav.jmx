@@ -165,27 +165,6 @@ Zimbra cd = new Zimbra(props,&quot;CalDAV&quot;);
 vars.putObject(&quot;CalDAV&quot;,cd);</stringProp>
       </BeanShellPreProcessor>
       <hashTree/>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Variables" enabled="true">
-        <collectionProp name="Arguments.arguments">
-          <elementProp name="UUID" elementType="Argument">
-            <stringProp name="Argument.name">UUID</stringProp>
-            <stringProp name="Argument.value">${__UUID()}</stringProp>
-            <stringProp name="Argument.desc">ID to use with put</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-        </collectionProp>
-      </Arguments>
-      <hashTree/>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Dependent Variables" enabled="true">
-        <collectionProp name="Arguments.arguments">
-          <elementProp name="APPTURL" elementType="Argument">
-            <stringProp name="Argument.name">APPTURL</stringProp>
-            <stringProp name="Argument.value">/dav/user1/Calendar/${UUID}.ics</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-        </collectionProp>
-      </Arguments>
-      <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="CalDAV" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -201,6 +180,17 @@ vars.putObject(&quot;CalDAV&quot;,cd);</stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="CalDAV Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="UUID" elementType="Argument">
+              <stringProp name="Argument.name">UUID</stringProp>
+              <stringProp name="Argument.value">${__UUID()}</stringProp>
+              <stringProp name="Argument.desc">ID to use with put</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
         <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="CalDAV HTTP Config" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
@@ -275,6 +265,9 @@ if (commands.size() &gt; 0) {
   	}
   }
   //log.info(vars.get(&quot;COMMAND&quot;));
+}
+if (vars.get(&quot;APPTURL&quot;) == null || vars.get(&quot;APPTURL&quot;).equals(&quot;&quot;)) {
+  vars.put(&quot;APPTURL&quot;,&quot;/dav/&quot;+vars.get(&quot;USER&quot;)+&quot;/Calendar/&quot;+vars.get(&quot;UUID&quot;)+&quot;.ics&quot;);
 }
 if (commands.size() == 0) {
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
