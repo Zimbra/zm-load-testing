@@ -2,33 +2,33 @@
 
 These tests provide generic Zimbra supported protocol performance testing.
 
-All these tests depend on the Zimbra JMeter Library zjmeter.jar and assume no SSL usage. See [README.md](../../src/README.md) for details on generating the jar.
+All these tests depend on the Zimbra JMeter Library zjmeter.jar. See [README.md](../../src/README.md) for details on generating the jar.
 
 The following protocols currently have a basic level of support:
 
 * caldav
   
-  [vCard Extension to WebDAV](https://tools.ietf.org/html/rfc6352) view [carddav](carddav/carddav.md) for a list of currently supported commands in the jmx.
+  [vCard Extension to WebDAV](https://tools.ietf.org/html/rfc6352) view [caldav](caldav/caldav.md) for a list of currently supported commands in the jmx.
   
 * carddav
   
-  [Calendering Extension to WebDAV](https://tools.ietf.org/html/rfc4791) view [cardav](cardav/cardav.md) for a list of currently supported commands in the jmx.
+  [Calendering Extension to WebDAV](https://tools.ietf.org/html/rfc4791) view [carddav](carddav/carddav.md) for a list of currently supported commands in the jmx.
   
 * imap
   
-  [Internet Message Access Protocol](https://tools.ietf.org/html/rfc3501) view [imap](imap/imap.md) for a list of currently supported commands in the jmx.
+  [Internet Message Access Protocol](https://tools.ietf.org/html/rfc3501) view [imap](imap/imap.md) for a list of currently supported commands in the jmx. No SSL support.
   
 * lmtp
   
-  [Local Mail Transfer Protocol](https://tools.ietf.org/html/rfc2033) view [lmtp](lmtp/lmtp.md) for a list of currently supported commands in the jmx.
+  [Local Mail Transfer Protocol](https://tools.ietf.org/html/rfc2033) view [lmtp](lmtp/lmtp.md) for a list of currently supported commands in the jmx. No SSL support.
   
 * pop
   
-  [Post Office Protocol](https://tools.ietf.org/html/rfc5321) view [pop](pop/pop.md) for a list of currently supported commands in the jmx.
+  [Post Office Protocol](https://tools.ietf.org/html/rfc5321) view [pop](pop/pop.md) for a list of currently supported commands in the jmx. No SSL support.
   
 * smtp
   
-  [Simple Mail Transfer Protocol](https://tools.ietf.org/html/rfc5321) view [smtp](smtp/smtp.md) for a list of currently supported commands in the jmx.
+  [Simple Mail Transfer Protocol](https://tools.ietf.org/html/rfc5321) view [smtp](smtp/smtp.md) for a list of currently supported commands in the jmx. No SSL support.
   
 * zsoap
   
