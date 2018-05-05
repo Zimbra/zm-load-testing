@@ -232,8 +232,8 @@ vars.putObject(&quot;CardDAV&quot;,cd);</stringProp>
           <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Zimbra;
 import com.zimbra.jmeter.Command;
 
-Zimbra soap = vars.getObject(&quot;CardDAV&quot;);
-ArrayList commands = soap.getcommands();
+Zimbra cd = vars.getObject(&quot;CardDAV&quot;);
+ArrayList commands = cd.getcommands();
 
 vars.putObject(&quot;COMMANDS&quot;,commands);
 // generate command DELAY

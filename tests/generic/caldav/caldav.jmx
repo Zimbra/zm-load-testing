@@ -161,8 +161,8 @@
         <boolProp name="resetInterpreter">false</boolProp>
         <stringProp name="script">import com.zimbra.jmeter.Zimbra;
 //debug();
-Zimbra soap = new Zimbra(props,&quot;CalDAV&quot;);
-vars.putObject(&quot;CalDAV&quot;,soap);</stringProp>
+Zimbra cd = new Zimbra(props,&quot;CalDAV&quot;);
+vars.putObject(&quot;CalDAV&quot;,cd);</stringProp>
       </BeanShellPreProcessor>
       <hashTree/>
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Variables" enabled="true">
@@ -232,8 +232,8 @@ vars.putObject(&quot;CalDAV&quot;,soap);</stringProp>
           <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Zimbra;
 import com.zimbra.jmeter.Command;
 
-Zimbra soap = vars.getObject(&quot;CalDAV&quot;);
-ArrayList commands = soap.getcommands();
+Zimbra cd = vars.getObject(&quot;CalDAV&quot;);
+ArrayList commands = cd.getcommands();
 
 vars.putObject(&quot;COMMANDS&quot;,commands);
 // generate command DELAY
@@ -356,8 +356,7 @@ if (commands.size() == 0) {
                   <stringProp name="parameters"></stringProp>
                   <boolProp name="resetInterpreter">false</boolProp>
                   <stringProp name="script">String m = prev.getResponseDataAsString();
-vars.put(&quot;APPTBODY&quot;,m);
-log.info(&quot;BODY: &quot;+vars.get(&quot;APPTBODY&quot;));</stringProp>
+vars.put(&quot;APPTBODY&quot;,m);</stringProp>
                 </BeanShellPostProcessor>
                 <hashTree/>
               </hashTree>
