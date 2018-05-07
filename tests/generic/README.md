@@ -8,11 +8,11 @@ The following protocols currently have a basic level of support:
 
 * caldav
   
-  [vCard Extension to WebDAV](https://tools.ietf.org/html/rfc6352) view [caldav](caldav/caldav.md) for a list of currently supported commands in the jmx.
+  [Calendering Extension to WebDAV](https://tools.ietf.org/html/rfc4791) view [caldav](caldav/caldav.md) for a list of currently supported commands in the jmx.
   
 * carddav
   
-  [Calendering Extension to WebDAV](https://tools.ietf.org/html/rfc4791) view [carddav](carddav/carddav.md) for a list of currently supported commands in the jmx.
+  [vCard Extension to WebDAV](https://tools.ietf.org/html/rfc6352) view [carddav](carddav/carddav.md) for a list of currently supported commands in the jmx.
   
 * imap
   

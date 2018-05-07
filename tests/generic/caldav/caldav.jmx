@@ -182,8 +182,8 @@ vars.putObject(&quot;CalDAV&quot;,cd);</stringProp>
       <hashTree>
         <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="CalDAV Variables" enabled="true">
           <collectionProp name="Arguments.arguments">
-            <elementProp name="UUID" elementType="Argument">
-              <stringProp name="Argument.name">UUID</stringProp>
+            <elementProp name="APPTUUID" elementType="Argument">
+              <stringProp name="Argument.name">APPTUUID</stringProp>
               <stringProp name="Argument.value">${__UUID()}</stringProp>
               <stringProp name="Argument.desc">ID to use with put</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
@@ -267,7 +267,7 @@ if (commands.size() &gt; 0) {
   //log.info(vars.get(&quot;COMMAND&quot;));
 }
 if (vars.get(&quot;APPTURL&quot;) == null || vars.get(&quot;APPTURL&quot;).equals(&quot;&quot;)) {
-  vars.put(&quot;APPTURL&quot;,&quot;/dav/&quot;+vars.get(&quot;USER&quot;)+&quot;/Calendar/&quot;+vars.get(&quot;UUID&quot;)+&quot;.ics&quot;);
+  vars.put(&quot;APPTURL&quot;,&quot;/dav/&quot;+vars.get(&quot;USER&quot;)+&quot;/Calendar/&quot;+vars.get(&quot;APPTUUID&quot;)+&quot;.ics&quot;);
 }
 if (commands.size() == 0) {
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
