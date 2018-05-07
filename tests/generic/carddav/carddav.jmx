@@ -191,16 +191,6 @@ vars.putObject(&quot;CardDAV&quot;,cd);</stringProp>
           </collectionProp>
         </Arguments>
         <hashTree/>
-        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="CardDAV Dependent Variables" enabled="false">
-          <collectionProp name="Arguments.arguments">
-            <elementProp name="CARDURL" elementType="Argument">
-              <stringProp name="Argument.name">CARDURL</stringProp>
-              <stringProp name="Argument.value">/dav/user1/Contacts/${CARDUUID}.vcf</stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
-          </collectionProp>
-        </Arguments>
-        <hashTree/>
         <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="CardDAV HTTP Config" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
@@ -287,6 +277,12 @@ if (commands.size() == 0) {
             <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
           </BeanShellSampler>
           <hashTree/>
+          <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+            <boolProp name="displayJMeterProperties">true</boolProp>
+            <boolProp name="displayJMeterVariables">true</boolProp>
+            <boolProp name="displaySystemProperties">true</boolProp>
+          </DebugSampler>
+          <hashTree/>
           <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Command Execution" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
             <boolProp name="TransactionController.parent">false</boolProp>
@@ -354,13 +350,13 @@ if (commands.size() == 0) {
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
-                <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+                <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="APPTBODY" enabled="true">
                   <stringProp name="filename"></stringProp>
                   <stringProp name="parameters"></stringProp>
                   <boolProp name="resetInterpreter">false</boolProp>
                   <stringProp name="script">String m = prev.getResponseDataAsString();
 vars.put(&quot;APPTBODY&quot;,m);
-log.info(&quot;BODY: &quot;+vars.get(&quot;APPTBODY&quot;));</stringProp>
+//log.info(&quot;BODY: &quot;+vars.get(&quot;APPTBODY&quot;));</stringProp>
                 </BeanShellPostProcessor>
                 <hashTree/>
               </hashTree>
@@ -393,7 +389,7 @@ log.info(&quot;BODY: &quot;+vars.get(&quot;APPTBODY&quot;));</stringProp>
                   </collectionProp>
                 </HeaderManager>
                 <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="CARDURL" enabled="true">
                   <stringProp name="XPathExtractor.default"></stringProp>
                   <stringProp name="XPathExtractor.refname">CARDURL</stringProp>
                   <stringProp name="XPathExtractor.xpathQuery">//D:href[not(../D:propstat/D:prop/D:resourcetype/D:collection)]</stringProp>
@@ -429,16 +425,24 @@ log.info(&quot;BODY: &quot;+vars.get(&quot;APPTBODY&quot;));</stringProp>
                 <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
               </HTTPSamplerProxy>
-              <hashTree/>
+              <hashTree>
+                <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Modify" enabled="true">
+                  <boolProp name="resetInterpreter">false</boolProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="script">String tmp = vars.get(&quot;CARDBODY&quot;);
+if (vars.get(&quot;N&quot;) != null) {
+  String [] fields = vars.get(&quot;N&quot;).split(&quot;;&quot;);
+  tmp=tmp.replaceAll(&quot;(?s)\nN:([^\\n]*)&quot;,&quot;\nN:&quot;+vars.get(&quot;N&quot;));
+  tmp=tmp.replaceAll(&quot;(?s)\nFN:([^\\n]*)&quot;,&quot;\nFN:&quot;+fields[0]+&quot; &quot;+fields[1]);
+  vars.put(&quot;CARDBODY&quot;,tmp);
+}</stringProp>
+                </BeanShellPreProcessor>
+                <hashTree/>
+              </hashTree>
             </hashTree>
           </hashTree>
         </hashTree>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
-          <boolProp name="displayJMeterProperties">true</boolProp>
-          <boolProp name="displayJMeterVariables">true</boolProp>
-          <boolProp name="displaySystemProperties">true</boolProp>
-        </DebugSampler>
-        <hashTree/>
       </hashTree>
     </hashTree>
     <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">

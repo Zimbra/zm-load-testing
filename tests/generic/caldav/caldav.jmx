@@ -344,7 +344,7 @@ if (commands.size() == 0) {
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
-                <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+                <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="APPTBODY" enabled="true">
                   <stringProp name="filename"></stringProp>
                   <stringProp name="parameters"></stringProp>
                   <boolProp name="resetInterpreter">false</boolProp>
@@ -382,7 +382,7 @@ vars.put(&quot;APPTBODY&quot;,m);</stringProp>
                   </collectionProp>
                 </HeaderManager>
                 <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="APPTURL" enabled="true">
                   <stringProp name="XPathExtractor.default"></stringProp>
                   <stringProp name="XPathExtractor.refname">APPTURL</stringProp>
                   <stringProp name="XPathExtractor.xpathQuery">//D:href[not(../D:propstat/D:prop/D:resourcetype/D:collection)]</stringProp>
@@ -418,7 +418,19 @@ vars.put(&quot;APPTBODY&quot;,m);</stringProp>
                 <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
               </HTTPSamplerProxy>
-              <hashTree/>
+              <hashTree>
+                <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Modify" enabled="true">
+                  <boolProp name="resetInterpreter">false</boolProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="script">String tmp = vars.get(&quot;APPTBODY&quot;);
+if (vars.get(&quot;DTEND&quot;) != null) {
+  tmp=tmp.replaceAll(&quot;(?s)DTEND;TZID=([^\\s]*)&quot;,&quot;DTEND;TZID=&quot;+vars.get(&quot;DTEND&quot;));
+  vars.put(&quot;APPTBODY&quot;,tmp);	
+}</stringProp>
+                </BeanShellPreProcessor>
+                <hashTree/>
+              </hashTree>
             </hashTree>
           </hashTree>
         </hashTree>

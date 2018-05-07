@@ -5,7 +5,7 @@ ORG:Foobar Inc;
 EMAIL;type=INTERNET;type=HOME;type=pref:test@gmail.com
 EMAIL;type=INTERNET;type=WORK:test@foobar.com
 TEL;type=CELL;type=VOICE;type=pref:444-555-7777
-UID:$UUID}
+UID:${CARDUUID}
 END:VCARD"
 "BEGIN:VCARD
 N:Bar;Foo;;;
@@ -14,5 +14,5 @@ ORG:Test Inc;
 EMAIL;type=INTERNET;type=HOME;type=pref:foo@gmail.com
 EMAIL;type=INTERNET;type=WORK:foo@test.com
 TEL;type=CELL;type=VOICE;type=pref:444-555-7777
-UID:${UUID}
+UID:${CARDUUID}
 END:VCARD"
