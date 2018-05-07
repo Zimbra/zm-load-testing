@@ -137,6 +137,10 @@
             jmeterlogfile="${basedir}/jmeter.log"
             resultlog="${basedir}/Results.jtl"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
+      <property name="PROFILE.CalDAV.appointments" value="${appointments}"/>
+      <property name="PROFILE.CardDAV.cards" value="${cards}"/>
+      <property name="PROFILE.SMTP.message" value="${smtp}"/>
+      <property name="PROFILE.LMTP.message" value="${lmtp}"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/generic/mix/load.prop"/>
