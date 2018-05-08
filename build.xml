@@ -1,6 +1,6 @@
 <project name="zm-load-testing" default="all">
   <property name="jmeter.home" location="/opt/apache-jmeter-3.0"/>
-  <property name="env" location="config/env.prop"/>
+  <property name="env" value="config/env.prop"/>
   <property name="users" location="config/users.csv"/>
   <property name="appointments" location="tests/generic/caldav/profiles/appointments.csv"/>
   <property name="book" location="tests/fixed/smtpbenchmarking/book.csv"/>
@@ -8,6 +8,7 @@
   <property name="lmtp" location="tests/generic/lmtp/profiles/message.txt"/>
   <property name="smtp" location="tests/generic/smtp/profiles/message.txt"/>
   <property name="tests" location="tests"/>
+  <property name="logs" location="logs"/>
   <property name="zjmeter" location="${basedir}/src/build/jar/zjmeter.jar"/>
   <target name="all">
     <antcall target="tests"/>
@@ -43,11 +44,14 @@
   <target name="src">
     <ant dir="src" antfile="build.xml" target="jar"/>
   </target>
-  <target name="generic-caldav" depends="src">
+  <target name ="logs">
+    <mkdir dir="${logs}"/>
+  </target>
+  <target name="generic-caldav" depends="src,logs">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/caldav/caldav.jmx"
-            jmeterlogfile="${basedir}/jmeter.log"
-            resultlog="${basedir}/Results.jtl"> 
+            jmeterlogfile="${logs}/generic-caldav-jmeter.log"
+            resultlog="${logs}/generic-caldav-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="PROFILE.CalDAV.appointments" value="${appointments}"/>
       <property name="user.classpath" value="${zjmeter}"/>
@@ -56,11 +60,11 @@
       <jmeterarg value="-q${basedir}/tests/generic/caldav/profiles/basic.prop"/>
     </jmeter>
   </target>
-  <target name="generic-carddav" depends="src">
+  <target name="generic-carddav" depends="src,logs">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/carddav/carddav.jmx"
-            jmeterlogfile="${basedir}/jmeter.log"
-            resultlog="${basedir}/Results.jtl"> 
+            jmeterlogfile="${logs}/generic-carddav-jmeter.log"
+            resultlog="${logs}/generic-carddav-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="PROFILE.CardDAV.cards" value="${cards}"/>
       <property name="user.classpath" value="${zjmeter}"/>
@@ -69,11 +73,11 @@
       <jmeterarg value="-q${basedir}/tests/generic/carddav/profiles/basic.prop"/>
     </jmeter>
   </target>
-  <target name="generic-imap" depends="src">
+  <target name="generic-imap" depends="src,logs">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/imap/imap.jmx"
-            jmeterlogfile="${basedir}/jmeter.log"
-            resultlog="${basedir}/Results.jtl"> 
+            jmeterlogfile="${logs}/generic-imap-jmeter.log"
+            resultlog="${logs}/generic-imap-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
@@ -81,11 +85,11 @@
       <jmeterarg value="-q${basedir}/tests/generic/imap/profiles/basic.prop"/>
     </jmeter>
   </target>
-  <target name="generic-lmtp" depends="src">
+  <target name="generic-lmtp" depends="src,logs">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/lmtp/lmtp.jmx"
-            jmeterlogfile="${basedir}/jmeter.log"
-            resultlog="${basedir}/Results.jtl"> 
+            jmeterlogfile="${logs}/generic-lmtp-jmeter.log"
+            resultlog="${logs}/generic-lmtp-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="PROFILE.LMTP.message" value="${lmtp}"/>
       <property name="user.classpath" value="${zjmeter}"/>
@@ -94,11 +98,11 @@
       <jmeterarg value="-q${basedir}/tests/generic/lmtp/profiles/basic.prop"/>
     </jmeter>
   </target>
-  <target name="generic-pop" depends="src">
+  <target name="generic-pop" depends="src,logs">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/pop/pop.jmx"
-            jmeterlogfile="${basedir}/jmeter.log"
-            resultlog="${basedir}/Results.jtl"> 
+            jmeterlogfile="${logs}/generic-pop-jmeter.log"
+            resultlog="${logs}/generic-pop-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
@@ -106,11 +110,11 @@
       <jmeterarg value="-q${basedir}/tests/generic/pop/profiles/basic.prop"/>
     </jmeter>
   </target>
-  <target name="generic-smtp" depends="src">
+  <target name="generic-smtp" depends="src,logs">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/smtp/smtp.jmx"
-            jmeterlogfile="${basedir}/jmeter.log"
-            resultlog="${basedir}/Results.jtl"> 
+            jmeterlogfile="${logs}/generic-smtp-jmeter.log"
+            resultlog="${logs}/generic-smtp-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="PROFILE.SMTP.message" value="${smtp}"/>
       <property name="user.classpath" value="${zjmeter}"/>
@@ -119,11 +123,11 @@
       <jmeterarg value="-q${basedir}/tests/generic/smtp/profiles/basic.prop"/>
     </jmeter>
   </target>
-  <target name="generic-zsoap" depends="src">
+  <target name="generic-zsoap" depends="src,logs">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/zsoap/zsoap.jmx"
-            jmeterlogfile="${basedir}/jmeter.log"
-            resultlog="${basedir}/Results.jtl"> 
+            jmeterlogfile="${logs}/generic-zsoap-jmeter.log"
+            resultlog="${logs}/generic-zsoap-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
@@ -131,11 +135,11 @@
       <jmeterarg value="-q${basedir}/tests/generic/zsoap/profiles/basic.prop"/>
     </jmeter>
   </target>
-  <target name="generic-mix" depends="src">
+  <target name="generic-mix" depends="src,logs">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/mix/mix.jmx"
-            jmeterlogfile="${basedir}/jmeter.log"
-            resultlog="${basedir}/Results.jtl"> 
+            jmeterlogfile="${logs}/generic-mix-jmeter.log"
+            resultlog="${logs}/generic-mix-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="PROFILE.CalDAV.appointments" value="${appointments}"/>
       <property name="PROFILE.CardDAV.cards" value="${cards}"/>
@@ -147,55 +151,59 @@
       <jmeterarg value="-q${basedir}/tests/generic/mix/profiles/basic.prop"/>
     </jmeter>
   </target>
-  <target name="fixed-ephemeral">
+  <target name="fixed-ephemeral" depends="logs">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/fixed/ephemeral/ephemeral.jmx"
-            jmeterlogfile="${basedir}/jmeter.log"
-            resultlog="${basedir}/Results.jtl"> 
+            jmeterlogfile="${logs}/fixed-ephemeral-jmeter.log"
+            resultlog="${logs}/fixed-ephemeral-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/fixed/ephemeral/load.prop"/>
     </jmeter>
   </target>
-  <target name="fixed-imapbenchmarking">
+  <target name="fixed-imapbenchmarking" depends="logs">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/fixed/imapbenchmarking/imapbenchmarking.jmx"
-            jmeterlogfile="${basedir}/jmeter.log"
-            resultlog="${basedir}/Results.jtl"> 
+            jmeterlogfile="${logs}/fixed-imapbenchmarking-jmeter.log"
+            resultlog="${logs}/fixed-imapbenchmarking-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/fixed/imapbenchmarking/load.prop"/>
     </jmeter>
   </target>
-  <target name="fixed-imapsoapmixload">
+  <target name="fixed-imapsoapmixload" depends="logs">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/fixed/imapsoapmixload/imapsoapmixload.jmx"
-            jmeterlogfile="${basedir}/jmeter.log"
-            resultlog="${basedir}/Results.jtl"> 
+            jmeterlogfile="${logs}/fixed-imapsoapmixload-jmeter.log"
+            resultlog="${logs}/fixed-imapsoapmixload-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/fixed/imapsoapmixload/load.prop"/>
     </jmeter>
   </target>
-  <target name="fixed-smtpbenchmarking">
+  <target name="fixed-smtpbenchmarking" depends="logs">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/fixed/smtpbenchmarking/smtpbenchmarking.jmx"
-            jmeterlogfile="${basedir}/jmeter.log"
-            resultlog="${basedir}/Results.jtl"> 
+            jmeterlogfile="${logs}/fixed-smtpbenchmarking-jmeter.log"
+            resultlog="${logs}/fixed-smtpbenchmarking-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="MESSAGES.csv" value="${book}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/fixed/smtpbenchmarking/load.prop"/>
     </jmeter>
   </target>
-  <target name="fixed-soapbenchmarking">
+  <target name="fixed-soapbenchmarking" depends="logs">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/fixed/soapbenchmarking/soapbenchmarking.jmx"
-            jmeterlogfile="${basedir}/jmeter.log"
-            resultlog="${basedir}/Results.jtl"> 
+            jmeterlogfile="${logs}/fixed-soapbenchmarking-jmeter.log"
+            resultlog="${logs}/fixed-soapbenchmarking-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/fixed/soapbenchmarking/load.prop"/>
     </jmeter>
+  </target>
+  <target name="clean">
+    <delete dir="${logs}"/>
+    <ant dir="src" antfile="build.xml" target="clean"/>
   </target>
 </project>
