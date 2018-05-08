@@ -37,7 +37,7 @@ $ cd zm-load-testing
 $ ant
 ```
 
-To run a specific test use that path name of the tests seperated by hypen example:
+To run a specific test use the path name of the test seperated by hyphen example:
 
 ```
 $ ant fixed-ephemeral
