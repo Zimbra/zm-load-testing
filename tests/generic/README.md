@@ -110,7 +110,7 @@ the lmtp and smtp test also have this additional property
 
 |Key        |Value                          |Description   |
 |-----------|-------------------------------|--------------|
-|PROFILE.&lt;Protocol&gt;.message|tests/generic/&lt;Directory&gt;/message.txt|message|
+|PROFILE.&lt;Test&gt;.message|tests/generic/&lt;Directory&gt;/message.txt|message|
 
 # Example
 
@@ -123,8 +123,8 @@ Any of these tests can be used following this basic outline of steps:
    $ cd zm-load-testing
    ```
 
-2. create a user.csv file of accounts that can be used for testing zimbra
-   generic tests use a csv file of the form: &lt;user&gt;,&lt;password&gt;
+2. create a user.csv file of accounts that can be used for testing zimbra  
+   generic tests use a csv file of the form: &lt;user&gt;,&lt;password&gt;  
    add as many users as you want to test with
 
    ``` 
@@ -142,7 +142,7 @@ Any of these tests can be used following this basic outline of steps:
    update the users.csv file to the csv file created above
    ```
 
-4. run the test
+4. run the test  
    note: some property files use relative paths that assume jmeter is run from the repo's top directory
 
    ```
