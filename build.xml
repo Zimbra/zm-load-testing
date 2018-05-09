@@ -2,11 +2,6 @@
   <property name="jmeter.home" location="/opt/apache-jmeter-3.0"/>
   <property name="env" value="config/env.prop"/>
   <property name="users" location="config/users.csv"/>
-  <property name="appointments" location="tests/generic/caldav/profiles/appointments.csv"/>
-  <property name="book" location="tests/fixed/smtpbenchmarking/book.csv"/>
-  <property name="cards" location="tests/generic/carddav/profiles/cards.csv"/>
-  <property name="lmtp" location="tests/generic/lmtp/profiles/message.txt"/>
-  <property name="smtp" location="tests/generic/smtp/profiles/message.txt"/>
   <property name="tests" location="tests"/>
   <property name="logs" location="logs"/>
   <property name="zjmeter" location="${basedir}/src/build/jar/zjmeter.jar"/>
@@ -53,7 +48,7 @@
             jmeterlogfile="${logs}/generic-caldav-jmeter.log"
             resultlog="${logs}/generic-caldav-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
-      <property name="PROFILE.CalDAV.appointments" value="${appointments}"/>
+      <property name="PROFILE.CalDAV.appointments" value="${basedir}/tests/generic/caldav/profiles/appointments.csv"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/generic/caldav/load.prop"/>
@@ -66,7 +61,7 @@
             jmeterlogfile="${logs}/generic-carddav-jmeter.log"
             resultlog="${logs}/generic-carddav-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
-      <property name="PROFILE.CardDAV.cards" value="${cards}"/>
+      <property name="PROFILE.CardDAV.cards" value="${basedir}/tests/generic/carddav/profiles/cards.csv"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/generic/carddav/load.prop"/>
@@ -91,7 +86,7 @@
             jmeterlogfile="${logs}/generic-lmtp-jmeter.log"
             resultlog="${logs}/generic-lmtp-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
-      <property name="PROFILE.LMTP.message" value="${lmtp}"/>
+      <property name="PROFILE.LMTP.message" value="${basedir}/tests/generic/lmtp/profiles/message.txt"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/generic/lmtp/load.prop"/>
@@ -116,7 +111,7 @@
             jmeterlogfile="${logs}/generic-smtp-jmeter.log"
             resultlog="${logs}/generic-smtp-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
-      <property name="PROFILE.SMTP.message" value="${smtp}"/>
+      <property name="PROFILE.SMTP.message" value="${basedir}/tests/generic/smtp/profiles/message.txt"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/generic/smtp/load.prop"/>
@@ -141,10 +136,10 @@
             jmeterlogfile="${logs}/generic-mix-jmeter.log"
             resultlog="${logs}/generic-mix-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
-      <property name="PROFILE.CalDAV.appointments" value="${appointments}"/>
-      <property name="PROFILE.CardDAV.cards" value="${cards}"/>
-      <property name="PROFILE.SMTP.message" value="${smtp}"/>
-      <property name="PROFILE.LMTP.message" value="${lmtp}"/>
+      <property name="PROFILE.CalDAV.appointments" value="${basedir}/tests/generic/mix/profiles/appointments.csv"/>
+      <property name="PROFILE.CardDAV.cards" value="${basedir}/tests/generic/mix/profiles/cards.csv"/>
+      <property name="PROFILE.SMTP.message" value="${basedir}/tests/generic/mix/profiles/message.txt"/>
+      <property name="PROFILE.LMTP.message" value="${basedir}/tests/generic/mix/profiles/message.txt"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/generic/mix/load.prop"/>
@@ -187,7 +182,7 @@
             jmeterlogfile="${logs}/fixed-smtpbenchmarking-jmeter.log"
             resultlog="${logs}/fixed-smtpbenchmarking-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
-      <property name="MESSAGES.csv" value="${book}"/>
+      <property name="MESSAGES.csv" value="${basedir}/tests/fixed/smtpbenchmarking/book.csv"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/fixed/smtpbenchmarking/load.prop"/>
     </jmeter>
