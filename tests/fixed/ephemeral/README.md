@@ -2,6 +2,27 @@
 
 This performs authentications to the web interface followed by a single SOAP request to validate CSRF value returned.
 
+# Properties
+
+## Environment
+
+|Key         |Value          |Description                              |
+|------------|---------------|-----------------------------------------|
+|WEB.server  |host.domain.com|name to use to connect to web server     |
+|WEB.port    |443            |port to use with web server              |
+|WEB.protocol|https          |protocol to use with web server          |
+|ACCOUNTS.csv|users.csv      |csv file of test accounts (user,password)|
+|REQUEST.log |requests.log   |file to log requests to                  |
+
+## Load
+
+|Key                  |Value|Description                                 |
+|---------------------|-----|--------------------------------------------|
+|LOAD.WEB.users       |1    |concurrent users/threads to run during tests|
+|LOAD.WEB.userduration|1    |user login duration in seconds              |
+|LOAD.WEB.rampup      |0    |how long to spend ramping up threads        |
+|LOAD.WEB.loopcount   |1    |how many times the user/thread repeats      |
+
 # Example
 
 ```

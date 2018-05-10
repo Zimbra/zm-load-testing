@@ -19,7 +19,7 @@ all generated items are in build directory.
 $ ant clean 
 ```
 
-remove build directory.
+will remove build directory.
 
 # manual build
 ## build

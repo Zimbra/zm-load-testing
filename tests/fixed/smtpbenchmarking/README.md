@@ -2,6 +2,28 @@
 
 Sends a messages from book.csv file.
 
+# Properties
+
+## Environment
+
+|Key         |Value          |Description                                 |
+|------------|---------------|--------------------------------------------|
+|SMTP.server |host.domain.com|name to use to connect to web server        |
+|SMTP.domain |domain.com     |domain to use in e-mail addresses           |
+|SMTP.port   |25             |port to use with web server                 |
+|ACCOUNTS.csv|users.csv      |csv file of test accounts (user,pass,touser)|
+|MESSAGES.csv|book.csv       |csv file of messages (message)              |
+|REQUEST.log |requests.log   |file to log requests to                     |
+
+## Load
+
+|Key                   |Value|Description                                 |
+|----------------------|-----|--------------------------------------------|
+|LOAD.SMTP.users       |1    |concurrent users/threads to run during tests|
+|LOAD.SMTP.rampup      |0    |how long to spend ramping up threads        |
+|LOAD.SMTP.loopcount   |1    |how many times the user/thread repeats      |
+|LOAD.SMTP.duration    |60   |duration of the test in seconds             |
+
 # Example
 
 ```
