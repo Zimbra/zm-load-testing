@@ -16,6 +16,10 @@ This contains zimbra jmeter load tests.
 
   Source code for Zimbra JMeter Java Library. See src [README.md](src/README.md) for more details.
 
+* data
+
+  Contain jmx file for data generation. Take input from config/users.csv to create accounts.
+
 # Quick Start
 
 ## Ant
@@ -35,6 +39,12 @@ This contains zimbra jmeter load tests.
 $ get clone https://github.com/Zimbra/zm-load-testing.git
 $ cd zm-load-testing
 $ ant
+```
+
+Data Generation
+
+```
+$ ant dataGen
 ```
 
 To run a specific test use the path name of the test seperated by hyphen example:
