@@ -2,6 +2,7 @@
   <property name="jmeter.home" location="/opt/apache-jmeter-3.0"/>
   <property name="env" value="config/env.prop"/>
   <property name="users" location="config/users.csv"/>
+  <property name="mail" location="data/Book.csv"/>
   <property name="tests" location="tests"/>
   <property name="logs" location="logs"/>
   <property name="zjmeter" location="${basedir}/src/build/jar/zjmeter.jar"/>
@@ -196,6 +197,16 @@
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/fixed/soapbenchmarking/load.prop"/>
     </jmeter>
+  </target>
+  <target name="dataGen" depends="logs">
+    <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/data/dataGen.jmx"
+            jmeterlogfile="${logs}/dataGen-jmeter.log"
+            resultlog="${logs}/dataGen-requests.log">
+      <property name="ACCOUNTS.csv" value="${users}"/>
+      <property name="MESSAGE.csv" value="${mail}"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+   </jmeter>
   </target>
   <target name="clean">
     <delete dir="${logs}"/>
