@@ -121,7 +121,7 @@
           <stringProp name="host_type">imaps</stringProp>
           <stringProp name="folder">INBOX</stringProp>
           <stringProp name="host">${__P(IMAP.server)}</stringProp>
-          <stringProp name="username">${user}</stringProp>
+          <stringProp name="username">${user}@${__P(IMAP.domain, IMAP.server)}</stringProp>
           <stringProp name="password">${pass}</stringProp>
           <stringProp name="num_messages">10</stringProp>
           <boolProp name="delete">false</boolProp>
