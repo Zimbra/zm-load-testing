@@ -309,7 +309,7 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
 POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
 
 try {
-  pc.sendCommand(&quot;USER&quot;,vars.get(&quot;USER&quot;));
+  pc.sendCommand(&quot;USER&quot;,vars.get(&quot;USER&quot;)+&quot;@&quot;+&quot;${__P(POP.domain,POP.server)}&quot;);
   log.info(Thread.currentThread().getName()+&quot; USER&quot;);
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
