@@ -198,7 +198,11 @@
       <jmeterarg value="-q${basedir}/tests/fixed/soapbenchmarking/load.prop"/>
     </jmeter>
   </target>
-  <target name="dataGen" depends="logs">
+  <target name="genUsers" depends="logs">
+	<exec executable="${basedir}/generateUsers.sh">
+	</exec>
+  </target>
+  <target name="dataGen" depends="logs,genUsers">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/data/dataGen.jmx"
             jmeterlogfile="${logs}/dataGen-jmeter.log"

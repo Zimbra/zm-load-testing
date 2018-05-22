@@ -170,7 +170,7 @@
             </collectionProp>
           </elementProp>
           <stringProp name="HTTPSampler.domain">${server}</stringProp>
-          <stringProp name="HTTPSampler.port">7071</stringProp>
+          <stringProp name="HTTPSampler.port">${__P(HTTP.admin.port)}</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/service/admin/soap/</stringProp>
@@ -275,7 +275,7 @@
               </collectionProp>
             </elementProp>
             <stringProp name="HTTPSampler.domain">${server}</stringProp>
-            <stringProp name="HTTPSampler.port">7071</stringProp>
+            <stringProp name="HTTPSampler.port">${__P(HTTP.admin.port)}</stringProp>
             <stringProp name="HTTPSampler.protocol">https</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
             <stringProp name="HTTPSampler.path">/service/admin/soap/</stringProp>
@@ -337,7 +337,7 @@
           </LoopController>
           <hashTree>
             <SmtpSampler guiclass="SmtpSamplerGui" testclass="SmtpSampler" testname="email" enabled="true">
-              <stringProp name="SMTPSampler.server">${server}</stringProp>
+              <stringProp name="SMTPSampler.server">${__P(SMTP.server)}</stringProp>
               <stringProp name="SMTPSampler.serverPort">25</stringProp>
               <stringProp name="SMTPSampler.mailFrom">${user}@${domain}</stringProp>
               <stringProp name="SMTPSampler.replyTo"></stringProp>
