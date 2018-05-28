@@ -85,12 +85,10 @@ echo "${jmeter} -n -Juser.classpath=${workspace}/src/build/jar/zjmeter.jar -t ${
 ${jmeter} -n -Juser.classpath=${workspace}/src/build/jar/zjmeter.jar -t ${workspace}/tests/${folder_name}/${jmx_file}/${jmx_file}.jmx -q ${workspace}/config/env.prop -q ${workspace}/tests/${folder_name}/${jmx_file}/load.prop -l ${report_dir}/${test_name}.xml -Djmeter.save.saveservice.thread_counts=true -Djmeter.save.saveservice.output_format=xml
 }
  fi
-#ant ${test_name}
 wait
 date3=`ssh root@$hostname date +%x`
 date4=`ssh root@$hostname date +%T`
 endDate="$date3 $date4"
-#tail -n +2 ${workspace}/logs/${test_name}-requests.log > ${report_dir}/${test_name}.xml
 
 echo "Performance test ended at :- $endDate"
 echo "****Taking Test Data Backup****"
@@ -125,7 +123,6 @@ echo "/usr/bin/perl $workspace/reportGen/scripts/truncate.pl ${report_dir} ${tes
 echo "/usr/bin/java -Xmx4182m -jar $workspace/reportGen/scripts/jars/saxon9he.jar  -o:$report_dir/truncated_and_sorted_${test_name}.xml -xsl:$xsl_dir/sort_output.xsl -s:$report_dir/merged_${test_name}.xml"
 /usr/bin/java -Xmx4182m -jar $workspace/reportGen/scripts/jars/saxon9he.jar  -o:$report_dir/truncated_and_sorted_${test_name}.xml -xsl:$xsl_dir/sort_output.xsl -s:$report_dir/merged_${test_name}.xml
 
-#echo "/usr/bin/java -Xmx4182m -jar $workspace/reportGen/scripts/jars/saxon9he.jar -o:$report_dir/index.html -xsl:$report_xsl -s:$report_dir/truncated_and_sorted_${test_name}.xml"
 echo "/usr/bin/java -Xmx4182m -jar $workspace/reportGen/scripts/jars/saxon9he.jar -o:$report_dir/sample.html -xsl:$simplereport_xsl -s:$report_dir/sort.xml
 rm -rf $report_dir/truncated_* $report_dir/merged* $report_dir/sample_sorted*"
 /usr/bin/java -Xmx4182m -jar $workspace/reportGen/scripts/jars/saxon9he.jar -o:$report_dir/sample.html -xsl:$simplereport_xsl -s:$report_dir/sort.xml
