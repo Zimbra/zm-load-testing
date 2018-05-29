@@ -15,22 +15,22 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="server" elementType="Argument">
             <stringProp name="Argument.name">server</stringProp>
-            <stringProp name="Argument.value">${__P(SOAP.server)}</stringProp>
+            <stringProp name="Argument.value">${__P(HTTP.server)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="domain" elementType="Argument">
             <stringProp name="Argument.name">domain</stringProp>
-            <stringProp name="Argument.value">${__P(SOAP.domain)}</stringProp>
+            <stringProp name="Argument.value">${__P(HTTP.domain)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="admin" elementType="Argument">
             <stringProp name="Argument.name">admin</stringProp>
-            <stringProp name="Argument.value">${__P(SOAP.admin.user)}</stringProp>
+            <stringProp name="Argument.value">${__P(HTTP.admin.user)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="pass" elementType="Argument">
             <stringProp name="Argument.name">pass</stringProp>
-            <stringProp name="Argument.value">${__P(SOAP.admin.pass)}</stringProp>
+            <stringProp name="Argument.value">${__P(HTTP.admin.pass)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="number_of_emails" elementType="Argument">
@@ -170,7 +170,7 @@
             </collectionProp>
           </elementProp>
           <stringProp name="HTTPSampler.domain">${server}</stringProp>
-          <stringProp name="HTTPSampler.port">${__P(SOAP.admin.port)}</stringProp>
+          <stringProp name="HTTPSampler.port">${__P(HTTP.admin.port)}</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/service/admin/soap/</stringProp>
@@ -275,7 +275,7 @@
               </collectionProp>
             </elementProp>
             <stringProp name="HTTPSampler.domain">${server}</stringProp>
-            <stringProp name="HTTPSampler.port">${__P(SOAP.admin.port)}</stringProp>
+            <stringProp name="HTTPSampler.port">${__P(HTTP.admin.port)}</stringProp>
             <stringProp name="HTTPSampler.protocol">https</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
             <stringProp name="HTTPSampler.path">/service/admin/soap/</stringProp>

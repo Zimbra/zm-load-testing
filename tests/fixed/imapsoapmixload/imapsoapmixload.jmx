@@ -92,8 +92,8 @@
         <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
           <collectionProp name="Arguments.arguments"/>
         </elementProp>
-        <stringProp name="HTTPSampler.domain">${__P(SOAP.server)}</stringProp>
-        <stringProp name="HTTPSampler.port">${__P(SOAP.port)}</stringProp>
+        <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+        <stringProp name="HTTPSampler.port">${__P(HTTP.port)}</stringProp>
         <stringProp name="HTTPSampler.connect_timeout">120000</stringProp>
         <stringProp name="HTTPSampler.response_timeout">1200000</stringProp>
         <stringProp name="HTTPSampler.protocol"></stringProp>
@@ -190,7 +190,7 @@
               <collectionProp name="HeaderManager.headers">
                 <elementProp name="Referer" elementType="Header">
                   <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
@@ -281,7 +281,7 @@
               <collectionProp name="Arguments.arguments">
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;Jmeter&quot;,&quot;version&quot;:&quot;&quot;},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(SOAP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;&quot;}},&quot;Body&quot;:{&quot;SearchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;sortBy&quot;:&quot;none&quot;,&quot;limit&quot;:&quot;500&quot;,&quot;types&quot;:&quot;message&quot;,&quot;resultMode&quot;:&quot;IDS&quot;,&quot;query&quot;:{&quot;_content&quot;:&quot;in:inbox&quot;}}}}</stringProp>
+                  <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;Jmeter&quot;,&quot;version&quot;:&quot;&quot;},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(HTTP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;&quot;}},&quot;Body&quot;:{&quot;SearchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;sortBy&quot;:&quot;none&quot;,&quot;limit&quot;:&quot;500&quot;,&quot;types&quot;:&quot;message&quot;,&quot;resultMode&quot;:&quot;IDS&quot;,&quot;query&quot;:{&quot;_content&quot;:&quot;in:inbox&quot;}}}}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
@@ -306,7 +306,7 @@
               <collectionProp name="HeaderManager.headers">
                 <elementProp name="Referer" elementType="Header">
                   <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}/</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}/</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
@@ -314,7 +314,7 @@
                 </elementProp>
                 <elementProp name="Origin" elementType="Header">
                   <stringProp name="Header.name">Origin</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}</stringProp>
                 </elementProp>
                 <elementProp name="Accept" elementType="Header">
                   <stringProp name="Header.name">Accept</stringProp>
@@ -371,7 +371,7 @@
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;Jmeter&quot;,&quot;version&quot;:&quot;&quot;},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(SOAP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;&quot;}},&quot;Body&quot;:{&quot;SearchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;sortBy&quot;:&quot;none&quot;,&quot;limit&quot;:&quot;500&quot;,&quot;types&quot;:&quot;message&quot;,&quot;resultMode&quot;:&quot;IDS&quot;,&quot;query&quot;:{&quot;_content&quot;:&quot;in:inbox&quot;}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;Jmeter&quot;,&quot;version&quot;:&quot;&quot;},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(HTTP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;&quot;}},&quot;Body&quot;:{&quot;SearchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;sortBy&quot;:&quot;none&quot;,&quot;limit&quot;:&quot;500&quot;,&quot;types&quot;:&quot;message&quot;,&quot;resultMode&quot;:&quot;IDS&quot;,&quot;query&quot;:{&quot;_content&quot;:&quot;in:inbox&quot;}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -396,7 +396,7 @@
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Referer" elementType="Header">
                     <stringProp name="Header.name">Referer</stringProp>
-                    <stringProp name="Header.value">https://${__P(SOAP.server)}/</stringProp>
+                    <stringProp name="Header.value">https://${__P(HTTP.server)}/</stringProp>
                   </elementProp>
                   <elementProp name="Accept-Language" elementType="Header">
                     <stringProp name="Header.name">Accept-Language</stringProp>
@@ -404,7 +404,7 @@
                   </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
-                    <stringProp name="Header.value">https://${__P(SOAP.server)}</stringProp>
+                    <stringProp name="Header.value">https://${__P(HTTP.server)}</stringProp>
                   </elementProp>
                   <elementProp name="Accept" elementType="Header">
                     <stringProp name="Header.name">Accept</stringProp>
@@ -473,7 +473,7 @@
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:${session},&quot;id&quot;:${session}},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(SOAP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;GetMsgRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;m&quot;:{&quot;id&quot;:&quot;${mid}&quot;,&quot;read&quot;:1,&quot;html&quot;:1,&quot;needExp&quot;:1,&quot;header&quot;:[{&quot;n&quot;:&quot;List-ID&quot;},{&quot;n&quot;:&quot;X-Zimbra-DL&quot;},{&quot;n&quot;:&quot;IN-REPLY-TO&quot;}],&quot;max&quot;:250000}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:${session},&quot;id&quot;:${session}},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(HTTP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;GetMsgRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;m&quot;:{&quot;id&quot;:&quot;${mid}&quot;,&quot;read&quot;:1,&quot;html&quot;:1,&quot;needExp&quot;:1,&quot;header&quot;:[{&quot;n&quot;:&quot;List-ID&quot;},{&quot;n&quot;:&quot;X-Zimbra-DL&quot;},{&quot;n&quot;:&quot;IN-REPLY-TO&quot;}],&quot;max&quot;:250000}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -498,7 +498,7 @@
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Referer" elementType="Header">
                     <stringProp name="Header.name">Referer</stringProp>
-                    <stringProp name="Header.value">https://${__P(SOAP.server)}/</stringProp>
+                    <stringProp name="Header.value">https://${__P(HTTP.server)}/</stringProp>
                   </elementProp>
                   <elementProp name="Accept-Language" elementType="Header">
                     <stringProp name="Header.name">Accept-Language</stringProp>
@@ -506,7 +506,7 @@
                   </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
-                    <stringProp name="Header.value">https://${__P(SOAP.server)}</stringProp>
+                    <stringProp name="Header.value">https://${__P(HTTP.server)}</stringProp>
                   </elementProp>
                   <elementProp name="Accept" elementType="Header">
                     <stringProp name="Header.name">Accept</stringProp>
@@ -550,7 +550,7 @@
               <collectionProp name="Arguments.arguments">
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:&quot;${session}&quot;,&quot;id&quot;:&quot;${session}&quot;},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(SOAP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;CreateContactRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;cn&quot;:{&quot;l&quot;:&quot;7&quot;,&quot;a&quot;:[{&quot;n&quot;:&quot;firstName&quot;,&quot;_content&quot;:&quot;users&quot;},{&quot;n&quot;:&quot;lastName&quot;,&quot;_content&quot;:&quot;users&quot;},{&quot;n&quot;:&quot;email&quot;,&quot;_content&quot;:&quot;${touser}@${__P(SOAP.domain)}&quot;},{&quot;n&quot;:&quot;fullName&quot;,&quot;_content&quot;:&quot;users, users&quot;}],&quot;m&quot;:[]}}}}</stringProp>
+                  <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:&quot;${session}&quot;,&quot;id&quot;:&quot;${session}&quot;},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(HTTP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;CreateContactRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;cn&quot;:{&quot;l&quot;:&quot;7&quot;,&quot;a&quot;:[{&quot;n&quot;:&quot;firstName&quot;,&quot;_content&quot;:&quot;users&quot;},{&quot;n&quot;:&quot;lastName&quot;,&quot;_content&quot;:&quot;users&quot;},{&quot;n&quot;:&quot;email&quot;,&quot;_content&quot;:&quot;${touser}@${__P(HTTP.domain)}&quot;},{&quot;n&quot;:&quot;fullName&quot;,&quot;_content&quot;:&quot;users, users&quot;}],&quot;m&quot;:[]}}}}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
@@ -575,7 +575,7 @@
               <collectionProp name="HeaderManager.headers">
                 <elementProp name="Referer" elementType="Header">
                   <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}/</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}/</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
@@ -583,7 +583,7 @@
                 </elementProp>
                 <elementProp name="Origin" elementType="Header">
                   <stringProp name="Header.name">Origin</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}</stringProp>
                 </elementProp>
                 <elementProp name="Accept" elementType="Header">
                   <stringProp name="Header.name">Accept</stringProp>
@@ -626,7 +626,7 @@
               <collectionProp name="Arguments.arguments">
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:${session},&quot;id&quot;:${session}},&quot;notify&quot;:{&quot;seq&quot;:1},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(SOAP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;CreateTaskRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;m&quot;:{&quot;l&quot;:&quot;15&quot;,&quot;inv&quot;:{&quot;comp&quot;:[{&quot;at&quot;:[],&quot;priority&quot;:5,&quot;status&quot;:&quot;NEED&quot;,&quot;percentComplete&quot;:0,&quot;allDay&quot;:&quot;1&quot;,&quot;s&quot;:{&quot;d&quot;:&quot;20170609&quot;},&quot;e&quot;:{&quot;d&quot;:&quot;20170610&quot;},&quot;name&quot;:&quot;task1&quot;,&quot;loc&quot;:&quot;test&quot;,&quot;or&quot;:{&quot;a&quot;:&quot;${touser}@${server}&quot;}}]},&quot;e&quot;:[],&quot;su&quot;:&quot;task1&quot;,&quot;mp&quot;:{&quot;mp&quot;:[{&quot;ct&quot;:&quot;text/plain&quot;,&quot;content&quot;:&quot;\n&quot;},{&quot;ct&quot;:&quot;text/html&quot;,&quot;content&quot;:&quot;&lt;html&gt;&lt;body id=&apos;htmlmode&apos;&gt;&lt;/body&gt;&lt;/html&gt;&quot;}],&quot;ct&quot;:&quot;multipart/alternative&quot;}}}}}</stringProp>
+                  <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:${session},&quot;id&quot;:${session}},&quot;notify&quot;:{&quot;seq&quot;:1},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(HTTP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;CreateTaskRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;m&quot;:{&quot;l&quot;:&quot;15&quot;,&quot;inv&quot;:{&quot;comp&quot;:[{&quot;at&quot;:[],&quot;priority&quot;:5,&quot;status&quot;:&quot;NEED&quot;,&quot;percentComplete&quot;:0,&quot;allDay&quot;:&quot;1&quot;,&quot;s&quot;:{&quot;d&quot;:&quot;20170609&quot;},&quot;e&quot;:{&quot;d&quot;:&quot;20170610&quot;},&quot;name&quot;:&quot;task1&quot;,&quot;loc&quot;:&quot;test&quot;,&quot;or&quot;:{&quot;a&quot;:&quot;${touser}@${server}&quot;}}]},&quot;e&quot;:[],&quot;su&quot;:&quot;task1&quot;,&quot;mp&quot;:{&quot;mp&quot;:[{&quot;ct&quot;:&quot;text/plain&quot;,&quot;content&quot;:&quot;\n&quot;},{&quot;ct&quot;:&quot;text/html&quot;,&quot;content&quot;:&quot;&lt;html&gt;&lt;body id=&apos;htmlmode&apos;&gt;&lt;/body&gt;&lt;/html&gt;&quot;}],&quot;ct&quot;:&quot;multipart/alternative&quot;}}}}}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
@@ -651,7 +651,7 @@
               <collectionProp name="HeaderManager.headers">
                 <elementProp name="Referer" elementType="Header">
                   <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}/</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}/</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
@@ -659,7 +659,7 @@
                 </elementProp>
                 <elementProp name="Origin" elementType="Header">
                   <stringProp name="Header.name">Origin</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}</stringProp>
                 </elementProp>
                 <elementProp name="Accept" elementType="Header">
                   <stringProp name="Header.name">Accept</stringProp>
@@ -707,7 +707,7 @@
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:${session},&quot;id&quot;:${session}},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(SOAP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;SaveDraftRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;m&quot;:{&quot;idnt&quot;:&quot;${idnt}&quot;,&quot;e&quot;:[{&quot;t&quot;:&quot;t&quot;,&quot;a&quot;:&quot;${touser}@${server}&quot;},{&quot;t&quot;:&quot;f&quot;,&quot;a&quot;:&quot;${user}@${__P(SOAP.domain)}&quot;}],&quot;su&quot;:{&quot;_content&quot;:&quot;&quot;},&quot;mp&quot;:[{&quot;ct&quot;:&quot;multipart/alternative&quot;,&quot;mp&quot;:[{&quot;ct&quot;:&quot;text/plain&quot;,&quot;content&quot;:{&quot;_content&quot;:&quot;&quot;}},{&quot;ct&quot;:&quot;text/html&quot;,&quot;content&quot;:{&quot;_content&quot;:&quot;&lt;html&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;&quot;}}]}]}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:${session},&quot;id&quot;:${session}},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(HTTP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;SaveDraftRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;m&quot;:{&quot;idnt&quot;:&quot;${idnt}&quot;,&quot;e&quot;:[{&quot;t&quot;:&quot;t&quot;,&quot;a&quot;:&quot;${touser}@${server}&quot;},{&quot;t&quot;:&quot;f&quot;,&quot;a&quot;:&quot;${user}@${__P(HTTP.domain)}&quot;}],&quot;su&quot;:{&quot;_content&quot;:&quot;&quot;},&quot;mp&quot;:[{&quot;ct&quot;:&quot;multipart/alternative&quot;,&quot;mp&quot;:[{&quot;ct&quot;:&quot;text/plain&quot;,&quot;content&quot;:{&quot;_content&quot;:&quot;&quot;}},{&quot;ct&quot;:&quot;text/html&quot;,&quot;content&quot;:{&quot;_content&quot;:&quot;&lt;html&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;&quot;}}]}]}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -732,7 +732,7 @@
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Referer" elementType="Header">
                     <stringProp name="Header.name">Referer</stringProp>
-                    <stringProp name="Header.value">https://${__P(SOAP.server)}/</stringProp>
+                    <stringProp name="Header.value">https://${__P(HTTP.server)}/</stringProp>
                   </elementProp>
                   <elementProp name="Accept-Language" elementType="Header">
                     <stringProp name="Header.name">Accept-Language</stringProp>
@@ -740,7 +740,7 @@
                   </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
-                    <stringProp name="Header.value">https://${__P(SOAP.server)}</stringProp>
+                    <stringProp name="Header.value">https://${__P(HTTP.server)}</stringProp>
                   </elementProp>
                   <elementProp name="Accept" elementType="Header">
                     <stringProp name="Header.name">Accept</stringProp>
@@ -788,7 +788,7 @@
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:${session},&quot;id&quot;:${session}},&quot;notify&quot;:{&quot;seq&quot;:5},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(SOAP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;SendMsgRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;m&quot;:{&quot;id&quot;:&quot;${cid}&quot;,&quot;did&quot;:&quot;${cid}&quot;,&quot;idnt&quot;:&quot;${idnt}&quot;,&quot;e&quot;:[{&quot;t&quot;:&quot;t&quot;,&quot;a&quot;:&quot;${touser}@${__P(SOAP.domain)}&quot;},{&quot;t&quot;:&quot;f&quot;,&quot;a&quot;:&quot;${user}@${__P(SOAP.domain)}&quot;}],&quot;su&quot;:{&quot;_content&quot;:&quot;jmeter ${time1}&quot;},&quot;mp&quot;:[{&quot;ct&quot;:&quot;multipart/alternative&quot;,&quot;mp&quot;:[{&quot;ct&quot;:&quot;text/plain&quot;,&quot;content&quot;:{&quot;_content&quot;:&quot;hi \n&quot;}},{&quot;ct&quot;:&quot;text/html&quot;,&quot;content&quot;:{&quot;_content&quot;:&quot;&lt;html&gt;&lt;body&gt;&lt;div style=\&quot;font-family: arial, helvetica, sans-serif; font-size: 12pt; color: #000000\&quot;&gt;&lt;div&gt;hi&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&quot;}}]}]}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:${session},&quot;id&quot;:${session}},&quot;notify&quot;:{&quot;seq&quot;:5},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(HTTP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;SendMsgRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;m&quot;:{&quot;id&quot;:&quot;${cid}&quot;,&quot;did&quot;:&quot;${cid}&quot;,&quot;idnt&quot;:&quot;${idnt}&quot;,&quot;e&quot;:[{&quot;t&quot;:&quot;t&quot;,&quot;a&quot;:&quot;${touser}@${__P(HTTP.domain)}&quot;},{&quot;t&quot;:&quot;f&quot;,&quot;a&quot;:&quot;${user}@${__P(HTTP.domain)}&quot;}],&quot;su&quot;:{&quot;_content&quot;:&quot;jmeter ${time1}&quot;},&quot;mp&quot;:[{&quot;ct&quot;:&quot;multipart/alternative&quot;,&quot;mp&quot;:[{&quot;ct&quot;:&quot;text/plain&quot;,&quot;content&quot;:{&quot;_content&quot;:&quot;hi \n&quot;}},{&quot;ct&quot;:&quot;text/html&quot;,&quot;content&quot;:{&quot;_content&quot;:&quot;&lt;html&gt;&lt;body&gt;&lt;div style=\&quot;font-family: arial, helvetica, sans-serif; font-size: 12pt; color: #000000\&quot;&gt;&lt;div&gt;hi&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&quot;}}]}]}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -813,7 +813,7 @@
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Referer" elementType="Header">
                     <stringProp name="Header.name">Referer</stringProp>
-                    <stringProp name="Header.value">https://${__P(SOAP.server)}/</stringProp>
+                    <stringProp name="Header.value">https://${__P(HTTP.server)}/</stringProp>
                   </elementProp>
                   <elementProp name="Accept-Language" elementType="Header">
                     <stringProp name="Header.name">Accept-Language</stringProp>
@@ -821,7 +821,7 @@
                   </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
-                    <stringProp name="Header.value">https://${__P(SOAP.server)}</stringProp>
+                    <stringProp name="Header.value">https://${__P(HTTP.server)}</stringProp>
                   </elementProp>
                   <elementProp name="Accept" elementType="Header">
                     <stringProp name="Header.name">Accept</stringProp>
@@ -865,7 +865,7 @@
               <collectionProp name="Arguments.arguments">
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:${session},&quot;id&quot;:${session}},&quot;notify&quot;:{&quot;seq&quot;:2},&quot;change&quot;:{&quot;token&quot;:97,&quot;type&quot;:&quot;new&quot;},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(SOAP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;ConvActionRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;action&quot;:{&quot;op&quot;:&quot;trash&quot;,&quot;tcon&quot;:&quot;-dtjs&quot;,&quot;l&quot;:&quot;3&quot;,&quot;id&quot;:&quot;-${Mail_id_1}&quot;}}}}</stringProp>
+                  <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:${session},&quot;id&quot;:${session}},&quot;notify&quot;:{&quot;seq&quot;:2},&quot;change&quot;:{&quot;token&quot;:97,&quot;type&quot;:&quot;new&quot;},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(HTTP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;ConvActionRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;action&quot;:{&quot;op&quot;:&quot;trash&quot;,&quot;tcon&quot;:&quot;-dtjs&quot;,&quot;l&quot;:&quot;3&quot;,&quot;id&quot;:&quot;-${Mail_id_1}&quot;}}}}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
@@ -890,7 +890,7 @@
               <collectionProp name="HeaderManager.headers">
                 <elementProp name="Referer" elementType="Header">
                   <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}/</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}/</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
@@ -898,7 +898,7 @@
                 </elementProp>
                 <elementProp name="Origin" elementType="Header">
                   <stringProp name="Header.name">Origin</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}</stringProp>
                 </elementProp>
                 <elementProp name="Accept" elementType="Header">
                   <stringProp name="Header.name">Accept</stringProp>
@@ -941,7 +941,7 @@
               <collectionProp name="Arguments.arguments">
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:${session},&quot;id&quot;:${session}},&quot;notify&quot;:{&quot;seq&quot;:2},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(SOAP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;CreateAppointmentRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;m&quot;:{&quot;l&quot;:&quot;10&quot;,&quot;inv&quot;:{&quot;comp&quot;:[{&quot;at&quot;:[{&quot;role&quot;:&quot;REQ&quot;,&quot;ptst&quot;:&quot;NE&quot;,&quot;rsvp&quot;:&quot;1&quot;,&quot;a&quot;:&quot;${touser}@${__P(SOAP.domain)}&quot;,&quot;d&quot;:&quot;${touser}&quot;}],&quot;status&quot;:&quot;CONF&quot;,&quot;fb&quot;:&quot;B&quot;,&quot;class&quot;:&quot;PUB&quot;,&quot;transp&quot;:&quot;O&quot;,&quot;draft&quot;:0,&quot;allDay&quot;:&quot;0&quot;,&quot;s&quot;:{&quot;tz&quot;:&quot;Asia/Kolkata&quot;,&quot;d&quot;:&quot;20160609T200000&quot;},&quot;e&quot;:{&quot;tz&quot;:&quot;Asia/Kolkata&quot;,&quot;d&quot;:&quot;20160609T210000&quot;},&quot;name&quot;:&quot;TestAppointment&quot;,&quot;loc&quot;:&quot;location&quot;,&quot;or&quot;:{&quot;a&quot;:&quot;${user}@${__P(SOAP.domain)}&quot;},&quot;alarm&quot;:[{&quot;action&quot;:&quot;DISPLAY&quot;,&quot;trigger&quot;:{&quot;rel&quot;:{&quot;m&quot;:5,&quot;related&quot;:&quot;START&quot;,&quot;neg&quot;:&quot;1&quot;}}}]}]},&quot;e&quot;:[{&quot;a&quot;:&quot;${touser}@${__P(SOAP.domain)}&quot;,&quot;p&quot;:&quot;${touser}&quot;,&quot;t&quot;:&quot;t&quot;}],&quot;su&quot;:&quot;TestAppointment&quot;,&quot;mp&quot;:{&quot;mp&quot;:[{&quot;ct&quot;:&quot;text/plain&quot;,&quot;content&quot;:&quot;The following is a new meeting request:\n\nSubject: TestAppointment \nOrganizer: ${user}@${server} \n\nLocation: location \nTime: Thursday, June 9, 2016, 8:00:00 PM - 9:00:00 PM GMT +05:30 Chennai, Kolkata, Mumbai, New Delhi\n \nInvitees: ${touser}@${__P(SOAP.domain)} \n\n\n*~*~*~*~*~*~*~*~*~*\n\nTest Appointment \n&quot;},{&quot;ct&quot;:&quot;text/html&quot;,&quot;content&quot;:&quot;&lt;html&gt;&lt;body id=&apos;htmlmode&apos;&gt;&lt;h3&gt;The following is a new meeting request:&lt;/h3&gt;\n\n&lt;p&gt;\n&lt;table border=&apos;0&apos;&gt;\n&lt;tr&gt;&lt;th align=left&gt;Subject:&lt;/th&gt;&lt;td&gt;TestAppointment &lt;/td&gt;&lt;/tr&gt;\n&lt;tr&gt;&lt;th align=left&gt;Organizer:&lt;/th&gt;&lt;td&gt;${user}@${__P(SOAP.domain)} &lt;/td&gt;&lt;/tr&gt;\n&lt;/table&gt;\n&lt;p&gt;\n&lt;table border=&apos;0&apos;&gt;\n&lt;tr&gt;&lt;th align=left&gt;Location:&lt;/th&gt;&lt;td&gt;location &lt;/td&gt;&lt;/tr&gt;\n&lt;tr&gt;&lt;th align=left&gt;Time:&lt;/th&gt;&lt;td&gt;Thursday, June 9, 2017, 8:00:00 PM - 9:00:00 PM GMT +05:30 Chennai, Kolkata, Mumbai, New Delhi\n &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;\n&lt;p&gt;\n&lt;table border=&apos;0&apos;&gt;\n&lt;tr&gt;&lt;th align=left&gt;Invitees:&lt;/th&gt;&lt;td&gt;${touser}@${__P(SOAP.domain)}&lt;/td&gt;&lt;/tr&gt;\n&lt;/table&gt;\n&lt;div&gt;*~*~*~*~*~*~*~*~*~*&lt;/div&gt;&lt;br&gt;&lt;div style=\&quot;font-family: arial, helvetica, sans-serif; font-size: 12pt; color: #000000\&quot;&gt;&lt;div&gt;Test Appointment&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&quot;}],&quot;ct&quot;:&quot;multipart/alternative&quot;}}}}}</stringProp>
+                  <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:${session},&quot;id&quot;:${session}},&quot;notify&quot;:{&quot;seq&quot;:2},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(HTTP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;CreateAppointmentRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;m&quot;:{&quot;l&quot;:&quot;10&quot;,&quot;inv&quot;:{&quot;comp&quot;:[{&quot;at&quot;:[{&quot;role&quot;:&quot;REQ&quot;,&quot;ptst&quot;:&quot;NE&quot;,&quot;rsvp&quot;:&quot;1&quot;,&quot;a&quot;:&quot;${touser}@${__P(HTTP.domain)}&quot;,&quot;d&quot;:&quot;${touser}&quot;}],&quot;status&quot;:&quot;CONF&quot;,&quot;fb&quot;:&quot;B&quot;,&quot;class&quot;:&quot;PUB&quot;,&quot;transp&quot;:&quot;O&quot;,&quot;draft&quot;:0,&quot;allDay&quot;:&quot;0&quot;,&quot;s&quot;:{&quot;tz&quot;:&quot;Asia/Kolkata&quot;,&quot;d&quot;:&quot;20160609T200000&quot;},&quot;e&quot;:{&quot;tz&quot;:&quot;Asia/Kolkata&quot;,&quot;d&quot;:&quot;20160609T210000&quot;},&quot;name&quot;:&quot;TestAppointment&quot;,&quot;loc&quot;:&quot;location&quot;,&quot;or&quot;:{&quot;a&quot;:&quot;${user}@${__P(HTTP.domain)}&quot;},&quot;alarm&quot;:[{&quot;action&quot;:&quot;DISPLAY&quot;,&quot;trigger&quot;:{&quot;rel&quot;:{&quot;m&quot;:5,&quot;related&quot;:&quot;START&quot;,&quot;neg&quot;:&quot;1&quot;}}}]}]},&quot;e&quot;:[{&quot;a&quot;:&quot;${touser}@${__P(HTTP.domain)}&quot;,&quot;p&quot;:&quot;${touser}&quot;,&quot;t&quot;:&quot;t&quot;}],&quot;su&quot;:&quot;TestAppointment&quot;,&quot;mp&quot;:{&quot;mp&quot;:[{&quot;ct&quot;:&quot;text/plain&quot;,&quot;content&quot;:&quot;The following is a new meeting request:\n\nSubject: TestAppointment \nOrganizer: ${user}@${server} \n\nLocation: location \nTime: Thursday, June 9, 2016, 8:00:00 PM - 9:00:00 PM GMT +05:30 Chennai, Kolkata, Mumbai, New Delhi\n \nInvitees: ${touser}@${__P(HTTP.domain)} \n\n\n*~*~*~*~*~*~*~*~*~*\n\nTest Appointment \n&quot;},{&quot;ct&quot;:&quot;text/html&quot;,&quot;content&quot;:&quot;&lt;html&gt;&lt;body id=&apos;htmlmode&apos;&gt;&lt;h3&gt;The following is a new meeting request:&lt;/h3&gt;\n\n&lt;p&gt;\n&lt;table border=&apos;0&apos;&gt;\n&lt;tr&gt;&lt;th align=left&gt;Subject:&lt;/th&gt;&lt;td&gt;TestAppointment &lt;/td&gt;&lt;/tr&gt;\n&lt;tr&gt;&lt;th align=left&gt;Organizer:&lt;/th&gt;&lt;td&gt;${user}@${__P(HTTP.domain)} &lt;/td&gt;&lt;/tr&gt;\n&lt;/table&gt;\n&lt;p&gt;\n&lt;table border=&apos;0&apos;&gt;\n&lt;tr&gt;&lt;th align=left&gt;Location:&lt;/th&gt;&lt;td&gt;location &lt;/td&gt;&lt;/tr&gt;\n&lt;tr&gt;&lt;th align=left&gt;Time:&lt;/th&gt;&lt;td&gt;Thursday, June 9, 2017, 8:00:00 PM - 9:00:00 PM GMT +05:30 Chennai, Kolkata, Mumbai, New Delhi\n &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;\n&lt;p&gt;\n&lt;table border=&apos;0&apos;&gt;\n&lt;tr&gt;&lt;th align=left&gt;Invitees:&lt;/th&gt;&lt;td&gt;${touser}@${__P(HTTP.domain)}&lt;/td&gt;&lt;/tr&gt;\n&lt;/table&gt;\n&lt;div&gt;*~*~*~*~*~*~*~*~*~*&lt;/div&gt;&lt;br&gt;&lt;div style=\&quot;font-family: arial, helvetica, sans-serif; font-size: 12pt; color: #000000\&quot;&gt;&lt;div&gt;Test Appointment&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&quot;}],&quot;ct&quot;:&quot;multipart/alternative&quot;}}}}}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
@@ -966,7 +966,7 @@
               <collectionProp name="HeaderManager.headers">
                 <elementProp name="Referer" elementType="Header">
                   <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}/</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}/</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
@@ -974,7 +974,7 @@
                 </elementProp>
                 <elementProp name="Origin" elementType="Header">
                   <stringProp name="Header.name">Origin</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}</stringProp>
                 </elementProp>
                 <elementProp name="Accept" elementType="Header">
                   <stringProp name="Header.name">Accept</stringProp>
@@ -1017,7 +1017,7 @@
               <collectionProp name="Arguments.arguments">
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:${session},&quot;id&quot;:${session}},&quot;notify&quot;:{&quot;seq&quot;:5},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(SOAP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;FolderActionRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;action&quot;:{&quot;op&quot;:&quot;empty&quot;,&quot;id&quot;:&quot;3&quot;,&quot;recursive&quot;:true}}}}</stringProp>
+                  <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:${session},&quot;id&quot;:${session}},&quot;notify&quot;:{&quot;seq&quot;:5},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(HTTP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;FolderActionRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;action&quot;:{&quot;op&quot;:&quot;empty&quot;,&quot;id&quot;:&quot;3&quot;,&quot;recursive&quot;:true}}}}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
@@ -1042,7 +1042,7 @@
               <collectionProp name="HeaderManager.headers">
                 <elementProp name="Referer" elementType="Header">
                   <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}/</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}/</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
@@ -1050,7 +1050,7 @@
                 </elementProp>
                 <elementProp name="Origin" elementType="Header">
                   <stringProp name="Header.name">Origin</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}</stringProp>
                 </elementProp>
                 <elementProp name="Accept" elementType="Header">
                   <stringProp name="Header.name">Accept</stringProp>
@@ -1093,7 +1093,7 @@
               <collectionProp name="Arguments.arguments">
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&lt;soap:Header&gt;&lt;context xmlns=&quot;urn:zimbra&quot;&gt;&lt;userAgent name=&quot;ZimbraWebClient - GC50 (Win)&quot; version=&quot;${version}&quot;/&gt;&lt;nosession/&gt;&lt;account by=&quot;name&quot;&gt;${user}@${__P(SOAP.domain)}&lt;/account&gt;&lt;format type=&quot;js&quot;/&gt;&lt;csrfToken&gt;${csrf}&lt;/csrfToken&gt;&lt;/context&gt;&lt;/soap:Header&gt;&lt;soap:Body&gt;&lt;BatchRequest xmlns=&quot;urn:zimbra&quot; onerror=&quot;continue&quot;&gt;&lt;SaveDocumentRequest xmlns=&quot;urn:zimbraMail&quot; requestId=&quot;0&quot;&gt;&lt;doc l=&quot;16&quot; ct=&quot;application/x-zimbra-doc&quot; name=&quot;TestDoc ${time1} &quot; descEnabled=&quot;true&quot; desc=&quot;TestDoc1 ${user} ${time1}&quot;&gt;&lt;content&gt;&amp;lt;html&amp;gt;&amp;lt;body&amp;gt;&amp;lt;div&amp;gt;Test Doc with sample data ${user} at time ${time1} &amp;lt;/div&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&lt;/content&gt;&lt;/doc&gt;&lt;/SaveDocumentRequest&gt;&lt;/BatchRequest&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</stringProp>
+                  <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&lt;soap:Header&gt;&lt;context xmlns=&quot;urn:zimbra&quot;&gt;&lt;userAgent name=&quot;ZimbraWebClient - GC50 (Win)&quot; version=&quot;${version}&quot;/&gt;&lt;nosession/&gt;&lt;account by=&quot;name&quot;&gt;${user}@${__P(HTTP.domain)}&lt;/account&gt;&lt;format type=&quot;js&quot;/&gt;&lt;csrfToken&gt;${csrf}&lt;/csrfToken&gt;&lt;/context&gt;&lt;/soap:Header&gt;&lt;soap:Body&gt;&lt;BatchRequest xmlns=&quot;urn:zimbra&quot; onerror=&quot;continue&quot;&gt;&lt;SaveDocumentRequest xmlns=&quot;urn:zimbraMail&quot; requestId=&quot;0&quot;&gt;&lt;doc l=&quot;16&quot; ct=&quot;application/x-zimbra-doc&quot; name=&quot;TestDoc ${time1} &quot; descEnabled=&quot;true&quot; desc=&quot;TestDoc1 ${user} ${time1}&quot;&gt;&lt;content&gt;&amp;lt;html&amp;gt;&amp;lt;body&amp;gt;&amp;lt;div&amp;gt;Test Doc with sample data ${user} at time ${time1} &amp;lt;/div&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&lt;/content&gt;&lt;/doc&gt;&lt;/SaveDocumentRequest&gt;&lt;/BatchRequest&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
@@ -1118,7 +1118,7 @@
               <collectionProp name="HeaderManager.headers">
                 <elementProp name="Referer" elementType="Header">
                   <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}/public/launchNewWindow.jsp?skin=harmony&amp;localeId=en_US&amp;childId=0</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}/public/launchNewWindow.jsp?skin=harmony&amp;localeId=en_US&amp;childId=0</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
@@ -1126,7 +1126,7 @@
                 </elementProp>
                 <elementProp name="Origin" elementType="Header">
                   <stringProp name="Header.name">Origin</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}</stringProp>
                 </elementProp>
                 <elementProp name="Accept" elementType="Header">
                   <stringProp name="Header.name">Accept</stringProp>
@@ -1167,7 +1167,7 @@
               <collectionProp name="Arguments.arguments">
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&lt;soap:Header&gt;&lt;context xmlns=&quot;urn:zimbra&quot;&gt;&lt;userAgent name=&quot;ZimbraWebClient - GC50 (Win)&quot; version=&quot;${version}&quot;/&gt;&lt;nosession/&gt;&lt;account by=&quot;name&quot;&gt;${user}@${__P(SOAP.domain)}&lt;/account&gt;&lt;format type=&quot;js&quot;/&gt;&lt;csrfToken&gt;${csrf}&lt;/csrfToken&gt;&lt;/context&gt;&lt;/soap:Header&gt;&lt;soap:Body&gt;&lt;GetItemRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&lt;item id=&quot;${DocID}&quot;/&gt;&lt;/GetItemRequest&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</stringProp>
+                  <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&lt;soap:Header&gt;&lt;context xmlns=&quot;urn:zimbra&quot;&gt;&lt;userAgent name=&quot;ZimbraWebClient - GC50 (Win)&quot; version=&quot;${version}&quot;/&gt;&lt;nosession/&gt;&lt;account by=&quot;name&quot;&gt;${user}@${__P(HTTP.domain)}&lt;/account&gt;&lt;format type=&quot;js&quot;/&gt;&lt;csrfToken&gt;${csrf}&lt;/csrfToken&gt;&lt;/context&gt;&lt;/soap:Header&gt;&lt;soap:Body&gt;&lt;GetItemRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&lt;item id=&quot;${DocID}&quot;/&gt;&lt;/GetItemRequest&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
@@ -1192,7 +1192,7 @@
               <collectionProp name="HeaderManager.headers">
                 <elementProp name="Referer" elementType="Header">
                   <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}/public/launchNewWindow.jsp?skin=harmony&amp;localeId=en_US&amp;childId=0</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}/public/launchNewWindow.jsp?skin=harmony&amp;localeId=en_US&amp;childId=0</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
@@ -1200,7 +1200,7 @@
                 </elementProp>
                 <elementProp name="Origin" elementType="Header">
                   <stringProp name="Header.name">Origin</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}</stringProp>
                 </elementProp>
                 <elementProp name="Accept" elementType="Header">
                   <stringProp name="Header.name">Accept</stringProp>
@@ -1243,7 +1243,7 @@
               <collectionProp name="Arguments.arguments">
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:${session},&quot;id&quot;:${session}},&quot;notify&quot;:{&quot;seq&quot;:4},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(SOAP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;EndSessionRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraAccount&quot;}}}</stringProp>
+                  <stringProp name="Argument.value">{&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraWebClient - GC50 (Win)&quot;,&quot;version&quot;:&quot;${version}&quot;},&quot;session&quot;:{&quot;_content&quot;:${session},&quot;id&quot;:${session}},&quot;notify&quot;:{&quot;seq&quot;:4},&quot;account&quot;:{&quot;_content&quot;:&quot;${user}@${__P(HTTP.domain)}&quot;,&quot;by&quot;:&quot;name&quot;},&quot;csrfToken&quot;:&quot;${csrf}&quot;}},&quot;Body&quot;:{&quot;EndSessionRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraAccount&quot;}}}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
@@ -1268,7 +1268,7 @@
               <collectionProp name="HeaderManager.headers">
                 <elementProp name="Referer" elementType="Header">
                   <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}/</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}/</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
@@ -1276,7 +1276,7 @@
                 </elementProp>
                 <elementProp name="Origin" elementType="Header">
                   <stringProp name="Header.name">Origin</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}</stringProp>
                 </elementProp>
                 <elementProp name="Accept" elementType="Header">
                   <stringProp name="Header.name">Accept</stringProp>
@@ -1308,7 +1308,7 @@
               <collectionProp name="Arguments.arguments">
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&lt;soap:Header&gt;&lt;context xmlns=&quot;urn:zimbra&quot;&gt;&lt;userAgent name=&quot;ZimbraWebClient - GC50 (Win)&quot; version=&quot;${version}&quot;/&gt;&lt;session id=&quot;${session}&quot;/&gt;&lt;notify seq=&quot;4&quot;/&gt;&lt;account by=&quot;name&quot;&gt;${user}@${__P(SOAP.domain)}&lt;/account&gt;&lt;format type=&quot;js&quot;/&gt;&lt;csrfToken&gt;${csrf}&lt;/csrfToken&gt;&lt;/context&gt;&lt;/soap:Header&gt;&lt;soap:Body&gt;&lt;ModifyPrefsRequest xmlns=&quot;urn:zimbraAccount&quot;&gt;&lt;pref name=&quot;zimbraPrefSortOrder&quot;&gt;BDLV:,CAL:,CLV:,CLV-SR-1:dateDesc,CLV-main:dateDesc,CNS:,CNSRC:,CNTGT:,CV:,TKL:,TV:&lt;/pref&gt;&lt;/ModifyPrefsRequest&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</stringProp>
+                  <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&lt;soap:Header&gt;&lt;context xmlns=&quot;urn:zimbra&quot;&gt;&lt;userAgent name=&quot;ZimbraWebClient - GC50 (Win)&quot; version=&quot;${version}&quot;/&gt;&lt;session id=&quot;${session}&quot;/&gt;&lt;notify seq=&quot;4&quot;/&gt;&lt;account by=&quot;name&quot;&gt;${user}@${__P(HTTP.domain)}&lt;/account&gt;&lt;format type=&quot;js&quot;/&gt;&lt;csrfToken&gt;${csrf}&lt;/csrfToken&gt;&lt;/context&gt;&lt;/soap:Header&gt;&lt;soap:Body&gt;&lt;ModifyPrefsRequest xmlns=&quot;urn:zimbraAccount&quot;&gt;&lt;pref name=&quot;zimbraPrefSortOrder&quot;&gt;BDLV:,CAL:,CLV:,CLV-SR-1:dateDesc,CLV-main:dateDesc,CNS:,CNSRC:,CNTGT:,CV:,TKL:,TV:&lt;/pref&gt;&lt;/ModifyPrefsRequest&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
@@ -1333,7 +1333,7 @@
               <collectionProp name="HeaderManager.headers">
                 <elementProp name="Referer" elementType="Header">
                   <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}/</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}/</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
@@ -1341,7 +1341,7 @@
                 </elementProp>
                 <elementProp name="Origin" elementType="Header">
                   <stringProp name="Header.name">Origin</stringProp>
-                  <stringProp name="Header.value">https://${__P(SOAP.server)}</stringProp>
+                  <stringProp name="Header.value">https://${__P(HTTP.server)}</stringProp>
                 </elementProp>
                 <elementProp name="Accept" elementType="Header">
                   <stringProp name="Header.name">Accept</stringProp>
@@ -1399,7 +1399,7 @@
               <collectionProp name="HeaderManager.headers">
                 <elementProp name="Referer" elementType="Header">
                   <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">https://$${__P(SOAP.server)}/</stringProp>
+                  <stringProp name="Header.value">https://$${__P(HTTP.server)}/</stringProp>
                 </elementProp>
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>

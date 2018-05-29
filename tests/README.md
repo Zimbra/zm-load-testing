@@ -20,7 +20,7 @@ The tests are broken up into two groups
   
   The generic tests can be run against different environments, with different loads, and using a profile can perform different sequences of protocol commands.
   
-  All the generic tests depend on the lib/zjmeter.jar to generate the sequence of commands from the profile property file.
+  All the generic tests depend on the [Zimbra JMeter Java Library](../src/README.md) to generate the sequence of commands from the profile property file.
   
   A typical execution of a generic test is of the form:
   
