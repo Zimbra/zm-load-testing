@@ -13,6 +13,10 @@ The following protocols currently have a basic level of support:
 * carddav
   
   [vCard Extension to WebDAV](https://tools.ietf.org/html/rfc6352) view [carddav](carddav/carddav.md) for a list of currently supported commands in the jmx.
+
+* eas
+
+  [Exchange ActiveSync: Command Reference Protocol](https://msdn.microsoft.com/en-us/library/dd299441(v=exchg.80).aspx) [Exchange ActiveSync: HTTP Protocol](https://msdn.microsoft.com/en-us/library/dd299446(v=exchg.80).aspx) [Exchange ActiveSync: WAP Binary XML (WBXML) Algorithm](https://msdn.microsoft.com/en-us/library/dd299442(v=exchg.80).aspx) view [eas](eas/eas.md) for a list of currently suported commands in the jmx.
   
 * imap
   
@@ -46,6 +50,7 @@ For each of the supported generic tests they depend on a protocol
 |---------|--------|--------|
 |caldav   |CalDAV  |HTTP    |
 |carddav  |CardDAV |HTTP    |
+|eas      |EAS     |HTTP    |
 |imap     |IMAP    |IMAP    |
 |lmtp     |LMTP    |LMTP    |
 |pop      |POP     |POP     |

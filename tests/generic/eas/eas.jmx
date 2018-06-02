@@ -1,0 +1,839 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.9" jmeter="3.0 r1743807">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>false</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>false</threadName>
+            <dataType>false</dataType>
+            <encoding>false</encoding>
+            <assertions>false</assertions>
+            <subresults>false</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <url>true</url>
+          </value>
+        </objProp>
+        <objProp>
+          <name></name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>false</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>false</threadName>
+            <dataType>false</dataType>
+            <encoding>false</encoding>
+            <assertions>false</assertions>
+            <subresults>false</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename">${__P(jmetercsv,${__P(REQUEST.log)})}</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <objProp>
+          <name></name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Accounts" enabled="true">
+        <stringProp name="filename">${__P(ACCOUNTS.csv)}</stringProp>
+        <stringProp name="fileEncoding"></stringProp>
+        <stringProp name="variableNames">USER,PASS</stringProp>
+        <stringProp name="delimiter">,</stringProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+      </CSVDataSet>
+      <hashTree/>
+      <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="EAS Setup" enabled="true">
+        <stringProp name="filename"></stringProp>
+        <stringProp name="parameters"></stringProp>
+        <boolProp name="resetInterpreter">false</boolProp>
+        <stringProp name="script">import com.zimbra.jmeter.Zimbra;
+//debug();
+Zimbra eas = new Zimbra(props,&quot;EAS&quot;);
+vars.putObject(&quot;EAS&quot;,eas);</stringProp>
+      </BeanShellPreProcessor>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="EAS" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">${__P(LOAD.EAS.loopcount)}</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.EAS.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.EAS.rampup)}</stringProp>
+        <longProp name="ThreadGroup.start_time">1505165237000</longProp>
+        <longProp name="ThreadGroup.end_time">1505165237000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.EAS.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="EAS Settings" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="EASURL" elementType="Argument">
+              <stringProp name="Argument.name">EASURL</stringProp>
+              <stringProp name="Argument.value">/Microsoft-Server-ActiveSync?Cmd=${COMMAND}&amp;User=${USER}&amp;DeviceId=testing&amp;DeviceType=jmeter</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="SYNCKEY" elementType="Argument">
+              <stringProp name="Argument.name">SYNCKEY</stringProp>
+              <stringProp name="Argument.value">0</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="EAS HTTP Config" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+          <stringProp name="HTTPSampler.port">${__P(HTTP.port)}</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol">${__P(HTTP.protocol)}</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/Microsoft-Server-ActiveSync</stringProp>
+          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+        </ConfigTestElement>
+        <hashTree/>
+        <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="EAS Authentication" enabled="true">
+          <collectionProp name="AuthManager.auth_list">
+            <elementProp name="" elementType="Authorization">
+              <stringProp name="Authorization.url">https://${__P(HTTP.server)}</stringProp>
+              <stringProp name="Authorization.username">${USER}</stringProp>
+              <stringProp name="Authorization.password">${PASS}</stringProp>
+              <stringProp name="Authorization.domain"></stringProp>
+              <stringProp name="Authorization.realm"></stringProp>
+            </elementProp>
+          </collectionProp>
+        </AuthManager>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
+          <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Zimbra;
+import com.zimbra.jmeter.Command;
+
+Zimbra eas = vars.getObject(&quot;EAS&quot;);
+ArrayList commands = eas.getcommands();
+
+vars.putObject(&quot;COMMANDS&quot;,commands);
+// generate command DELAY
+if (props.get(&quot;LOAD.EAS.userduration&quot;) == null || commands.size() == 0) {
+  vars.putObject(&quot;DELAY&quot;,&quot;0&quot;);
+} else {
+  int delay = Integer.parseInt(props.get(&quot;LOAD.EAS.userduration&quot;))*1000/commands.size();
+  vars.putObject(&quot;DELAY&quot;,delay.toString());
+}
+// initialize CONTINUE
+if (commands.size() &gt; 0) {
+  vars.put(&quot;CONTINUE&quot;,&quot;true&quot;);
+} else {
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+}</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Run Commands" enabled="true">
+          <stringProp name="WhileController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+        </WhileController>
+        <hashTree>
+          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Next Command" enabled="true">
+            <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Command;
+
+ArrayList commands = vars.getObject(&quot;COMMANDS&quot;);
+if (commands.size() &gt; 0) {
+  //log.info(&quot;Testing: &quot;+commands);
+  Command c = commands.remove(0);
+  vars.put(&quot;COMMAND&quot;,c.getName());
+  for (Map.Entry a: c.argsSet()) {
+  	vars.put(a.getKey(),a.getValue());
+  }
+  //log.info(vars.get(&quot;COMMAND&quot;));
+}
+if (commands.size() == 0) {
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+}</stringProp>
+            <stringProp name="BeanShellSampler.filename"></stringProp>
+            <stringProp name="BeanShellSampler.parameters"></stringProp>
+            <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+          </BeanShellSampler>
+          <hashTree/>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Command Execution" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Command Delay" enabled="true">
+              <stringProp name="ConstantTimer.delay">${DELAY}</stringProp>
+            </ConstantTimer>
+            <hashTree/>
+            <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="Commands" enabled="true">
+              <stringProp name="SwitchController.value">${COMMAND}</stringProp>
+            </SwitchController>
+            <hashTree>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="default" enabled="true">
+                <stringProp name="BeanShellSampler.query">log.info(Thread.currentThread().getName()+&quot; &quot;+vars.get(&quot;COMMAND&quot;)+&quot; not currently supported&quot;);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="FolderCreate" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpEntity;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.conn.ssl.SSLContextBuilder;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.util.EntityUtils;
+import org.apache.commons.codec.binary.Base64;
+import java.nio.charset.StandardCharsets;
+import org.apache.http.HttpHeaders;
+import com.zimbra.zimbrasync.wbxml.BinarySerializer;
+import com.zimbra.zimbrasync.wbxml.BinaryParser;
+
+
+try {
+//Setup HTTP Request
+HttpPost hp = new HttpPost(&quot;https://10.250.3.127/Microsoft-Server-ActiveSync?Cmd=FolderCreate&amp;User=user1&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
+String auth = &quot;user1:userpass&quot;;
+byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
+String authHeader = &quot;Basic &quot;+new String(encodedAuth);
+hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
+hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,&quot;2.5&quot;);
+
+//Generate WBXML Request Body
+ByteArrayOutputStream bao = new ByteArrayOutputStream();
+BinarySerializer bs = new BinarySerializer(bao,false);
+bs.openTag(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_FOLDERCREATE);
+bs.textElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_SYNCKEY,vars.get(&quot;SYNCKEY&quot;));
+bs.integerElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_PARENTID,0);
+bs.textElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_DISPLAYNAME,&quot;ActiveSyncTestDir&quot;);
+bs.integerElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_TYPE,12);
+bs.closeTag();
+
+//Add WBXML Body to request
+HttpEntity entity = new ByteArrayEntity(bao.toByteArray());
+hp.setEntity(entity);
+
+//Disable SSL validation/verification
+SSLContextBuilder builder = new SSLContextBuilder();
+builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build(),SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+
+//Create http connection and send request
+CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+HttpResponse hr = dhc.execute(hp);
+
+//Process reponse for reporting results in jmeter
+ResponseCode = hr.getStatusLine().getStatusCode();
+ResponseMessage = hr.getStatusLine().getReasonPhrase();
+
+//Convert WBXML to readable form for jmeter
+String result=&quot;&quot;;
+try {
+  BinaryParser bp = new BinaryParser(new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())),false);
+
+  while (bp.next() != null) {
+    if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
+    } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.START_TAG) {
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.END_TAG) {
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.TEXT) {
+      result+=bp.getText(); 	
+    }
+  }
+} catch (e) {
+   log.info(&quot;FolderCreate exception thrown: &quot;+e);
+}
+SampleResult.setResponseData(result);
+
+} catch (Exception e) {
+	log.error(e.toString());
+}</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+                  <stringProp name="XPathExtractor.default">${SYNCKEY}</stringProp>
+                  <stringProp name="XPathExtractor.refname">SYNCKEY</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//SyncKey</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+                  <stringProp name="XPathExtractor.default"></stringProp>
+                  <stringProp name="XPathExtractor.refname">FOLDERID</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//ServerId</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+              </hashTree>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="FolderDelete" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpEntity;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.conn.ssl.SSLContextBuilder;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.util.EntityUtils;
+import org.apache.commons.codec.binary.Base64;
+import java.nio.charset.StandardCharsets;
+import org.apache.http.HttpHeaders;
+import com.zimbra.zimbrasync.wbxml.BinarySerializer;
+import com.zimbra.zimbrasync.wbxml.BinaryParser;
+
+
+try {
+HttpPost hp = new HttpPost(&quot;https://10.250.3.127/Microsoft-Server-ActiveSync?Cmd=FolderDelete&amp;User=user1&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
+String auth = &quot;user1:userpass&quot;;
+byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
+String authHeader = &quot;Basic &quot;+new String(encodedAuth);
+hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
+hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,&quot;2.5&quot;);
+
+ByteArrayOutputStream bao = new ByteArrayOutputStream();
+BinarySerializer bs = new BinarySerializer(bao,false);
+bs.openTag(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_FOLDERDELETE);
+bs.textElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_SYNCKEY,vars.get(&quot;SYNCKEY&quot;));
+bs.textElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_SERVERID,vars.get(&quot;FOLDERID&quot;));
+bs.closeTag();
+
+HttpEntity entity = new ByteArrayEntity(bao.toByteArray());
+hp.setEntity(entity);
+
+SSLContextBuilder builder = new SSLContextBuilder();
+builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build(),SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+
+CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+HttpResponse hr = dhc.execute(hp);
+
+//Generate readable result data
+String result=&quot;&quot;;
+try {
+  BinaryParser bp = new BinaryParser(new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())),false);
+
+  while (bp.next() != null) {
+    if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
+    } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.START_TAG) {
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.END_TAG) {
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.TEXT) {
+      result+=bp.getText(); 	
+    }
+  }
+} catch (e) {
+   log.info(&quot;FolderDelete exception thrown: &quot;+e);
+}
+SampleResult.setResponseData(result);
+
+} catch (Exception e) {
+	log.error(e.toString());
+}</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+                  <stringProp name="XPathExtractor.default">${SYNCKEY}</stringProp>
+                  <stringProp name="XPathExtractor.refname">SYNCKEY</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//SyncKey</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="FolderSync" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">&lt;?xmll version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
+&lt;FolderSync xmlns=&quot;FolderHierarchy&quot;&gt;&#xd;
+  &lt;SyncKey&gt;${SYNCKEY}&lt;/SyncKey&gt;&#xd;
+&lt;/FolderSync&gt;</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain"></stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                <stringProp name="HTTPSampler.protocol"></stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">${__eval(${EASURL})}</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <boolProp name="HTTPSampler.monitor">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+                  <boolProp name="resetInterpreter">false</boolProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="script">import com.zimbra.zimbrasync.wbxml.BinaryParser;
+String result=&quot;&quot;;
+try {
+  BinaryParser bp = new BinaryParser(new ByteArrayInputStream(data),false);
+
+  while (bp.next() != null) {
+    if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
+    } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.START_TAG) {
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.END_TAG) {
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.TEXT) {
+      result+=bp.getText(); 	
+    }
+  }
+} catch (e) {
+   log.info(&quot;FolderSync exception thrown: &quot;+e);
+}
+prev.setResponseData(result);</stringProp>
+                </BeanShellPostProcessor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+                  <stringProp name="XPathExtractor.default"></stringProp>
+                  <stringProp name="XPathExtractor.refname">SYNCKEY</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//SyncKey</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="false">
+                  <boolProp name="resetInterpreter">false</boolProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="script">String synckey=vars.get(&quot;SYNCKEY&quot;);
+log.info(&quot;SYNCKEY: &quot;+synckey);
+synckey=synckey.replaceAll(&quot;\\{.*\\}&quot;,&quot;&quot;);
+log.info(&quot;SYNCKEY: &quot;+synckey);
+vars.put(&quot;SYNCKEY&quot;,&quot;1&quot;);</stringProp>
+                </BeanShellPostProcessor>
+                <hashTree/>
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Search" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">&lt;?xmll version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
+&lt;Search xmlns=&quot;Search&quot;&gt;&#xd;
+  &lt;Store&gt;&#xd;
+    &lt;Name&gt;Mailbox&lt;/Name&gt;&#xd;
+    &lt;Query&gt;Testing&lt;/Query&gt;&#xd;
+    &lt;Options&gt;&#xd;
+      &lt;Range&gt;0-10&lt;/Range&gt;&#xd;
+    &lt;/Options&gt;&#xd;
+  &lt;/Store&gt;&#xd;
+&lt;/Search&gt;</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain"></stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                <stringProp name="HTTPSampler.protocol"></stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">${__eval(${EASURL})}</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <boolProp name="HTTPSampler.monitor">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+                  <boolProp name="resetInterpreter">false</boolProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="script">import com.zimbra.zimbrasync.wbxml.BinaryParser;
+String result=&quot;&quot;;
+try {
+  BinaryParser bp = new BinaryParser(new ByteArrayInputStream(data),false);
+
+  while (bp.next() != null) {
+    if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
+    } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.START_TAG) {
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.END_TAG) {
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.TEXT) {
+      result+=bp.getText(); 	
+    }
+  }
+} catch (e) {
+   log.info(&quot;Exception thrown: &quot;+e);
+}
+prev.setResponseData(result);</stringProp>
+                </BeanShellPostProcessor>
+                <hashTree/>
+              </hashTree>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Search2" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpEntity;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.conn.ssl.SSLContextBuilder;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.util.EntityUtils;
+import org.apache.commons.codec.binary.Base64;
+import java.nio.charset.StandardCharsets;
+import org.apache.http.HttpHeaders;
+import com.zimbra.zimbrasync.wbxml.BinarySerializer;
+import com.zimbra.zimbrasync.wbxml.BinaryParser;
+
+log.info(&quot;Search start&quot;);
+
+try {
+//Setup HTTP Request
+HttpPost hp = new HttpPost(&quot;https://10.250.3.127/Microsoft-Server-ActiveSync?Cmd=Search&amp;User=user1&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
+String auth = &quot;user1:userpass&quot;;
+byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
+String authHeader = &quot;Basic &quot;+new String(encodedAuth);
+hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
+hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,&quot;2.5&quot;);
+
+//Generate WBXML Request Body
+ByteArrayOutputStream bao = new ByteArrayOutputStream();
+BinarySerializer bs = new BinarySerializer(bao,false);
+bs.openTag(BinarySerializer.NAMESPACE_SEARCH,BinarySerializer.SEARCH_SEARCH);
+bs.openTag(BinarySerializer.NAMESPACE_SEARCH,BinarySerializer.SEARCH_STORE);
+bs.textElement(BinarySerializer.NAMESPACE_SEARCH,BinarySerializer.SEARCH_NAME,&quot;Mailbox&quot;);
+bs.textElement(BinarySerializer.NAMESPACE_SEARCH,BinarySerializer.SEARCH_QUERY,&quot;test&quot;);
+bs.closeTag();
+bs.closeTag();
+log.info(&quot;Search Inside&quot;);
+
+//Add WBXML Body to request
+HttpEntity entity = new ByteArrayEntity(bao.toByteArray());
+hp.setEntity(entity);
+
+//Disable SSL validation/verification
+SSLContextBuilder builder = new SSLContextBuilder();
+builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build(),SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+
+//Create http connection and send request
+CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+HttpResponse hr = dhc.execute(hp);
+
+//Process reponse for reporting results in jmeter
+ResponseCode = hr.getStatusLine().getStatusCode();
+ResponseMessage = hr.getStatusLine().getReasonPhrase();
+
+log.info(&quot;Search result&quot;);
+//Convert WBXML to readable form for jmeter
+String result=&quot;&quot;;
+try {
+  BinaryParser bp = new BinaryParser(new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())),false);
+
+  while (bp.next() != null) {
+    if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
+    } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.START_TAG) {
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.END_TAG) {
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.TEXT) {
+      result+=bp.getText(); 	
+    }
+  }
+} catch (e) {
+   log.info(&quot;Search exception thrown: &quot;+e);
+}
+SampleResult.setResponseData(result);
+
+} catch (Exception e) {
+	log.error(&quot;Search:&quot;+e.toString());
+}</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="SendMail" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpEntity;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.conn.ssl.SSLContextBuilder;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.commons.codec.binary.Base64;
+import java.nio.charset.StandardCharsets;
+import org.apache.http.HttpHeaders;
+import com.zimbra.zimbrasync.wbxml.BinarySerializer;
+
+String message = &quot;From: &lt;user1@zimbra07.loadtest.synacor.com&gt;\n&quot;;
+message += &quot;To: &lt;user1@zimbra07.loadtest.synacor.com&gt;\n&quot;;
+message += &quot;Subject: From Active Sync\n&quot;;
+message += &quot;MIME-Version: 1.0\n&quot;;
+message += &quot;Content-Type:  text/plain; charset=utf-8\n&quot;;
+message += &quot;Content-Transfer-Encoding: 7bit\n\n&quot;;
+message += &quot;This is the message.\n&quot;;
+
+try {
+HttpPost hp = new HttpPost(&quot;https://10.250.3.127/Microsoft-Server-ActiveSync?Cmd=SendMail&amp;User=user1&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
+String auth = &quot;user1:userpass&quot;;
+byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
+String authHeader = &quot;Basic &quot;+new String(encodedAuth);
+hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
+hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
+
+ByteArrayOutputStream bao = new ByteArrayOutputStream();
+BinarySerializer bs = new BinarySerializer(bao,false);
+bs.openTag(BinarySerializer.NAMESPACE_COMPOSEMAIL,BinarySerializer.COMPOSEMAIL_SENDMAIL);
+bs.textElement(BinarySerializer.NAMESPACE_COMPOSEMAIL,BinarySerializer.COMPOSEMAIL_CLIENTID,&quot;${__UUID()}&quot;);
+bs.opaqueElement(BinarySerializer.NAMESPACE_COMPOSEMAIL,BinarySerializer.COMPOSEMAIL_MIME,message);
+bs.closeTag();
+
+HttpEntity entity = new ByteArrayEntity(bao.toByteArray());
+hp.setEntity(entity);
+
+SSLContextBuilder builder = new SSLContextBuilder();
+builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build(),SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+
+CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+HttpResponse hr = dhc.execute(hp);
+
+log.info(&quot;SendMail Status: &quot;+hr.getStatusLine());
+} catch (Exception e) {
+	log.error(e.toString());
+}</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Sync" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain"></stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                <stringProp name="HTTPSampler.protocol"></stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">${__eval(${EASURL})}</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <boolProp name="HTTPSampler.monitor">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+                  <boolProp name="resetInterpreter">false</boolProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="script">import com.zimbra.zimbrasync.wbxml.BinaryParser;
+String result=&quot;&quot;;
+try {
+  BinaryParser bp = new BinaryParser(new ByteArrayInputStream(data),false);
+
+  while (bp.next() != null) {
+    if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
+    } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.START_TAG) {
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.END_TAG) {
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+    } else if (bp.getEventType() == BinaryParser.TEXT) {
+      result+=bp.getText(); 	
+    }
+  }
+} catch (e) {
+   log.info(&quot;Sync exception thrown: &quot;+e);
+}
+prev.setResponseData(result);</stringProp>
+                </BeanShellPostProcessor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+                  <stringProp name="XPathExtractor.default">${SYNCKEY}</stringProp>
+                  <stringProp name="XPathExtractor.refname">SYNCKEY</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//SyncKey</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+          <boolProp name="displayJMeterProperties">true</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">true</boolProp>
+        </DebugSampler>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+    <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
+      <boolProp name="WorkBench.save">true</boolProp>
+    </WorkBench>
+    <hashTree/>
+  </hashTree>
+</jmeterTestPlan>

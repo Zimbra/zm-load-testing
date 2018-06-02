@@ -50,10 +50,10 @@
             resultlog="${logs}/generic-caldav-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="PROFILE.CalDAV.appointments" value="${basedir}/tests/generic/caldav/profiles/appointments.csv"/>
-      <property name="user.classpath" value="${zjmeter}"/>
+      <property name="user.classpath" value="${zjmeter}:src/build/jar/zm-sync-common.jar"/>
       <jmeterarg value="-q${basedir}/${env}"/>
-      <jmeterarg value="-q${basedir}/tests/generic/caldav/load.prop"/>
-      <jmeterarg value="-q${basedir}/tests/generic/caldav/profiles/basic.prop"/>
+      <jmeterarg value="-q${basedir}/tests/generic/eas/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/generic/eas/profiles/basic.prop"/>
     </jmeter>
   </target>
   <target name="generic-carddav" depends="src,logs">
@@ -67,6 +67,18 @@
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/generic/carddav/load.prop"/>
       <jmeterarg value="-q${basedir}/tests/generic/carddav/profiles/basic.prop"/>
+    </jmeter>
+  </target>
+  <target name="generic-eas" depends="src,logs">
+    <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/generic/eas/eas.jmx"
+            jmeterlogfile="${logs}/generic-eas-jmeter.log"
+            resultlog="${logs}/generic-eas-requests.log"> 
+      <property name="ACCOUNTS.csv" value="${users}"/>
+      <property name="user.classpath" value="${zjmeter}"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+      <jmeterarg value="-q${basedir}/tests/generic/zsoap/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/generic/zsoap/profiles/basic.prop"/>
     </jmeter>
   </target>
   <target name="generic-imap" depends="src,logs">

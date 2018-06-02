@@ -1,0 +1,7 @@
+PROFILE.EAS.type=sequence
+PROFILE.EAS.sequence.1=FolderSync
+PROFILE.EAS.sequence.2=FolderCreate
+PROFILE.EAS.sequence.3=FolderDelete
+PROFILE.EAS.sequence.4=SendMail
+PROFILE.EAS.sequence.5=Sync
+PROFILE.EAS.sequence.6=Search
