@@ -77,8 +77,8 @@
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
-      <jmeterarg value="-q${basedir}/tests/generic/zsoap/load.prop"/>
-      <jmeterarg value="-q${basedir}/tests/generic/zsoap/profiles/basic.prop"/>
+      <jmeterarg value="-q${basedir}/tests/generic/eas/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/generic/eas/profiles/basic.prop"/>
     </jmeter>
   </target>
   <target name="generic-imap" depends="src,logs">
