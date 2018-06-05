@@ -16,7 +16,7 @@ The following protocols currently have a basic level of support:
 
 * eas
 
-  [Exchange ActiveSync: Command Reference Protocol](https://msdn.microsoft.com/en-us/library/dd299441(v=exchg.80).aspx) [Exchange ActiveSync: HTTP Protocol](https://msdn.microsoft.com/en-us/library/dd299446(v=exchg.80).aspx) [Exchange ActiveSync: WAP Binary XML (WBXML) Algorithm](https://msdn.microsoft.com/en-us/library/dd299442(v=exchg.80).aspx) view [eas](eas/eas.md) for a list of currently suported commands in the jmx.
+  [Exchange ActiveSync: Command Reference Protocol](https://msdn.microsoft.com/en-us/library/dd299441(v=exchg.80).aspx) [Exchange ActiveSync: HTTP Protocol](https://msdn.microsoft.com/en-us/library/dd299446(v=exchg.80).aspx) [Exchange ActiveSync: WAP Binary XML (WBXML) Algorithm](https://msdn.microsoft.com/en-us/library/dd299442(v=exchg.80).aspx) view [eas](eas/eas.md) for a list of currently suported commands in the jmx. This test depends on zm-sync-common.jar and assumes it is in src/build/jar.
   
 * imap
   
