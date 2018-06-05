@@ -50,10 +50,10 @@
             resultlog="${logs}/generic-caldav-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="PROFILE.CalDAV.appointments" value="${basedir}/tests/generic/caldav/profiles/appointments.csv"/>
-      <property name="user.classpath" value="${zjmeter}:src/build/jar/zm-sync-common.jar"/>
+      <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
-      <jmeterarg value="-q${basedir}/tests/generic/eas/load.prop"/>
-      <jmeterarg value="-q${basedir}/tests/generic/eas/profiles/basic.prop"/>
+      <jmeterarg value="-q${basedir}/tests/generic/caldav/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/generic/caldav/profiles/basic.prop"/>
     </jmeter>
   </target>
   <target name="generic-carddav" depends="src,logs">
@@ -69,13 +69,13 @@
       <jmeterarg value="-q${basedir}/tests/generic/carddav/profiles/basic.prop"/>
     </jmeter>
   </target>
-  <target name="generic-eas" depends="src,logs">
+  <target name="generic-eas" depends="src,logs,zm-sync-common">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/eas/eas.jmx"
             jmeterlogfile="${logs}/generic-eas-jmeter.log"
             resultlog="${logs}/generic-eas-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
-      <property name="user.classpath" value="${zjmeter}"/>
+      <property name="user.classpath" value="${zjmeter}:${basedir}/src/build/jar/zm-sync-common.jar"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/generic/eas/load.prop"/>
       <jmeterarg value="-q${basedir}/tests/generic/eas/profiles/basic.prop"/>
@@ -227,5 +227,13 @@
   <target name="clean">
     <delete dir="${logs}"/>
     <ant dir="src" antfile="build.xml" target="clean"/>
+  </target>
+  <target name="zm-sync-common-test">
+    <availabe file="src/build/jar/zm-sync-common.jar"
+              property="zm-sync-common-jar.present"/>
+  </target>
+  <target name="zm-sync-common" depends="zm-sync-common-test"
+          unless="jar.present">
+    <fail message="generic-eas test can not be run uncless zm-sync-common.jar is copied to src/build/jar manually"/>
   </target>
 </project>
