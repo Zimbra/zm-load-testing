@@ -14,6 +14,10 @@ The following protocols currently have a basic level of support:
   
   [vCard Extension to WebDAV](https://tools.ietf.org/html/rfc6352) view [carddav](carddav/carddav.md) for a list of currently supported commands in the jmx.
   
+* ews
+
+  [Exchange Web Services](https://msdn.microsoft.com/en-us/library/office/bb409286(v=exchg.150).aspx) view [ews](ews/ews.md) for a list of currently suported commands in the jmx and additional requirements.
+  
 * imap
   
   [Internet Message Access Protocol](https://tools.ietf.org/html/rfc3501) view [imap](imap/imap.md) for a list of currently supported commands in the jmx. No SSL support.
@@ -46,6 +50,7 @@ For each of the supported generic tests they depend on a protocol
 |---------|--------|--------|
 |caldav   |CalDAV  |HTTP    |
 |carddav  |CardDAV |HTTP    |
+|ews      |EWS     |HTTP    |
 |imap     |IMAP    |IMAP    |
 |lmtp     |LMTP    |LMTP    |
 |pop      |POP     |POP     |
