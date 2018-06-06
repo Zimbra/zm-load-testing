@@ -1,6 +1,6 @@
 # Setup
 
-EWS must be enable with custom license.
+EWS must be enabled with license.
 
 EWS must be enabled for each account or through an account class of service.
 
