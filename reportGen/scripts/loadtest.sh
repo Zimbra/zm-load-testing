@@ -54,7 +54,7 @@ fi
 
 folder_name=$(echo $test_name | cut -f1 -d-)
 jmx_file=$(echo $test_name | cut -f2 -d-)
-jmeter=/opt/apache-jmeter-3.3/bin/jmeter
+jmeter=/opt/apache-jmeter-3.0/bin/jmeter
 if [ ! -x "${jmeter}" ]
 then
     jmeter=`which jmeter`
@@ -76,9 +76,9 @@ startDate="$date1 $date2"
 
 #startDate=`date +'%x %H:%M:%S'`
 echo "Performance test started at :- $startDate"
-if [ $folder_name = "generic"]; then {
-echo "${jmeter} -n -Juser.classpath=${workspace}/src/build/jar/zjmeter.jar -t ${workspace}/tests/${folder_name}/${jmx_file}/${jmx_file}.jmx -q ${workspace}/config/env.prop -q ${workspace}/tests/${folder_name}/${jmx_file}/load.prop -q ${workspace}/tests/${folder_name}/${jmx_file}/profiles/basic.prop -l ${report_dir}/${test_name}.xml -Djmeter.save.saveservice.thread_counts=true -Djmeter.save.saveservice.output_format=xml"
-${jmeter} -n -Juser.classpath=${workspace}/src/build/jar/zjmeter.jar -t ${workspace}/tests/${folder_name}/${jmx_file}/${jmx_file}.jmx -q ${workspace}/config/env.prop -q ${workspace}/tests/${folder_name}/${jmx_file}/load.prop -q ${workspace}/tests/${folder_name}/${jmx_file}/profiles/basic.prop -l ${report_dir}/${test_name}.xml -Djmeter.save.saveservice.thread_counts=true -Djmeter.save.saveservice.output_format=xml
+if [ $folder_name = 'generic' ]; then {
+echo "${jmeter} -n -Juser.classpath=${workspace}/src/build/jar/zjmeter.jar -t ${workspace}/tests/${folder_name}/${jmx_file}/${jmx_file}.jmx -q ${workspace}/config/env.prop -q ${workspace}/tests/${folder_name}/${jmx_file}/load.prop -q ${workspace}/tests/${folder_name}/${jmx_file}/profiles/basic.prop -l ${report_dir}/${test_name}.xml -Djmeter.save.saveservice.thread_counts=true -Djmeter.save.saveservice.output_format=xml -q ${workspace}/config/extras.txt"
+${jmeter} -n -Juser.classpath=${workspace}/src/build/jar/zjmeter.jar -t ${workspace}/tests/${folder_name}/${jmx_file}/${jmx_file}.jmx -q ${workspace}/config/env.prop -q ${workspace}/tests/${folder_name}/${jmx_file}/load.prop -q ${workspace}/tests/${folder_name}/${jmx_file}/profiles/basic.prop -l ${report_dir}/${test_name}.xml -Djmeter.save.saveservice.thread_counts=true -Djmeter.save.saveservice.output_format=xml -q ${workspace}/config/extras.txt
 }
 else {
 echo "${jmeter} -n -Juser.classpath=${workspace}/src/build/jar/zjmeter.jar -t ${workspace}/tests/${folder_name}/${jmx_file}/${jmx_file}.jmx -q ${workspace}/config/env.prop -q ${workspace}/tests/${folder_name}/${jmx_file}/load.prop -l ${report_dir}/${test_name}.xml -Djmeter.save.saveservice.thread_counts=true -Djmeter.save.saveservice.output_format=xml"
@@ -112,20 +112,20 @@ xsl_dir=$workspace/reportGen/xsl_files
 echo "$workspace/reportGen/scripts/sort_results.pl $report_dir ${test_name}"
 $workspace/reportGen/scripts/sort_results.pl $report_dir ${test_name}
 
-echo "/usr/bin/java -Xmx4182m -jar $workspace/reportGen/scripts/jars/saxon9he.jar -o:$report_dir/Transaction_detail.html -xsl:$report_xsl -s:$report_dir/sample_sorted_${test_name}.xml"
-/usr/bin/java -Xmx4182m -jar $workspace/reportGen/scripts/jars/saxon9he.jar -o:$report_dir/transaction.html -xsl:$report_xsl -s:$report_dir/sample_sorted_${test_name}.xml
+echo "/usr/bin/java -Xmx4182m -jar $workspace/src/build/jar/saxon.jar -o:$report_dir/Transaction_detail.html -xsl:$report_xsl -s:$report_dir/sample_sorted_${test_name}.xml"
+/usr/bin/java -Xmx4182m -jar $workspace/src/build/jar/saxon.jar -o:$report_dir/transaction.html -xsl:$report_xsl -s:$report_dir/sample_sorted_${test_name}.xml
 
 #truncate now merges as well for history purposes.
 echo "/usr/bin/perl $workspace/reportGen/scripts/truncate.pl ${report_dir} ${test_name}"
 /usr/bin/perl $workspace/reportGen/scripts/truncate.pl  ${report_dir} ${test_name}
 
 #sort again after truncate and merge
-echo "/usr/bin/java -Xmx4182m -jar $workspace/reportGen/scripts/jars/saxon9he.jar  -o:$report_dir/truncated_and_sorted_${test_name}.xml -xsl:$xsl_dir/sort_output.xsl -s:$report_dir/merged_${test_name}.xml"
-/usr/bin/java -Xmx4182m -jar $workspace/reportGen/scripts/jars/saxon9he.jar  -o:$report_dir/truncated_and_sorted_${test_name}.xml -xsl:$xsl_dir/sort_output.xsl -s:$report_dir/merged_${test_name}.xml
+echo "/usr/bin/java -Xmx4182m -jar $workspace/src/build/jar/saxon.jar  -o:$report_dir/truncated_and_sorted_${test_name}.xml -xsl:$xsl_dir/sort_output.xsl -s:$report_dir/merged_${test_name}.xml"
+/usr/bin/java -Xmx4182m -jar $workspace/src/build/jar/saxon.jar  -o:$report_dir/truncated_and_sorted_${test_name}.xml -xsl:$xsl_dir/sort_output.xsl -s:$report_dir/merged_${test_name}.xml
 
-echo "/usr/bin/java -Xmx4182m -jar $workspace/reportGen/scripts/jars/saxon9he.jar -o:$report_dir/sample.html -xsl:$simplereport_xsl -s:$report_dir/sort.xml
+echo "/usr/bin/java -Xmx4182m -jar $workspace/src/build/jar/saxon.jar -o:$report_dir/sample.html -xsl:$simplereport_xsl -s:$report_dir/sort.xml
 rm -rf $report_dir/truncated_* $report_dir/merged* $report_dir/sample_sorted*"
-/usr/bin/java -Xmx4182m -jar $workspace/reportGen/scripts/jars/saxon9he.jar -o:$report_dir/sample.html -xsl:$simplereport_xsl -s:$report_dir/sort.xml
+/usr/bin/java -Xmx4182m -jar $workspace/src/build/jar/saxon.jar -o:$report_dir/sample.html -xsl:$simplereport_xsl -s:$report_dir/sort.xml
 
 rm -rf $report_dir/truncated_* $report_dir/merged* $report_dir/sample_sorted*
 scp -r root@$hostname:/opt/zimbra/data/tmp/$zmdiaglog_dir $report_dir
@@ -170,13 +170,12 @@ echo "===========================================" >> $report_dir/AnalysisReport
 date2=`echo "$date2"|sed '$s/..$//'`
 `sed -e "1,/$date2/ d" $report_dir/$zmdiaglog_dir/logs/mailbox.log > $report_dir/$zmdiaglog_dir/logs/mailbox1.log`
 mv $report_dir/$zmdiaglog_dir/zmstat_charts/ $report_dir/zmstat_charts/
-echo "/usr/bin/java -Xmx3200m -cp $workspace/reportGen/scripts/jars/Loganalyzer.jar com.zimbra.perf.loganalyzer.ExceptionsAnalyzer $report_dir/Test $report_dir/$zmdiaglog_dir/logs/mailbox1.log"
-/usr/bin/java -Xmx3200m -cp $workspace/reportGen/scripts/jars/Loganalyzer.jar com.zimbra.perf.loganalyzer.ExceptionsAnalyzer $report_dir/Test $report_dir/$zmdiaglog_dir/logs/mailbox1.log
-echo "/usr/bin/java -Xmx3200m -cp $workspace/reportGen/scripts/jars/Loganalyzer.jar com.zimbra.perf.loganalyzer.LogAnalyzer $report_dir/$zmdiaglog_dir/logs/mailbox1.log > $report_dir/TestLogs.txt"
-/usr/bin/java -Xmx3200m -cp $workspace/reportGen/scripts/jars/Loganalyzer.jar com.zimbra.perf.loganalyzer.LogAnalyzer $report_dir/$zmdiaglog_dir/logs/mailbox1.log > $report_dir/TestLogs.txt
-echo "/usr/bin/java -Xmx3200m -cp $workspace/reportGen/scripts/jars/Loganalyzer.jar com.zimbra.perf.loganalyzer.ExceptionsAnalyzer $report_dir/Test $report_dir/$zmdiaglog_dir/logs/mailbox1.log"
+echo "/usr/bin/java -Xmx3200m -cp ${workspace}/src/build/jar/Loganalyzer.jar com.zimbra.perf.loganalyzer.ExceptionsAnalyzer $report_dir/Test $report_dir/$zmdiaglog_dir/logs/mailbox1.log"
+/usr/bin/java -Xmx3200m -cp ${workspace}/src/build/jar/Loganalyzer.jar com.zimbra.perf.loganalyzer.ExceptionsAnalyzer $report_dir/Test $report_dir/$zmdiaglog_dir/logs/mailbox1.log
+echo "/usr/bin/java -Xmx3200m -cp ${workspace}/src/build/jar/Loganalyzer.jar com.zimbra.perf.loganalyzer.LogAnalyzer $report_dir/$zmdiaglog_dir/logs/mailbox1.log > $report_dir/TestLogs.txt"
+/usr/bin/java -Xmx3200m -cp ${workspace}/src/build/jar/Loganalyzer.jar com.zimbra.perf.loganalyzer.LogAnalyzer $report_dir/$zmdiaglog_dir/logs/mailbox1.log > $report_dir/TestLogs.txt
 echo "/usr/bin/java -Xmx3200m -cp $workspace/reportGen/scripts/jars/Loganalyser.jar com.zimbra.perf.loganalyser.SlowSQLAnalyzer $report_dir/TestSlow $report_dir/$zmdiaglog_dir/logs/mailbox1.log"
-/usr/bin/java -Xmx3200m -cp $workspace/reportGen/scripts/jars/Loganalyzer.jar com.zimbra.perf.loganalyzer.SlowSQLAnalyzer $report_dir/TestSlow $report_dir/$zmdiaglog_dir/logs/mailbox1.log
+/usr/bin/java -Xmx3200m -cp ${workspace}/src/build/jar/Loganalyzer.jar com.zimbra.perf.loganalyzer.SlowSQLAnalyzer $report_dir/TestSlow $report_dir/$zmdiaglog_dir/logs/mailbox1.log
 CPU_Usage=`sed -n -e '60p' $report_dir/AnalysisReport | grep -o '......$'`
 CPU_Usage=$CPU_Usage s/\D//g
 BaseCPU=85
