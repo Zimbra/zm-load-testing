@@ -144,12 +144,12 @@
         <stringProp name="shareMode">shareMode.all</stringProp>
       </CSVDataSet>
       <hashTree/>
-      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="SOAP HTTP Config" enabled="true">
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="ZSOAP HTTP Config" enabled="true">
         <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
           <collectionProp name="Arguments.arguments"/>
         </elementProp>
-        <stringProp name="HTTPSampler.domain">${__P(SOAP.server)}</stringProp>
-        <stringProp name="HTTPSampler.port">${__P(SOAP.port)}</stringProp>
+        <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+        <stringProp name="HTTPSampler.port">${__P(HTTP.port)}</stringProp>
         <stringProp name="HTTPSampler.connect_timeout"></stringProp>
         <stringProp name="HTTPSampler.response_timeout"></stringProp>
         <stringProp name="HTTPSampler.protocol"></stringProp>
@@ -159,38 +159,38 @@
         <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
       </ConfigTestElement>
       <hashTree/>
-      <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="SOAP Setup" enabled="true">
+      <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="ZSOAP Setup" enabled="true">
         <stringProp name="filename"></stringProp>
         <stringProp name="parameters"></stringProp>
         <boolProp name="resetInterpreter">false</boolProp>
         <stringProp name="script">import com.zimbra.jmeter.Zimbra;
 //debug();
-Zimbra soap = new Zimbra(props,&quot;SOAP&quot;);
-vars.putObject(&quot;SOAP&quot;,soap);
+Zimbra soap = new Zimbra(props,&quot;ZSOAP&quot;);
+vars.putObject(&quot;ZSOAP&quot;,soap);
 
-String url = &quot;https://&quot;+props.get(&quot;SOAP.server&quot;);
+String url = &quot;https://&quot;+props.get(&quot;HTTP.server&quot;);
 String admin = url+&quot;:7071/service/admin/soap&quot;;
 vars.put(&quot;ADMIN&quot;,admin);
-if (!props.get(&quot;SOAP.port&quot;).equals(&quot;&quot;) ) {
-  url = url + &quot;:&quot; + props.get(&quot;SOAP.port&quot;); 
+if (!props.get(&quot;HTTP.port&quot;).equals(&quot;&quot;) ) {
+  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;); 
 }
 url = url+&quot;/service/soap&quot;;
 log.info(url);
 vars.put(&quot;URL&quot;,url);</stringProp>
       </BeanShellPreProcessor>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="SOAP User" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="ZSOAP User" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">${__P(LOAD.SOAP.loopcount)}</stringProp>
+          <stringProp name="LoopController.loops">${__P(LOAD.ZSOAP.loopcount)}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.SOAP.users)}</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.SOAP.rampup)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.ZSOAP.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.ZSOAP.rampup)}</stringProp>
         <longProp name="ThreadGroup.start_time">1505165237000</longProp>
         <longProp name="ThreadGroup.end_time">1505165237000</longProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.SOAP.duration)}</stringProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.ZSOAP.duration)}</stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
@@ -198,15 +198,15 @@ vars.put(&quot;URL&quot;,url);</stringProp>
           <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Zimbra;
 import com.zimbra.jmeter.Command;
 
-Zimbra soap = vars.getObject(&quot;SOAP&quot;);
+Zimbra soap = vars.getObject(&quot;ZSOAP&quot;);
 ArrayList commands = soap.getcommands();
 
 vars.putObject(&quot;COMMANDS&quot;,commands);
 // generate command DELAY
-if (props.get(&quot;LOAD.SOAP.userduration&quot;) == null || commands.size() == 0) {
+if (props.get(&quot;LOAD.ZSOAP.userduration&quot;) == null || commands.size() == 0) {
   vars.putObject(&quot;DELAY&quot;,&quot;0&quot;);
 } else {
-  int delay = Integer.parseInt(props.get(&quot;LOAD.SOAP.userduration&quot;))*1000/commands.size();
+  int delay = Integer.parseInt(props.get(&quot;LOAD.ZSOAP.userduration&quot;))*1000/commands.size();
   vars.putObject(&quot;DELAY&quot;,delay.toString());
 }
 // initialize CONTINUE
@@ -364,8 +364,8 @@ if (commands.size() == 0) {
   &lt;/soap:Header&gt;
   &lt;soap:Body&gt;
    &lt;AuthRequest xmlns=&quot;urn:zimbraAdmin&quot; csrfTokenSecured=&quot;1&quot;&gt;
-     &lt;account by=&quot;name&quot;&gt;${__P(SOAP.admin.user)}&lt;/account&gt;
-     &lt;password&gt;${__P(SOAP.admin.pass)}&lt;/password&gt;
+     &lt;account by=&quot;name&quot;&gt;${__P(HTTP.admin.user)}&lt;/account&gt;
+     &lt;password&gt;${__P(HTTP.admin.pass)}&lt;/password&gt;
    &lt;/AuthRequest&gt;
   &lt;/soap:Body&gt;
 &lt;/soap:Envelope&gt;</stringProp>
@@ -1927,8 +1927,8 @@ if (commands.size() == 0) {
   &lt;soap:Body&gt;
     &lt;SendMsgRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
       &lt;m su=&quot;Hello World&quot;&gt;
-        &lt;e a=&quot;${USER}@${__P(SOAP.domain)}&quot; t=&quot;f&quot;/&gt;
-        &lt;e a=&quot;${USER}@${__P(SOAP.domain)}&quot; t=&quot;t&quot;/&gt;
+        &lt;e a=&quot;${USER}@${__P(HTTP.domain)}&quot; t=&quot;f&quot;/&gt;
+        &lt;e a=&quot;${USER}@${__P(HTTP.domain)}&quot; t=&quot;t&quot;/&gt;
        &lt;content&gt;Send a Message Request&lt;/content&gt;
       &lt;/m&gt;
     &lt;/SendMsgRequest&gt;

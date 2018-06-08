@@ -148,11 +148,11 @@
         <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
           <collectionProp name="Arguments.arguments"/>
         </elementProp>
-        <stringProp name="HTTPSampler.domain">${__P(WEB.server)}</stringProp>
-        <stringProp name="HTTPSampler.port">${__P(WEB.port)}</stringProp>
+        <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+        <stringProp name="HTTPSampler.port">${__P(HTTP.port)}</stringProp>
         <stringProp name="HTTPSampler.connect_timeout"></stringProp>
         <stringProp name="HTTPSampler.response_timeout"></stringProp>
-        <stringProp name="HTTPSampler.protocol">${__P(WEB.protocol)}</stringProp>
+        <stringProp name="HTTPSampler.protocol">${__P(HTTP.protocol)}</stringProp>
         <stringProp name="HTTPSampler.contentEncoding"></stringProp>
         <stringProp name="HTTPSampler.path"></stringProp>
         <stringProp name="HTTPSampler.implementation">Java</stringProp>
@@ -182,9 +182,9 @@
         </CookieManager>
         <hashTree/>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
-          <stringProp name="BeanShellSampler.query">String url = &quot;https://&quot;+props.get(&quot;WEB.server&quot;);
-if (!props.get(&quot;WEB.port&quot;).equals(&quot;&quot;) ) {
-  url = url + &quot;:&quot; + props.get(&quot;WEB.port&quot;); 
+          <stringProp name="BeanShellSampler.query">String url = &quot;https://&quot;+props.get(&quot;HTTP.server&quot;);
+if (!props.get(&quot;HTTP.port&quot;).equals(&quot;&quot;) ) {
+  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;); 
 }
 url = url+&quot;/service/soap&quot;;
 log.info(url);
