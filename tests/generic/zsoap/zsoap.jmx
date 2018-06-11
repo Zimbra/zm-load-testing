@@ -326,7 +326,7 @@ if (commands.size() == 0) {
   &lt;/soap:Header&gt;
   &lt;soap:Body&gt;
    &lt;AuthRequest xmlns=&quot;urn:zimbraAccount&quot; csrfTokenSecured=&quot;1&quot;&gt;
-     &lt;account by=&quot;name&quot;&gt;${USER}&lt;/account&gt;
+     &lt;account by=&quot;name&quot;&gt;${USER}@${__P(HTTP.domain, HTTP.server)}&lt;/account&gt;
      &lt;password&gt;${PASS}&lt;/password&gt;
    &lt;/AuthRequest&gt;
   &lt;/soap:Body&gt;
@@ -881,7 +881,7 @@ if (commands.size() == 0) {
   &lt;/soap:Header&gt;
   &lt;soap:Body&gt;
     &lt;GetAccountRequest xmlns=&quot;urn:zimbraAdmin&quot;&gt;
-      &lt;account by=&quot;name&quot;&gt;${USER}&lt;/account&gt;
+      &lt;account by=&quot;name&quot;&gt;${USER}@${__P(HTTP.domain, HTTP.server)}&lt;/account&gt;
     &lt;/GetAccountRequest&gt;
   &lt;/soap:Body&gt;
 &lt;/soap:Envelope&gt;</stringProp>
@@ -916,7 +916,7 @@ if (commands.size() == 0) {
   &lt;/soap:Header&gt;
   &lt;soap:Body&gt;
     &lt;GetAccountInfoRequest xmlns=&quot;urn:zimbraAccount&quot;&gt;
-      &lt;account by=&quot;name&quot;&gt;${USER}&lt;/account&gt;
+      &lt;account by=&quot;name&quot;&gt;${USER}@${__P(HTTP.domain, HTTP.server)}&lt;/account&gt;
     &lt;/GetAccountInfoRequest&gt;
   &lt;/soap:Body&gt;
 &lt;/soap:Envelope&gt;</stringProp>

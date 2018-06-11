@@ -201,7 +201,7 @@ vars.putObject(&quot;CalDAV&quot;,cd);</stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">${__P(HTTP.protocol)}</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/dav/${USER}/Calendar</stringProp>
+          <stringProp name="HTTPSampler.path">/dav/${USER}@${__P(HTTP.domain,HTTP.server)}/Calendar</stringProp>
           <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
         </ConfigTestElement>
@@ -210,7 +210,7 @@ vars.putObject(&quot;CalDAV&quot;,cd);</stringProp>
           <collectionProp name="AuthManager.auth_list">
             <elementProp name="" elementType="Authorization">
               <stringProp name="Authorization.url">https://${__P(HTTP.server)}</stringProp>
-              <stringProp name="Authorization.username">${USER}</stringProp>
+              <stringProp name="Authorization.username">${USER}@${__P(HTTP.domain,HTTP.server)}</stringProp>
               <stringProp name="Authorization.password">${PASS}</stringProp>
               <stringProp name="Authorization.domain"></stringProp>
               <stringProp name="Authorization.realm"></stringProp>
@@ -267,7 +267,7 @@ if (commands.size() &gt; 0) {
   //log.info(vars.get(&quot;COMMAND&quot;));
 }
 if (vars.get(&quot;APPTURL&quot;) == null || vars.get(&quot;APPTURL&quot;).equals(&quot;&quot;)) {
-  vars.put(&quot;APPTURL&quot;,&quot;/dav/&quot;+vars.get(&quot;USER&quot;)+&quot;/Calendar/&quot;+vars.get(&quot;APPTUUID&quot;)+&quot;.ics&quot;);
+  vars.put(&quot;APPTURL&quot;,&quot;/dav/&quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+&quot;${__P(HTTP.domain,HTTP.server)}&quot;+&quot;/Calendar/&quot;+vars.get(&quot;APPTUUID&quot;)+&quot;.ics&quot;);
 }
 if (commands.size() == 0) {
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);

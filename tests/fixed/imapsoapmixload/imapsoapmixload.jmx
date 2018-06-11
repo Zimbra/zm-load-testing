@@ -121,7 +121,7 @@
           <stringProp name="host_type">imaps</stringProp>
           <stringProp name="folder">INBOX</stringProp>
           <stringProp name="host">${__P(IMAP.server)}</stringProp>
-          <stringProp name="username">${user}</stringProp>
+          <stringProp name="username">${user}@${__P(IMAP.domain, IMAP.server)}</stringProp>
           <stringProp name="password">${pass}</stringProp>
           <stringProp name="num_messages">10</stringProp>
           <boolProp name="delete">false</boolProp>
@@ -165,7 +165,7 @@
               <collectionProp name="Arguments.arguments">
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&lt;soap:Header&gt;&lt;context xmlns=&quot;urn:zimbra&quot;&gt;&lt;userAgent xmlns=&quot;&quot; name=&quot;&quot;/&gt;&lt;session xmlns=&quot;&quot;/&gt;&lt;authTokenControl xmlns=&quot;&quot; voidOnExpired=&quot;1&quot;/&gt;&lt;format xmlns=&quot;&quot; type=&quot;js&quot;/&gt;&lt;/context&gt;&lt;/soap:Header&gt;&lt;soap:Body&gt;&lt;AuthRequest xmlns=&quot;urn:zimbraAccount&quot;&gt;&lt;account by=&quot;name&quot;&gt;${user}&lt;/account&gt;&lt;password&gt;${pass}&lt;/password&gt;&lt;/AuthRequest&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</stringProp>
+                  <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&lt;soap:Header&gt;&lt;context xmlns=&quot;urn:zimbra&quot;&gt;&lt;userAgent xmlns=&quot;&quot; name=&quot;&quot;/&gt;&lt;session xmlns=&quot;&quot;/&gt;&lt;authTokenControl xmlns=&quot;&quot; voidOnExpired=&quot;1&quot;/&gt;&lt;format xmlns=&quot;&quot; type=&quot;js&quot;/&gt;&lt;/context&gt;&lt;/soap:Header&gt;&lt;soap:Body&gt;&lt;AuthRequest xmlns=&quot;urn:zimbraAccount&quot;&gt;&lt;account by=&quot;name&quot;&gt;${user}@${__P(HTTP.domain, HTTP.server)}&lt;/account&gt;&lt;password&gt;${pass}&lt;/password&gt;&lt;/AuthRequest&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
