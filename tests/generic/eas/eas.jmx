@@ -801,7 +801,10 @@ try {
     } else if (bp.getEventType() == BinaryParser.END_TAG) {
       result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.TEXT) {
-      result+=StringEscapeUtils.escapeXml(bp.getText());
+    	 // ugly quick fix to resolve invalid XML characters
+    	 String text = bp.getText();
+      text=text.replaceAll(&quot;\\p{Cntrl}&quot;,&quot;&quot;);
+      result+=StringEscapeUtils.escapeXml(text);
     }
   }
 } catch (IOException e) {
