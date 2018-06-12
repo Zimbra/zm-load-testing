@@ -159,21 +159,6 @@
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
-        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="EAS Settings" enabled="true">
-          <collectionProp name="Arguments.arguments">
-            <elementProp name="FOLDERSYNCKEY" elementType="Argument">
-              <stringProp name="Argument.name">FOLDERSYNCKEY</stringProp>
-              <stringProp name="Argument.value">0</stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
-            <elementProp name="SYNCSYNCKEY" elementType="Argument">
-              <stringProp name="Argument.name">SYNCSYNCKEY</stringProp>
-              <stringProp name="Argument.value">0</stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
-          </collectionProp>
-        </Arguments>
-        <hashTree/>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
           <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Zimbra;
 import com.zimbra.jmeter.Command;
@@ -205,7 +190,10 @@ if (commands.size() &gt; 0) {
   vars.put(&quot;CONTINUE&quot;,&quot;true&quot;);
 } else {
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
-}</stringProp>
+}
+// initialize sync keys
+vars.put(&quot;FOLDERSYNCKEY&quot;,&quot;0&quot;);
+vars.put(&quot;SYNCSYNCKEY&quot;,&quot;0&quot;);</stringProp>
           <stringProp name="BeanShellSampler.filename"></stringProp>
           <stringProp name="BeanShellSampler.parameters"></stringProp>
           <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
@@ -283,7 +271,7 @@ byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
 hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
 hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,&quot;12.1&quot;);
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.get(&quot;PROFILE.EAS.version&quot;));
 
 //Generate WBXML Request Body
 ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -392,7 +380,7 @@ byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
 hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
 hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,&quot;12.1&quot;);
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.get(&quot;PROFILE.EAS.version&quot;));
 
 //Generate WBXML Request Body
 ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -490,7 +478,7 @@ byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
 hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
 hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,&quot;12.1&quot;);
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.get(&quot;PROFILE.EAS.version&quot;));
 
 //Generate WBXML Request Body
 ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -587,7 +575,7 @@ byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
 hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
 hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,&quot;12.1&quot;);
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.get(&quot;PROFILE.EAS.version&quot;));
 
 //Generate WBXML Request Body
 ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -688,7 +676,7 @@ String auth = vars.get(&quot;USER&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;
 byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
 hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,&quot;12.1&quot;);
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.get(&quot;PROFILE.EAS.version&quot;));
 hp.setHeader(&quot;Content-Type&quot;,&quot;message/rfc822&quot;);
 
 HttpEntity entity = new StringEntity(message);
@@ -752,6 +740,7 @@ import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.util.EntityUtils;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringEscapeUtils;
 import java.nio.charset.StandardCharsets;
 import org.apache.http.HttpHeaders;
 import com.zimbra.zimbrasync.wbxml.BinarySerializer;
@@ -767,7 +756,7 @@ byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
 hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
 hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,&quot;12.1&quot;);
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.get(&quot;PROFILE.EAS.version&quot;));
 
 //Generate WBXML Request Body
 ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -806,13 +795,13 @@ try {
     if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
       result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.START_TAG) {
-      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.END_TAG) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.TEXT) {
-      result+=bp.getText(); 	
+      result+=StringEscapeUtils.escapeXml(bp.getText());
     }
   }
 } catch (IOException e) {
