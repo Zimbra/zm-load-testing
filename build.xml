@@ -1,5 +1,5 @@
 <project name="zm-load-testing" default="all" xmlns:ivy="antlib:org.apache.ivy.ant">
-  <import file="../zm-zcs/ant-global.xml"/>
+  <import file="ant-global.xml"/>
 
   <property name="build.dir" location="${basedir}/build"/>
   <property name="build.jar.dir" location="${basedir}/build/dist"/>
