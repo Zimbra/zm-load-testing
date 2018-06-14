@@ -40,7 +40,7 @@ This contains zimbra jmeter load tests.
 4. config/env.prop is configured for the Zimbra environment to be tested.
 5. admin account exists and has password of test123 in the Zimbra environment (modify config/users.csv if other account(s) desired).
 6. See src [README.md](src/README.md) for addtional requirements to generate Zimbra JMeter Java Library.
-7. We have clone of zm-zcs in same parent directory. 
+7. We have clone of zm-zcs and zimbra-package-stub in same parent directory.
 
 ### Execution
 
@@ -77,6 +77,7 @@ $ ant src
 Execution with reports generation
 
 ```
+Ssh key addition of client to the server root user authorized_keys
 create required jars
 
 $ ant jar
