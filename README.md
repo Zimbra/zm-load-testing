@@ -77,6 +77,7 @@ $ ant src
 Execution with reports generation
 
 ```
+Ssh key addition of client to the server root user authorized_keys
 create required jars
 
 $ ant jar
