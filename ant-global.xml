@@ -1,0 +1,25 @@
+<project name="ant-global" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+  <property name="dev.home"  value="${user.home}"/>
+  <property name="ivy.jar.dir" location="${dev.home}/.ant/lib"/>
+  <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy-2.3.0.jar"/>
+  <property name="ivy.install.version" value="2.3.0"/>
+  <property name="build.dir" location="${basedir}/build"/>
+  <property name="build.tmp.dir" location="${build.dir}/tmp" />
+  <property name="dist.dir" location="${build.dir}/dist" />
+
+  <target name="init-ivy" depends="download-ivy">
+    <!-- If ivy is not downloaded yet, try to load ivy here from ivy home. -->
+    <path id="ivy.lib.path">
+      <fileset dir="${ivy.jar.dir}" includes="*.jar"/>
+    </path>
+    <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
+      <ivy:settings id="dev.settings" file="ivysettings.xml"/>
+  </target>
+  <target name="download-ivy">
+    <mkdir dir="${ivy.jar.dir}"/>
+    <!-- download Ivy from web site so that it can be used even without any special installation. -->
+    <get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar"
+      dest="${ivy.jar.file}" usetimestamp="true"/>
+    </target>
+</project>
