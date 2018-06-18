@@ -271,7 +271,7 @@ byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
 hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
 hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.get(&quot;EAS.version&quot;));
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
 
 //Generate WBXML Request Body
 ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -380,7 +380,7 @@ byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
 hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
 hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.get(&quot;EAS.version&quot;));
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
 
 //Generate WBXML Request Body
 ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -478,7 +478,7 @@ byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
 hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
 hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.get(&quot;EAS.version&quot;));
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
 
 //Generate WBXML Request Body
 ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -575,7 +575,7 @@ byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
 hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
 hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.get(&quot;EAS.version&quot;));
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
 
 //Generate WBXML Request Body
 ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -646,7 +646,7 @@ SampleResult.setResponseData(result);
               </BeanShellSampler>
               <hashTree/>
               <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="SendMail" enabled="true">
-                <stringProp name="SwitchController.value">${__P(EAS.version)}</stringProp>
+                <stringProp name="SwitchController.value">${__P(EAS.version,12.1)}</stringProp>
               </SwitchController>
               <hashTree>
                 <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="default" enabled="true">
@@ -683,7 +683,7 @@ byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
 hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
 hp.setHeader(&quot;Content-Type&quot;,&quot;message/rfc822&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.get(&quot;EAS.version&quot;));
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
 
 HttpEntity entity = new StringEntity(message);
 hp.setEntity(entity);
@@ -768,7 +768,7 @@ byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
 hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
 hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.get(&quot;EAS.version&quot;));
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
 
 //Generate WBXML Request Body
 ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -861,7 +861,7 @@ byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
 hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
 hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.get(&quot;EAS.version&quot;));
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
 
 //Generate WBXML Request Body
 ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -950,7 +950,7 @@ byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
 hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
 hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.get(&quot;EAS.version&quot;));
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
 
 //Generate WBXML Request Body
 ByteArrayOutputStream bao = new ByteArrayOutputStream();

@@ -229,11 +229,11 @@
     <ant dir="src" antfile="build.xml" target="clean"/>
   </target>
   <target name="zm-sync-common-test">
-    <availabe file="src/build/jar/zm-sync-common.jar"
+    <available file="src/build/jar/zm-sync-common.jar"
               property="zm-sync-common-jar.present"/>
   </target>
   <target name="zm-sync-common" depends="zm-sync-common-test"
-          unless="jar.present">
-    <fail message="generic-eas test can not be run uncless zm-sync-common.jar is copied to src/build/jar manually"/>
+          unless="zm-sync-common-jar.present">
+    <fail message="generic-eas test can not be run unless zm-sync-common.jar is copied to src/build/jar manually"/>
   </target>
 </project>
