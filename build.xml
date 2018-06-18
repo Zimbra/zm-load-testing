@@ -1,4 +1,8 @@
-<project name="zm-load-testing" default="all">
+<project name="zm-load-testing" default="all" xmlns:ivy="antlib:org.apache.ivy.ant">
+  <import file="ant-global.xml"/>
+
+  <property name="build.dir" location="${basedir}/build"/>
+  <property name="build.jar.dir" location="${basedir}/build/dist"/>
   <property name="jmeter.home" location="/opt/apache-jmeter-3.0"/>
   <property name="env" value="config/env.prop"/>
   <property name="users" location="config/users.csv"/>
@@ -6,7 +10,11 @@
   <property name="tests" location="tests"/>
   <property name="logs" location="logs"/>
   <property name="zjmeter" location="${basedir}/src/build/jar/zjmeter.jar"/>
+  <property name="jmeter.lib.ext" location="${jmeter.home}/lib/ext"/>
+  <property name="jar.dir" location="${basedir}/src/build/jar"/>
+
   <target name="all">
+    <antcall target="jar"/>
     <antcall target="tests"/>
   </target>
   <path id="jmeter.classpath">
@@ -16,6 +24,28 @@
   </path>
   <taskdef name="jmeter" classpathref="jmeter.classpath"
            classname="org.programmerplanet.ant.taskdefs.jmeter.JMeterTask"/>
+  <target name="jar" depends="init-ivy">
+    <ant dir="src" antfile="build.xml" target="Loganalyzer.jar"/>
+    <ivy:install organisation="net.sf.saxon" module="Saxon-HE" revision="9.4" settingsRef="dev.settings" from="chain-resolver" to="build-dist" overwrite="true" transitive="true" type="jar"/>
+    <ivy:install organisation="kg.apc" module="cmdrunner" revision="1.0.1" settingsRef="dev.settings" from="chain-resolver" to="build-dist" overwrite="true" transitive="true" type="jar"/>
+    <ivy:install organisation="kg.apc" module="jmeter-plugins-extras-libs" revision="1.2.0" settingsRef="dev.settings" from="chain-resolver" to="build-dist" overwrite="true" transitive="true" type="jar"/>
+    <ivy:install organisation="kg.apc" module="jmeter-plugins-standard" revision="1.1.3" settingsRef="dev.settings" from="chain-resolver" to="build-dist" overwrite="true" transitive="true" type="jar"/>
+    <ivy:install organisation="kg.apc" module="jmeter-plugins-extras" revision="1.4.0" settingsRef="dev.settings" from="chain-resolver" to="build-dist" overwrite="true" transitive="true" type="jar"/>
+    <ivy:install organisation="kg.apc" module="jmeter-plugins-manager" revision="0.10" settingsRef="dev.settings" from="chain-resolver" to="build-dist" overwrite="true" transitive="true" type="jar"/>
+    <copy todir="${jmeter.lib.ext}">
+      <fileset dir="${build.jar.dir}">
+        <include name="cmdrunner-1.0.1.jar"/>
+        <include name="jmeter-plugins-extras-1.4.0.jar"/>
+        <include name="jmeter-plugins-extras-libs-1.2.0.jar"/>
+        <include name="jmeter-plugins-manager-0.10.jar"/>
+        <include name="jmeter-plugins-standard-1.1.3.jar"/>
+     </fileset>
+    </copy>
+   <copy todir="${jar.dir}">
+      <fileset dir="${build.jar.dir}"/>
+        <globmapper from="Saxon-HE-9.4.jar" to="saxon.jar"/>
+    </copy>
+  </target>
   <target name="tests">
     <antcall target="generic"/>
     <antcall target="fixed"/>
@@ -226,6 +256,7 @@
   </target>
   <target name="clean">
     <delete dir="${logs}"/>
+    <delete dir="${build.dir}"/>
     <ant dir="src" antfile="build.xml" target="clean"/>
   </target>
   <target name="zm-sync-common-test">

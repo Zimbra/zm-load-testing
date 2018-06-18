@@ -21,7 +21,14 @@
            includeAntRuntime="false"/>
   </target>
   <target name="jar" depends="build">
-    <jar destfile="${jar}/zjmeter.jar" basedir="${classes}"/>
+    <jar destfile="${jar}/zjmeter.jar" basedir="${classes}">
+      <include name="com/zimbra/jmeter/*"/>
+    </jar>
+  </target>
+  <target name="Loganalyzer.jar" depends="build">
+    <jar destfile="${jar}/Loganalyzer.jar" basedir="${classes}">
+      <include name="com/zimbra/perf/loganalyzer/*"/>
+    </jar>
   </target>
   <target name="test" depends="jar">
     <mkdir dir="${test}"/>

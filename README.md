@@ -20,6 +20,14 @@ This contains zimbra jmeter load tests.
 
   Contain jmx file for data generation. Take input from config/users.csv to create accounts.
 
+* reportGen
+
+  Contain scripts used to execute test and generate graphs and other reports using the execution results.
+
+* result
+
+  Contain reports when we execute test using loadtest.sh
+
 # Quick Start
 
 ## Ant
@@ -63,6 +71,18 @@ To generate the Zimbra JMeter Java Library only:
 
 ```
 $ ant src
+```
+
+Execution with reports generation
+
+```
+Ssh key addition of client to the server root user authorized_keys(.ssh/authorised_keys file).
+create required jars
+
+$ ant jar
+$ ant src
+$ sh reportGen/scripts/loadtest.sh -t <test name> -w < workspace path>
+  test name: use the path name of the test seperated by hyphen (eg: fixed-ephemeral)
 ```
 
 ## Manual

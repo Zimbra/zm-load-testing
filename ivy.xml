@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ivy-module version="2.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+ <info organisation="zimbra" module="zm-load-testing" status="integration">
+ </info>
+  <dependencies>
+    <dependency org="net.sf.saxon" name="Saxon-HE" rev="9.4"/> 
+    <dependency org="kg.apc" name="cmdrunner" rev="1.0.1"/>
+    <dependency org="kg.apc" name="jmeter-plugins-extras" rev="1.4.0"/>
+    <dependency org="kg.apc" name="jmeter-plugins-standard" rev="1.1.3"/>
+    <dependency org="kg.apc" name="jmeter-plugins-extras-libs" rev="1.2.0"/>
+    <dependency org="kg.apc" name="jmeter-plugins-manager" rev="0.10"/>
+  </dependencies>
+</ivy-module>
