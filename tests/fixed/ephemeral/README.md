@@ -22,6 +22,8 @@ This performs authentications to the web interface followed by a single SOAP req
 |LOAD.WEB.userduration|1    |user login duration in seconds              |
 |LOAD.WEB.rampup      |0    |how long to spend ramping up threads        |
 |LOAD.WEB.loopcount   |1    |how many times the user/thread repeats      |
+|LOAD.WEB.duration    |130  |test duration in seconds                    |
+|LOAD.WEB.delay       |0    |test start delay in seconds                 |
 
 # Example
 

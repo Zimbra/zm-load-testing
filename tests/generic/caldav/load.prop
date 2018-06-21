@@ -2,3 +2,5 @@ LOAD.CalDAV.users=1
 LOAD.CalDAV.userduration=1
 LOAD.CalDAV.rampup=0
 LOAD.CalDAV.loopcount=1
+LOAD.CalDAV.duration=130
+LOAD.CalDAV.delay=0

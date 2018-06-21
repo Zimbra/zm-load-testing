@@ -146,16 +146,6 @@
         <boolProp name="ignoreFirstLine">false</boolProp>
       </CSVDataSet>
       <hashTree/>
-      <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="SMTP Setup" enabled="true">
-        <stringProp name="filename"></stringProp>
-        <stringProp name="parameters"></stringProp>
-        <boolProp name="resetInterpreter">false</boolProp>
-        <stringProp name="script">import com.zimbra.jmeter.Zimbra;
-//debug();
-Zimbra smtp = new Zimbra(props,&quot;SMTP&quot;);
-vars.putObject(&quot;SMTP&quot;,smtp);</stringProp>
-      </BeanShellPreProcessor>
-      <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="SMTP User" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -164,19 +154,19 @@ vars.putObject(&quot;SMTP&quot;,smtp);</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">${__P(LOAD.SMTP.users)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">$(__P(LOAD.SMTP.rampup)}</stringProp>
-        <longProp name="ThreadGroup.start_time">1497658914000</longProp>
-        <longProp name="ThreadGroup.end_time">1497658914000</longProp>
-        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <longProp name="ThreadGroup.start_time">1529539407000</longProp>
+        <longProp name="ThreadGroup.end_time">1529539407000</longProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.duration">${__P(LOAD.SMTP.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay"></stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.SMTP.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
           <stringProp name="BeanShellSampler.query">import org.apache.commons.net.smtp.SMTPClient;
 import com.zimbra.jmeter.Zimbra;
 import com.zimbra.jmeter.Command;
-
-Zimbra smtp = vars.getObject(&quot;SMTP&quot;);
+//debug();
+Zimbra smtp = new Zimbra(props,&quot;SMTP&quot;);
 ArrayList commands = smtp.getcommands();
 
 vars.putObject(&quot;COMMANDS&quot;,commands);

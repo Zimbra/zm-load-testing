@@ -145,16 +145,6 @@
         <boolProp name="ignoreFirstLine">false</boolProp>
       </CSVDataSet>
       <hashTree/>
-      <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="POP Setup" enabled="true">
-        <stringProp name="filename"></stringProp>
-        <stringProp name="parameters"></stringProp>
-        <boolProp name="resetInterpreter">false</boolProp>
-        <stringProp name="script">import com.zimbra.jmeter.Zimbra;
-//debug();
-Zimbra pop = new Zimbra(props,&quot;POP&quot;);
-vars.putObject(&quot;POP&quot;,pop);</stringProp>
-      </BeanShellPreProcessor>
-      <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="POP User" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -167,15 +157,15 @@ vars.putObject(&quot;POP&quot;,pop);</stringProp>
         <longProp name="ThreadGroup.end_time">1497658914000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.duration">${__P(LOAD.POP.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay"></stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.POP.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
           <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
 import com.zimbra.jmeter.Zimbra;
 import com.zimbra.jmeter.Command;
-
-Zimbra pop = vars.getObject(&quot;POP&quot;);
+//debug();
+Zimbra pop = new Zimbra(props,&quot;POP&quot;);
 ArrayList commands = pop.getcommands();
 
 vars.putObject(&quot;COMMANDS&quot;,commands);
