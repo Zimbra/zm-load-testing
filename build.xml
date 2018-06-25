@@ -99,6 +99,18 @@
       <jmeterarg value="-q${basedir}/tests/generic/carddav/profiles/basic.prop"/>
     </jmeter>
   </target>
+  <target name="generic-eas" depends="src,logs,zm-sync-common">
+    <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/generic/eas/eas.jmx"
+            jmeterlogfile="${logs}/generic-eas-jmeter.log"
+            resultlog="${logs}/generic-eas-requests.log"> 
+      <property name="ACCOUNTS.csv" value="${users}"/>
+      <property name="user.classpath" value="${zjmeter}:${basedir}/src/build/jar/zm-sync-common.jar"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+      <jmeterarg value="-q${basedir}/tests/generic/eas/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/generic/eas/profiles/basic.prop"/>
+    </jmeter>
+  </target>
   <target name="generic-imap" depends="src,logs">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/imap/imap.jmx"
@@ -246,5 +258,13 @@
     <delete dir="${logs}"/>
     <delete dir="${build.dir}"/>
     <ant dir="src" antfile="build.xml" target="clean"/>
+  </target>
+  <target name="zm-sync-common-test">
+    <available file="src/build/jar/zm-sync-common.jar"
+              property="zm-sync-common-jar.present"/>
+  </target>
+  <target name="zm-sync-common" depends="zm-sync-common-test"
+          unless="zm-sync-common-jar.present">
+    <fail message="generic-eas test can not be run unless zm-sync-common.jar is copied to src/build/jar manually"/>
   </target>
 </project>

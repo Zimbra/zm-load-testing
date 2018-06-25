@@ -1,0 +1,4 @@
+LOAD.EAS.users=1
+LOAD.EAS.userduration=1
+LOAD.EAS.rampup=0
+LOAD.EAS.loopcount=1
