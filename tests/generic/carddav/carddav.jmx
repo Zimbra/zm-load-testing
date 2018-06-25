@@ -166,8 +166,8 @@
         <longProp name="ThreadGroup.start_time">1505165237000</longProp>
         <longProp name="ThreadGroup.end_time">1505165237000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.CardDAV.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay">${__P(LOAD.CardDAV.delay)}</stringProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="CardDAV HTTP Config" enabled="true">

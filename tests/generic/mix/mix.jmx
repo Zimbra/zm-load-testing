@@ -166,8 +166,8 @@
         <longProp name="ThreadGroup.start_time">1505165237000</longProp>
         <longProp name="ThreadGroup.end_time">1505165237000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.CalDAV.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay">${__P(LOAD.CalDAV.delay)}</stringProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="CalDAV HTTP Config" enabled="true">
@@ -451,8 +451,8 @@ if (vars.get(&quot;DTEND&quot;) != null) {
         <longProp name="ThreadGroup.start_time">1505165237000</longProp>
         <longProp name="ThreadGroup.end_time">1505165237000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.CardDAV.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay">${__P(LOAD.CardDAV.delay)}</stringProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="CardDAV HTTP Config" enabled="true">
@@ -728,8 +728,8 @@ if (vars.get(&quot;N&quot;) != null) {
         <longProp name="ThreadGroup.start_time">1497658914000</longProp>
         <longProp name="ThreadGroup.end_time">1497658914000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.IMAP.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay">${__P(LOAD.IMAP.delay)}</stringProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
@@ -1528,8 +1528,8 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
         <longProp name="ThreadGroup.start_time">1497658914000</longProp>
         <longProp name="ThreadGroup.end_time">1497658914000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.LMTP.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay">${__P(LOAD.LMTP.delay)}</stringProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
@@ -1771,8 +1771,8 @@ try {
         <longProp name="ThreadGroup.start_time">1497658914000</longProp>
         <longProp name="ThreadGroup.end_time">1497658914000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.POP.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay">${__P(LOAD.POP.delay)}</stringProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
@@ -2020,8 +2020,8 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
         <longProp name="ThreadGroup.start_time">1529539407000</longProp>
         <longProp name="ThreadGroup.end_time">1529539407000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.SMTP.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay">${__P(LOAD.SMTP.delay)}</stringProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
@@ -2275,8 +2275,8 @@ try {
         <longProp name="ThreadGroup.start_time">1529531218000</longProp>
         <longProp name="ThreadGroup.end_time">1529531240000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.ZSOAP.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay">${__P(LOAD.ZSOAP.delay)}</stringProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">

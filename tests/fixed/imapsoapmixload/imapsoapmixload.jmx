@@ -113,8 +113,8 @@
         <longProp name="ThreadGroup.start_time">1388465117000</longProp>
         <longProp name="ThreadGroup.end_time">1388465117000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.IMAP.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay"></stringProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <MailReaderSampler guiclass="MailReaderSamplerGui" testclass="MailReaderSampler" testname="INBOX" enabled="true">
@@ -145,8 +145,8 @@
         <longProp name="ThreadGroup.start_time">1370726934000</longProp>
         <longProp name="ThreadGroup.end_time">1370726934000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.SOAP.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay"></stringProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">

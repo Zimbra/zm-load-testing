@@ -16,10 +16,11 @@ Login and list first 10 messages of inbox.
 
 |Key                 |Value|Description                                 |
 |--------------------|-----|--------------------------------------------|
+|LOAD.duration       |30   |test duration in seconds                    |
+|LOAD.delay          |0    |test start delay in seconds                 |
 |LOAD.IMAP.users     |1    |concurrent users/threads to run during tests|
 |LOAD.IMAP.rampup    |0    |how long to spend ramping up threads        |
 |LOAD.IMAP.loopcount |1    |how many times the user/thread repeats      |
-|LOAD.IMAP.duration  |30   |duration of the test in seconds             |
 
 # Example
 
