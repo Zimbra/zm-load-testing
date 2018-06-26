@@ -7,7 +7,7 @@
   <property name="jar" location="${build}/jar"/>
   <property name="doc" location="${build}/doc"/>
   <property name="ext" value="zimbraext.jar"/>
-  <property name="jmeter_home" value="/opt/apache-jmeter-3.0"/>
+  <property name="jmeter.home" value="/opt/apache-jmeter-3.0"/>
   <path id="test.path">
     <pathelement location="${jar}/zjmeter.jar"/>
   </path>
@@ -18,11 +18,11 @@
     <antcall target="doc"/>
   </target>
   <path id="jmeter-classpath">
-    <fileset dir="${jmeter_home}/lib/ext">
+    <fileset dir="${jmeter.home}/lib/ext">
       <include name="ApacheJMeter_core.jar"/>
       <include name="ApacheJMeter_java.jar"/>
     </fileset>
-    <fileset dir="${jmeter_home}/lib">
+    <fileset dir="${jmeter.home}/lib">
       <include name="slf4j-api-1.7.13.jar"/>
     </fileset>
   </path>
@@ -34,7 +34,7 @@
     </javac>
   </target>
   <target name="install">
-    <copy todir="${jmeter_home}/lib/ext">
+    <copy todir="${jmeter.home}/lib/ext">
       <fileset dir="${jar}">
         <include name="${ext}"/>
       </fileset>
