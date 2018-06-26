@@ -6,6 +6,8 @@
   <property name="test" location="${build}/test"/>
   <property name="jar" location="${build}/jar"/>
   <property name="doc" location="${build}/doc"/>
+  <property name="ext" value="zimbraext.jar"/>
+  <property name="jmeter_home" value="/opt/apache-jmeter-3.0"/>
   <path id="test.path">
     <pathelement location="${jar}/zjmeter.jar"/>
   </path>
@@ -15,14 +17,35 @@
     <antcall target="test"/>
     <antcall target="doc"/>
   </target>
+  <path id="jmeter-classpath">
+    <fileset dir="${jmeter_home}/lib/ext">
+      <include name="ApacheJMeter_core.jar"/>
+      <include name="ApacheJMeter_java.jar"/>
+    </fileset>
+    <fileset dir="${jmeter_home}/lib">
+      <include name="slf4j-api-1.7.13.jar"/>
+    </fileset>
+  </path>
   <target name="build">
     <mkdir dir="${classes}"/>
     <javac srcdir="${src}" destdir="${classes}" fork="yes"
-           includeAntRuntime="false"/>
+           includeAntRuntime="false">
+      <classpath refid="jmeter-classpath"/>
+    </javac>
+  </target>
+  <target name="install">
+    <copy todir="${jmeter_home}/lib/ext">
+      <fileset dir="${jar}">
+        <include name="${ext}"/>
+      </fileset>
+    </copy>
   </target>
   <target name="jar" depends="build">
     <jar destfile="${jar}/zjmeter.jar" basedir="${classes}">
-      <include name="com/zimbra/jmeter/*"/>
+      <include name="com/zimbra/jmeter/*.class"/>
+    </jar>
+    <jar destfile="${jar}/${ext}" basedir="${classes}">
+      <include name="com/zimbra/jmeter/ext/*"/>
     </jar>
   </target>
   <target name="Loganalyzer.jar" depends="build">
@@ -41,7 +64,9 @@
     </junit>
   </target>
   <target name="doc">
-    <javadoc sourcepath="${src}" destdir="${doc}"/>
+    <javadoc sourcepath="${src}" destdir="${doc}">
+      <classpath refid="jmeter-classpath"/>
+    </javadoc>
   </target>
   <target name="clean">
     <delete dir="${build}"/>

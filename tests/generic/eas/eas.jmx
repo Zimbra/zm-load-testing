@@ -244,7 +244,25 @@ if (commands.size() == 0) {
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="FolderCreate" enabled="true">
+              <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="FolderCreate" enabled="true">
+                <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="Command" elementType="Argument">
+                      <stringProp name="Argument.name">Command</stringProp>
+                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                    <elementProp name="Arguments" elementType="Argument">
+                      <stringProp name="Argument.name">Arguments</stringProp>
+                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="classname">com.zimbra.jmeter.ext.EASRequest</stringProp>
+              </JavaSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="FolderCreate" enabled="false">
                 <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -353,7 +371,25 @@ SampleResult.setResponseData(result);
                 </XPathExtractor>
                 <hashTree/>
               </hashTree>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="FolderDelete" enabled="true">
+              <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="FolderDelete" enabled="true">
+                <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="Command" elementType="Argument">
+                      <stringProp name="Argument.name">Command</stringProp>
+                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                    <elementProp name="Arguments" elementType="Argument">
+                      <stringProp name="Argument.name">Arguments</stringProp>
+                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="classname">com.zimbra.jmeter.ext.EASRequest</stringProp>
+              </JavaSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="FolderDelete" enabled="false">
                 <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -451,7 +487,25 @@ SampleResult.setResponseData(result);
                 </XPathExtractor>
                 <hashTree/>
               </hashTree>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="FolderSync" enabled="true">
+              <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="FolderSync" enabled="true">
+                <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="Command" elementType="Argument">
+                      <stringProp name="Argument.name">Command</stringProp>
+                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                    <elementProp name="Arguments" elementType="Argument">
+                      <stringProp name="Argument.name">Arguments</stringProp>
+                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="classname">com.zimbra.jmeter.ext.EASRequest</stringProp>
+              </JavaSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="FolderSync" enabled="false">
                 <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -548,7 +602,25 @@ SampleResult.setResponseData(result);
                 </XPathExtractor>
                 <hashTree/>
               </hashTree>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Search" enabled="true">
+              <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="Search" enabled="true">
+                <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="Command" elementType="Argument">
+                      <stringProp name="Argument.name">Command</stringProp>
+                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                    <elementProp name="Arguments" elementType="Argument">
+                      <stringProp name="Argument.name">Arguments</stringProp>
+                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="classname">com.zimbra.jmeter.ext.EASRequest</stringProp>
+              </JavaSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Search" enabled="false">
                 <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -645,7 +717,25 @@ SampleResult.setResponseData(result);
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
-              <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="SendMail" enabled="true">
+              <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="SendMail" enabled="true">
+                <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="Command" elementType="Argument">
+                      <stringProp name="Argument.name">Command</stringProp>
+                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                    <elementProp name="Arguments" elementType="Argument">
+                      <stringProp name="Argument.name">Arguments</stringProp>
+                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="classname">com.zimbra.jmeter.ext.EASRequest</stringProp>
+              </JavaSampler>
+              <hashTree/>
+              <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="SendMail" enabled="false">
                 <stringProp name="SwitchController.value">${__P(EAS.version,12.1)}</stringProp>
               </SwitchController>
               <hashTree>
@@ -921,7 +1011,25 @@ if (hr.getEntity().getContentLength() &gt; 0) {
                 </BeanShellSampler>
                 <hashTree/>
               </hashTree>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Sync" enabled="true">
+              <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="Sync" enabled="true">
+                <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="Command" elementType="Argument">
+                      <stringProp name="Argument.name">Command</stringProp>
+                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                    <elementProp name="Arguments" elementType="Argument">
+                      <stringProp name="Argument.name">Arguments</stringProp>
+                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="classname">com.zimbra.jmeter.ext.EASRequest</stringProp>
+              </JavaSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Sync" enabled="false">
                 <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.client.methods.HttpPost;
