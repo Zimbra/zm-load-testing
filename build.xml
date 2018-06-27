@@ -111,6 +111,19 @@
       <jmeterarg value="-q${basedir}/tests/generic/eas/profiles/basic.prop"/>
     </jmeter>
   </target>
+  <target name="generic-ews" depends="src,logs">
+    <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/generic/ews/ews.jmx"
+            jmeterlogfile="${logs}/generic-ews-jmeter.log"
+            resultlog="${logs}/generic-ews-requests.log"> 
+      <property name="ACCOUNTS.csv" value="${users}"/>
+      <property name="user.classpath" value="${zjmeter}"/>
+      <property name="xpath.namespace.config" value="${basedir}/tests/generic/ews/profiles/namespace.prop"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+      <jmeterarg value="-q${basedir}/tests/generic/ews/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/generic/ews/profiles/basic.prop"/>
+    </jmeter>
+  </target>
   <target name="generic-imap" depends="src,logs">
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/imap/imap.jmx"

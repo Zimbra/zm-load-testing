@@ -18,6 +18,10 @@ The following protocols currently have a basic level of support:
 
   [Exchange ActiveSync: Command Reference Protocol](https://msdn.microsoft.com/en-us/library/dd299441(v=exchg.80).aspx) [Exchange ActiveSync: HTTP Protocol](https://msdn.microsoft.com/en-us/library/dd299446(v=exchg.80).aspx) [Exchange ActiveSync: WAP Binary XML (WBXML) Algorithm](https://msdn.microsoft.com/en-us/library/dd299442(v=exchg.80).aspx) view [eas](eas/eas.md) for a list of currently suported commands in the jmx. This test depends on zm-sync-common.jar and assumes it is in src/build/jar.
   
+* ews
+
+  [Exchange Web Services](https://msdn.microsoft.com/en-us/library/office/bb409286(v=exchg.150).aspx) view [ews](ews/ews.md) for a list of currently suported commands in the jmx and additional requirements.
+  
 * imap
   
   [Internet Message Access Protocol](https://tools.ietf.org/html/rfc3501) view [imap](imap/imap.md) for a list of currently supported commands in the jmx. No SSL support.
@@ -51,6 +55,7 @@ For each of the supported generic tests they depend on a protocol
 |caldav   |CalDAV  |HTTP    |
 |carddav  |CardDAV |HTTP    |
 |eas      |EAS     |HTTP    |
+|ews      |EWS     |HTTP    |
 |imap     |IMAP    |IMAP    |
 |lmtp     |LMTP    |LMTP    |
 |pop      |POP     |POP     |
