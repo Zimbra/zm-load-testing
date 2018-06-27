@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="2.9" jmeter="3.0 r1743807">
+<jmeterTestPlan version="1.2" properties="4.0" jmeter="4.0 r1823414">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -142,6 +142,7 @@
         <boolProp name="recycle">true</boolProp>
         <boolProp name="stopThread">false</boolProp>
         <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="ignoreFirstLine">false</boolProp>
       </CSVDataSet>
       <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="EAS" enabled="true">
@@ -249,108 +250,13 @@ if (commands.size() == 0) {
                   <collectionProp name="Arguments.arguments">
                     <elementProp name="Command" elementType="Argument">
                       <stringProp name="Argument.name">Command</stringProp>
-                      <stringProp name="Argument.value">Testing</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                    <elementProp name="Arguments" elementType="Argument">
-                      <stringProp name="Argument.name">Arguments</stringProp>
-                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.value">FolderCreate</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                     </elementProp>
                   </collectionProp>
                 </elementProp>
                 <stringProp name="classname">com.zimbra.jmeter.ext.EASRequest</stringProp>
               </JavaSampler>
-              <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="FolderCreate" enabled="false">
-                <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.conn.ssl.SSLContextBuilder;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.util.EntityUtils;
-import org.apache.commons.codec.binary.Base64;
-import java.nio.charset.StandardCharsets;
-import org.apache.http.HttpHeaders;
-import com.zimbra.zimbrasync.wbxml.BinarySerializer;
-import com.zimbra.zimbrasync.wbxml.BinaryParser;
-
-
-try {
-//Setup HTTP Request
-HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=&quot;+vars.get(&quot;COMMAND&quot;)+&quot;&amp;User=&quot;+vars.get(&quot;USER&quot;)+
-                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
-String auth = vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;HTTP.domain&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
-byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
-String authHeader = &quot;Basic &quot;+new String(encodedAuth);
-hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
-hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
-
-//Generate WBXML Request Body
-ByteArrayOutputStream bao = new ByteArrayOutputStream();
-BinarySerializer bs = new BinarySerializer(bao,false);
-bs.openTag(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_FOLDERCREATE);
-bs.textElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_SYNCKEY,vars.get(&quot;FOLDERSYNCKEY&quot;));
-bs.integerElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_PARENTID,0);
-bs.textElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_DISPLAYNAME,&quot;ActiveSyncTestDir&quot;);
-bs.integerElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_TYPE,12);
-bs.closeTag();
-
-//Add WBXML Body to request
-HttpEntity entity = new ByteArrayEntity(bao.toByteArray());
-hp.setEntity(entity);
-
-//Disable SSL validation/verification
-SSLContextBuilder builder = new SSLContextBuilder();
-builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build(),SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-
-//Create http connection and send request
-CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build();
-HttpResponse hr = dhc.execute(hp);
-
-//Process reponse for reporting results in jmeter
-ResponseCode = hr.getStatusLine().getStatusCode();
-ResponseMessage = hr.getStatusLine().getReasonPhrase();
-
-//Convert WBXML to readable form for jmeter
-String result=&quot;&quot;;
-try {
-  BinaryParser bp = new BinaryParser(new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())),false);
-  while (bp.next() != null) {
-    if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
-      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
-    } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
-    } else if (bp.getEventType() == BinaryParser.START_TAG) {
-      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
-    } else if (bp.getEventType() == BinaryParser.END_TAG) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
-    } else if (bp.getEventType() == BinaryParser.TEXT) {
-      result+=bp.getText(); 	
-    }
-  }
-} catch (IOException e) {
-  if (e.getMessage().equals(&quot;Unexpected EOF&quot;)) {
-  	// ignore
-  } else {
-  	throw e;
-  }
-}
-SampleResult.setResponseData(result);
-
-} catch (Exception e) {
-	log.error(&quot;FolderCreate: &quot;+e.toString());
-}</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
-                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-              </BeanShellSampler>
               <hashTree>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
                   <stringProp name="XPathExtractor.default">${FOLDERSYNCKEY}</stringProp>
@@ -359,6 +265,7 @@ SampleResult.setResponseData(result);
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">false</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
                 </XPathExtractor>
                 <hashTree/>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
@@ -368,6 +275,7 @@ SampleResult.setResponseData(result);
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">false</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
                 </XPathExtractor>
                 <hashTree/>
               </hashTree>
@@ -376,106 +284,13 @@ SampleResult.setResponseData(result);
                   <collectionProp name="Arguments.arguments">
                     <elementProp name="Command" elementType="Argument">
                       <stringProp name="Argument.name">Command</stringProp>
-                      <stringProp name="Argument.value">Testing</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                    <elementProp name="Arguments" elementType="Argument">
-                      <stringProp name="Argument.name">Arguments</stringProp>
-                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.value">FolderDelete</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                     </elementProp>
                   </collectionProp>
                 </elementProp>
                 <stringProp name="classname">com.zimbra.jmeter.ext.EASRequest</stringProp>
               </JavaSampler>
-              <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="FolderDelete" enabled="false">
-                <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.conn.ssl.SSLContextBuilder;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.util.EntityUtils;
-import org.apache.commons.codec.binary.Base64;
-import java.nio.charset.StandardCharsets;
-import org.apache.http.HttpHeaders;
-import com.zimbra.zimbrasync.wbxml.BinarySerializer;
-import com.zimbra.zimbrasync.wbxml.BinaryParser;
-
-
-try {
-//Setup HTTP Request
-HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=&quot;+vars.get(&quot;COMMAND&quot;)+&quot;&amp;User=&quot;+vars.get(&quot;USER&quot;)+
-                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
-String auth = vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;HTTP.domain&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
-byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
-String authHeader = &quot;Basic &quot;+new String(encodedAuth);
-hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
-hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
-
-//Generate WBXML Request Body
-ByteArrayOutputStream bao = new ByteArrayOutputStream();
-BinarySerializer bs = new BinarySerializer(bao,false);
-bs.openTag(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_FOLDERDELETE);
-bs.textElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_SYNCKEY,vars.get(&quot;FOLDERSYNCKEY&quot;));
-bs.textElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_SERVERID,vars.get(&quot;FOLDERID&quot;));
-bs.closeTag();
-
-//Add WBXML Body to request
-HttpEntity entity = new ByteArrayEntity(bao.toByteArray());
-hp.setEntity(entity);
-
-//Disable SSL validation/verification
-SSLContextBuilder builder = new SSLContextBuilder();
-builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build(),SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-
-//Create http connection and send request
-CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build();
-HttpResponse hr = dhc.execute(hp);
-
-//Process reponse for reporting results in jmeter
-ResponseCode = hr.getStatusLine().getStatusCode();
-ResponseMessage = hr.getStatusLine().getReasonPhrase();
-
-//Convert WBXML to readable form for jmeter
-String result=&quot;&quot;;
-try {
-  BinaryParser bp = new BinaryParser(new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())),false);
-  while (bp.next() != null) {
-    if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
-      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
-    } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
-    } else if (bp.getEventType() == BinaryParser.START_TAG) {
-      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
-    } else if (bp.getEventType() == BinaryParser.END_TAG) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
-    } else if (bp.getEventType() == BinaryParser.TEXT) {
-      result+=bp.getText(); 	
-    }
-  }
-} catch (IOException e) {
-  if (e.message.equals(&quot;Unexpected EOF&quot;)) {
-  	// ignore
-  } else {
-  	throw e;
-  }
-}
-SampleResult.setResponseData(result);
-
-} catch (Exception e) {
-	log.error(&quot;FolderDelete: &quot;+e.toString());
-}</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
-                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-              </BeanShellSampler>
               <hashTree>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
                   <stringProp name="XPathExtractor.default">${FOLDERSYNCKEY}</stringProp>
@@ -484,6 +299,7 @@ SampleResult.setResponseData(result);
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">false</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
                 </XPathExtractor>
                 <hashTree/>
               </hashTree>
@@ -492,105 +308,13 @@ SampleResult.setResponseData(result);
                   <collectionProp name="Arguments.arguments">
                     <elementProp name="Command" elementType="Argument">
                       <stringProp name="Argument.name">Command</stringProp>
-                      <stringProp name="Argument.value">Testing</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                    <elementProp name="Arguments" elementType="Argument">
-                      <stringProp name="Argument.name">Arguments</stringProp>
-                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.value">FolderSync</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                     </elementProp>
                   </collectionProp>
                 </elementProp>
                 <stringProp name="classname">com.zimbra.jmeter.ext.EASRequest</stringProp>
               </JavaSampler>
-              <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="FolderSync" enabled="false">
-                <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.conn.ssl.SSLContextBuilder;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.util.EntityUtils;
-import org.apache.commons.codec.binary.Base64;
-import java.nio.charset.StandardCharsets;
-import org.apache.http.HttpHeaders;
-import com.zimbra.zimbrasync.wbxml.BinarySerializer;
-import com.zimbra.zimbrasync.wbxml.BinaryParser;
-
-
-try {
-//Setup HTTP Request
-HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=&quot;+vars.get(&quot;COMMAND&quot;)+&quot;&amp;User=&quot;+vars.get(&quot;USER&quot;)+
-                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
-String auth = vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;HTTP.domain&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
-byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
-String authHeader = &quot;Basic &quot;+new String(encodedAuth);
-hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
-hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
-
-//Generate WBXML Request Body
-ByteArrayOutputStream bao = new ByteArrayOutputStream();
-BinarySerializer bs = new BinarySerializer(bao,false);
-bs.openTag(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_FOLDERSYNC);
-bs.textElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,BinarySerializer.FOLDERHIERARCHY_SYNCKEY,vars.get(&quot;FOLDERSYNCKEY&quot;));
-bs.closeTag();
-
-//Add WBXML Body to request
-HttpEntity entity = new ByteArrayEntity(bao.toByteArray());
-hp.setEntity(entity);
-
-//Disable SSL validation/verification
-SSLContextBuilder builder = new SSLContextBuilder();
-builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build(),SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-
-//Create http connection and send request
-CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build();
-HttpResponse hr = dhc.execute(hp);
-
-//Process reponse for reporting results in jmeter
-ResponseCode = hr.getStatusLine().getStatusCode();
-ResponseMessage = hr.getStatusLine().getReasonPhrase();
-
-//Convert WBXML to readable form for jmeter
-String result=&quot;&quot;;
-try {
-  BinaryParser bp = new BinaryParser(new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())),false);
-  while (bp.next() != null) {
-    if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
-      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
-    } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
-    } else if (bp.getEventType() == BinaryParser.START_TAG) {
-      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
-    } else if (bp.getEventType() == BinaryParser.END_TAG) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
-    } else if (bp.getEventType() == BinaryParser.TEXT) {
-      result+=bp.getText(); 	
-    }
-  }
-} catch (IOException e) {
-  if (e.message.equals(&quot;Unexpected EOF&quot;)) {
-  	// ignore
-  } else {
-  	throw e;
-  }
-}
-SampleResult.setResponseData(result);
-
-} catch (Exception e) {
-	log.error(&quot;FolderSync: &quot;+e.toString());
-}</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
-                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-              </BeanShellSampler>
               <hashTree>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
                   <stringProp name="XPathExtractor.default">${FOLDERSYNCKEY}</stringProp>
@@ -599,6 +323,7 @@ SampleResult.setResponseData(result);
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">false</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
                 </XPathExtractor>
                 <hashTree/>
               </hashTree>
@@ -607,127 +332,20 @@ SampleResult.setResponseData(result);
                   <collectionProp name="Arguments.arguments">
                     <elementProp name="Command" elementType="Argument">
                       <stringProp name="Argument.name">Command</stringProp>
-                      <stringProp name="Argument.value">Testing</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                    <elementProp name="Arguments" elementType="Argument">
-                      <stringProp name="Argument.name">Arguments</stringProp>
-                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.value">Search</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                     </elementProp>
                   </collectionProp>
                 </elementProp>
                 <stringProp name="classname">com.zimbra.jmeter.ext.EASRequest</stringProp>
               </JavaSampler>
-              <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Search" enabled="false">
-                <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.conn.ssl.SSLContextBuilder;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.util.EntityUtils;
-import org.apache.commons.codec.binary.Base64;
-import java.nio.charset.StandardCharsets;
-import org.apache.http.HttpHeaders;
-import com.zimbra.zimbrasync.wbxml.BinarySerializer;
-import com.zimbra.zimbrasync.wbxml.BinaryParser;
-
-
-try {
-//Setup HTTP Request
-HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=&quot;+vars.get(&quot;COMMAND&quot;)+&quot;&amp;User=&quot;+vars.get(&quot;USER&quot;)+
-                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
-String auth = vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;HTTP.domain&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
-byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
-String authHeader = &quot;Basic &quot;+new String(encodedAuth);
-hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
-hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
-
-//Generate WBXML Request Body
-ByteArrayOutputStream bao = new ByteArrayOutputStream();
-BinarySerializer bs = new BinarySerializer(bao,false);
-bs.openTag(BinarySerializer.NAMESPACE_SEARCH,BinarySerializer.SEARCH_SEARCH);
-bs.openTag(BinarySerializer.NAMESPACE_SEARCH,BinarySerializer.SEARCH_STORE);
-bs.textElement(BinarySerializer.NAMESPACE_SEARCH,BinarySerializer.SEARCH_NAME,&quot;Mailbox&quot;);
-bs.openTag(BinarySerializer.NAMESPACE_SEARCH,BinarySerializer.SEARCH_QUERY);
-bs.openTag(BinarySerializer.NAMESPACE_SEARCH,BinarySerializer.SEARCH_AND);
-bs.textElement(BinarySerializer.NAMESPACE_SEARCH,BinarySerializer.SEARCH_FREETEXT,&quot;test&quot;);
-bs.closeTag();
-bs.closeTag();
-bs.openTag(BinarySerializer.NAMESPACE_SEARCH,BinarySerializer.SEARCH_OPTIONS);
-bs.textElement(BinarySerializer.NAMESPACE_SEARCH,BinarySerializer.SEARCH_RANGE,&quot;0-9&quot;);
-bs.closeTag();
-bs.closeTag();
-bs.closeTag();
-
-//Add WBXML Body to request
-HttpEntity entity = new ByteArrayEntity(bao.toByteArray());
-hp.setEntity(entity);
-
-//Disable SSL validation/verification
-SSLContextBuilder builder = new SSLContextBuilder();
-builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build(),SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-
-//Create http connection and send request
-CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build();
-HttpResponse hr = dhc.execute(hp);
-
-//Process reponse for reporting results in jmeter
-ResponseCode = hr.getStatusLine().getStatusCode();
-ResponseMessage = hr.getStatusLine().getReasonPhrase();
-
-//Convert WBXML to readable form for jmeter
-String result=&quot;&quot;;
-try {
-  BinaryParser bp = new BinaryParser(new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())),false);
-  while (bp.next() != null) {
-    if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
-      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
-    } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
-    } else if (bp.getEventType() == BinaryParser.START_TAG) {
-      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
-    } else if (bp.getEventType() == BinaryParser.END_TAG) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
-    } else if (bp.getEventType() == BinaryParser.TEXT) {
-      result+=bp.getText(); 	
-    }
-  }
-} catch (IOException e) {
-  if (e.message.equals(&quot;Unexpected EOF&quot;)) {
-  	// ignore
-  } else {
-  	throw e;
-  }
-}
-SampleResult.setResponseData(result);
-
-} catch (Exception e) {
-	log.error(&quot;Search:&quot;+e.toString());
-}</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
-                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-              </BeanShellSampler>
               <hashTree/>
               <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="SendMail" enabled="true">
                 <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
                   <collectionProp name="Arguments.arguments">
                     <elementProp name="Command" elementType="Argument">
                       <stringProp name="Argument.name">Command</stringProp>
-                      <stringProp name="Argument.value">Testing</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                    <elementProp name="Arguments" elementType="Argument">
-                      <stringProp name="Argument.name">Arguments</stringProp>
-                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.value">SendMail</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                     </elementProp>
                   </collectionProp>
@@ -735,401 +353,18 @@ SampleResult.setResponseData(result);
                 <stringProp name="classname">com.zimbra.jmeter.ext.EASRequest</stringProp>
               </JavaSampler>
               <hashTree/>
-              <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="SendMail" enabled="false">
-                <stringProp name="SwitchController.value">${__P(EAS.version,12.1)}</stringProp>
-              </SwitchController>
-              <hashTree>
-                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="default" enabled="true">
-                  <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.conn.ssl.SSLContextBuilder;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.util.EntityUtils;
-import org.apache.commons.codec.binary.Base64;
-import java.nio.charset.StandardCharsets;
-import org.apache.http.HttpHeaders;
-import com.zimbra.zimbrasync.wbxml.BinarySerializer;
-import com.zimbra.zimbrasync.wbxml.BinaryParser;
-
-String message = &quot;From: &lt;&quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;HTTP.domain&quot;)+&quot;&gt;\n&quot;;
-message += &quot;To: &lt;&quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;HTTP.domain&quot;)+&quot;&gt;\n&quot;;
-message += &quot;Subject: From Active Sync\n&quot;;
-message += &quot;MIME-Version: 1.0\n&quot;;
-message += &quot;Content-Type:  text/plain; charset=utf-8\n&quot;;
-message += &quot;Content-Transfer-Encoding: 7bit\n\n&quot;;
-message += &quot;This is the test message.\n&quot;;
-
-try {
-//Setup HTTP Request
-HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=&quot;+vars.get(&quot;COMMAND&quot;)+&quot;&amp;User=&quot;+vars.get(&quot;USER&quot;)+
-                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
-String auth = vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;HTTP.domain&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
-byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
-String authHeader = &quot;Basic &quot;+new String(encodedAuth);
-hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
-hp.setHeader(&quot;Content-Type&quot;,&quot;message/rfc822&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
-
-HttpEntity entity = new StringEntity(message);
-hp.setEntity(entity);
-
-SSLContextBuilder builder = new SSLContextBuilder();
-builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build(),SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-
-CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build();
-HttpResponse hr = dhc.execute(hp);
-
-//Process reponse for reporting results in jmeter
-ResponseCode = hr.getStatusLine().getStatusCode();
-ResponseMessage = hr.getStatusLine().getReasonPhrase();
-
-//Convert WBXML to readable form for jmeter
-if (hr.getEntity().getContentLength() &gt; 0) {
-  String result=&quot;&quot;;
-  try {
-    BinaryParser bp = new BinaryParser(new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())),false);
-    while (bp.next() != null) {
-      if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
-        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
-      } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
-      } else if (bp.getEventType() == BinaryParser.START_TAG) {
-        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
-      } else if (bp.getEventType() == BinaryParser.END_TAG) {
-        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
-      } else if (bp.getEventType() == BinaryParser.TEXT) {
-        result+=bp.getText(); 	
-      }
-    }
-  } catch (Exception e) {
-    if (e.getMessage().equals(&quot;Unexpected EOF&quot;)) {
-      // ignore
-    } else {
-      throw e;
-    }
-  }
-  SampleResult.setResponseData(result);
-}
-} catch (Exception e) {
-	log.error(&quot;SendMail exception: &quot;+e.toString());
-}</stringProp>
-                  <stringProp name="BeanShellSampler.filename"></stringProp>
-                  <stringProp name="BeanShellSampler.parameters"></stringProp>
-                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-                </BeanShellSampler>
-                <hashTree/>
-                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="14.0" enabled="true">
-                  <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.conn.ssl.SSLContextBuilder;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.util.EntityUtils;
-import org.apache.commons.codec.binary.Base64;
-import java.nio.charset.StandardCharsets;
-import org.apache.http.HttpHeaders;
-import com.zimbra.zimbrasync.wbxml.BinarySerializer;
-import com.zimbra.zimbrasync.wbxml.BinaryParser;
-
-String message = &quot;From: &lt;&quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;HTTP.domain&quot;)+&quot;&gt;\n&quot;;
-message += &quot;To: &lt;&quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;HTTP.domain&quot;)+&quot;&gt;\n&quot;;
-message += &quot;Subject: From Active Sync\n&quot;;
-message += &quot;MIME-Version: 1.0\n&quot;;
-message += &quot;Content-Type:  text/plain; charset=utf-8\n&quot;;
-message += &quot;Content-Transfer-Encoding: 7bit\n\n&quot;;
-message += &quot;This is the test message.\n&quot;;
-
-try {
-//Setup HTTP Request
-HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=&quot;+vars.get(&quot;COMMAND&quot;)+&quot;&amp;User=&quot;+vars.get(&quot;USER&quot;)+
-                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
-String auth = vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;HTTP.domain&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
-byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
-String authHeader = &quot;Basic &quot;+new String(encodedAuth);
-hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
-hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
-
-//Generate WBXML Request Body
-ByteArrayOutputStream bao = new ByteArrayOutputStream();
-BinarySerializer bs = new BinarySerializer(bao,false);
-bs.openTag(BinarySerializer.NAMESPACE_COMPOSEMAIL,BinarySerializer.COMPOSEMAIL_SENDMAIL);
-bs.textElement(BinarySerializer.NAMESPACE_COMPOSEMAIL,BinarySerializer.COMPOSEMAIL_CLIENTID,UUID.randomUUID().toString());
-bs.opaqueElement(BinarySerializer.NAMESPACE_COMPOSEMAIL,BinarySerializer.COMPOSEMAIL_MIME,message);
-bs.closeTag();
-
-HttpEntity entity = new ByteArrayEntity(bao.toByteArray());
-hp.setEntity(entity);
-
-SSLContextBuilder builder = new SSLContextBuilder();
-builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build(),SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-
-CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build();
-HttpResponse hr = dhc.execute(hp);
-
-//Process reponse for reporting results in jmeter
-ResponseCode = hr.getStatusLine().getStatusCode();
-ResponseMessage = hr.getStatusLine().getReasonPhrase();
-
-//Convert WBXML to readable form for jmeter
-if (hr.getEntity().getContentLength() &gt; 0) {
-  String result=&quot;&quot;;
-  try {
-    BinaryParser bp = new BinaryParser(new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())),false);
-    while (bp.next() != null) {
-      if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
-        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
-      } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
-      } else if (bp.getEventType() == BinaryParser.START_TAG) {
-        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
-      } else if (bp.getEventType() == BinaryParser.END_TAG) {
-        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
-      } else if (bp.getEventType() == BinaryParser.TEXT) {
-        result+=bp.getText(); 	
-      }
-    }
-  } catch (Exception e) {
-    if (e.getMessage().equals(&quot;Unexpected EOF&quot;)) {
-      // ignore
-    } else {
-      throw e;
-    }
-  }
-  SampleResult.setResponseData(result);
-}
-} catch (Exception e) {
-	log.error(&quot;SendMail exception: &quot;+e.toString());
-}</stringProp>
-                  <stringProp name="BeanShellSampler.filename"></stringProp>
-                  <stringProp name="BeanShellSampler.parameters"></stringProp>
-                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-                </BeanShellSampler>
-                <hashTree/>
-                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="14.1" enabled="true">
-                  <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.conn.ssl.SSLContextBuilder;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.util.EntityUtils;
-import org.apache.commons.codec.binary.Base64;
-import java.nio.charset.StandardCharsets;
-import org.apache.http.HttpHeaders;
-import com.zimbra.zimbrasync.wbxml.BinarySerializer;
-import com.zimbra.zimbrasync.wbxml.BinaryParser;
-
-String message = &quot;From: &lt;&quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;HTTP.domain&quot;)+&quot;&gt;\n&quot;;
-message += &quot;To: &lt;&quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;HTTP.domain&quot;)+&quot;&gt;\n&quot;;
-message += &quot;Subject: From Active Sync\n&quot;;
-message += &quot;MIME-Version: 1.0\n&quot;;
-message += &quot;Content-Type:  text/plain; charset=utf-8\n&quot;;
-message += &quot;Content-Transfer-Encoding: 7bit\n\n&quot;;
-message += &quot;This is the test message.\n&quot;;
-
-try {
-//Setup HTTP Request
-HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=&quot;+vars.get(&quot;COMMAND&quot;)+&quot;&amp;User=&quot;+vars.get(&quot;USER&quot;)+
-                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
-String auth = vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;HTTP.domain&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
-byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
-String authHeader = &quot;Basic &quot;+new String(encodedAuth);
-hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
-hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
-
-//Generate WBXML Request Body
-ByteArrayOutputStream bao = new ByteArrayOutputStream();
-BinarySerializer bs = new BinarySerializer(bao,false);
-bs.openTag(BinarySerializer.NAMESPACE_COMPOSEMAIL,BinarySerializer.COMPOSEMAIL_SENDMAIL);
-bs.textElement(BinarySerializer.NAMESPACE_COMPOSEMAIL,BinarySerializer.COMPOSEMAIL_CLIENTID,UUID.randomUUID().toString());
-bs.opaqueElement(BinarySerializer.NAMESPACE_COMPOSEMAIL,BinarySerializer.COMPOSEMAIL_MIME,message);
-bs.closeTag();
-
-HttpEntity entity = new ByteArrayEntity(bao.toByteArray());
-hp.setEntity(entity);
-
-SSLContextBuilder builder = new SSLContextBuilder();
-builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build(),SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-
-CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build();
-HttpResponse hr = dhc.execute(hp);
-
-//Process reponse for reporting results in jmeter
-ResponseCode = hr.getStatusLine().getStatusCode();
-ResponseMessage = hr.getStatusLine().getReasonPhrase();
-
-//Convert WBXML to readable form for jmeter
-if (hr.getEntity().getContentLength() &gt; 0) {
-  String result=&quot;&quot;;
-  try {
-    BinaryParser bp = new BinaryParser(new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())),false);
-    while (bp.next() != null) {
-      if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
-        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
-      } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
-      } else if (bp.getEventType() == BinaryParser.START_TAG) {
-        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
-      } else if (bp.getEventType() == BinaryParser.END_TAG) {
-        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
-      } else if (bp.getEventType() == BinaryParser.TEXT) {
-        result+=bp.getText(); 	
-      }
-    }
-  } catch (Exception e) {
-    if (e.getMessage().equals(&quot;Unexpected EOF&quot;)) {
-      // ignore
-    } else {
-      throw e;
-    }
-  }
-  SampleResult.setResponseData(result);
-}
-} catch (Exception e) {
-	log.error(&quot;SendMail exception: &quot;+e.toString());
-}</stringProp>
-                  <stringProp name="BeanShellSampler.filename"></stringProp>
-                  <stringProp name="BeanShellSampler.parameters"></stringProp>
-                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-                </BeanShellSampler>
-                <hashTree/>
-              </hashTree>
               <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="Sync" enabled="true">
                 <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
                   <collectionProp name="Arguments.arguments">
                     <elementProp name="Command" elementType="Argument">
                       <stringProp name="Argument.name">Command</stringProp>
-                      <stringProp name="Argument.value">Testing</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                    <elementProp name="Arguments" elementType="Argument">
-                      <stringProp name="Argument.name">Arguments</stringProp>
-                      <stringProp name="Argument.value">Testing</stringProp>
+                      <stringProp name="Argument.value">Sync</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                     </elementProp>
                   </collectionProp>
                 </elementProp>
                 <stringProp name="classname">com.zimbra.jmeter.ext.EASRequest</stringProp>
               </JavaSampler>
-              <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Sync" enabled="false">
-                <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.conn.ssl.SSLContextBuilder;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.util.EntityUtils;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.lang3.StringEscapeUtils;
-import java.nio.charset.StandardCharsets;
-import org.apache.http.HttpHeaders;
-import com.zimbra.zimbrasync.wbxml.BinarySerializer;
-import com.zimbra.zimbrasync.wbxml.BinaryParser;
-
-import org.apache.http.Header;
-
-try {
-//Setup HTTP Request
-HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=&quot;+vars.get(&quot;COMMAND&quot;)+&quot;&amp;User=&quot;+vars.get(&quot;USER&quot;)+
-                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
-String auth = vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;HTTP.domain&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
-byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
-String authHeader = &quot;Basic &quot;+new String(encodedAuth);
-hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
-hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
-hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
-
-//Generate WBXML Request Body
-ByteArrayOutputStream bao = new ByteArrayOutputStream();
-BinarySerializer bs = new BinarySerializer(bao,false);
-bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC,BinarySerializer.AIRSYNC_SYNC);
-bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC,BinarySerializer.AIRSYNC_COLLECTIONS);
-bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC,BinarySerializer.AIRSYNC_COLLECTION);
-bs.textElement(BinarySerializer.NAMESPACE_AIRSYNC,BinarySerializer.AIRSYNC_SYNCKEY,vars.get(&quot;SYNCSYNCKEY&quot;));
-bs.integerElement(BinarySerializer.NAMESPACE_AIRSYNC,BinarySerializer.AIRSYNC_COLLECTIONID,2);
-bs.closeTag();
-bs.closeTag();
-bs.closeTag();
-
-//Add WBXML Body to request
-HttpEntity entity = new ByteArrayEntity(bao.toByteArray());
-hp.setEntity(entity);
-
-//Disable SSL validation/verification
-SSLContextBuilder builder = new SSLContextBuilder();
-builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build(),SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-
-//Create http connection and send request
-CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build();
-HttpResponse hr = dhc.execute(hp);
-
-//Process reponse for reporting results in jmeter
-ResponseCode = hr.getStatusLine().getStatusCode();
-ResponseMessage = hr.getStatusLine().getReasonPhrase();
-
-//View headers for debug
-//for (Header h : hr.getAllHeaders()) {
-//  log.info(&quot;Header: &quot;+h.getName()+&quot;=&quot;+h.getValue());
-//}
-
-//Convert WBXML to readable form for jmeter
-String result=&quot;&quot;;
-try {
-  BinaryParser bp = new BinaryParser(new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())),false);
-  while (bp.next() != null) {
-    if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
-      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
-    } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
-    } else if (bp.getEventType() == BinaryParser.START_TAG) {
-      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
-    } else if (bp.getEventType() == BinaryParser.END_TAG) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
-    } else if (bp.getEventType() == BinaryParser.TEXT) {
-    	 // ugly quick fix to resolve invalid XML characters
-    	 String text = bp.getText();
-      text=text.replaceAll(&quot;\\p{Cntrl}&quot;,&quot;&quot;);
-      result+=StringEscapeUtils.escapeXml(text);
-    }
-  }
-} catch (IOException e) {
-  if (e.message.equals(&quot;Unexpected EOF&quot;)) {
-  	// ignore
-  } else {
-  	throw e;
-  }
-}
-SampleResult.setResponseData(result);
-
-} catch (Exception e) {
-	log.error(&quot;Sync:&quot;+e.toString());
-}</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
-                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-              </BeanShellSampler>
               <hashTree>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
                   <stringProp name="XPathExtractor.default">${SYNCSYNCKEY}</stringProp>
@@ -1138,6 +373,7 @@ SampleResult.setResponseData(result);
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">false</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
                 </XPathExtractor>
                 <hashTree/>
               </hashTree>
@@ -1152,9 +388,5 @@ SampleResult.setResponseData(result);
         <hashTree/>
       </hashTree>
     </hashTree>
-    <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
-      <boolProp name="WorkBench.save">true</boolProp>
-    </WorkBench>
-    <hashTree/>
   </hashTree>
 </jmeterTestPlan>
