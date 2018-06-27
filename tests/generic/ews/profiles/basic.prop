@@ -1,0 +1,9 @@
+xpath.namespace.config=tests/generic/ews/profiles/namespace.prop
+PROFILE.EWS.type=sequence
+PROFILE.EWS.sequence.1=CreateItem
+PROFILE.EWS.sequence.2=FindFolder
+PROFILE.EWS.sequence.3=FindItem(FINDITEMTYPE=inbox)
+PROFILE.EWS.sequence.4=FindItem(FINDITEMTYPE=contacts)
+PROFILE.EWS.sequence.5=GetItem
+PROFILE.EWS.sequence.6=CreateFolder
+PROFILE.EWS.sequence.7=DeleteFolder
