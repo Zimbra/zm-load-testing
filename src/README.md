@@ -1,6 +1,6 @@
 # ant build
 
-requires: java 7, ant 1.9, junit, and hamcrest
+requires: java 8, jmeter 4.0, ant 1.9, junit, and hamcrest
 
 centos: yum install java ant ant-contrib ant-junit
 
@@ -10,10 +10,18 @@ $ ant
 
 all generated items are in build directory.
 
-* jar = zjmeter jar file
-* doc = zjmeter documentation
-* classes = zjmeter classes
-* test = zjmeter test classes
+* jar = jar files
+* doc = documentation
+* classes = classes
+* test = test classes
+
+For eas testing the zimbraext.jar file must be installed to the jmeter lib/ext directory. This build assumes jmeter is available at /opt/apache-jemeter-4.0 if not then set jmeter.home to the proper location. If you have write access tot he jmeter location you can use:
+
+```
+$ ant install
+```
+
+To copy the zimbraext.jar to the jmeter lib/ext directory.
 
 ```
 $ ant clean 
@@ -26,7 +34,7 @@ will remove build directory.
 
 ```
 shopt -s globstar
-javac -cp java java/**/*.java
+javac -cp java:/opt/apache-jmeter-4.0/lib/*:/opt/apache-jmeter-4.0/lib/ext/* java/**/*.java
 ```
 
 ## command line testing
@@ -39,7 +47,8 @@ java -cp java com.zimbra.jmeter.test command SOAP properties/test.prop
 ## jar
 
 ```
-cd java; jar -cf ../zjmeter.jar .
+cd java; jar -cf ../zjmeter.jar com/zimbra/jmeter/*.class
+cd java; jar -cf ../zimbraext.jar com/zimbra/jmeter/ext/*.class
 ```
 
 ## jar command line testing
