@@ -31,7 +31,7 @@
       <!-- EAS base64 -->
       <include name="commons-codec-*.jar"/>
     </fileset>
-    <fileset dir="Build/jar">
+    <fileset dir="build/jar">
       <!-- EAS wbxml -->
       <include name="zm-sync-common.jar"/>
     </fileset>
