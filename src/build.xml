@@ -36,12 +36,21 @@
       <include name="zm-sync-common.jar"/>
     </fileset>
   </path>
+  <target name="zm-sync-common-test">
+    <available file="build/jar/zm-sync-common.jar"
+              property="zm-sync-common-jar.present"/>
+  </target>
   <target name="build">
     <mkdir dir="${classes}"/>
-    <javac srcdir="${src}" destdir="${classes}" fork="yes"
+    <javac srcdir="${src}/com" destdir="${classes}" fork="yes"
+           includeAntRuntime="false"/>
+    <antcall target="extbuild"/>
+  </target>
+  <target name="extbuild" depends="zm-sync-common-test"
+          if="zm-sync-common-jar.present">
+    <javac srcdir="${src}/ext" destdir="${classes}" fork="yes"
            includeAntRuntime="false">
       <classpath refid="jmeter-classpath"/>
-      <compilerarg value="-Xlint:deprecation"/>
     </javac>
   </target>
   <target name="install">
@@ -51,10 +60,14 @@
       </fileset>
     </copy>
   </target>
-  <target name="jar" depends="build">
+  <target name="jar" depends="build,zm-sync-common-test">
     <jar destfile="${jar}/zjmeter.jar" basedir="${classes}">
       <include name="com/zimbra/jmeter/*.class"/>
     </jar>
+    <antcall target="extjar"/>
+  </target>
+  <target name="extjar" depends="zm-sync-common-test"
+          if="zm-sync-common-jar.present">
     <jar destfile="${jar}/${ext}" basedir="${classes}">
       <include name="com/zimbra/jmeter/ext/*"/>
     </jar>
