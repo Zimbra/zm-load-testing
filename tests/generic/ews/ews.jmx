@@ -169,9 +169,9 @@
         <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.EWS.rampup)}</stringProp>
         <longProp name="ThreadGroup.start_time">1505165237000</longProp>
         <longProp name="ThreadGroup.end_time">1505165237000</longProp>
-        <boolProp name="ThreadGroup.scheduler">false</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.EWS.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">

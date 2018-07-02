@@ -159,26 +159,6 @@
         <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
       </ConfigTestElement>
       <hashTree/>
-      <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="ZSOAP Setup" enabled="true">
-        <stringProp name="filename"></stringProp>
-        <stringProp name="parameters"></stringProp>
-        <boolProp name="resetInterpreter">false</boolProp>
-        <stringProp name="script">import com.zimbra.jmeter.Zimbra;
-//debug();
-Zimbra soap = new Zimbra(props,&quot;ZSOAP&quot;);
-vars.putObject(&quot;ZSOAP&quot;,soap);
-
-String url = &quot;https://&quot;+props.get(&quot;HTTP.server&quot;);
-String admin = url+&quot;:7071/service/admin/soap&quot;;
-vars.put(&quot;ADMIN&quot;,admin);
-if (!props.get(&quot;HTTP.port&quot;).equals(&quot;&quot;) ) {
-  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;); 
-}
-url = url+&quot;/service/soap&quot;;
-log.info(url);
-vars.put(&quot;URL&quot;,url);</stringProp>
-      </BeanShellPreProcessor>
-      <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="ZSOAP User" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -187,18 +167,28 @@ vars.put(&quot;URL&quot;,url);</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">${__P(LOAD.ZSOAP.users)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.ZSOAP.rampup)}</stringProp>
-        <longProp name="ThreadGroup.start_time">1505165237000</longProp>
-        <longProp name="ThreadGroup.end_time">1505165237000</longProp>
-        <boolProp name="ThreadGroup.scheduler">false</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.ZSOAP.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay"></stringProp>
+        <longProp name="ThreadGroup.start_time">1529531218000</longProp>
+        <longProp name="ThreadGroup.end_time">1529531240000</longProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
           <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Zimbra;
 import com.zimbra.jmeter.Command;
+//debug();
+String url = &quot;https://&quot;+props.get(&quot;HTTP.server&quot;);
+String admin = url+&quot;:7071/service/admin/soap&quot;;
+vars.put(&quot;ADMIN&quot;,admin);
+if (!props.get(&quot;HTTP.port&quot;).equals(&quot;&quot;) ) {
+  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;); 
+}
+url = url+&quot;/service/soap&quot;;
+log.info(url);
+vars.put(&quot;URL&quot;,url);
 
-Zimbra soap = vars.getObject(&quot;ZSOAP&quot;);
+Zimbra soap = new Zimbra(props,&quot;ZSOAP&quot;);
 ArrayList commands = soap.getcommands();
 
 vars.putObject(&quot;COMMANDS&quot;,commands);
@@ -1621,12 +1611,16 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
               </SoapSampler>
               <hashTree/>
-              <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="MsgActionRequest" enabled="true">
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                  <collectionProp name="Arguments.arguments"/>
-                </elementProp>
-                <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
-                <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+              <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="MsgActionRequest" enabled="true">
+                <stringProp name="SwitchController.value">${MSGACTIONTYPE}</stringProp>
+              </SwitchController>
+              <hashTree>
+                <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="read" enabled="true">
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments"/>
+                  </elementProp>
+                  <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                  <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
   &lt;soap:Header&gt;
     &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
       &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
@@ -1640,12 +1634,38 @@ if (commands.size() == 0) {
     &lt;/MsgActionRequest&gt;
   &lt;/soap:Body&gt;
 &lt;/soap:Envelope&gt;</stringProp>
-                <stringProp name="SoapSampler.xml_data_file"></stringProp>
-                <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
-                <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
-                <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
-              </SoapSampler>
-              <hashTree/>
+                  <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                  <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                  <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                </SoapSampler>
+                <hashTree/>
+                <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="delete" enabled="true">
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments"/>
+                  </elementProp>
+                  <stringProp name="SoapSampler.URL_DATA">${URL}</stringProp>
+                  <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
+  &lt;soap:Header&gt;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;
+      &lt;nosession/&gt;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;
+    &lt;/context&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;MsgActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;
+      &lt;action id=&quot;${MESSAGE}&quot; op=&quot;delete&quot;/&gt;
+    &lt;/MsgActionRequest&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</stringProp>
+                  <stringProp name="SoapSampler.xml_data_file"></stringProp>
+                  <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
+                  <stringProp name="SoapSampler.SEND_SOAP_ACTION">true</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                </SoapSampler>
+                <hashTree/>
+              </hashTree>
               <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="NoOpRequest" enabled="true">
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments"/>

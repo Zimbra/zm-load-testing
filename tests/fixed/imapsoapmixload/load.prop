@@ -1,8 +1,8 @@
+LOAD.duration=60
+LOAD.delay=0
 LOAD.IMAP.users=1
 LOAD.IMAP.rampup=0
 LOAD.IMAP.loopcount=1
-LOAD.IMAP.duration=60
 LOAD.SOAP.users=1
 LOAD.SOAP.rampup=0
 LOAD.SOAP.loopcount=1
-LOAD.SOAP.duration=60

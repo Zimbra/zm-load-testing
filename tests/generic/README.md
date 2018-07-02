@@ -85,10 +85,14 @@ the HTTP protocol also has these additional properties
 
 |Key                           |Value|Description                                 |
 |------------------------------|-----|--------------------------------------------|
+|LOAD.duration                 |130  |test duration in seconds                    |
+|LOAD.delay                    |0    |test start delay in seconds                 |
 |LOAD.&lt;Test&gt;.users       |1    |concurrent users/threads to run during tests|
 |LOAD.&lt;Test&gt;.userduration|1    |user login duration in seconds              |
 |LOAD.&lt;Test&gt;.rampup      |0    |how long to spend ramping up threads        |
 |LOAD.&lt;Test&gt;.loopcount   |1    |how many times the user/thread repeats      |
+
+Note: use -1 loop count to loop until duration end. to avoid any delays in user command execution set userduration to 0.
 
 ## Profile
 

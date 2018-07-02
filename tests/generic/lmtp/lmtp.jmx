@@ -145,16 +145,6 @@
         <boolProp name="ignoreFirstLine">false</boolProp>
       </CSVDataSet>
       <hashTree/>
-      <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="LMTP Setup" enabled="true">
-        <stringProp name="filename"></stringProp>
-        <stringProp name="parameters"></stringProp>
-        <boolProp name="resetInterpreter">false</boolProp>
-        <stringProp name="script">import com.zimbra.jmeter.Zimbra;
-//debug();
-Zimbra lmtp = new Zimbra(props,&quot;LMTP&quot;);
-vars.putObject(&quot;LMTP&quot;,lmtp);</stringProp>
-      </BeanShellPreProcessor>
-      <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="LMTP User" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -165,17 +155,17 @@ vars.putObject(&quot;LMTP&quot;,lmtp);</stringProp>
         <stringProp name="ThreadGroup.ramp_time">$(__P(LOAD.LMTP.rampup)}</stringProp>
         <longProp name="ThreadGroup.start_time">1497658914000</longProp>
         <longProp name="ThreadGroup.end_time">1497658914000</longProp>
-        <boolProp name="ThreadGroup.scheduler">false</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.LMTP.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
           <stringProp name="BeanShellSampler.query">import org.apache.commons.net.smtp.SMTPClient;
 import com.zimbra.jmeter.Zimbra;
 import com.zimbra.jmeter.Command;
-
-Zimbra lmtp = vars.getObject(&quot;LMTP&quot;);
+//debug();
+Zimbra lmtp = new Zimbra(props,&quot;LMTP&quot;);
 ArrayList commands = lmtp.getcommands();
 
 vars.putObject(&quot;COMMANDS&quot;,commands);
