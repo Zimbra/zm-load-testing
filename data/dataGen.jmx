@@ -287,7 +287,7 @@
                 </collectionProp>
               </elementProp>
               <stringProp name="HTTPSampler.domain">${server}</stringProp>
-              <stringProp name="HTTPSampler.port">${__P(SOAP.admin.port)}</stringProp>
+              <stringProp name="HTTPSampler.port">${__P(HTTP.admin.port)}</stringProp>
               <stringProp name="HTTPSampler.connect_timeout"></stringProp>
               <stringProp name="HTTPSampler.response_timeout"></stringProp>
               <stringProp name="HTTPSampler.protocol">https</stringProp>
