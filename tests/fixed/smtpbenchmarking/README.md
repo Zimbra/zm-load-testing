@@ -19,10 +19,11 @@ Sends a messages from book.csv file.
 
 |Key                   |Value|Description                                 |
 |----------------------|-----|--------------------------------------------|
+|LOAD.duration         |60   |test duration in seconds                    |
+|LOAD.delay            |0    |test start delay in seconds                 |
 |LOAD.SMTP.users       |1    |concurrent users/threads to run during tests|
 |LOAD.SMTP.rampup      |0    |how long to spend ramping up threads        |
 |LOAD.SMTP.loopcount   |1    |how many times the user/thread repeats      |
-|LOAD.SMTP.duration    |60   |duration of the test in seconds             |
 
 # Example
 

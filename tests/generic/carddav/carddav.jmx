@@ -155,16 +155,6 @@
         <stringProp name="shareMode">shareMode.all</stringProp>
       </CSVDataSet>
       <hashTree/>
-      <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="CardDAV Setup" enabled="true">
-        <stringProp name="filename"></stringProp>
-        <stringProp name="parameters"></stringProp>
-        <boolProp name="resetInterpreter">false</boolProp>
-        <stringProp name="script">import com.zimbra.jmeter.Zimbra;
-//debug();
-Zimbra cd = new Zimbra(props,&quot;CardDAV&quot;);
-vars.putObject(&quot;CardDAV&quot;,cd);</stringProp>
-      </BeanShellPreProcessor>
-      <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="CardDAV" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -175,9 +165,9 @@ vars.putObject(&quot;CardDAV&quot;,cd);</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.CardDAV.rampup)}</stringProp>
         <longProp name="ThreadGroup.start_time">1505165237000</longProp>
         <longProp name="ThreadGroup.end_time">1505165237000</longProp>
-        <boolProp name="ThreadGroup.scheduler">false</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.CardDAV.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="CardDAV HTTP Config" enabled="true">
@@ -210,8 +200,8 @@ vars.putObject(&quot;CardDAV&quot;,cd);</stringProp>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
           <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Zimbra;
 import com.zimbra.jmeter.Command;
-
-Zimbra cd = vars.getObject(&quot;CardDAV&quot;);
+//debug();
+Zimbra cd = new Zimbra(props,&quot;CardDAV&quot;);
 ArrayList commands = cd.getcommands();
 
 vars.putObject(&quot;COMMANDS&quot;,commands);
