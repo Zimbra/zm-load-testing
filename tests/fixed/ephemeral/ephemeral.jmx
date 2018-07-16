@@ -187,7 +187,7 @@ if (!props.get(&quot;HTTP.port&quot;).equals(&quot;&quot;) ) {
   url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;); 
 }
 url = url+&quot;/service/soap&quot;;
-log.info(url);
+//log.info(url);
 vars.put(&quot;URL&quot;,url);</stringProp>
           <stringProp name="BeanShellSampler.filename"></stringProp>
           <stringProp name="BeanShellSampler.parameters"></stringProp>
@@ -290,29 +290,44 @@ vars.put(&quot;URL&quot;,url);</stringProp>
           </RegexExtractor>
           <hashTree/>
         </hashTree>
-        <SoapSampler guiclass="SoapSamplerGui" testclass="SoapSampler" testname="SOAP_GetAccountInfoRequest" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetAccountInfoRequest" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-          <stringProp name="SoapSampler.URL_DATA">${URL}/GetAccountInfoRequest</stringProp>
-          <stringProp name="HTTPSamper.xml_data">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;
-  &lt;soap:Header&gt;
-    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;
-      &lt;userAgent xmlns=&quot;&quot; name=&quot;ZimbraWebClient - FF56 (Mac)&quot; version=&quot;8.8.5_GA_1890&quot;/&gt;
-      &lt;csrfToken xmlns=&quot;&quot;&gt;${CSRFToken}&lt;/csrfToken&gt;
-    &lt;/context&gt;
-  &lt;/soap:Header&gt;
-  &lt;soap:Body&gt;
-    &lt;GetAccountInfoRequest xmlns=&quot;urn:zimbraAccount&quot;&gt;
-      &lt;account by=&quot;name&quot;&gt;${USER}&lt;/account&gt;
-    &lt;/GetAccountInfoRequest&gt;
-  &lt;/soap:Body&gt;
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;userAgent xmlns=&quot;&quot; name=&quot;ZimbraWebClient - FF56 (Mac)&quot; version=&quot;8.8.5_GA_1890&quot;/&gt;&#xd;
+      &lt;csrfToken xmlns=&quot;&quot;&gt;${CSRFToken}&lt;/csrfToken&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;GetAccountInfoRequest xmlns=&quot;urn:zimbraAccount&quot;&gt;&#xd;
+      &lt;account by=&quot;name&quot;&gt;${USER}&lt;/account&gt;&#xd;
+    &lt;/GetAccountInfoRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
 &lt;/soap:Envelope&gt;</stringProp>
-          <stringProp name="SoapSampler.xml_data_file"></stringProp>
-          <stringProp name="SoapSampler.SOAP_ACTION"></stringProp>
-          <stringProp name="SoapSampler.SEND_SOAP_ACTION">false</stringProp>
-          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
-        </SoapSampler>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${URL}</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
         <hashTree/>
         <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug_Sampler" enabled="true">
           <boolProp name="displayJMeterProperties">true</boolProp>
