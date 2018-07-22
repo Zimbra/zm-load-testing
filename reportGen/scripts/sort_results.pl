@@ -76,7 +76,7 @@ for (@sorted_list) {
 
 @sorted_list2 = sort { $b->[0] <=> $a->[0] } @sample_list;
 for (@sorted_list2) {
-  if ($$_[4] eq "Next_Command" || $$_[4] eq "Command_Execution" || $$_[4] eq "START" || $$_[4] eq "Debug_Sampler") {}
+  if ($$_[4] eq "Next_Command" || $$_[4] eq "Command_Execution" || $$_[4] eq "START" || $$_[4] eq "Debug_Sampler" || $$_[4] eq "END") {}
 else {
     print fh "<httpSample t=\"$$_[0]\" lt=\"$$_[1]\" ts=\"$$_[2]\" s=\"$$_[3]\" lb=\"$$_[4]\" rc=\"$$_[5]\" rm=\"$$_[6]\" tn=\"$$_[7]\" dt=\"$$_[8]\" by=\"$$_[9]\" ng=\"$$_[10]\" na=\"$$_[11]\"/>\n";
 }
@@ -86,7 +86,10 @@ close fh;
 @sorted_list = sort { $b->[0] <=> $a->[0] } @sample_list;
 print sample_fh "<testResults>\n";
 for (@sorted_list) {
+  if ($$_[4] eq "Next_Command" || $$_[4] eq "Command_Execution" || $$_[4] eq "START" || $$_[4] eq "Debug_Sampler"|| $$_[4] eq "END") {}
+else {
   print sample_fh "<sample t=\"$$_[0]\" lt=\"$$_[1]\" ts=\"$$_[2]\" s=\"$$_[3]\" lb=\"$$_[4]\" rc=\"$$_[5]\" rm=\"$$_[6]\" tn=\"$$_[7]\" dt=\"$$_[8]\" by=\"$$_[9]\" ng=\"$$_[10]\" na=\"$$_[11]\"/>\n";
+}
 }
 print sample_fh "</testResults>\n";
 close sample_fh;
