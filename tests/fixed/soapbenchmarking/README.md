@@ -18,10 +18,11 @@ Login check the inbox periodically until a message is availble then perform a sp
 
 |Key                   |Value|Description                                 |
 |----------------------|-----|--------------------------------------------|
+|LOAD.duration         |60   |test duration in seconds                    |
+|LOAD.delay            |0    |test start delay in seconds                 |
 |LOAD.SOAP.users       |1    |concurrent users/threads to run during tests|
 |LOAD.SOAP.rampup      |0    |how long to spend ramping up threads        |
 |LOAD.SOAP.loopcount   |1    |how many times the user/thread repeats      |
-|LOAD.SOAP.duration    |60   |duration of the test in seconds             |
 
 # Example
 

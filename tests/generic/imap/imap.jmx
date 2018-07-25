@@ -145,16 +145,6 @@
         <boolProp name="ignoreFirstLine">false</boolProp>
       </CSVDataSet>
       <hashTree/>
-      <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="IMAP Setup" enabled="true">
-        <stringProp name="filename"></stringProp>
-        <stringProp name="parameters"></stringProp>
-        <boolProp name="resetInterpreter">false</boolProp>
-        <stringProp name="script">import com.zimbra.jmeter.Zimbra;
-//debug();
-Zimbra imap = new Zimbra(props,&quot;IMAP&quot;);
-vars.putObject(&quot;IMAP&quot;,imap);</stringProp>
-      </BeanShellPreProcessor>
-      <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="IMAP User" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -165,17 +155,17 @@ vars.putObject(&quot;IMAP&quot;,imap);</stringProp>
         <stringProp name="ThreadGroup.ramp_time">$(__P(LOAD.IMAP.rampup)}</stringProp>
         <longProp name="ThreadGroup.start_time">1497658914000</longProp>
         <longProp name="ThreadGroup.end_time">1497658914000</longProp>
-        <boolProp name="ThreadGroup.scheduler">false</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.IMAP.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
       </ThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
           <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 import com.zimbra.jmeter.Zimbra;
 import com.zimbra.jmeter.Command;
-
-Zimbra imap = vars.getObject(&quot;IMAP&quot;);
+//debug();
+Zimbra imap = new Zimbra(props,&quot;IMAP&quot;);
 ArrayList commands = imap.getcommands();
 
 vars.putObject(&quot;COMMANDS&quot;,commands);
@@ -214,11 +204,11 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
           <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
         </BeanShellSampler>
         <hashTree/>
-        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Run Commands" enabled="true">
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Run_Commands" enabled="true">
           <stringProp name="WhileController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
         </WhileController>
         <hashTree>
-          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Next Command" enabled="true">
+          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Next_Command" enabled="true">
             <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Command;
 
 ArrayList commands = vars.getObject(&quot;COMMANDS&quot;);
@@ -239,7 +229,7 @@ if (commands.size() == 0) {
             <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
           </BeanShellSampler>
           <hashTree/>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Command Execution" enabled="true">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Command_Execution" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
             <boolProp name="TransactionController.parent">false</boolProp>
           </TransactionController>
@@ -948,7 +938,7 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
           <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
         </BeanShellSampler>
         <hashTree/>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug_Sampler" enabled="true">
           <boolProp name="displayJMeterProperties">true</boolProp>
           <boolProp name="displayJMeterVariables">true</boolProp>
           <boolProp name="displaySystemProperties">false</boolProp>

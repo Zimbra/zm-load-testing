@@ -18,6 +18,10 @@ The following protocols currently have a basic level of support:
 
   [Exchange ActiveSync: Command Reference Protocol](https://msdn.microsoft.com/en-us/library/dd299441(v=exchg.80).aspx) [Exchange ActiveSync: HTTP Protocol](https://msdn.microsoft.com/en-us/library/dd299446(v=exchg.80).aspx) [Exchange ActiveSync: WAP Binary XML (WBXML) Algorithm](https://msdn.microsoft.com/en-us/library/dd299442(v=exchg.80).aspx) view [eas](eas/eas.md) for a list of currently suported commands in the jmx. This test depends on zm-sync-common.jar and assumes it is in src/build/jar.
   
+* ews
+
+  [Exchange Web Services](https://msdn.microsoft.com/en-us/library/office/bb409286(v=exchg.150).aspx) view [ews](ews/ews.md) for a list of currently suported commands in the jmx and additional requirements.
+  
 * imap
   
   [Internet Message Access Protocol](https://tools.ietf.org/html/rfc3501) view [imap](imap/imap.md) for a list of currently supported commands in the jmx. No SSL support.
@@ -51,6 +55,7 @@ For each of the supported generic tests they depend on a protocol
 |caldav   |CalDAV  |HTTP    |
 |carddav  |CardDAV |HTTP    |
 |eas      |EAS     |HTTP    |
+|ews      |EWS     |HTTP    |
 |imap     |IMAP    |IMAP    |
 |lmtp     |LMTP    |LMTP    |
 |pop      |POP     |POP     |
@@ -80,10 +85,14 @@ the HTTP protocol also has these additional properties
 
 |Key                           |Value|Description                                 |
 |------------------------------|-----|--------------------------------------------|
+|LOAD.duration                 |130  |test duration in seconds                    |
+|LOAD.delay                    |0    |test start delay in seconds                 |
 |LOAD.&lt;Test&gt;.users       |1    |concurrent users/threads to run during tests|
 |LOAD.&lt;Test&gt;.userduration|1    |user login duration in seconds              |
 |LOAD.&lt;Test&gt;.rampup      |0    |how long to spend ramping up threads        |
 |LOAD.&lt;Test&gt;.loopcount   |1    |how many times the user/thread repeats      |
+
+Note: use -1 loop count to loop until duration end. to avoid any delays in user command execution set userduration to 0.
 
 ## Profile
 

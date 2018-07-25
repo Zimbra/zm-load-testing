@@ -97,7 +97,7 @@ $ sh reportGen/scripts/loadtest.sh -t <test name> -w < workspace path>
 1. grab a copy of this repo
 
    ```
-   $ get clone https://github.com/Zimbra/zm-load-testing.git
+   $ git clone https://github.com/Zimbra/zm-load-testing.git
    $ cd zm-load-testing
    ```
 
