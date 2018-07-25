@@ -3235,7 +3235,6 @@ if (commands.size() == 0) {
                   <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
                   <boolProp name="HTTPSampler.monitor">false</boolProp>
                   <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-
                 </HTTPSamplerProxy>
                 <hashTree/>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="delete" enabled="true">
