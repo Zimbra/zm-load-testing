@@ -42,14 +42,14 @@ PROFILE.ZSOAP.type=sequence
 PROFILE.ZSOAP.sequence.1=AuthRequest(AUTHTYPE=user)
 PROFILE.ZSOAP.sequence.2=GetAccountInfoRequest
 PROFILE.ZSOAP.sequence.3=CreateFolderRequest
-PROFILE.ZSOAP.sequence.4=GetFolderRequest(PATH=/soaptest)
+PROFILE.ZSOAP.sequence.4=GetFolderRequest(PATH=FolderRequest)
 PROFILE.ZSOAP.sequence.5=SendMsgRequest
 PROFILE.ZSOAP.sequence.6=SearchRequest(SEARCHTYPE=message,SEARCH=*)
 PROFILE.ZSOAP.sequence.7=GetMsgRequest
 PROFILE.ZSOAP.sequence.8=SearchRequest(SEARCHTYPE=conversation,SEARCH=*)
 PROFILE.ZSOAP.sequence.9=MsgActionRequest
-PROFILE.ZSOAP.sequence.10=SearchRequest(SEARCHTYPE=appointment,SEARCH=*)
-PROFILE.ZSOAP.sequence.11=CreateAppointmentRequest
+PROFILE.ZSOAP.sequence.10=CreateAppointmentRequest
+PROFILE.ZSOAP.sequence.11=SearchRequest(SEARCHTYPE=appointment,SEARCH=*)
 PROFILE.ZSOAP.sequence.12=CreateTagRequest
 PROFILE.ZSOAP.sequence.13=GetTagRequest
 PROFILE.ZSOAP.sequence.14=MsgActionRequest(MSGACTIONTYPE=tag)

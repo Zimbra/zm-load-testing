@@ -2,7 +2,7 @@ PROFILE.ZSOAP.type=sequence
 PROFILE.ZSOAP.sequence.1=AuthRequest(AUTHTYPE=user)
 PROFILE.ZSOAP.sequence.2=GetAccountInfoRequest
 PROFILE.ZSOAP.sequence.3=CreateFolderRequest
-PROFILE.ZSOAP.sequence.4=GetFolderRequest(PATH=/soaptest)
+PROFILE.ZSOAP.sequence.4=GetFolderRequest(PATH=FolderRequest)
 PROFILE.ZSOAP.sequence.5=SendMsgRequest
 PROFILE.ZSOAP.sequence.6=SearchRequest(SEARCHTYPE=message,SEARCH=*)
 PROFILE.ZSOAP.sequence.7=GetMsgRequest
