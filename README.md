@@ -44,7 +44,7 @@ This contains zimbra jmeter load tests.
 ### Execution
 
 ```
-$ get clone https://github.com/Zimbra/zm-load-testing.git
+$ git clone https://github.com/Zimbra/zm-load-testing.git
 $ cd zm-load-testing
 $ ant
 ```
