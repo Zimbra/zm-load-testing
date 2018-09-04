@@ -47,7 +47,7 @@ PROFILE.ZSOAP.sequence.5=SendMsgRequest
 PROFILE.ZSOAP.sequence.6=SearchRequest(SEARCHTYPE=message,SEARCH=*)
 PROFILE.ZSOAP.sequence.7=GetMsgRequest
 PROFILE.ZSOAP.sequence.8=SearchRequest(SEARCHTYPE=conversation,SEARCH=*)
-PROFILE.ZSOAP.sequence.9=MsgActionRequest
+PROFILE.ZSOAP.sequence.9=MsgActionRequest(MSGACTIONTYPE=read)
 PROFILE.ZSOAP.sequence.10=CreateAppointmentRequest
 PROFILE.ZSOAP.sequence.11=SearchRequest(SEARCHTYPE=appointment,SEARCH=*)
 PROFILE.ZSOAP.sequence.12=CreateTagRequest
