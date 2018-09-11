@@ -726,7 +726,7 @@ if (commands.size() == 0) {
   &lt;soap:Body&gt;&#xd;
     &lt;CreateContactRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
       &lt;cn&gt;&#xd;
-        &lt;a n=&quot;${lastName}&quot;&gt;Testing&lt;/a&gt;&#xd;
+        &lt;a n=&quot;lastName&quot;&gt;Testing&lt;/a&gt;&#xd;
       &lt;/cn&gt;&#xd;
     &lt;/CreateContactRequest&gt;&#xd;
   &lt;/soap:Body&gt;&#xd;
