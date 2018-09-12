@@ -35,9 +35,7 @@
 | GetDataSourcesRequest                 | zimbraMail    |                   | AUTHTOKEN                      |                       |                                                                                                    |
 | GetDomainInfoRequest                  | zimbraAdmin   |                   |                                |                       | domain name "zimbra07.loadatest.synacor.com" \# need to fix                                        |
 | GetFilterRulesRequest                 | zimbraMail    |                   | AUTHTOKEN                      | FILTER                |                                                                                                    |
-| GetFolderRequest                      | zimbraMail    | PATH=SearchType   | AUTHTOKEN                      | FOLDER                | PATH defaults to "/inbox"
-                                                                                                                                     | SearchType=FolderRequest/SearchFolderRequest
-
+| GetFolderRequest                      | zimbraMail    | PATH=SearchType   | AUTHTOKEN                      | FOLDER                | PATH defaults to "/inbox" SearchType=FolderRequest/SearchFolderRequest                             |
 | GetFreeBusyRequest                    | zimbraMail    |                   | AUTHTOKEN                      |                       | s 1501570800000 e 1504249200000                                                                    |
 | GetInfoRequest                        | zimbraAccount |                   | AUTHTOKEN                      |                       |                                                                                                    |
 | GetMailboxRequest                     | zimbraAdmin   |                   | ADMINAUTHTOKEN,ACCOUNTID       |                       |                                                                                                    |
