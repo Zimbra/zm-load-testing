@@ -2734,7 +2734,9 @@ if (commands.size() == 0) {
   &lt;soap:Body&gt;&#xd;
     &lt;SaveDraftRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
       &lt;m su=&quot;Save Draft Test&quot;&gt;&#xd;
-        &lt;content&gt;Save Draft Request Test Case&lt;/content&gt;&#xd;
+         &lt;mp ct=&quot;text/plain&quot;&gt;&#xd;
+           &lt;content&gt;This is save message in draft from zsoap jmeter test&lt;/content&gt;&#xd;
+         &lt;/mp&gt;&#xd;
       &lt;/m&gt;&#xd;
     &lt;/SaveDraftRequest&gt;&#xd;
   &lt;/soap:Body&gt;&#xd;
