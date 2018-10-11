@@ -27,8 +27,8 @@ PROFILE.ZSOAP.sequence.25=SearchRequest(SEARCHTYPE=conversation,SEARCH=*)
 PROFILE.ZSOAP.sequence.26=SearchConvRequest
 PROFILE.ZSOAP.sequence.27=GetConvRequest
 PROFILE.ZSOAP.sequence.28=ConvActionRequest
-PROFILE.ZSOAP.sequence.29=GetFolderRequest
-PROFILE.ZSOAP.sequence.30=FolderActionRequest
+PROFILE.ZSOAP.sequence.29=GetFolderRequest(PATH=inbox)
+PROFILE.ZSOAP.sequence.30=FolderActionRequest(FOLDERACTIONTYPE=read)
 PROFILE.ZSOAP.sequence.31=CreateContactRequest
 PROFILE.ZSOAP.sequence.32=GetContactsRequest
 PROFILE.ZSOAP.sequence.33=ContactActionRequest
