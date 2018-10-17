@@ -71,8 +71,21 @@ PROFILE.ZSOAP.sequence.69=GetWhiteBlackListRequest
 PROFILE.ZSOAP.sequence.70=ModifyAccountRequest
 PROFILE.ZSOAP.sequence.71=RankingActionRequest
 PROFILE.ZSOAP.sequence.72=GetInfoRequest
-PROFILE.ZSOAP.sequence.73=SearchRequest(SEARCHTYPE=message,SEARCH="is:invite not from:${USER}")
+PROFILE.ZSOAP.sequence.73=SearchRequest(SEARCHTYPE=appointment,SEARCH="subject:Subject of meeting perf zsoap testing")
+PROFILE.ZSOAP.sequence.74=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox")
+PROFILE.ZSOAP.sequence.75=SearchRequest(SEARCHTYPE=message,SEARCH="is:read")
+PROFILE.ZSOAP.sequence.76=SearchRequest(SEARCHTYPE=message,SEARCH="subject:Hello World larger:50b")
+PROFILE.ZSOAP.sequence.77=SearchRequest(SEARCHTYPE=message,SEARCH="to:${TOUSER}")
+PROFILE.ZSOAP.sequence.78=SearchRequest(SEARCHTYPE=message,SEARCH="content:This is test message from zsoap jmeter test to:${TOUSER}")
+PROFILE.ZSOAP.sequence.79=SearchRequest(SEARCHTYPE=message,SEARCH="subject:*ello World")
+PROFILE.ZSOAP.sequence.80=SearchRequest(SEARCHTYPE=message,SEARCH="to:${TOUSER} OR in:calendar")
+PROFILE.ZSOAP.sequence.81=SearchRequest(SEARCHTYPE=message,SEARCH="to:${TOUSER} AND in:sent")
+PROFILE.ZSOAP.sequence.82=SearchRequest(SEARCHTYPE=conversation,SEARCH="in:inbox")
+PROFILE.ZSOAP.sequence.83=SearchRequest(SEARCHTYPE=conversation,SEARCH="from:user*")
+PROFILE.ZSOAP.sequence.84=SearchRequest(SEARCHTYPE="conversation",SEARCH="subject:Hello World OR subject:Subject of meeting perf zsoap testing")
+PROFILE.ZSOAP.sequence.85=SearchRequest(SEARCHTYPE="appointment,message",SEARCH="in:Calendar")
+PROFILE.ZSOAP.sequence.86=SearchRequest(SEARCHTYPE=message,SEARCH="is:invite not from:${USER}")
 # This request will fail unless the previous search found a message which
 # is probably not likely
-PROFILE.ZSOAP.sequence.74=SendInviteReplyRequest
-PROFILE.ZSOAP.sequence.75=EndSessionRequest
+PROFILE.ZSOAP.sequence.87=SendInviteReplyRequest
+PROFILE.ZSOAP.sequence.88=EndSessionRequest
