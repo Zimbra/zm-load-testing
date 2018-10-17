@@ -211,7 +211,10 @@ vars.put(&quot;soaptest_SearchFolderName&quot;,&quot;soapsearchtest_${__Random(1
 Date now = new Date();
 Date nowPlus30Minutes = new Date(now.getTime() + 30 * 60 * 1000);
 SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyyMMdd&apos;T&apos;hhmmss&quot;);
-vars.put(&quot;endDate&quot;,sdf.format(nowPlus30Minutes));</stringProp>
+vars.put(&quot;endDate&quot;,sdf.format(nowPlus30Minutes));
+vars.put(&quot;soaptest_folderNameRenamed&quot;, &quot;soaptest_renamed_${__Random(1,10000000)}&quot;);
+vars.put(&quot;soaptest_tagNameRenamed&quot;, &quot;soaptag_renamed_${__Random(1,10000000)}&quot;);
+vars.put(&quot;soaptest_signName&quot;, &quot;soaptest_sign_${__Random(1,10000000)}&quot;);</stringProp>
           <stringProp name="BeanShellSampler.filename"></stringProp>
           <stringProp name="BeanShellSampler.parameters"></stringProp>
           <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
@@ -341,8 +344,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -351,8 +352,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="AuthRequest" enabled="true">
@@ -386,8 +388,6 @@ if (commands.size() == 0) {
                   </elementProp>
                   <stringProp name="HTTPSampler.domain"></stringProp>
                   <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                   <stringProp name="HTTPSampler.protocol"></stringProp>
                   <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                   <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -396,7 +396,6 @@ if (commands.size() == 0) {
                   <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <boolProp name="HTTPSampler.monitor">false</boolProp>
                   <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
                   <stringProp name="HTTPSampler.connect_timeout"></stringProp>
                   <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -442,8 +441,6 @@ if (commands.size() == 0) {
                   </elementProp>
                   <stringProp name="HTTPSampler.domain"></stringProp>
                   <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                   <stringProp name="HTTPSampler.protocol"></stringProp>
                   <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                   <stringProp name="HTTPSampler.path">${ADMIN}</stringProp>
@@ -452,8 +449,9 @@ if (commands.size() == 0) {
                   <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <boolProp name="HTTPSampler.monitor">false</boolProp>
                   <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="ADMINAUTHTOKEN" enabled="true">
@@ -494,8 +492,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -504,8 +500,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BrowseRequest" enabled="true">
@@ -532,8 +529,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -542,8 +537,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CheckSpellingRequest" enabled="true">
@@ -570,8 +566,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -580,8 +574,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ContactActionRequest" enabled="true">
@@ -610,8 +605,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -620,17 +613,22 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ConvActionRequest" enabled="true">
-                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                  <collectionProp name="Arguments.arguments">
-                    <elementProp name="" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+              <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="ConvActionRequest" enabled="true">
+                <stringProp name="SwitchController.value">${CONVACTIONTYPE}</stringProp>
+              </SwitchController>
+              <hashTree>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="read" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
   &lt;soap:Header&gt;&#xd;
     &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
       &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
@@ -644,26 +642,143 @@ if (commands.size() == 0) {
     &lt;/ConvActionRequest&gt;&#xd;
   &lt;/soap:Body&gt;&#xd;
 &lt;/soap:Envelope&gt;</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                </elementProp>
-                <stringProp name="HTTPSampler.domain"></stringProp>
-                <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
-                <stringProp name="HTTPSampler.protocol"></stringProp>
-                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                <stringProp name="HTTPSampler.path">${URL}</stringProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
-                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              </HTTPSamplerProxy>
-              <hashTree/>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain"></stringProp>
+                  <stringProp name="HTTPSampler.port"></stringProp>
+                  <stringProp name="HTTPSampler.protocol"></stringProp>
+                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                </HTTPSamplerProxy>
+                <hashTree/>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="delete" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;ConvActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;action id=&quot;${CONVERSATION}&quot; op=&quot;delete&quot;/&gt;&#xd;
+    &lt;/ConvActionRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain"></stringProp>
+                  <stringProp name="HTTPSampler.port"></stringProp>
+                  <stringProp name="HTTPSampler.protocol"></stringProp>
+                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                </HTTPSamplerProxy>
+                <hashTree/>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="trash" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;ConvActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;action id=&quot;${CONVERSATION}&quot; op=&quot;trash&quot;/&gt;&#xd;
+    &lt;/ConvActionRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain"></stringProp>
+                  <stringProp name="HTTPSampler.port"></stringProp>
+                  <stringProp name="HTTPSampler.protocol"></stringProp>
+                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                </HTTPSamplerProxy>
+                <hashTree/>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="move" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;ConvActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;action id=&quot;${CONVERSATION}&quot; op=&quot;move&quot; l=&quot;${FOLDER}&quot;/&gt;&#xd;
+    &lt;/ConvActionRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain"></stringProp>
+                  <stringProp name="HTTPSampler.port"></stringProp>
+                  <stringProp name="HTTPSampler.protocol"></stringProp>
+                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                </HTTPSamplerProxy>
+                <hashTree/>
+              </hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CreateAppointmentRequest" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -686,7 +801,7 @@ if (commands.size() == 0) {
             &lt;or a=&quot;${USER}@${__P(HTTP.domain)}&quot;&gt;&lt;/or&gt;&#xd;
             &lt;at a=&quot;${TOUSER}@${__P(HTTP.domain)}&quot; rsvp=&quot;1&quot; ptst=&quot;NE&quot; role=&quot;REQ&quot;&gt;&lt;/at&gt;&#xd;
             &lt;s d=&quot;${__time(yyyyMMdd&apos;T&apos;hhmmss)}&quot;&gt;&lt;/s&gt;&#xd;
-            &lt;e d=&quot;${endDate}&quot;&gt;&lt;/e&gt;&#xd;
+	    &lt;e d=&quot;${endDate}&quot;&gt;&lt;/e&gt;&#xd;
           &lt;/comp&gt;&#xd;
         &lt;/inv&gt;&#xd;
         &lt;e t=&quot;t&quot; a=&quot;${TOUSER}@${__P(HTTP.domain)}&quot;&gt;&lt;/e&gt;&#xd;
@@ -704,8 +819,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -714,8 +827,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CreateContactRequest" enabled="true">
@@ -746,8 +860,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -756,8 +868,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="CONTACT" enabled="true">
@@ -797,8 +910,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -807,8 +918,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="FOLDER" enabled="true">
@@ -848,8 +960,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -858,8 +968,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="FOLDER" enabled="true">
@@ -873,6 +984,48 @@ if (commands.size() == 0) {
                 </XPathExtractor>
                 <hashTree/>
               </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CreateSignatureRequest" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;CreateSignatureRequest xmlns=&quot;urn:zimbraAccount&quot; requestId=&quot;0&quot;&gt;&#xd;
+     &lt;signature name=&quot;${soaptest_signName}&quot;&gt;&#xd;
+    		&lt;content type=&quot;text/plain&quot;&gt;test signature&lt;/content&gt;&#xd;
+    		&lt;content type=&quot;text/html&quot;&gt;&lt;/content&gt;&#xd;
+    &lt;/signature&gt;&#xd;
+    &lt;/CreateSignatureRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain"></stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.protocol"></stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CreateTagRequest" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -899,8 +1052,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -909,8 +1060,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="TAG" enabled="true">
@@ -950,8 +1102,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -960,8 +1110,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="WAITSETID" enabled="true">
@@ -1013,8 +1164,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -1023,8 +1172,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DiscoverRightsRequest" enabled="true">
@@ -1053,8 +1203,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -1063,8 +1211,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DismissCalendarItemAlarmRequest" enabled="true">
@@ -1091,8 +1240,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -1101,8 +1248,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EndSessionRequest" enabled="true">
@@ -1129,8 +1277,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -1139,8 +1285,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="FlushCacheRequest" enabled="true">
@@ -1171,8 +1318,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${ADMIN}</stringProp>
@@ -1181,8 +1326,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="FolderActionRequest" enabled="true">
@@ -1215,8 +1361,6 @@ if (commands.size() == 0) {
                   </elementProp>
                   <stringProp name="HTTPSampler.domain"></stringProp>
                   <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                   <stringProp name="HTTPSampler.protocol"></stringProp>
                   <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                   <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -1225,8 +1369,9 @@ if (commands.size() == 0) {
                   <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <boolProp name="HTTPSampler.monitor">false</boolProp>
                   <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree/>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="delete" enabled="true">
@@ -1255,8 +1400,6 @@ if (commands.size() == 0) {
                   </elementProp>
                   <stringProp name="HTTPSampler.domain"></stringProp>
                   <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                   <stringProp name="HTTPSampler.protocol"></stringProp>
                   <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                   <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -1265,8 +1408,204 @@ if (commands.size() == 0) {
                   <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <boolProp name="HTTPSampler.monitor">false</boolProp>
                   <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                </HTTPSamplerProxy>
+                <hashTree/>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="empty" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;FolderActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;action op=&quot;empty&quot; id=&quot;${FOLDER}&quot; recursive=&quot;false&quot;/&gt;&#xd;
+    &lt;/FolderActionRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain"></stringProp>
+                  <stringProp name="HTTPSampler.port"></stringProp>
+                  <stringProp name="HTTPSampler.protocol"></stringProp>
+                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                </HTTPSamplerProxy>
+                <hashTree/>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="color" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;FolderActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;action op=&quot;color&quot; id=&quot;${FOLDER}&quot; color=&quot;1&quot;/&gt;&#xd;
+    &lt;/FolderActionRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain"></stringProp>
+                  <stringProp name="HTTPSampler.port"></stringProp>
+                  <stringProp name="HTTPSampler.protocol"></stringProp>
+                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                </HTTPSamplerProxy>
+                <hashTree/>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="move" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;FolderActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;action op=&quot;move&quot; id=&quot;${FOLDER}&quot; l=&quot;5&quot;/&gt;&#xd;
+    &lt;/FolderActionRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain"></stringProp>
+                  <stringProp name="HTTPSampler.port"></stringProp>
+                  <stringProp name="HTTPSampler.protocol"></stringProp>
+                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                </HTTPSamplerProxy>
+                <hashTree/>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="trash" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;FolderActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;action op=&quot;trash&quot; id=&quot;${FOLDER}&quot;/&gt;&#xd;
+    &lt;/FolderActionRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain"></stringProp>
+                  <stringProp name="HTTPSampler.port"></stringProp>
+                  <stringProp name="HTTPSampler.protocol"></stringProp>
+                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                </HTTPSamplerProxy>
+                <hashTree/>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rename" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;FolderActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;action op=&quot;rename&quot; id=&quot;${FOLDER}&quot; name=&quot;${soaptest_folderNameRenamed}&quot;/&gt;&#xd;
+    &lt;/FolderActionRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain"></stringProp>
+                  <stringProp name="HTTPSampler.port"></stringProp>
+                  <stringProp name="HTTPSampler.protocol"></stringProp>
+                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree/>
               </hashTree>
@@ -1296,8 +1635,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${ADMIN}</stringProp>
@@ -1306,8 +1643,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="ACCOUNTID" enabled="true">
@@ -1347,8 +1685,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -1357,8 +1693,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetAggregateQuotaUsageOnServerRequest" enabled="true">
@@ -1385,8 +1722,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${ADMIN}</stringProp>
@@ -1395,8 +1730,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetAppointmentRequest" enabled="true">
@@ -1423,8 +1759,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -1433,8 +1767,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetAvailableCsvFormatsRequest" enabled="true">
@@ -1461,8 +1796,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -1471,8 +1804,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetAvailableLocalesRequest" enabled="true">
@@ -1499,8 +1833,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -1509,8 +1841,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetAvailableSkinsRequest" enabled="true">
@@ -1537,8 +1870,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -1547,8 +1878,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetContactsRequest" enabled="true">
@@ -1575,8 +1907,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -1585,8 +1915,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetConvRequest" enabled="true">
@@ -1615,8 +1946,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -1625,8 +1954,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetCosRequest" enabled="true">
@@ -1655,8 +1985,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${ADMIN}</stringProp>
@@ -1665,8 +1993,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetDataSourcesRequest" enabled="true">
@@ -1693,8 +2022,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${ADMIN}</stringProp>
@@ -1703,8 +2030,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetDomainInfoRequest" enabled="true">
@@ -1733,8 +2061,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${ADMIN}</stringProp>
@@ -1743,8 +2069,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetFilterRulesRequest" enabled="true">
@@ -1771,8 +2098,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -1781,8 +2106,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="FILTER" enabled="true">
@@ -1826,8 +2152,6 @@ if (commands.size() == 0) {
                   </elementProp>
                   <stringProp name="HTTPSampler.domain"></stringProp>
                   <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                   <stringProp name="HTTPSampler.protocol"></stringProp>
                   <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                   <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -1836,8 +2160,9 @@ if (commands.size() == 0) {
                   <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <boolProp name="HTTPSampler.monitor">false</boolProp>
                   <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree/>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SearchFolderRequest" enabled="true">
@@ -1874,8 +2199,9 @@ if (commands.size() == 0) {
                   <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <boolProp name="HTTPSampler.monitor">false</boolProp>
                   <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree/>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="inbox" enabled="true">
@@ -1912,8 +2238,9 @@ if (commands.size() == 0) {
                   <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <boolProp name="HTTPSampler.monitor">false</boolProp>
                   <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="FOLDER" enabled="true">
@@ -1952,8 +2279,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -1962,8 +2287,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetInfoRequest" enabled="true">
@@ -1990,8 +2316,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2000,8 +2324,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetMailboxRequest" enabled="true">
@@ -2030,8 +2355,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${ADMIN}</stringProp>
@@ -2040,8 +2363,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetMailboxMetadataRequest" enabled="true">
@@ -2070,8 +2394,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2080,8 +2402,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetMiniCalRequest" enabled="true">
@@ -2108,8 +2431,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2118,8 +2439,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetMsgRequest" enabled="true">
@@ -2148,8 +2470,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2158,8 +2478,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetPrefsRequest" enabled="true">
@@ -2186,8 +2507,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2196,8 +2515,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetRightsRequest" enabled="true">
@@ -2224,8 +2544,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2234,8 +2552,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetShareInfoRequest" enabled="true">
@@ -2262,8 +2581,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2272,8 +2589,46 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree/>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetSignaturesRequest" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;GetSignaturesRequest xmlns=&quot;urn:zimbraAccount&quot; /&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain"></stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.protocol"></stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetTagRequest" enabled="true">
@@ -2300,8 +2655,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2310,8 +2663,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetWhiteBlackListRequest" enabled="true">
@@ -2338,8 +2692,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2348,8 +2700,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ModifyAccountRequest" enabled="true">
@@ -2378,8 +2731,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${ADMIN}</stringProp>
@@ -2388,8 +2739,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ModifyContactRequest" enabled="true">
@@ -2420,8 +2772,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2430,8 +2780,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ModifyFilterRulesRequest" enabled="true">
@@ -2469,8 +2820,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2479,8 +2828,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ModifyPrefsRequest" enabled="true">
@@ -2509,8 +2859,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2519,8 +2867,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="MsgActionRequest" enabled="true">
@@ -2553,8 +2902,6 @@ if (commands.size() == 0) {
                   </elementProp>
                   <stringProp name="HTTPSampler.domain"></stringProp>
                   <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                   <stringProp name="HTTPSampler.protocol"></stringProp>
                   <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                   <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2563,8 +2910,9 @@ if (commands.size() == 0) {
                   <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <boolProp name="HTTPSampler.monitor">false</boolProp>
                   <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree/>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="read" enabled="true">
@@ -2593,8 +2941,6 @@ if (commands.size() == 0) {
                   </elementProp>
                   <stringProp name="HTTPSampler.domain"></stringProp>
                   <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                   <stringProp name="HTTPSampler.protocol"></stringProp>
                   <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                   <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2603,8 +2949,9 @@ if (commands.size() == 0) {
                   <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <boolProp name="HTTPSampler.monitor">false</boolProp>
                   <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree/>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="tag" enabled="true">
@@ -2633,8 +2980,6 @@ if (commands.size() == 0) {
                   </elementProp>
                   <stringProp name="HTTPSampler.domain"></stringProp>
                   <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                   <stringProp name="HTTPSampler.protocol"></stringProp>
                   <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                   <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2643,8 +2988,204 @@ if (commands.size() == 0) {
                   <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <boolProp name="HTTPSampler.monitor">false</boolProp>
                   <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                </HTTPSamplerProxy>
+                <hashTree/>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="trash" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;MsgActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;action id=&quot;${MESSAGE}&quot; op=&quot;trash&quot;/&gt;&#xd;
+    &lt;/MsgActionRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain"></stringProp>
+                  <stringProp name="HTTPSampler.port"></stringProp>
+                  <stringProp name="HTTPSampler.protocol"></stringProp>
+                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                </HTTPSamplerProxy>
+                <hashTree/>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="move" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;MsgActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;action id=&quot;${MESSAGE}&quot; op=&quot;move&quot; l=&quot;${FOLDER}&quot;/&gt;&#xd;
+    &lt;/MsgActionRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain"></stringProp>
+                  <stringProp name="HTTPSampler.port"></stringProp>
+                  <stringProp name="HTTPSampler.protocol"></stringProp>
+                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                </HTTPSamplerProxy>
+                <hashTree/>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="unread" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;MsgActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;action id=&quot;${MESSAGE}&quot; op=&quot;!read&quot;/&gt;&#xd;
+    &lt;/MsgActionRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain"></stringProp>
+                  <stringProp name="HTTPSampler.port"></stringProp>
+                  <stringProp name="HTTPSampler.protocol"></stringProp>
+                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                </HTTPSamplerProxy>
+                <hashTree/>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="flag" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;MsgActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;action id=&quot;${MESSAGE}&quot; op=&quot;flag&quot;/&gt;&#xd;
+    &lt;/MsgActionRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain"></stringProp>
+                  <stringProp name="HTTPSampler.port"></stringProp>
+                  <stringProp name="HTTPSampler.protocol"></stringProp>
+                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                </HTTPSamplerProxy>
+                <hashTree/>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="unflag" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;MsgActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;action id=&quot;${MESSAGE}&quot; op=&quot;!flag&quot;/&gt;&#xd;
+    &lt;/MsgActionRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain"></stringProp>
+                  <stringProp name="HTTPSampler.port"></stringProp>
+                  <stringProp name="HTTPSampler.protocol"></stringProp>
+                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree/>
               </hashTree>
@@ -2672,8 +3213,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2682,8 +3221,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="RankingActionRequest" enabled="true">
@@ -2712,8 +3252,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2722,8 +3260,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SaveDraftRequest" enabled="true">
@@ -2756,8 +3295,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2766,8 +3303,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SearchConvRequest" enabled="true">
@@ -2796,8 +3334,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2806,8 +3342,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="SearchRequest" enabled="true">
@@ -2840,8 +3377,6 @@ if (commands.size() == 0) {
                   </elementProp>
                   <stringProp name="HTTPSampler.domain"></stringProp>
                   <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                   <stringProp name="HTTPSampler.protocol"></stringProp>
                   <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                   <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2850,8 +3385,9 @@ if (commands.size() == 0) {
                   <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <boolProp name="HTTPSampler.monitor">false</boolProp>
                   <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="COMPNUM" enabled="true">
@@ -2901,8 +3437,6 @@ if (commands.size() == 0) {
                   </elementProp>
                   <stringProp name="HTTPSampler.domain"></stringProp>
                   <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                   <stringProp name="HTTPSampler.protocol"></stringProp>
                   <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                   <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2911,8 +3445,9 @@ if (commands.size() == 0) {
                   <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <boolProp name="HTTPSampler.monitor">false</boolProp>
                   <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="APPOINTMENT" enabled="true">
@@ -2952,8 +3487,6 @@ if (commands.size() == 0) {
                   </elementProp>
                   <stringProp name="HTTPSampler.domain"></stringProp>
                   <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                   <stringProp name="HTTPSampler.protocol"></stringProp>
                   <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                   <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -2962,8 +3495,9 @@ if (commands.size() == 0) {
                   <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <boolProp name="HTTPSampler.monitor">false</boolProp>
                   <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="CONVERSATION" enabled="true">
@@ -3002,8 +3536,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -3012,8 +3544,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SendInviteReplyRequest" enabled="true">
@@ -3040,8 +3573,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -3050,8 +3581,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SendMsgRequest" enabled="true">
@@ -3086,8 +3618,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -3096,8 +3626,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SetCustomMetadataRequest" enabled="true">
@@ -3128,8 +3659,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -3138,8 +3667,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SetMailboxMetadataRequest" enabled="true">
@@ -3170,8 +3700,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -3180,8 +3708,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SnoozeCalendarItemAlarmRequest" enabled="true">
@@ -3208,8 +3737,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -3218,8 +3745,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SyncGalRequest" enabled="true">
@@ -3246,8 +3774,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -3256,8 +3782,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="GALTOKEN" enabled="true">
@@ -3297,8 +3824,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -3307,8 +3832,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="SYNCTOKEN" enabled="true">
@@ -3354,8 +3880,6 @@ if (commands.size() == 0) {
                   </elementProp>
                   <stringProp name="HTTPSampler.domain"></stringProp>
                   <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                   <stringProp name="HTTPSampler.protocol"></stringProp>
                   <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                   <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -3364,8 +3888,9 @@ if (commands.size() == 0) {
                   <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <boolProp name="HTTPSampler.monitor">false</boolProp>
                   <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree/>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="delete" enabled="true">
@@ -3394,8 +3919,6 @@ if (commands.size() == 0) {
                   </elementProp>
                   <stringProp name="HTTPSampler.domain"></stringProp>
                   <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                   <stringProp name="HTTPSampler.protocol"></stringProp>
                   <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                   <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -3404,8 +3927,48 @@ if (commands.size() == 0) {
                   <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                   <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <boolProp name="HTTPSampler.monitor">false</boolProp>
                   <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                </HTTPSamplerProxy>
+                <hashTree/>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rename" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;TagActionRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;action id=&quot;${TAG}&quot; op=&quot;rename&quot; name=&quot;${soaptest_tagNameRenamed}&quot;/&gt;&#xd;
+    &lt;/TagActionRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain"></stringProp>
+                  <stringProp name="HTTPSampler.port"></stringProp>
+                  <stringProp name="HTTPSampler.protocol"></stringProp>
+                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree/>
               </hashTree>
@@ -3433,8 +3996,6 @@ if (commands.size() == 0) {
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${URL}</stringProp>
@@ -3443,8 +4004,9 @@ if (commands.size() == 0) {
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.monitor">false</boolProp>
                 <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
