@@ -1,0 +1,12 @@
+PROFILE.ZSOAP.type=sequence
+PROFILE.ZSOAP.sequence.1=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.2=AuthRequest(AUTHTYPE=admin)
+PROFILE.ZSOAP.sequence.3=GetAccountRequest
+PROFILE.ZSOAP.sequence.4=ModifyAccountRequest
+PROFILE.ZSOAP.sequence.5=GetCosRequest
+PROFILE.ZSOAP.sequence.6=GetAggregateQuotaUsageOnServerRequest
+PROFILE.ZSOAP.sequence.7=FlushCacheRequest
+PROFILE.ZSOAP.sequence.8=GetDataSourcesRequest
+PROFILE.ZSOAP.sequence.9=GetMailboxRequest
+PROFILE.ZSOAP.sequence.10=GetDataSourcesRequest
+
