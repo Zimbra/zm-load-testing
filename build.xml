@@ -58,6 +58,8 @@
     <antcall target="generic-pop"/>
     <antcall target="generic-smtp"/>
     <antcall target="generic-zsoap"/>
+    <antcall target="generic-zsoap-all"/>
+    <antcall target="generic-zsoap-perf"/>
     <antcall target="generic-mix"/>
   </target>
   <target name="fixed">
@@ -184,6 +186,30 @@
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/generic/zsoap/load.prop"/>
       <jmeterarg value="-q${basedir}/tests/generic/zsoap/profiles/basic.prop"/>
+    </jmeter>
+  </target>
+  <target name="generic-zsoap-all" depends="src,logs,generic-zsoap">
+    <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/generic/zsoap/zsoap.jmx"
+            jmeterlogfile="${logs}/generic-zsoap-jmeter.log"
+            resultlog="${logs}/generic-zsoap-requests.log">
+      <property name="ACCOUNTS.csv" value="${users}"/>
+      <property name="user.classpath" value="${zjmeter}"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+      <jmeterarg value="-q${basedir}/tests/generic/zsoap/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/generic/zsoap/profiles/test.prop"/>
+    </jmeter>
+  </target>
+  <target name="generic-zsoap-perf" depends="src,logs,generic-zsoap-all">
+    <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/generic/zsoap/zsoap.jmx"
+            jmeterlogfile="${logs}/generic-zsoap-jmeter.log"
+            resultlog="${logs}/generic-zsoap-requests.log">
+      <property name="ACCOUNTS.csv" value="${users}"/>
+      <property name="user.classpath" value="${zjmeter}"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+      <jmeterarg value="-q${basedir}/tests/generic/zsoap/load_perf.prop"/>
+      <jmeterarg value="-q${basedir}/tests/generic/zsoap/profiles/test_perf.prop"/>
     </jmeter>
   </target>
   <target name="generic-mix" depends="src,logs">

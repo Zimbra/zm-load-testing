@@ -287,6 +287,21 @@ if (commands.size() &gt; 0) {
       vars.put(&quot;TAGACTIONTYPE&quot;,&quot;read&quot;);
     }
   }
+  if (c.getName().equals(&quot;MsgActionRequest&quot;)) {
+    if (c.getArg(&quot;MSGACTIONTYPE&quot;) == null) {
+      vars.put(&quot;MSGACTIONTYPE&quot;,&quot;read&quot;);
+    }
+  }
+  if (c.getName().equals(&quot;ConvActionRequest&quot;)) {
+    if (c.getArg(&quot;CONVACTIONTYPE&quot;) == null) {
+      vars.put(&quot;CONVACTIONTYPE&quot;,&quot;read&quot;);
+    }
+  }
+  if (c.getName().equals(&quot;SearchRequest&quot;)) {
+    if (c.getArg(&quot;SEARCHTYPE&quot;) == null) {
+      vars.put(&quot;SEARCHTYPE&quot;,&quot;message&quot;);
+    }
+  }
   //log.info(vars.get(&quot;COMMAND&quot;));
 }
 if (commands.size() == 0) {
