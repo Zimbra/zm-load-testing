@@ -1,4 +1,4 @@
-LOAD.duration=130
+LOAD.duration=600
 LOAD.delay=5
 LOAD.ZSOAP.users=1
 LOAD.ZSOAP.userduration=200
