@@ -184,7 +184,7 @@
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
-      <jmeterarg value="-q${basedir}/tests/generic/zsoap/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/generic/zsoap/load_basic.prop"/>
       <jmeterarg value="-q${basedir}/tests/generic/zsoap/profiles/basic.prop"/>
     </jmeter>
   </target>
