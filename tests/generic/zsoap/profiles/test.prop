@@ -6,19 +6,19 @@ PROFILE.ZSOAP.sequence.4=CreateTagRequest
 PROFILE.ZSOAP.sequence.5=ModifyFilterRulesRequest
 PROFILE.ZSOAP.sequence.6=CreateContactRequest
 PROFILE.ZSOAP.sequence.7=CreateFolderRequest
-PROFILE.ZSOAP.sequence.8=CreateSignatureRequest
-PROFILE.ZSOAP.sequence.9=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox")
-PROFILE.ZSOAP.sequence.10=SearchRequest(SEARCHTYPE=appointment,SEARCH="in:Calendar")
-PROFILE.ZSOAP.sequence.11=GetMsgRequest
-PROFILE.ZSOAP.sequence.12=GetAppointmentRequest
-PROFILE.ZSOAP.sequence.13=MsgActionRequest(MSGACTIONTYPE=read)
-PROFILE.ZSOAP.sequence.14=MsgActionRequest(MSGACTIONTYPE=flag)
-PROFILE.ZSOAP.sequence.15=MsgActionRequest(MSGACTIONTYPE=tag)
-PROFILE.ZSOAP.sequence.16=MsgActionRequest(MSGACTIONTYPE=unread)
-PROFILE.ZSOAP.sequence.17=MsgActionRequest(MSGACTIONTYPE=trash)
-PROFILE.ZSOAP.sequence.18=MsgActionRequest(MSGACTIONTYPE=unflag)
-PROFILE.ZSOAP.sequence.19=MsgActionRequest(MSGACTIONTYPE=move)
-PROFILE.ZSOAP.sequence.20=SearchRequest(SEARCHTYPE=conversation,SEARCH="in:inbox")
+PROFILE.ZSOAP.sequence.8=SearchRequest(SEARCHTYPE=message,SEARCH="not is:invite")
+PROFILE.ZSOAP.sequence.9=SearchRequest(SEARCHTYPE=appointment,SEARCH="in:Calendar")
+PROFILE.ZSOAP.sequence.10=GetMsgRequest
+PROFILE.ZSOAP.sequence.11=GetAppointmentRequest
+PROFILE.ZSOAP.sequence.12=MsgActionRequest(MSGACTIONTYPE=read)
+PROFILE.ZSOAP.sequence.13=MsgActionRequest(MSGACTIONTYPE=flag)
+PROFILE.ZSOAP.sequence.14=MsgActionRequest(MSGACTIONTYPE=tag)
+PROFILE.ZSOAP.sequence.15=MsgActionRequest(MSGACTIONTYPE=unread)
+PROFILE.ZSOAP.sequence.16=MsgActionRequest(MSGACTIONTYPE=trash)
+PROFILE.ZSOAP.sequence.17=MsgActionRequest(MSGACTIONTYPE=unflag)
+PROFILE.ZSOAP.sequence.18=MsgActionRequest(MSGACTIONTYPE=move)
+PROFILE.ZSOAP.sequence.19=MsgActionRequest(MSGACTIONTYPE=read)
+PROFILE.ZSOAP.sequence.20=SearchRequest(SEARCHTYPE=conversation,SEARCH="not is:invite")
 PROFILE.ZSOAP.sequence.21=SearchConvRequest
 PROFILE.ZSOAP.sequence.22=GetTagRequest
 PROFILE.ZSOAP.sequence.23=GetFilterRulesRequest
@@ -26,11 +26,11 @@ PROFILE.ZSOAP.sequence.24=GetContactsRequest
 PROFILE.ZSOAP.sequence.25=ConvActionRequest(CONVACTIONTYPE=read)
 PROFILE.ZSOAP.sequence.26=ConvActionRequest(CONVACTIONTYPE=trash)
 PROFILE.ZSOAP.sequence.27=ConvActionRequest(CONVACTIONTYPE=move)
-PROFILE.ZSOAP.sequence.28=SetCustomMetadataRequest
-PROFILE.ZSOAP.sequence.29=ContactActionRequest
-PROFILE.ZSOAP.sequence.30=ModifyContactRequest
-PROFILE.ZSOAP.sequence.31=GetMiniCalRequest
-PROFILE.ZSOAP.sequence.32=GetAccountInfoRequest
+PROFILE.ZSOAP.sequence.28=ConvActionRequest(CONVACTIONTYPE=read)
+PROFILE.ZSOAP.sequence.29=SetCustomMetadataRequest
+PROFILE.ZSOAP.sequence.30=ContactActionRequest
+PROFILE.ZSOAP.sequence.31=ModifyContactRequest
+PROFILE.ZSOAP.sequence.32=GetMiniCalRequest
 PROFILE.ZSOAP.sequence.33=ApplyFilterRulesRequest
 PROFILE.ZSOAP.sequence.34=CheckSpellingRequest
 PROFILE.ZSOAP.sequence.35=SetMailboxMetadataRequest
@@ -39,61 +39,52 @@ PROFILE.ZSOAP.sequence.37=GetAvailableLocalesRequest
 PROFILE.ZSOAP.sequence.38=AutoCompleteRequest
 PROFILE.ZSOAP.sequence.39=GetAvailableSkinsRequest
 PROFILE.ZSOAP.sequence.40=BrowseRequest
-PROFILE.ZSOAP.sequence.41=GetPrefsRequest
-PROFILE.ZSOAP.sequence.42=SnoozeCalendarItemAlarmRequest
-PROFILE.ZSOAP.sequence.43=NoOpRequest
-PROFILE.ZSOAP.sequence.44=SaveDraftRequest
-PROFILE.ZSOAP.sequence.45=ModifyPrefsRequest
-PROFILE.ZSOAP.sequence.46=DiscoverRightsRequest
-PROFILE.ZSOAP.sequence.47=GetMailboxMetadataRequest
-PROFILE.ZSOAP.sequence.48=GetShareInfoRequest
-PROFILE.ZSOAP.sequence.49=GetFreeBusyRequest
-PROFILE.ZSOAP.sequence.50=GetAvailableCsvFormatsRequest
-PROFILE.ZSOAP.sequence.51=SendDeliveryReportRequest
-PROFILE.ZSOAP.sequence.52=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox")
-PROFILE.ZSOAP.sequence.53=MsgActionRequest(MSGACTIONTYPE=tag)
-PROFILE.ZSOAP.sequence.54=TagActionRequest(TAGACTIONTYPE=read)
-PROFILE.ZSOAP.sequence.55=TagActionRequest(TAGACTIONTYPE=rename)
-PROFILE.ZSOAP.sequence.56=TagActionRequest(TAGACTIONTYPE=delete)
-PROFILE.ZSOAP.sequence.57=GetFolderRequest(PATH=FolderRequest)
-PROFILE.ZSOAP.sequence.58=FolderActionRequest(FOLDERACTIONTYPE=read)
-PROFILE.ZSOAP.sequence.59=FolderActionRequest(FOLDERACTIONTYPE=color)
-PROFILE.ZSOAP.sequence.60=FolderActionRequest(FOLDERACTIONTYPE=move)
-PROFILE.ZSOAP.sequence.61=FolderActionRequest(FOLDERACTIONTYPE=empty)
-PROFILE.ZSOAP.sequence.62=FolderActionRequest(FOLDERACTIONTYPE=trash)
-PROFILE.ZSOAP.sequence.63=FolderActionRequest(FOLDERACTIONTYPE=rename)
-PROFILE.ZSOAP.sequence.64=FolderActionRequest(FOLDERACTIONTYPE=delete)
-PROFILE.ZSOAP.sequence.65=CreateSearchFolderRequest
-PROFILE.ZSOAP.sequence.66=GetFolderRequest(PATH=SearchFolderRequest)
-PROFILE.ZSOAP.sequence.67=FolderActionRequest(FOLDERACTIONTYPE=read)
-PROFILE.ZSOAP.sequence.68=FolderActionRequest(FOLDERACTIONTYPE=color)
-PROFILE.ZSOAP.sequence.69=FolderActionRequest(FOLDERACTIONTYPE=move)
-PROFILE.ZSOAP.sequence.70=FolderActionRequest(FOLDERACTIONTYPE=empty)
-PROFILE.ZSOAP.sequence.71=FolderActionRequest(FOLDERACTIONTYPE=trash)
-PROFILE.ZSOAP.sequence.72=FolderActionRequest(FOLDERACTIONTYPE=rename)
-PROFILE.ZSOAP.sequence.73=FolderActionRequest(FOLDERACTIONTYPE=delete)
-PROFILE.ZSOAP.sequence.74=SearchRequest(SEARCHTYPE=message,SEARCH="is:read")
-PROFILE.ZSOAP.sequence.75=SearchRequest(SEARCHTYPE=message,SEARCH="subject:Hello World larger:50b")
-PROFILE.ZSOAP.sequence.76=SearchRequest(SEARCHTYPE=message,SEARCH="to:${TOUSER}")
-PROFILE.ZSOAP.sequence.77=SearchRequest(SEARCHTYPE=message,SEARCH="content:This is test message from zsoap jmeter test to:${TOUSER}")
-PROFILE.ZSOAP.sequence.78=SearchRequest(SEARCHTYPE=message,SEARCH="subject:*ello World")
-PROFILE.ZSOAP.sequence.79=SearchRequest(SEARCHTYPE=message,SEARCH="to:${TOUSER} OR in:calendar")
-PROFILE.ZSOAP.sequence.80=SearchRequest(SEARCHTYPE=message,SEARCH="to:${TOUSER} AND in:sent")
-PROFILE.ZSOAP.sequence.81=SearchRequest(SEARCHTYPE=conversation,SEARCH="from:user*")
-PROFILE.ZSOAP.sequence.82=SearchRequest(SEARCHTYPE="conversation",SEARCH="subject:Hello World OR subject:Subject of meeting perf zsoap testing")
-PROFILE.ZSOAP.sequence.83=SearchRequest(SEARCHTYPE="appointment,message",SEARCH="in:Calendar")
-PROFILE.ZSOAP.sequence.84=GetFolderRequest(PATH=inbox)
-PROFILE.ZSOAP.sequence.85=FolderActionRequest(FOLDERACTIONTYPE=read)
-PROFILE.ZSOAP.sequence.86=GetRightsRequest
-PROFILE.ZSOAP.sequence.87=GetWhiteBlackListRequest
-PROFILE.ZSOAP.sequence.88=RankingActionRequest
-PROFILE.ZSOAP.sequence.89=GetInfoRequest
-PROFILE.ZSOAP.sequence.90=SearchRequest(SEARCHTYPE=message,SEARCH="is:invite not from:${USER}")
-PROFILE.ZSOAP.sequence.91=SendInviteReplyRequest
-PROFILE.ZSOAP.sequence.92=MsgActionRequest(MSGACTIONTYPE=delete)
-PROFILE.ZSOAP.sequence.93=ConvActionRequest(CONVACTIONTYPE=delete)
-PROFILE.ZSOAP.sequence.94=GetSignaturesRequest
-PROFILE.ZSOAP.sequence.95=EndSessionRequest
+PROFILE.ZSOAP.sequence.41=SnoozeCalendarItemAlarmRequest
+PROFILE.ZSOAP.sequence.42=NoOpRequest
+PROFILE.ZSOAP.sequence.43=SaveDraftRequest
+PROFILE.ZSOAP.sequence.44=DiscoverRightsRequest
+PROFILE.ZSOAP.sequence.45=GetMailboxMetadataRequest
+PROFILE.ZSOAP.sequence.46=GetShareInfoRequest
+PROFILE.ZSOAP.sequence.47=GetFreeBusyRequest
+PROFILE.ZSOAP.sequence.48=GetAvailableCsvFormatsRequest
+PROFILE.ZSOAP.sequence.49=SendDeliveryReportRequest
+PROFILE.ZSOAP.sequence.50=TagActionRequest(TAGACTIONTYPE=read)
+PROFILE.ZSOAP.sequence.51=TagActionRequest(TAGACTIONTYPE=rename)
+PROFILE.ZSOAP.sequence.52=TagActionRequest(TAGACTIONTYPE=delete)
+PROFILE.ZSOAP.sequence.53=GetFolderRequest(PATH=FolderRequest)
+PROFILE.ZSOAP.sequence.54=FolderActionRequest(FOLDERACTIONTYPE=read)
+PROFILE.ZSOAP.sequence.55=FolderActionRequest(FOLDERACTIONTYPE=color)
+PROFILE.ZSOAP.sequence.56=FolderActionRequest(FOLDERACTIONTYPE=move)
+PROFILE.ZSOAP.sequence.57=FolderActionRequest(FOLDERACTIONTYPE=empty)
+PROFILE.ZSOAP.sequence.58=FolderActionRequest(FOLDERACTIONTYPE=trash)
+PROFILE.ZSOAP.sequence.59=FolderActionRequest(FOLDERACTIONTYPE=rename)
+PROFILE.ZSOAP.sequence.60=FolderActionRequest(FOLDERACTIONTYPE=delete)
+PROFILE.ZSOAP.sequence.61=CreateSearchFolderRequest
+PROFILE.ZSOAP.sequence.62=GetFolderRequest(PATH=SearchFolderRequest)
+PROFILE.ZSOAP.sequence.63=FolderActionRequest(FOLDERACTIONTYPE=read)
+PROFILE.ZSOAP.sequence.64=FolderActionRequest(FOLDERACTIONTYPE=color)
+PROFILE.ZSOAP.sequence.65=FolderActionRequest(FOLDERACTIONTYPE=trash)
+PROFILE.ZSOAP.sequence.66=FolderActionRequest(FOLDERACTIONTYPE=rename)
+PROFILE.ZSOAP.sequence.67=FolderActionRequest(FOLDERACTIONTYPE=delete)
+PROFILE.ZSOAP.sequence.68=SearchRequest(SEARCHTYPE=message,SEARCH="is:read")
+PROFILE.ZSOAP.sequence.69=SearchRequest(SEARCHTYPE=message,SEARCH="subject:Hello World larger:50b")
+PROFILE.ZSOAP.sequence.70=SearchRequest(SEARCHTYPE=message,SEARCH="to:${TOUSER}")
+PROFILE.ZSOAP.sequence.71=SearchRequest(SEARCHTYPE=message,SEARCH="content:This is test message from zsoap jmeter test to:${TOUSER}")
+PROFILE.ZSOAP.sequence.72=SearchRequest(SEARCHTYPE=message,SEARCH="subject:*ello World")
+PROFILE.ZSOAP.sequence.73=SearchRequest(SEARCHTYPE=message,SEARCH="to:${TOUSER} OR in:calendar")
+PROFILE.ZSOAP.sequence.74=SearchRequest(SEARCHTYPE=message,SEARCH="to:${TOUSER} AND in:sent")
+PROFILE.ZSOAP.sequence.75=SearchRequest(SEARCHTYPE=conversation,SEARCH="from:user*")
+PROFILE.ZSOAP.sequence.76=SearchRequest(SEARCHTYPE="conversation",SEARCH="subject:Hello World OR subject:Subject of meeting perf zsoap testing")
+PROFILE.ZSOAP.sequence.77=SearchRequest(SEARCHTYPE="appointment,message",SEARCH="in:Calendar")
+PROFILE.ZSOAP.sequence.78=GetFolderRequest(PATH=inbox)
+PROFILE.ZSOAP.sequence.79=FolderActionRequest(FOLDERACTIONTYPE=read)
+PROFILE.ZSOAP.sequence.80=GetRightsRequest
+PROFILE.ZSOAP.sequence.81=GetWhiteBlackListRequest
+PROFILE.ZSOAP.sequence.82=RankingActionRequest
+PROFILE.ZSOAP.sequence.83=GetInfoRequest
+PROFILE.ZSOAP.sequence.84=SearchRequest(SEARCHTYPE=message,SEARCH="is:invite not from:${USER}")
+PROFILE.ZSOAP.sequence.85=SendInviteReplyRequest
+PROFILE.ZSOAP.sequence.86=EndSessionRequest
 ##Below are Admin soap requests, same are available in admin.prop file
 #PROFILE.ZSOAP.sequence.1=GetDomainInfoRequest
 #PROFILE.ZSOAP.sequence.2=AuthRequest(AUTHTYPE=admin)
