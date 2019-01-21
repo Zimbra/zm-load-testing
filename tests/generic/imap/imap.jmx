@@ -181,7 +181,7 @@ if (commands.size() &gt; 0) {
   vars.put(&quot;CONTINUE&quot;,&quot;true&quot;);
 } else {
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
-} 
+}
 
 //Create IMAP conncection and store for all future use
 //log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
@@ -254,8 +254,8 @@ if (commands.size() == 0) {
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 
 try {
-  ic.append(&quot;INBOX&quot;,null,null,&quot;From: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;IMAP.domain&quot;)+
-                              &quot;\nTo: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;IMAP.domain&quot;)+
+  ic.append(&quot;INBOX&quot;,null,null,&quot;From: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;ZIMBRA.domain&quot;)+
+                              &quot;\nTo: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;ZIMBRA.domain&quot;)+
                               &quot;\nSubject: Testing\n\nThis is a test of IMAP append.\n&quot;);
   log.info(Thread.currentThread().getName()+&quot; APPEND&quot;);
 } catch (Exception e) {
