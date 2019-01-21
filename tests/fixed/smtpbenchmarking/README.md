@@ -9,7 +9,7 @@ Sends a messages from book.csv file.
 |Key         |Value          |Description                                 |
 |------------|---------------|--------------------------------------------|
 |SMTP.server |host.domain.com|name to use to connect to web server        |
-|SMTP.domain |domain.com     |domain to use in e-mail addresses           |
+|ZIMBRA.domain |domain.com     |domain to use in e-mail addresses           |
 |SMTP.port   |25             |port to use with web server                 |
 |ACCOUNTS.csv|users.csv      |csv file of test accounts (user,pass,touser)|
 |MESSAGES.csv|book.csv       |csv file of messages (message)              |

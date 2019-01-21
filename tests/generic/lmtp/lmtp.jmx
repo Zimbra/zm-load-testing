@@ -274,7 +274,7 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
 SMTPClient sc = vars.getObject(&quot;LMTPCLIENT&quot;);
 
 try {
-  sc.mail(&quot;&lt;&quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;SMTP.domain&quot;)+&quot;&gt;&quot;);
+  sc.mail(&quot;&lt;&quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;ZIMBRA.domain&quot;)+&quot;&gt;&quot;);
   log.info(Thread.currentThread().getName()+&quot; MAIL&quot;);
 } catch (Exception e) {
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);

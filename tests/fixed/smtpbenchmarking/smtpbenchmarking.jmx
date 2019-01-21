@@ -84,9 +84,9 @@
         <SmtpSampler guiclass="SmtpSamplerGui" testclass="SmtpSampler" testname="LMTP_EMAIL" enabled="true">
           <stringProp name="SMTPSampler.server">${__P(SMTP.server)}</stringProp>
           <stringProp name="SMTPSampler.serverPort">${__P(SMTP.port)}</stringProp>
-          <stringProp name="SMTPSampler.mailFrom">${user}@${__P(SMTP.domain)}</stringProp>
+          <stringProp name="SMTPSampler.mailFrom">${user}@${__P(ZIMBRA.domain)}</stringProp>
           <stringProp name="SMTPSampler.replyTo"></stringProp>
-          <stringProp name="SMTPSampler.receiverTo">${touser}@${__P(SMTP.domain)}</stringProp>
+          <stringProp name="SMTPSampler.receiverTo">${touser}@${__P(ZIMBRA.domain)}</stringProp>
           <stringProp name="SMTPSampler.receiverCC"></stringProp>
           <stringProp name="SMTPSampler.receiverBCC"></stringProp>
           <stringProp name="SMTPSampler.subject">JMeter test direct from admin</stringProp>
@@ -105,7 +105,7 @@
           <stringProp name="SMTPSampler.emlMessageToSend"></stringProp>
           <stringProp name="SMTPSampler.useAuth">true</stringProp>
           <stringProp name="SMTPSampler.password">${pass}</stringProp>
-          <stringProp name="SMTPSampler.username">${user}@${__P(SMTP.domain)}</stringProp>
+          <stringProp name="SMTPSampler.username">${user}@${__P(ZIMBRA.domain)}</stringProp>
           <stringProp name="SMTPSampler.messageSizeStatistics">false</stringProp>
           <stringProp name="SMTPSampler.enableDebug">false</stringProp>
           <collectionProp name="SMTPSampler.headerFields"/>
