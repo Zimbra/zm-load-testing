@@ -9,7 +9,7 @@ Login check the inbox periodically until a message is availble then perform a sp
 |Key         |Value          |Description                                 |
 |------------|---------------|--------------------------------------------|
 |HTTP.server |host.domain.com|name to use to connect to web server        |
-|HTTP.domain |domain.com     |domain to use in e-mail addresses           |
+|ZIMBRA.domain |domain.com     |domain to use in e-mail addresses           |
 |HTTP.port   |443            |port to use with web server                 |
 |ACCOUNTS.csv|users.csv      |csv file of test accounts (user,pass,touser)|
 |REQUEST.log |requests.log   |file to log requests to                     |

@@ -813,13 +813,13 @@ if (commands.size() == 0) {
       &lt;m&gt;&#xd;
         &lt;inv&gt;&#xd;
           &lt;comp name=&quot;Subject of meeting perf zsoap testing&quot; status=&quot;CONF&quot; fb=&quot;B&quot; allDay=&quot;0&quot; transp=&quot;O&quot;&gt;&#xd;
-            &lt;or a=&quot;${USER}@${__P(HTTP.domain)}&quot;&gt;&lt;/or&gt;&#xd;
-            &lt;at a=&quot;${TOUSER}@${__P(HTTP.domain)}&quot; rsvp=&quot;1&quot; ptst=&quot;NE&quot; role=&quot;REQ&quot;&gt;&lt;/at&gt;&#xd;
+            &lt;or a=&quot;${USER}@${__P(ZIMBRA.domain)}&quot;&gt;&lt;/or&gt;&#xd;
+            &lt;at a=&quot;${TOUSER}@${__P(ZIMBRA.domain)}&quot; rsvp=&quot;1&quot; ptst=&quot;NE&quot; role=&quot;REQ&quot;&gt;&lt;/at&gt;&#xd;
             &lt;s d=&quot;${__time(yyyyMMdd&apos;T&apos;hhmmss)}&quot;&gt;&lt;/s&gt;&#xd;
 	    &lt;e d=&quot;${endDate}&quot;&gt;&lt;/e&gt;&#xd;
           &lt;/comp&gt;&#xd;
         &lt;/inv&gt;&#xd;
-        &lt;e t=&quot;t&quot; a=&quot;${TOUSER}@${__P(HTTP.domain)}&quot;&gt;&lt;/e&gt;&#xd;
+        &lt;e t=&quot;t&quot; a=&quot;${TOUSER}@${__P(ZIMBRA.domain)}&quot;&gt;&lt;/e&gt;&#xd;
         &lt;su&gt;Subject of meeting perf zsoap testing&lt;/su&gt;&#xd;
         &lt;mp ct=&quot;text/plain&quot;&gt;&#xd;
           &lt;content&gt;Content of the message is perf zsoap testing&lt;/content&gt;&#xd;
@@ -3618,8 +3618,8 @@ if (commands.size() == 0) {
   &lt;soap:Body&gt;&#xd;
     &lt;SendMsgRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
       &lt;m su=&quot;Hello World&quot;&gt;&#xd;
-        &lt;e a=&quot;${USER}@${__P(HTTP.domain)}&quot; t=&quot;f&quot;/&gt;&#xd;
-        &lt;e a=&quot;${TOUSER}@${__P(HTTP.domain)}&quot; t=&quot;t&quot;/&gt;&#xd;
+        &lt;e a=&quot;${USER}@${__P(ZIMBRA.domain)}&quot; t=&quot;f&quot;/&gt;&#xd;
+        &lt;e a=&quot;${TOUSER}@${__P(ZIMBRA.domain)}&quot; t=&quot;t&quot;/&gt;&#xd;
          &lt;mp ct=&quot;text/plain&quot;&gt;&#xd;
            &lt;content&gt;This is test message from zsoap jmeter test&lt;/content&gt;&#xd;
          &lt;/mp&gt;&#xd;

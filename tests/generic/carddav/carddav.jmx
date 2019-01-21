@@ -180,7 +180,7 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">${__P(HTTP.protocol)}</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/dav/${USER}@${__P(HTTP.domain)}/Contacts</stringProp>
+          <stringProp name="HTTPSampler.path">/dav/${USER}@${__P(ZIMBRA.domain)}/Contacts</stringProp>
           <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
         </ConfigTestElement>
@@ -220,7 +220,7 @@ if (commands.size() &gt; 0) {
 }
 // initialize CARDUUID and CARDURL
 vars.put(&quot;CARDUUID&quot;,UUID.randomUUID().toString());
-vars.put(&quot;CARDURL&quot;,&quot;/dav/&quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;HTTP.domain&quot;)+&quot;/Contacts/&quot;+vars.get(&quot;CARDUUID&quot;)+&quot;.vcf&quot;);</stringProp>
+vars.put(&quot;CARDURL&quot;,&quot;/dav/&quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;ZIMBRA.domain&quot;)+&quot;/Contacts/&quot;+vars.get(&quot;CARDUUID&quot;)+&quot;.vcf&quot;);</stringProp>
           <stringProp name="BeanShellSampler.filename"></stringProp>
           <stringProp name="BeanShellSampler.parameters"></stringProp>
           <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>

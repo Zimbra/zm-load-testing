@@ -354,7 +354,7 @@ if (commands.size() == 0) {
           &lt;t:Body BodyType=&quot;Text&quot;&gt;Testing EWS jmeter testing&lt;/t:Body&gt;&#xd;
           &lt;t:ToRecipients&gt;&#xd;
             &lt;t:Mailbox&gt;&#xd;
-              &lt;t:EmailAddress&gt;${USER}@${__P(HTTP.domain)}&lt;/t:EmailAddress&gt;&#xd;
+              &lt;t:EmailAddress&gt;${USER}@${__P(ZIMBRA.domain)}&lt;/t:EmailAddress&gt;&#xd;
             &lt;/t:Mailbox&gt;&#xd;
           &lt;/t:ToRecipients&gt;&#xd;
           &lt;t:IsRead&gt;false&lt;/t:IsRead&gt;&#xd;
