@@ -556,7 +556,7 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
 SMTPClient sc = vars.getObject(&quot;LMTPCLIENT&quot;);
 
 try {
-  sc.rcpt(&quot;&lt;&quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;LMTP.domain&quot;)+&quot;&gt;&quot;);
+  sc.rcpt(&quot;&lt;&quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;ZIMBRA.domain&quot;)+&quot;&gt;&quot;);
   log.info(Thread.currentThread().getName()+&quot; RCPT&quot;);
 } catch (Exception e) {
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
@@ -578,8 +578,8 @@ SMTPClient sc = vars.getObject(&quot;LMTPCLIENT&quot;);
 try {
   Writer w = sc.sendMessageData();
   // add canned From and To lines
-  w.write(&quot;From: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;LMTP.domain&quot;)+&quot;\r\n&quot;);
-  w.write(&quot;To: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;LMTP.domain&quot;)+&quot;\r\n&quot;);
+  w.write(&quot;From: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;ZIMBRA.domain&quot;)+&quot;\r\n&quot;);
+  w.write(&quot;To: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;ZIMBRA.domain&quot;)+&quot;\r\n&quot;);
 
   // read and send a files contents as message
   FileReader m = new FileReader(props.get(&quot;PROFILE.LMTP.message&quot;));
