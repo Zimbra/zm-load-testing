@@ -180,7 +180,7 @@ import com.zimbra.jmeter.Command;
 //debug();
 String url = &quot;https://&quot;+props.get(&quot;HTTP.server&quot;);
 if (!props.get(&quot;HTTP.port&quot;).equals(&quot;&quot;) ) {
-  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;); 
+  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;);
 }
 url = url+&quot;/ews/Exchange.asmx&quot;;
 vars.put(&quot;URL&quot;,url);

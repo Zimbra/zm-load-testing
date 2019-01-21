@@ -180,7 +180,7 @@ String url = &quot;https://&quot;+props.get(&quot;HTTP.server&quot;);
 String admin = url+&quot;:&quot;+ props.get(&quot;HTTP.admin.port&quot;)+&quot;/service/admin/soap&quot;;
 vars.put(&quot;ADMIN&quot;,admin);
 if (!props.get(&quot;HTTP.port&quot;).equals(&quot;&quot;) ) {
-  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;); 
+  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;);
 }
 url = url+&quot;/service/soap&quot;;
 //log.info(url);
@@ -228,7 +228,7 @@ String url = &quot;https://&quot;+props.get(&quot;HTTP.server&quot;);
 String admin = url+&quot;:7071/service/admin/soap&quot;;
 vars.put(&quot;ADMIN&quot;,admin);
 if (!props.get(&quot;HTTP.port&quot;).equals(&quot;&quot;) ) {
-  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;); 
+  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;);
 }
 url = url+&quot;/service/soap&quot;;
 log.info(url);

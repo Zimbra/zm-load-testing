@@ -181,7 +181,7 @@ if (commands.size() &gt; 0) {
   vars.put(&quot;CONTINUE&quot;,&quot;true&quot;);
 } else {
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
-} 
+}
 
 //Create IMAP conncection and store for all future use
 //log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));

@@ -414,7 +414,7 @@ vars.put(&quot;APPTBODY&quot;,m);</stringProp>
                   <stringProp name="script">String tmp = vars.get(&quot;APPTBODY&quot;);
 if (vars.get(&quot;DTEND&quot;) != null) {
   tmp=tmp.replaceAll(&quot;(?s)DTEND;TZID=([^\\s]*)&quot;,&quot;DTEND;TZID=&quot;+vars.get(&quot;DTEND&quot;));
-  vars.put(&quot;APPTBODY&quot;,tmp);	
+  vars.put(&quot;APPTBODY&quot;,tmp);
 }</stringProp>
                 </BeanShellPreProcessor>
                 <hashTree/>

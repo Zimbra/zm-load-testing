@@ -28,7 +28,7 @@ Login check the inbox periodically until a message is availble then perform a sp
 
 ```
 # grab a copy of the tests
-$ get clone https://github.com/Zimbra/zm-load-testing.git 
+$ get clone https://github.com/Zimbra/zm-load-testing.git
 $ cd zm-load-testing
 
 # create a user.csv file of accounts that can be used for testing

@@ -191,7 +191,7 @@ if (commands.size() &gt; 0) {
   vars.put(&quot;CONTINUE&quot;,&quot;true&quot;);
 } else {
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
-} 
+}
 
 //Create IMAP conncection and store for all future use
 //log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
@@ -444,7 +444,7 @@ if (commands.size() &gt; 0) {
   vars.put(&quot;CONTINUE&quot;,&quot;true&quot;);
 } else {
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
-} 
+}
 
 //Create IMAP conncection and store for all future use
 //log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
@@ -697,7 +697,7 @@ if (commands.size() &gt; 0) {
   vars.put(&quot;CONTINUE&quot;,&quot;true&quot;);
 } else {
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
-} 
+}
 
 //Create IMAP conncection and store for all future use
 //log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
@@ -1507,7 +1507,7 @@ if (commands.size() &gt; 0) {
   vars.put(&quot;CONTINUE&quot;,&quot;true&quot;);
 } else {
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
-} 
+}
 
 //Create POP conncection and store for all future use
 //log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
@@ -1611,7 +1611,7 @@ try {
 if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
   SampleResult.setSuccessful(false);
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
-  IsSuccess=false; 
+  IsSuccess=false;
 }
 SampleResult.setResponseData(pc.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
@@ -1637,7 +1637,7 @@ try {
 if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
   SampleResult.setSuccessful(false);
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
-  IsSuccess=false; 
+  IsSuccess=false;
 }
 SampleResult.setResponseData(pc.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
@@ -1663,7 +1663,7 @@ try {
 if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
   SampleResult.setSuccessful(false);
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
-  IsSuccess=false; 
+  IsSuccess=false;
 }
 SampleResult.setResponseData(pc.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
@@ -1689,7 +1689,7 @@ try {
 if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
   SampleResult.setSuccessful(false);
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
-  IsSuccess=false; 
+  IsSuccess=false;
 }
 SampleResult.setResponseData(pc.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
@@ -1998,7 +1998,7 @@ vars.put(&quot;APPTBODY&quot;,m);</stringProp>
                   <stringProp name="script">String tmp = vars.get(&quot;APPTBODY&quot;);
 if (vars.get(&quot;DTEND&quot;) != null) {
   tmp=tmp.replaceAll(&quot;(?s)DTEND;TZID=([^\\s]*)&quot;,&quot;DTEND;TZID=&quot;+vars.get(&quot;DTEND&quot;));
-  vars.put(&quot;APPTBODY&quot;,tmp);	
+  vars.put(&quot;APPTBODY&quot;,tmp);
 }</stringProp>
                 </BeanShellPreProcessor>
                 <hashTree/>
@@ -2343,7 +2343,7 @@ String url = &quot;https://&quot;+props.get(&quot;HTTP.server&quot;);
 String admin = url+&quot;:7071/service/admin/soap&quot;;
 vars.put(&quot;ADMIN&quot;,admin);
 if (!props.get(&quot;HTTP.port&quot;).equals(&quot;&quot;) ) {
-  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;); 
+  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;);
 }
 url = url+&quot;/service/soap&quot;;
 //log.info(url);

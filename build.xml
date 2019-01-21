@@ -79,7 +79,7 @@
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/caldav/caldav.jmx"
             jmeterlogfile="${logs}/generic-caldav-jmeter.log"
-            resultlog="${logs}/generic-caldav-requests.log"> 
+            resultlog="${logs}/generic-caldav-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="PROFILE.CalDAV.appointments" value="${basedir}/tests/generic/caldav/profiles/appointments.csv"/>
       <property name="user.classpath" value="${zjmeter}"/>
@@ -92,7 +92,7 @@
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/carddav/carddav.jmx"
             jmeterlogfile="${logs}/generic-carddav-jmeter.log"
-            resultlog="${logs}/generic-carddav-requests.log"> 
+            resultlog="${logs}/generic-carddav-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="PROFILE.CardDAV.cards" value="${basedir}/tests/generic/carddav/profiles/cards.csv"/>
       <property name="user.classpath" value="${zjmeter}"/>
@@ -105,7 +105,7 @@
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/eas/eas.jmx"
             jmeterlogfile="${logs}/generic-eas-jmeter.log"
-            resultlog="${logs}/generic-eas-requests.log"> 
+            resultlog="${logs}/generic-eas-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="user.classpath" value="${zjmeter}:${basedir}/src/build/jar/zm-sync-common.jar"/>
       <jmeterarg value="-q${basedir}/${env}"/>
@@ -117,7 +117,7 @@
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/ews/ews.jmx"
             jmeterlogfile="${logs}/generic-ews-jmeter.log"
-            resultlog="${logs}/generic-ews-requests.log"> 
+            resultlog="${logs}/generic-ews-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <property name="xpath.namespace.config" value="${basedir}/tests/generic/ews/profiles/namespace.prop"/>
@@ -130,7 +130,7 @@
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/imap/imap.jmx"
             jmeterlogfile="${logs}/generic-imap-jmeter.log"
-            resultlog="${logs}/generic-imap-requests.log"> 
+            resultlog="${logs}/generic-imap-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
@@ -142,7 +142,7 @@
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/lmtp/lmtp.jmx"
             jmeterlogfile="${logs}/generic-lmtp-jmeter.log"
-            resultlog="${logs}/generic-lmtp-requests.log"> 
+            resultlog="${logs}/generic-lmtp-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="PROFILE.LMTP.message" value="${basedir}/tests/generic/lmtp/profiles/message.txt"/>
       <property name="user.classpath" value="${zjmeter}"/>
@@ -155,7 +155,7 @@
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/pop/pop.jmx"
             jmeterlogfile="${logs}/generic-pop-jmeter.log"
-            resultlog="${logs}/generic-pop-requests.log"> 
+            resultlog="${logs}/generic-pop-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
@@ -167,7 +167,7 @@
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/smtp/smtp.jmx"
             jmeterlogfile="${logs}/generic-smtp-jmeter.log"
-            resultlog="${logs}/generic-smtp-requests.log"> 
+            resultlog="${logs}/generic-smtp-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="PROFILE.SMTP.message" value="${basedir}/tests/generic/smtp/profiles/message.txt"/>
       <property name="user.classpath" value="${zjmeter}"/>
@@ -180,7 +180,7 @@
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/zsoap/zsoap.jmx"
             jmeterlogfile="${logs}/generic-zsoap-jmeter.log"
-            resultlog="${logs}/generic-zsoap-requests.log"> 
+            resultlog="${logs}/generic-zsoap-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
@@ -216,7 +216,7 @@
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/generic/mix/mix.jmx"
             jmeterlogfile="${logs}/generic-mix-jmeter.log"
-            resultlog="${logs}/generic-mix-requests.log"> 
+            resultlog="${logs}/generic-mix-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="PROFILE.CalDAV.appointments" value="${basedir}/tests/generic/mix/profiles/appointments.csv"/>
       <property name="PROFILE.CardDAV.cards" value="${basedir}/tests/generic/mix/profiles/cards.csv"/>
@@ -232,7 +232,7 @@
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/fixed/ephemeral/ephemeral.jmx"
             jmeterlogfile="${logs}/fixed-ephemeral-jmeter.log"
-            resultlog="${logs}/fixed-ephemeral-requests.log"> 
+            resultlog="${logs}/fixed-ephemeral-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/fixed/ephemeral/load.prop"/>
@@ -242,7 +242,7 @@
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/fixed/imapbenchmarking/imapbenchmarking.jmx"
             jmeterlogfile="${logs}/fixed-imapbenchmarking-jmeter.log"
-            resultlog="${logs}/fixed-imapbenchmarking-requests.log"> 
+            resultlog="${logs}/fixed-imapbenchmarking-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/fixed/imapbenchmarking/load.prop"/>
@@ -252,7 +252,7 @@
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/fixed/imapsoapmixload/imapsoapmixload.jmx"
             jmeterlogfile="${logs}/fixed-imapsoapmixload-jmeter.log"
-            resultlog="${logs}/fixed-imapsoapmixload-requests.log"> 
+            resultlog="${logs}/fixed-imapsoapmixload-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/fixed/imapsoapmixload/load.prop"/>
@@ -262,7 +262,7 @@
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/fixed/smtpbenchmarking/smtpbenchmarking.jmx"
             jmeterlogfile="${logs}/fixed-smtpbenchmarking-jmeter.log"
-            resultlog="${logs}/fixed-smtpbenchmarking-requests.log"> 
+            resultlog="${logs}/fixed-smtpbenchmarking-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="MESSAGES.csv" value="${basedir}/tests/fixed/smtpbenchmarking/book.csv"/>
       <jmeterarg value="-q${basedir}/${env}"/>
@@ -273,7 +273,7 @@
     <jmeter jmeterhome="${jmeter.home}"
             testplan="${basedir}/tests/fixed/soapbenchmarking/soapbenchmarking.jmx"
             jmeterlogfile="${logs}/fixed-soapbenchmarking-jmeter.log"
-            resultlog="${logs}/fixed-soapbenchmarking-requests.log"> 
+            resultlog="${logs}/fixed-soapbenchmarking-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/fixed/soapbenchmarking/load.prop"/>

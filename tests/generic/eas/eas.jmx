@@ -168,7 +168,7 @@ vars.putObject(&quot;EAS&quot;,eas);
 
 String url = props.get(&quot;HTTP.protocol&quot;)+&quot;://&quot;+props.get(&quot;HTTP.server&quot;);
 if (!props.get(&quot;HTTP.port&quot;).equals(&quot;&quot;) ) {
-  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;); 
+  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;);
 }
 url = url+&quot;/Microsoft-Server-ActiveSync&quot;;
 //log.info(&quot;EAS URL: &quot;+url);
@@ -308,13 +308,13 @@ try {
     if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
       result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.START_TAG) {
-      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.END_TAG) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.TEXT) {
-      result+=bp.getText(); 	
+      result+=bp.getText();
     }
   }
 } catch (IOException e) {
@@ -415,13 +415,13 @@ try {
     if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
       result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.START_TAG) {
-      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.END_TAG) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.TEXT) {
-      result+=bp.getText(); 	
+      result+=bp.getText();
     }
   }
 } catch (IOException e) {
@@ -512,13 +512,13 @@ try {
     if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
       result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.START_TAG) {
-      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.END_TAG) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.TEXT) {
-      result+=bp.getText(); 	
+      result+=bp.getText();
     }
   }
 } catch (IOException e) {
@@ -619,13 +619,13 @@ try {
     if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
       result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.START_TAG) {
-      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
+      result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.END_TAG) {
-      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+      result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
     } else if (bp.getEventType() == BinaryParser.TEXT) {
-      result+=bp.getText(); 	
+      result+=bp.getText();
     }
   }
 } catch (IOException e) {
@@ -708,13 +708,13 @@ if (hr.getEntity().getContentLength() &gt; 0) {
       if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
         result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.START_TAG) {
-        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
+        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.END_TAG) {
-        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.TEXT) {
-        result+=bp.getText(); 	
+        result+=bp.getText();
       }
     }
   } catch (Exception e) {
@@ -801,13 +801,13 @@ if (hr.getEntity().getContentLength() &gt; 0) {
       if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
         result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.START_TAG) {
-        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
+        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.END_TAG) {
-        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.TEXT) {
-        result+=bp.getText(); 	
+        result+=bp.getText();
       }
     }
   } catch (Exception e) {
@@ -894,13 +894,13 @@ if (hr.getEntity().getContentLength() &gt; 0) {
       if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
         result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.START_TAG) {
-        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
+        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.END_TAG) {
-        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.TEXT) {
-        result+=bp.getText(); 	
+        result+=bp.getText();
       }
     }
   } catch (Exception e) {
