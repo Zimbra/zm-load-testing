@@ -1,5 +1,5 @@
 LOAD.duration=60
 LOAD.delay=0
-LOAD.SMTP.users=1
-LOAD.SMTP.rampup=0
-LOAD.SMTP.loopcount=1
+LOAD.users=1
+LOAD.rampup=0
+LOAD.loopcount=1

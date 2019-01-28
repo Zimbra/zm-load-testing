@@ -159,10 +159,10 @@ vars.putObject(&quot;SMTP&quot;,smtp);</stringProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">${__P(LOAD.SMTP.loopcount)}</stringProp>
+          <stringProp name="LoopController.loops">${__P(LOAD.loopcount)}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.SMTP.users)}</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">$(__P(LOAD.SMTP.rampup)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">$(__P(LOAD.rampup)}</stringProp>
         <longProp name="ThreadGroup.start_time">1497658914000</longProp>
         <longProp name="ThreadGroup.end_time">1497658914000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
@@ -180,10 +180,10 @@ ArrayList commands = smtp.getcommands();
 
 vars.putObject(&quot;COMMANDS&quot;,commands);
 // generate command DELAY
-if (props.get(&quot;LOAD.SMTP.userduration&quot;) == null || commands.size() == 0) {
+if (props.get(&quot;LOAD.userduration&quot;) == null || commands.size() == 0) {
   vars.putObject(&quot;DELAY&quot;,&quot;0&quot;);
 } else {
-  int delay = Integer.parseInt(props.get(&quot;LOAD.SMTP.userduration&quot;))*1000/commands.size();
+  int delay = Integer.parseInt(props.get(&quot;LOAD.userduration&quot;))*1000/commands.size();
   vars.putObject(&quot;DELAY&quot;,delay.toString());
 }
 // initialize CONTINUE
@@ -412,10 +412,10 @@ vars.putObject(&quot;LMTP&quot;,lmtp);</stringProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">${__P(LOAD.LMTP.loopcount)}</stringProp>
+          <stringProp name="LoopController.loops">${__P(LOAD.loopcount)}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.LMTP.users)}</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">$(__P(LOAD.LMTP.rampup)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">$(__P(LOAD.rampup)}</stringProp>
         <longProp name="ThreadGroup.start_time">1497658914000</longProp>
         <longProp name="ThreadGroup.end_time">1497658914000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
@@ -433,10 +433,10 @@ ArrayList commands = lmtp.getcommands();
 
 vars.putObject(&quot;COMMANDS&quot;,commands);
 // generate command DELAY
-if (props.get(&quot;LOAD.LMTP.userduration&quot;) == null || commands.size() == 0) {
+if (props.get(&quot;LOAD.userduration&quot;) == null || commands.size() == 0) {
   vars.putObject(&quot;DELAY&quot;,&quot;0&quot;);
 } else {
-  int delay = Integer.parseInt(props.get(&quot;LOAD.LMTP.userduration&quot;))*1000/commands.size();
+  int delay = Integer.parseInt(props.get(&quot;LOAD.userduration&quot;))*1000/commands.size();
   vars.putObject(&quot;DELAY&quot;,delay.toString());
 }
 // initialize CONTINUE
@@ -665,10 +665,10 @@ vars.putObject(&quot;IMAP&quot;,imap);</stringProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">${__P(LOAD.IMAP.loopcount)}</stringProp>
+          <stringProp name="LoopController.loops">${__P(LOAD.loopcount)}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.IMAP.users)}</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">$(__P(LOAD.IMAP.rampup)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">$(__P(LOAD.rampup)}</stringProp>
         <longProp name="ThreadGroup.start_time">1497658914000</longProp>
         <longProp name="ThreadGroup.end_time">1497658914000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
@@ -686,10 +686,10 @@ ArrayList commands = imap.getcommands();
 
 vars.putObject(&quot;COMMANDS&quot;,commands);
 // generate command DELAY
-if (props.get(&quot;LOAD.IMAP.userduration&quot;) == null || commands.size() == 0) {
+if (props.get(&quot;LOAD.userduration&quot;) == null || commands.size() == 0) {
   vars.putObject(&quot;DELAY&quot;,&quot;0&quot;);
 } else {
-  int delay = Integer.parseInt(props.get(&quot;LOAD.IMAP.userduration&quot;))*1000/commands.size();
+  int delay = Integer.parseInt(props.get(&quot;LOAD.userduration&quot;))*1000/commands.size();
   vars.putObject(&quot;DELAY&quot;,delay.toString());
 }
 // initialize CONTINUE
@@ -1475,10 +1475,10 @@ vars.putObject(&quot;POP&quot;,pop);</stringProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">${__P(LOAD.POP.loopcount)}</stringProp>
+          <stringProp name="LoopController.loops">${__P(LOAD.loopcount)}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.POP.users)}</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.POP.rampup)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.rampup)}</stringProp>
         <longProp name="ThreadGroup.start_time">1497658914000</longProp>
         <longProp name="ThreadGroup.end_time">1497658914000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
@@ -1496,10 +1496,10 @@ ArrayList commands = pop.getcommands();
 
 vars.putObject(&quot;COMMANDS&quot;,commands);
 // generate command DELAY
-if (props.get(&quot;LOAD.POP.userduration&quot;) == null || commands.size() == 0) {
+if (props.get(&quot;LOAD.userduration&quot;) == null || commands.size() == 0) {
   vars.putObject(&quot;DELAY&quot;,&quot;0&quot;);
 } else {
-  int delay = Integer.parseInt(props.get(&quot;LOAD.POP.userduration&quot;))*1000/commands.size();
+  int delay = Integer.parseInt(props.get(&quot;LOAD.userduration&quot;))*1000/commands.size();
   vars.putObject(&quot;DELAY&quot;,delay.toString());
 }
 // initialize CONTINUE
@@ -2039,10 +2039,10 @@ vars.putObject(&quot;CardDAV&quot;,cd);</stringProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">${__P(LOAD.CardDAV.loopcount)}</stringProp>
+          <stringProp name="LoopController.loops">${__P(LOAD.loopcount)}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.CardDAV.users)}</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.CardDAV.rampup)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.rampup)}</stringProp>
         <longProp name="ThreadGroup.start_time">1505165237000</longProp>
         <longProp name="ThreadGroup.end_time">1505165237000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
@@ -2086,10 +2086,10 @@ ArrayList commands = cd.getcommands();
 
 vars.putObject(&quot;COMMANDS&quot;,commands);
 // generate command DELAY
-if (props.get(&quot;LOAD.CardDAV.userduration&quot;) == null || commands.size() == 0) {
+if (props.get(&quot;LOAD.userduration&quot;) == null || commands.size() == 0) {
   vars.putObject(&quot;DELAY&quot;,&quot;0&quot;);
 } else {
-  int delay = Integer.parseInt(props.get(&quot;LOAD.CardDAV.userduration&quot;))*1000/commands.size();
+  int delay = Integer.parseInt(props.get(&quot;LOAD.userduration&quot;))*1000/commands.size();
   vars.putObject(&quot;DELAY&quot;,delay.toString());
 }
 // initialize CONTINUE
@@ -2354,10 +2354,10 @@ vars.put(&quot;URL&quot;,url);</stringProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">${__P(LOAD.ZSOAP.loopcount)}</stringProp>
+          <stringProp name="LoopController.loops">${__P(LOAD.loopcount)}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.ZSOAP.users)}</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.ZSOAP.rampup)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.rampup)}</stringProp>
         <longProp name="ThreadGroup.start_time">1505165237000</longProp>
         <longProp name="ThreadGroup.end_time">1505165237000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
@@ -2383,10 +2383,10 @@ ArrayList commands = soap.getcommands();
 
 vars.putObject(&quot;COMMANDS&quot;,commands);
 // generate command DELAY
-if (props.get(&quot;LOAD.ZSOAP.userduration&quot;) == null || commands.size() == 0) {
+if (props.get(&quot;LOAD.userduration&quot;) == null || commands.size() == 0) {
   vars.putObject(&quot;DELAY&quot;,&quot;0&quot;);
 } else {
-  int delay = Integer.parseInt(props.get(&quot;LOAD.ZSOAP.userduration&quot;))*1000/commands.size();
+  int delay = Integer.parseInt(props.get(&quot;LOAD.userduration&quot;))*1000/commands.size();
   vars.putObject(&quot;DELAY&quot;,delay.toString());
 }
 // initialize CONTINUE

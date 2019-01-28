@@ -20,16 +20,16 @@ This performs authentications to the web interface followed by a single SOAP req
 |---------------------|-----|--------------------------------------------|
 |LOAD.duration        |130  |test duration in seconds                    |
 |LOAD.delay           |0    |test start delay in seconds                 |
-|LOAD.WEB.users       |1    |concurrent users/threads to run during tests|
-|LOAD.WEB.userduration|1    |user login duration in seconds              |
-|LOAD.WEB.rampup      |0    |how long to spend ramping up threads        |
-|LOAD.WEB.loopcount   |1    |how many times the user/thread repeats      |
+|LOAD.users           |1    |concurrent users/threads to run during tests|
+|LOAD.userduration    |1    |user login duration in seconds              |
+|LOAD.rampup          |0    |how long to spend ramping up threads        |
+|LOAD.loopcount       |1    |how many times the user/thread repeats      |
 
 # Example
 
 ```
 # grab a copy of the tests
-$ get clone https://github.com/Zimbra/zm-load-testing.git 
+$ get clone https://github.com/Zimbra/zm-load-testing.git
 $ cd zm-load-testing
 
 # create a user.csv file of accounts that can be used for testing

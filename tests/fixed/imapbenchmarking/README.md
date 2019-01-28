@@ -18,15 +18,15 @@ Login and list first 10 messages of inbox.
 |--------------------|-----|--------------------------------------------|
 |LOAD.duration       |30   |test duration in seconds                    |
 |LOAD.delay          |0    |test start delay in seconds                 |
-|LOAD.IMAP.users     |1    |concurrent users/threads to run during tests|
-|LOAD.IMAP.rampup    |0    |how long to spend ramping up threads        |
-|LOAD.IMAP.loopcount |1    |how many times the user/thread repeats      |
+|LOAD.users          |1    |concurrent users/threads to run during tests|
+|LOAD.rampup         |0    |how long to spend ramping up threads        |
+|LOAD.loopcount      |1    |how many times the user/thread repeats      |
 
 # Example
 
 ```
 # grab a copy of the tests
-$ get clone https://github.com/Zimbra/zm-load-testing.git 
+$ get clone https://github.com/Zimbra/zm-load-testing.git
 $ cd zm-load-testing
 
 # create a user.csv file of accounts that can be used for testing

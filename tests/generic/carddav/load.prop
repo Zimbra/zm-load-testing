@@ -1,6 +1,6 @@
 LOAD.duration=130
 LOAD.delay=0
-LOAD.CardDAV.users=1
-LOAD.CardDAV.userduration=1
-LOAD.CardDAV.rampup=0
-LOAD.CardDAV.loopcount=1
+LOAD.users=1
+LOAD.userduration=1
+LOAD.rampup=0
+LOAD.loopcount=1
