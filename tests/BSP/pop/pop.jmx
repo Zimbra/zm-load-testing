@@ -1,0 +1,2122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="3.2" jmeter="3.3 r1808647">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>false</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>false</threadName>
+            <dataType>false</dataType>
+            <encoding>false</encoding>
+            <assertions>false</assertions>
+            <subresults>false</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <url>true</url>
+          </value>
+        </objProp>
+        <objProp>
+          <name></name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>false</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>false</threadName>
+            <dataType>false</dataType>
+            <encoding>false</encoding>
+            <assertions>false</assertions>
+            <subresults>false</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename">${__P(jmetercsv,${__P(REQUEST.log)})}</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <objProp>
+          <name></name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Accounts" enabled="true">
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding"></stringProp>
+        <stringProp name="filename">${__P(ACCOUNTS.csv)}</stringProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="variableNames">USER,PASS</stringProp>
+        <boolProp name="ignoreFirstLine">false</boolProp>
+      </CSVDataSet>
+      <hashTree/>
+      <ConfigTestElement guiclass="SimpleConfigGui" testclass="ConfigTestElement" testname="Simple Config Element" enabled="true">
+        <stringProp name="soaptest_folderName">soaptest</stringProp>
+        <stringProp name="soaptest_tagName">soaptag</stringProp>
+        <stringProp name="soaptest_SearchFolderName">soapsearchtest</stringProp>
+        <stringProp name="endDate">0</stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="POP Setup" enabled="true">
+        <boolProp name="resetInterpreter">false</boolProp>
+        <stringProp name="parameters"></stringProp>
+        <stringProp name="filename"></stringProp>
+        <stringProp name="script">import com.zimbra.jmeter.Zimbra;
+</stringProp>
+      </BeanShellPreProcessor>
+      <hashTree/>
+      <kg.apc.jmeter.threads.UltimateThreadGroup guiclass="kg.apc.jmeter.threads.UltimateThreadGroupGui" testclass="kg.apc.jmeter.threads.UltimateThreadGroup" testname="POP User" enabled="true">
+        <collectionProp name="ultimatethreadgroupdata">
+          <collectionProp name="-662792342">
+            <stringProp name="-1064415843">${__P(LOAD.POP.Ausers)}</stringProp>
+            <stringProp name="48">0</stringProp>
+            <stringProp name="-1182500902">${__P(LOAD.POP.rampup)}</stringProp>
+            <stringProp name="-449238496">${__P(LOAD.POP.avgloadDuration)}</stringProp>
+            <stringProp name="-1182500902">${__P(LOAD.POP.rampup)}</stringProp>
+          </collectionProp>
+          <collectionProp name="-1560863664">
+            <stringProp name="-692064594">${__P(LOAD.POP.Pusers)}</stringProp>
+            <stringProp name="-449238496">${__P(LOAD.POP.avgloadDuration)}</stringProp>
+            <stringProp name="-1182500902">${__P(LOAD.POP.rampup)}</stringProp>
+            <stringProp name="-923261007">${__P(LOAD.POP.peakloadDuration)}</stringProp>
+            <stringProp name="-1182500902">${__P(LOAD.POP.rampup)}</stringProp>
+          </collectionProp>
+          <collectionProp name="153758254">
+            <stringProp name="-1064415843">${__P(LOAD.POP.Ausers)}</stringProp>
+            <stringProp name="-305008701">${__P(LOAD.POP.initialDelay)}</stringProp>
+            <stringProp name="-1182500902">${__P(LOAD.POP.rampup)}</stringProp>
+            <stringProp name="-449238496">${__P(LOAD.POP.avgloadDuration)}</stringProp>
+            <stringProp name="-1182500902">${__P(LOAD.POP.rampup)}</stringProp>
+          </collectionProp>
+        </collectionProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+      </kg.apc.jmeter.threads.UltimateThreadGroup>
+      <hashTree>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
+          <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+import com.zimbra.jmeter.Zimbra;
+import com.zimbra.jmeter.Command;
+//debug();
+Zimbra pop = new Zimbra(props,&quot;POP&quot;);
+ArrayList commands = pop.getcommands();
+
+vars.putObject(&quot;COMMANDS&quot;,commands);
+// generate command DELAY
+if (props.get(&quot;LOAD.POP.userduration&quot;) == null || commands.size() == 0) {
+  vars.putObject(&quot;DELAY&quot;,&quot;0&quot;);
+} else {
+  int delay = Integer.parseInt(props.get(&quot;LOAD.POP.userduration&quot;))*1000/commands.size();
+  vars.putObject(&quot;DELAY&quot;,delay.toString());
+}
+// initialize CONTINUE
+if (commands.size() &gt; 0) {
+  vars.put(&quot;CONTINUE&quot;,&quot;true&quot;);
+} else {
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+} 
+
+//Get Machine IP for XOIP command
+vars.put(&quot;clientIP&quot;,&quot;${__machineIP()}&quot;);
+log.info(&quot;Jmeter Client IP is: &quot; + vars.get(&quot;clientIP&quot;));
+ 
+//Create POP connection and store for all future use
+//log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
+POP3Client pc = new POP3Client();
+try {
+  log.info(&quot;POP connection: &quot;+props.get(&quot;POP.server&quot;)+&quot; &quot;+props.get(&quot;POP.port&quot;));
+  pc.connect(props.get(&quot;POP.server&quot;),Integer.parseInt(props.get(&quot;POP.port&quot;)));
+} catch (Exception x) {
+  log.info(&quot;connect error: &quot;,x);
+}
+vars.putObject(&quot;POP3CLIENT&quot;,pc);
+
+//log.info(Thread.currentThread().getName()+&quot; &quot;+ctx.getThreadNum().toString()+&quot; START&quot;);
+log.info(Thread.currentThread().getName()+&quot; START&quot;);
+//Capture POP response and include as sampler Response
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Run_Commands" enabled="true">
+          <stringProp name="WhileController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+        </WhileController>
+        <hashTree>
+          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Next_Command" enabled="true">
+            <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Command;
+
+ArrayList commands = vars.getObject(&quot;COMMANDS&quot;);
+if (commands.size() &gt; 0) {
+  //log.info(&quot;Testing: &quot;+commands);
+  Command c = commands.remove(0);
+  vars.put(&quot;COMMAND&quot;,c.getName());
+  for (Map.Entry a: c.argsSet()) {
+  	vars.put(a.getKey(),a.getValue());
+  }
+  //log.info(vars.get(&quot;COMMAND&quot;));
+}
+if (commands.size() == 0) {
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+}</stringProp>
+            <stringProp name="BeanShellSampler.filename"></stringProp>
+            <stringProp name="BeanShellSampler.parameters"></stringProp>
+            <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+          </BeanShellSampler>
+          <hashTree/>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Command_Execution" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Command Delay" enabled="true">
+              <stringProp name="ConstantTimer.delay">${DELAY}</stringProp>
+            </ConstantTimer>
+            <hashTree/>
+            <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="Commands" enabled="true">
+              <stringProp name="SwitchController.value">${COMMAND}</stringProp>
+            </SwitchController>
+            <hashTree>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="default" enabled="true">
+                <stringProp name="BeanShellSampler.query">log.info(Thread.currentThread().getName()+&quot; &quot;+vars.get(&quot;COMMAND&quot;)+&quot; not currently supported&quot;);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="LIST" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  //POP3MessageInfo[] x = pc.listMessages();
+  pc.sendCommand(&quot;LIST&quot;);
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; LIST&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; LIST: &quot;+e);
+}
+
+// store the response mailboxes for posible use in other commands
+// available in the jmeter variable MAILBOXES
+//ArrayList mailboxes = new ArrayList();
+//String[] lines = icw.toString().split(&quot;\\r?\\n&quot;);
+//for (String s: lines) {
+//	// * LIST (\HasNoChildren \Drafts) &quot;/&quot; &quot;Drafts&quot;
+//	Pattern p = Pattern.compile(&quot;\\* LIST \\(([^\\)]+)\\) \&quot;([^\&quot;]+)\&quot; \&quot;([^\&quot;]+)\&quot;&quot;);
+//	Matcher m = p.matcher(s);
+//     while (m.find()) {
+//	  //log.info(m.group(2)+m.group(3));
+//	  mailboxes.add(m.group(2)+m.group(3));
+//     }
+//}
+//vars.putObject(&quot;MAILBOXES&quot;,mailboxes);
+
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="USER" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+import com.zimbra.jmeter.Zimbra;
+import com.zimbra.jmeter.Command;
+
+//Create POP conncection and store for all future use
+//log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
+POP3Client pc = new POP3Client();
+try {
+  log.info(&quot;POP connection: &quot;+props.get(&quot;POP.server&quot;)+&quot; &quot;+props.get(&quot;POP.port&quot;));
+  pc.connect(props.get(&quot;POP.server&quot;),Integer.parseInt(props.get(&quot;POP.port&quot;)));
+} catch (Exception x) {
+  log.info(&quot;connect error: &quot;,x);
+}
+vars.putObject(&quot;POP3CLIENT&quot;,pc);
+
+//log.info(Thread.currentThread().getName()+&quot; &quot;+ctx.getThreadNum().toString()+&quot; START&quot;);
+log.info(Thread.currentThread().getName()+&quot; START&quot;);
+//Capture POP response and include as sampler Response
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
+
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;USER&quot;,vars.get(&quot;USER&quot;));
+  log.info(Thread.currentThread().getName()+&quot; USER&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; USER: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="PASS" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;PASS&quot;,vars.get(&quot;PASS&quot;));
+  log.info(Thread.currentThread().getName()+&quot; PASS&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; PASS: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="QUIT" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.logout();
+  log.info(Thread.currentThread().getName()+&quot; QUIT&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; QUIT: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="STAT" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.concurrent.ThreadLocalRandom;
+
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;STAT&quot;);
+  log.info(Thread.currentThread().getName()+&quot; STAT&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; STAT: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  //Assign random messageId for testing even if STAT test failed
+  vars.put(&quot;msgId&quot;, &quot;${__Random(1,10)}&quot;);
+  log.info(&quot;Message ID is: &quot; + vars.get(&quot;msgId&quot;));
+
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+else
+{
+  //Assign random messageId for testing - based on the number of messages present in user&apos;s mailbox
+  String[] stat_reply = pc.getReplyString().split(&quot; &quot;);
+  String numMsgStr = stat_reply[1];
+  int numMsg = Integer.parseInt(numMsgStr);
+  log.info(&quot;Number of Messages= &quot; + numMsg);
+  int randNum=ThreadLocalRandom.current().nextInt(1, numMsg);
+  vars.put(&quot;msgId&quot;, randNum.toString());
+  log.info(&quot;Message ID is: &quot; + vars.get(&quot;msgId&quot;));
+}
+
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UIDL" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;UIDL&quot;);
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; UIDL&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; UIDL: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="TOP" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+String args = vars.get(&quot;msgId&quot;) + &quot; 10&quot;;
+
+try {
+  log.info(&quot;MsgID is: &quot; +  vars.get(&quot;msgId&quot;));
+  pc.sendCommand(&quot;TOP&quot;, args);
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; TOP&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; TOP: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="LIST_MSG" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  log.info(&quot;MsgID is: &quot; +  vars.get(&quot;msgId&quot;));
+  pc.sendCommand(&quot;LIST&quot;, vars.get(&quot;msgId&quot;));
+  log.info(Thread.currentThread().getName()+&quot; LIST_MSG&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; LIST_MSG: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="RETR" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  log.info(&quot;MsgID is: &quot; +  vars.get(&quot;msgId&quot;));
+  pc.sendCommand(&quot;RETR&quot;, vars.get(&quot;msgId&quot;));
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; RETR&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; RETR: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="DELE" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  log.info(&quot;MsgID is: &quot; +  vars.get(&quot;msgId&quot;));
+  pc.sendCommand(&quot;DELE&quot;, vars.get(&quot;msgId&quot;));
+  log.info(Thread.currentThread().getName()+&quot; DELE&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; DELE: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="RSET" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;RSET&quot;);
+  log.info(Thread.currentThread().getName()+&quot; RSET&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; RSET: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="CAPA" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;CAPA&quot;);
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; CAPA&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; CAPA: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="RETR_DEL" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  log.info(&quot;MsgID is: &quot; +  vars.get(&quot;msgId&quot;));
+  pc.sendCommand(&quot;RETR&quot;, vars.get(&quot;msgId&quot;));
+  log.info(Thread.currentThread().getName()+&quot; RETR_DEL&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; RETR_DEL: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;-ERR message is deleted&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="XOIP" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;XOIP&quot;, vars.get(&quot;clientIP&quot;));
+  log.info(Thread.currentThread().getName()+&quot; XOIP&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; XOIP: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="NOOP" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;NOOP&quot;);
+  log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; NOOP: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UIDL_MSG" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  log.info(&quot;MsgID is: &quot; +  vars.get(&quot;msgId&quot;));
+  pc.sendCommand(&quot;UIDL&quot;, vars.get(&quot;msgId&quot;));
+  log.info(Thread.currentThread().getName()+&quot; UIDL_MSG&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; UIDL_MSG: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="LOOP" enabled="true">
+                <boolProp name="LoopController.continue_forever">true</boolProp>
+                <stringProp name="LoopController.loops">20</stringProp>
+              </LoopController>
+              <hashTree>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="USER" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+import com.zimbra.jmeter.Zimbra;
+import com.zimbra.jmeter.Command;
+
+//Create POP conncection and store for all future use
+//log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
+POP3Client pc = new POP3Client();
+try {
+  log.info(&quot;POP connection: &quot;+props.get(&quot;POP.server&quot;)+&quot; &quot;+props.get(&quot;POP.port&quot;));
+  pc.connect(props.get(&quot;POP.server&quot;),Integer.parseInt(props.get(&quot;POP.port&quot;)));
+} catch (Exception x) {
+  log.info(&quot;connect error: &quot;,x);
+}
+vars.putObject(&quot;POP3CLIENT&quot;,pc);
+
+//log.info(Thread.currentThread().getName()+&quot; &quot;+ctx.getThreadNum().toString()+&quot; START&quot;);
+log.info(Thread.currentThread().getName()+&quot; START&quot;);
+//Capture POP response and include as sampler Response
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
+
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;USER&quot;,vars.get(&quot;USER&quot;));
+  log.info(Thread.currentThread().getName()+&quot; USER&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; USER: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="PASS" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;PASS&quot;,vars.get(&quot;PASS&quot;));
+  log.info(Thread.currentThread().getName()+&quot; PASS&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; PASS: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="STAT" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.concurrent.ThreadLocalRandom;
+
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;STAT&quot;);
+  log.info(Thread.currentThread().getName()+&quot; STAT&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; STAT: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  //Assign random messageId for testing even if STAT test failed
+  vars.put(&quot;msgId&quot;, &quot;${__Random(1,10)}&quot;);
+  log.info(&quot;Message ID is: &quot; + vars.get(&quot;msgId&quot;));
+
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+else
+{
+  //Assign random messageId for testing - based on the number of messages present in user&apos;s mailbox
+  String[] stat_reply = pc.getReplyString().split(&quot; &quot;);
+  String numMsgStr = stat_reply[1];
+  int numMsg = Integer.parseInt(numMsgStr);
+  log.info(&quot;Number of Messages= &quot; + numMsg);
+  int randNum=ThreadLocalRandom.current().nextInt(1, numMsg);
+  vars.put(&quot;msgId&quot;, randNum.toString());
+  log.info(&quot;Message ID is: &quot; + vars.get(&quot;msgId&quot;));
+}
+
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="TOP" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+String args = vars.get(&quot;msgId&quot;) + &quot; 10&quot;;
+
+try {
+  log.info(&quot;MsgID is: &quot; +  vars.get(&quot;msgId&quot;));
+  pc.sendCommand(&quot;TOP&quot;, args);
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; TOP&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; TOP: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UIDL" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;UIDL&quot;);
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; UIDL&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; UIDL: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="LOOP_UIDL" enabled="true">
+                  <boolProp name="LoopController.continue_forever">true</boolProp>
+                  <stringProp name="LoopController.loops">170</stringProp>
+                </LoopController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UIDL_MSG" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  log.info(&quot;MsgID is: &quot; +  vars.get(&quot;msgId&quot;));
+  pc.sendCommand(&quot;UIDL&quot;, vars.get(&quot;msgId&quot;));
+  log.info(Thread.currentThread().getName()+&quot; UIDL_MSG&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; UIDL_MSG: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="QUIT" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.logout();
+  log.info(Thread.currentThread().getName()+&quot; QUIT&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; QUIT: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="USER" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+import com.zimbra.jmeter.Zimbra;
+import com.zimbra.jmeter.Command;
+
+//Create POP conncection and store for all future use
+//log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
+POP3Client pc = new POP3Client();
+try {
+  log.info(&quot;POP connection: &quot;+props.get(&quot;POP.server&quot;)+&quot; &quot;+props.get(&quot;POP.port&quot;));
+  pc.connect(props.get(&quot;POP.server&quot;),Integer.parseInt(props.get(&quot;POP.port&quot;)));
+} catch (Exception x) {
+  log.info(&quot;connect error: &quot;,x);
+}
+vars.putObject(&quot;POP3CLIENT&quot;,pc);
+
+//log.info(Thread.currentThread().getName()+&quot; &quot;+ctx.getThreadNum().toString()+&quot; START&quot;);
+log.info(Thread.currentThread().getName()+&quot; START&quot;);
+//Capture POP response and include as sampler Response
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
+
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;USER&quot;,vars.get(&quot;USER&quot;));
+  log.info(Thread.currentThread().getName()+&quot; USER&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; USER: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="PASS" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;PASS&quot;,vars.get(&quot;PASS&quot;));
+  log.info(Thread.currentThread().getName()+&quot; PASS&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; PASS: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="STAT" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.concurrent.ThreadLocalRandom;
+
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;STAT&quot;);
+  log.info(Thread.currentThread().getName()+&quot; STAT&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; STAT: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  //Assign random messageId for testing even if STAT test failed
+  vars.put(&quot;msgId&quot;, &quot;${__Random(1,10)}&quot;);
+  log.info(&quot;Message ID is: &quot; + vars.get(&quot;msgId&quot;));
+
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+else
+{
+  //Assign random messageId for testing - based on the number of messages present in user&apos;s mailbox
+  String[] stat_reply = pc.getReplyString().split(&quot; &quot;);
+  String numMsgStr = stat_reply[1];
+  int numMsg = Integer.parseInt(numMsgStr);
+  log.info(&quot;Number of Messages= &quot; + numMsg);
+  int randNum=ThreadLocalRandom.current().nextInt(1, numMsg);
+  vars.put(&quot;msgId&quot;, randNum.toString());
+  log.info(&quot;Message ID is: &quot; + vars.get(&quot;msgId&quot;));
+}
+
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="RETR" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  log.info(&quot;MsgID is: &quot; +  vars.get(&quot;msgId&quot;));
+  pc.sendCommand(&quot;RETR&quot;, vars.get(&quot;msgId&quot;));
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; RETR&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; RETR: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="TOP" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+String args = vars.get(&quot;msgId&quot;) + &quot; 10&quot;;
+
+try {
+  log.info(&quot;MsgID is: &quot; +  vars.get(&quot;msgId&quot;));
+  pc.sendCommand(&quot;TOP&quot;, args);
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; TOP&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; TOP: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="LIST" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  //POP3MessageInfo[] x = pc.listMessages();
+  pc.sendCommand(&quot;LIST&quot;);
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; LIST&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; LIST: &quot;+e);
+}
+
+// store the response mailboxes for posible use in other commands
+// available in the jmeter variable MAILBOXES
+//ArrayList mailboxes = new ArrayList();
+//String[] lines = icw.toString().split(&quot;\\r?\\n&quot;);
+//for (String s: lines) {
+//	// * LIST (\HasNoChildren \Drafts) &quot;/&quot; &quot;Drafts&quot;
+//	Pattern p = Pattern.compile(&quot;\\* LIST \\(([^\\)]+)\\) \&quot;([^\&quot;]+)\&quot; \&quot;([^\&quot;]+)\&quot;&quot;);
+//	Matcher m = p.matcher(s);
+//     while (m.find()) {
+//	  //log.info(m.group(2)+m.group(3));
+//	  mailboxes.add(m.group(2)+m.group(3));
+//     }
+//}
+//vars.putObject(&quot;MAILBOXES&quot;,mailboxes);
+
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="TOP" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+String args = vars.get(&quot;msgId&quot;) + &quot; 10&quot;;
+
+try {
+  log.info(&quot;MsgID is: &quot; +  vars.get(&quot;msgId&quot;));
+  pc.sendCommand(&quot;TOP&quot;, args);
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; TOP&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; TOP: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="RETR" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  log.info(&quot;MsgID is: &quot; +  vars.get(&quot;msgId&quot;));
+  pc.sendCommand(&quot;RETR&quot;, vars.get(&quot;msgId&quot;));
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; RETR&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; RETR: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="STAT" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.concurrent.ThreadLocalRandom;
+
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;STAT&quot;);
+  log.info(Thread.currentThread().getName()+&quot; STAT&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; STAT: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  //Assign random messageId for testing even if STAT test failed
+  vars.put(&quot;msgId&quot;, &quot;${__Random(1,10)}&quot;);
+  log.info(&quot;Message ID is: &quot; + vars.get(&quot;msgId&quot;));
+
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+else
+{
+  //Assign random messageId for testing - based on the number of messages present in user&apos;s mailbox
+  String[] stat_reply = pc.getReplyString().split(&quot; &quot;);
+  String numMsgStr = stat_reply[1];
+  int numMsg = Integer.parseInt(numMsgStr);
+  log.info(&quot;Number of Messages= &quot; + numMsg);
+  int randNum=ThreadLocalRandom.current().nextInt(1, numMsg);
+  vars.put(&quot;msgId&quot;, randNum.toString());
+  log.info(&quot;Message ID is: &quot; + vars.get(&quot;msgId&quot;));
+}
+
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="LIST" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  //POP3MessageInfo[] x = pc.listMessages();
+  pc.sendCommand(&quot;LIST&quot;);
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; LIST&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; LIST: &quot;+e);
+}
+
+// store the response mailboxes for posible use in other commands
+// available in the jmeter variable MAILBOXES
+//ArrayList mailboxes = new ArrayList();
+//String[] lines = icw.toString().split(&quot;\\r?\\n&quot;);
+//for (String s: lines) {
+//	// * LIST (\HasNoChildren \Drafts) &quot;/&quot; &quot;Drafts&quot;
+//	Pattern p = Pattern.compile(&quot;\\* LIST \\(([^\\)]+)\\) \&quot;([^\&quot;]+)\&quot; \&quot;([^\&quot;]+)\&quot;&quot;);
+//	Matcher m = p.matcher(s);
+//     while (m.find()) {
+//	  //log.info(m.group(2)+m.group(3));
+//	  mailboxes.add(m.group(2)+m.group(3));
+//     }
+//}
+//vars.putObject(&quot;MAILBOXES&quot;,mailboxes);
+
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="DELE" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  log.info(&quot;MsgID is: &quot; +  vars.get(&quot;msgId&quot;));
+  pc.sendCommand(&quot;DELE&quot;, vars.get(&quot;msgId&quot;));
+  log.info(Thread.currentThread().getName()+&quot; DELE&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; DELE: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="QUIT" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.logout();
+  log.info(Thread.currentThread().getName()+&quot; QUIT&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; QUIT: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="USER" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+import com.zimbra.jmeter.Zimbra;
+import com.zimbra.jmeter.Command;
+
+//Create POP conncection and store for all future use
+//log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
+POP3Client pc = new POP3Client();
+try {
+  log.info(&quot;POP connection: &quot;+props.get(&quot;POP.server&quot;)+&quot; &quot;+props.get(&quot;POP.port&quot;));
+  pc.connect(props.get(&quot;POP.server&quot;),Integer.parseInt(props.get(&quot;POP.port&quot;)));
+} catch (Exception x) {
+  log.info(&quot;connect error: &quot;,x);
+}
+vars.putObject(&quot;POP3CLIENT&quot;,pc);
+
+//log.info(Thread.currentThread().getName()+&quot; &quot;+ctx.getThreadNum().toString()+&quot; START&quot;);
+log.info(Thread.currentThread().getName()+&quot; START&quot;);
+//Capture POP response and include as sampler Response
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
+
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;USER&quot;,vars.get(&quot;USER&quot;));
+  log.info(Thread.currentThread().getName()+&quot; USER&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; USER: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="PASS" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;PASS&quot;,vars.get(&quot;PASS&quot;));
+  log.info(Thread.currentThread().getName()+&quot; PASS&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; PASS: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="STAT" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.concurrent.ThreadLocalRandom;
+
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;STAT&quot;);
+  log.info(Thread.currentThread().getName()+&quot; STAT&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; STAT: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  //Assign random messageId for testing even if STAT test failed
+  vars.put(&quot;msgId&quot;, &quot;${__Random(1,10)}&quot;);
+  log.info(&quot;Message ID is: &quot; + vars.get(&quot;msgId&quot;));
+
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+else
+{
+  //Assign random messageId for testing - based on the number of messages present in user&apos;s mailbox
+  String[] stat_reply = pc.getReplyString().split(&quot; &quot;);
+  String numMsgStr = stat_reply[1];
+  int numMsg = Integer.parseInt(numMsgStr);
+  log.info(&quot;Number of Messages= &quot; + numMsg);
+  int randNum=ThreadLocalRandom.current().nextInt(1, numMsg);
+  vars.put(&quot;msgId&quot;, randNum.toString());
+  log.info(&quot;Message ID is: &quot; + vars.get(&quot;msgId&quot;));
+}
+
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="RETR" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  log.info(&quot;MsgID is: &quot; +  vars.get(&quot;msgId&quot;));
+  pc.sendCommand(&quot;RETR&quot;, vars.get(&quot;msgId&quot;));
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; RETR&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; RETR: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="QUIT" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.logout();
+  log.info(Thread.currentThread().getName()+&quot; QUIT&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; QUIT: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="USER" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+import com.zimbra.jmeter.Zimbra;
+import com.zimbra.jmeter.Command;
+
+//Create POP conncection and store for all future use
+//log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
+POP3Client pc = new POP3Client();
+try {
+  log.info(&quot;POP connection: &quot;+props.get(&quot;POP.server&quot;)+&quot; &quot;+props.get(&quot;POP.port&quot;));
+  pc.connect(props.get(&quot;POP.server&quot;),Integer.parseInt(props.get(&quot;POP.port&quot;)));
+} catch (Exception x) {
+  log.info(&quot;connect error: &quot;,x);
+}
+vars.putObject(&quot;POP3CLIENT&quot;,pc);
+
+//log.info(Thread.currentThread().getName()+&quot; &quot;+ctx.getThreadNum().toString()+&quot; START&quot;);
+log.info(Thread.currentThread().getName()+&quot; START&quot;);
+//Capture POP response and include as sampler Response
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
+
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;USER&quot;,vars.get(&quot;USER&quot;));
+  log.info(Thread.currentThread().getName()+&quot; USER&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; USER: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="PASS" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;PASS&quot;,vars.get(&quot;PASS&quot;));
+  log.info(Thread.currentThread().getName()+&quot; PASS&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; PASS: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="STAT" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.concurrent.ThreadLocalRandom;
+
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;STAT&quot;);
+  log.info(Thread.currentThread().getName()+&quot; STAT&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; STAT: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  //Assign random messageId for testing even if STAT test failed
+  vars.put(&quot;msgId&quot;, &quot;${__Random(1,10)}&quot;);
+  log.info(&quot;Message ID is: &quot; + vars.get(&quot;msgId&quot;));
+
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+else
+{
+  //Assign random messageId for testing - based on the number of messages present in user&apos;s mailbox
+  String[] stat_reply = pc.getReplyString().split(&quot; &quot;);
+  String numMsgStr = stat_reply[1];
+  int numMsg = Integer.parseInt(numMsgStr);
+  log.info(&quot;Number of Messages= &quot; + numMsg);
+  int randNum=ThreadLocalRandom.current().nextInt(1, numMsg);
+  vars.put(&quot;msgId&quot;, randNum.toString());
+  log.info(&quot;Message ID is: &quot; + vars.get(&quot;msgId&quot;));
+}
+
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="QUIT" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.logout();
+  log.info(Thread.currentThread().getName()+&quot; QUIT&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; QUIT: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="USER" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+import com.zimbra.jmeter.Zimbra;
+import com.zimbra.jmeter.Command;
+
+//Create POP conncection and store for all future use
+//log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
+POP3Client pc = new POP3Client();
+try {
+  log.info(&quot;POP connection: &quot;+props.get(&quot;POP.server&quot;)+&quot; &quot;+props.get(&quot;POP.port&quot;));
+  pc.connect(props.get(&quot;POP.server&quot;),Integer.parseInt(props.get(&quot;POP.port&quot;)));
+} catch (Exception x) {
+  log.info(&quot;connect error: &quot;,x);
+}
+vars.putObject(&quot;POP3CLIENT&quot;,pc);
+
+//log.info(Thread.currentThread().getName()+&quot; &quot;+ctx.getThreadNum().toString()+&quot; START&quot;);
+log.info(Thread.currentThread().getName()+&quot; START&quot;);
+//Capture POP response and include as sampler Response
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
+
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;USER&quot;,vars.get(&quot;USER&quot;));
+  log.info(Thread.currentThread().getName()+&quot; USER&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; USER: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="PASS" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;PASS&quot;,vars.get(&quot;PASS&quot;));
+  log.info(Thread.currentThread().getName()+&quot; PASS&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; PASS: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="LIST" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  //POP3MessageInfo[] x = pc.listMessages();
+  pc.sendCommand(&quot;LIST&quot;);
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; LIST&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; LIST: &quot;+e);
+}
+
+// store the response mailboxes for posible use in other commands
+// available in the jmeter variable MAILBOXES
+//ArrayList mailboxes = new ArrayList();
+//String[] lines = icw.toString().split(&quot;\\r?\\n&quot;);
+//for (String s: lines) {
+//	// * LIST (\HasNoChildren \Drafts) &quot;/&quot; &quot;Drafts&quot;
+//	Pattern p = Pattern.compile(&quot;\\* LIST \\(([^\\)]+)\\) \&quot;([^\&quot;]+)\&quot; \&quot;([^\&quot;]+)\&quot;&quot;);
+//	Matcher m = p.matcher(s);
+//     while (m.find()) {
+//	  //log.info(m.group(2)+m.group(3));
+//	  mailboxes.add(m.group(2)+m.group(3));
+//     }
+//}
+//vars.putObject(&quot;MAILBOXES&quot;,mailboxes);
+
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="STAT" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.concurrent.ThreadLocalRandom;
+
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.sendCommand(&quot;STAT&quot;);
+  log.info(Thread.currentThread().getName()+&quot; STAT&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; STAT: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  //Assign random messageId for testing even if STAT test failed
+  vars.put(&quot;msgId&quot;, &quot;${__Random(1,10)}&quot;);
+  log.info(&quot;Message ID is: &quot; + vars.get(&quot;msgId&quot;));
+
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+else
+{
+  //Assign random messageId for testing - based on the number of messages present in user&apos;s mailbox
+  String[] stat_reply = pc.getReplyString().split(&quot; &quot;);
+  String numMsgStr = stat_reply[1];
+  int numMsg = Integer.parseInt(numMsgStr);
+  log.info(&quot;Number of Messages= &quot; + numMsg);
+  int randNum=ThreadLocalRandom.current().nextInt(1, numMsg);
+  vars.put(&quot;msgId&quot;, randNum.toString());
+  log.info(&quot;Message ID is: &quot; + vars.get(&quot;msgId&quot;));
+}
+
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="TOP" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+String args = vars.get(&quot;msgId&quot;) + &quot; 10&quot;;
+
+try {
+  log.info(&quot;MsgID is: &quot; +  vars.get(&quot;msgId&quot;));
+  pc.sendCommand(&quot;TOP&quot;, args);
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; TOP&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; TOP: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="RETR" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  log.info(&quot;MsgID is: &quot; +  vars.get(&quot;msgId&quot;));
+  pc.sendCommand(&quot;RETR&quot;, vars.get(&quot;msgId&quot;));
+  pc.getAdditionalReply();
+  log.info(Thread.currentThread().getName()+&quot; RETR&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; RETR: &quot;+e);
+}
+
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="QUIT" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.logout();
+  log.info(Thread.currentThread().getName()+&quot; QUIT&quot;);
+  log.info(&quot;Command response is: &quot; + pc.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; QUIT: &quot;+e);
+}
+// pop succesful response starts with &quot;+OK&quot;
+if (!pc.getReplyString().startsWith(&quot;+OK&quot;)) {
+  SampleResult.setSuccessful(false);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  IsSuccess=false; 
+}
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="END" enabled="true">
+          <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
+POP3Client pc = vars.getObject(&quot;POP3CLIENT&quot;);
+
+try {
+  pc.disconnect();
+  log.info(Thread.currentThread().getName()+&quot; END&quot;);
+} catch (Exception e) {
+  log.info(Thread.currentThread().getName()+&quot; END: &quot;+e);
+}
+
+SampleResult.setResponseData(pc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+    <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
+      <boolProp name="WorkBench.save">true</boolProp>
+    </WorkBench>
+    <hashTree/>
+  </hashTree>
+</jmeterTestPlan>
