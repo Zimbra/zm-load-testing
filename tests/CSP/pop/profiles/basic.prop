@@ -1,0 +1,9 @@
+PROFILE.POP.type=sequence
+PROFILE.POP.sequence.1=XOIP
+PROFILE.POP.sequence.2=LOOP
+PROFILE.POP.sequence.3=USER
+PROFILE.POP.sequence.4=PASS
+PROFILE.POP.sequence.5=NOOP
+PROFILE.POP.sequence.6=RSET
+PROFILE.POP.sequence.7=CAPA
+PROFILE.POP.sequence.8=QUIT
