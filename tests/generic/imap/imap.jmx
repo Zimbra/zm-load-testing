@@ -199,8 +199,8 @@ vars.putObject(&quot;IMAPCLIENT&quot;,ic);
 // Random folder names to be used by IMAP
 vars.put(&quot;imap_folder1&quot;,&quot;imapfolder1_${__Random(1,1000)}&quot;);
 vars.put(&quot;imap_folder2&quot;,&quot;imapfolder2_${__Random(1,1000)}&quot;);
-log.info(&quot;Imap folder1 name is: &quot; +vars.get(&quot;imap_folder1&quot;));
-log.info(&quot;Imap folder2 name is: &quot; +vars.get(&quot;imap_folder2&quot;));
+//log.info(&quot;Imap folder1 name is: &quot; +vars.get(&quot;imap_folder1&quot;));
+//log.info(&quot;Imap folder2 name is: &quot; +vars.get(&quot;imap_folder2&quot;));
 
 //log.info(Thread.currentThread().getName()+&quot; &quot;+ctx.getThreadNum().toString()+&quot; START&quot;);
 log.info(Thread.currentThread().getName()+&quot; START&quot;);
@@ -229,8 +229,8 @@ if (commands.size() &gt; 0) {
   }
 
 //Below log code to debug issues with command
-log.info(&quot;Command executed is: &quot; +vars.get(&quot;COMMAND&quot;));
-log.info(&quot;Command execution flag is: &quot; +vars.get(&quot;CONTINUE&quot;));
+//log.info(&quot;Command executed is: &quot; +vars.get(&quot;COMMAND&quot;));
+//log.info(&quot;Command execution flag is: &quot; +vars.get(&quot;CONTINUE&quot;));
 
 }
 if (commands.size() == 0) {
@@ -271,7 +271,7 @@ try {
   ic.append(&quot;INBOX&quot;,null,null,&quot;From: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;IMAP.domain&quot;)+
                               &quot;\nTo: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;IMAP.domain&quot;)+
                               &quot;\nSubject: Testing\n\nThis is a test of IMAP append.\n&quot;);
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());                            
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());                            
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -285,6 +285,7 @@ try {
 if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString().contains(&quot;APPEND completed&quot;))) {
   SampleResult.setSuccessful(false);
   IsSuccess=false; 
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -303,7 +304,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; CAPABILITY&quot;);
   ic.capability();
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -317,6 +318,7 @@ try {
 if (!ic.getReplyString().contains(&quot;OK CAPABILITY completed&quot;)) {
   SampleResult.setSuccessful(false);
   IsSuccess=false; 
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -336,7 +338,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; CHECK&quot;);
   ic.check();
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -350,6 +352,7 @@ try {
 if (!ic.getReplyString().contains(&quot;OK CHECK completed&quot;)) {
   SampleResult.setSuccessful(false);
   IsSuccess=false; 
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -368,7 +371,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; CLOSE&quot;);
   ic.close();
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -382,6 +385,7 @@ try {
 if (!ic.getReplyString().contains(&quot;OK CLOSE completed&quot;)) {
   SampleResult.setSuccessful(false);
   IsSuccess=false; 
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -402,7 +406,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; COPY&quot;);
   ic.copy(&quot;1&quot;,vars.get(&quot;imap_folder1&quot;));
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -415,7 +419,8 @@ try {
 
 if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString().contains(&quot;COPY completed&quot;))) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -434,7 +439,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; CREATE&quot;);
   ic.create(vars.get(&quot;imap_folder1&quot;));
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -448,6 +453,7 @@ try {
 if (!ic.getReplyString().contains(&quot;OK CREATE completed&quot;)) {
   SampleResult.setSuccessful(false);
   IsSuccess=false; 
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -466,7 +472,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; DELETE&quot;);
   ic.delete(vars.get(&quot;imap_folder2&quot;));
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -480,6 +486,7 @@ try {
 if (!ic.getReplyString().contains(&quot;OK DELETE completed&quot;)) {
   SampleResult.setSuccessful(false);
   IsSuccess=false; 
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -498,7 +505,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; EXAMINE&quot;);
   ic.examine(&quot;INBOX&quot;);
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -511,7 +518,8 @@ try {
 
 if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString().contains(&quot;EXAMINE completed&quot;))) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -530,7 +538,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; EXPUNGE&quot;);
   ic.expunge();
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -543,7 +551,8 @@ try {
 
 if (!ic.getReplyString().contains(&quot;OK EXPUNGE completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -586,7 +595,8 @@ try {
 
 if (!ic.getReplyString().contains(&quot;OK FETCH completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -605,7 +615,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; ID&quot;);
   ic.sendCommand(&quot;ID&quot;,&quot;(\&quot;JMeter\&quot; \&quot;BeanShell\&quot; \&quot;Commons-Net\&quot; \&quot;Testing\&quot;)&quot;);
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -618,7 +628,8 @@ try {
 
 if (!ic.getReplyString().contains(&quot;OK ID completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -640,7 +651,7 @@ try {
   ic.sendCommand(&quot;IDLE&quot;);
   TimeUnit.SECONDS.sleep(10);
   ic.sendData(&quot;DONE&quot;);
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -654,6 +665,7 @@ try {
 if (!ic.getReplyString().contains(&quot;OK IDLE completed&quot;)) {
   SampleResult.setSuccessful(false);
   IsSuccess=false; 
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -674,7 +686,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; LIST&quot;);
   ic.list(&quot;\&quot;\&quot;&quot;,&quot;\&quot;*\&quot;&quot;);
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -702,7 +714,8 @@ try {
 
 if (!ic.getReplyString().contains(&quot;OK LIST completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString()); 
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -721,7 +734,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; LOGIN&quot;);
   ic.login(vars.get(&quot;USER&quot;),vars.get(&quot;PASS&quot;));
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   continue_flag = &quot;false&quot;;
@@ -732,7 +745,8 @@ try {
 if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString().contains(&quot;LOGIN completed&quot;))) {
   SampleResult.setSuccessful(false);
   continue_flag = &quot;false&quot;;
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -751,8 +765,8 @@ String logout_error;
 
 try {
   ic.logout();
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
   log.info(Thread.currentThread().getName()+&quot; LOGOUT&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
   logout_error=&quot;true&quot;;
@@ -771,6 +785,7 @@ if (!ic.getReplyString().contains(&quot;OK LOGOUT completed&quot;)) {
 if (logout_error == &quot;true&quot;){
   SampleResult.setSuccessful(true);
   IsSuccess=true;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -789,7 +804,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; LSUB&quot;);
   ic.lsub(&quot;\&quot;\&quot;&quot;,&quot;\&quot;*\&quot;&quot;);
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -802,7 +817,8 @@ try {
 
 if (!ic.getReplyString().contains(&quot;OK LSUB completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString()); 
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -821,7 +837,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; NAMESPACE&quot;);
   ic.sendCommand(&quot;NAMESPACE&quot;);
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -834,7 +850,8 @@ try {
 
 if (!ic.getReplyString().contains(&quot;OK NAMESPACE completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -853,7 +870,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
   ic.noop();
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -866,7 +883,8 @@ try {
 
 if (!ic.getReplyString().contains(&quot;OK NOOP completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -885,7 +903,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; RENAME&quot;);
   ic.rename(vars.get(&quot;imap_folder1&quot;),vars.get(&quot;imap_folder2&quot;));
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -898,7 +916,8 @@ try {
 
 if (!ic.getReplyString().contains(&quot;OK RENAME completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -919,7 +938,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; SEARCH&quot;);
   ic.search(&quot;ALL&quot;);
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -953,7 +972,8 @@ vars.putObject(&quot;MSGID&quot;,msgid);
 
 if (!ic.getReplyString().contains(&quot;OK SEARCH completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -972,7 +992,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
   ic.select(&quot;INBOX&quot;);
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   continue_flag = &quot;false&quot;;
@@ -983,7 +1003,8 @@ try {
 if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString().contains(&quot;SELECT completed&quot;))) {
   SampleResult.setSuccessful(false);
   continue_flag = &quot;false&quot;;
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -1002,7 +1023,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; STATUS&quot;);
   ic.status(&quot;INBOX&quot;,new String[]{&quot;MESSAGES&quot;,&quot;RECENT&quot;,&quot;UIDNEXT&quot;,&quot;UIDVALIDITY&quot;,&quot;UNSEEN&quot;});
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -1015,7 +1036,8 @@ try {
 
 if (!ic.getReplyString().contains(&quot;OK STATUS completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString()); 
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -1036,7 +1058,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; STORE&quot;);
   ic.store(&quot;1&quot;,&quot;+FLAGS&quot;,&quot;(\\Seen)&quot;);
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -1049,7 +1071,8 @@ try {
 
 if (!ic.getReplyString().contains(&quot;OK STORE completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -1068,7 +1091,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; SUBSCRIBE&quot;);
   ic.subscribe(&quot;INBOX&quot;);
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -1081,7 +1104,8 @@ try {
 
 if (!ic.getReplyString().contains(&quot;OK SUBSCRIBE completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString()); 
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -1110,7 +1134,7 @@ if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
 try {
   log.info(Thread.currentThread().getName()+&quot; UID COPY&quot;);
   ic.uid(&quot;COPY&quot;,i+&quot; &quot;+vars.get(&quot;imap_folder1&quot;));
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -1123,7 +1147,8 @@ try {
 
 if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString().contains(&quot;UID COPY completed&quot;))) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -1166,7 +1191,8 @@ try {
 
 if (!ic.getReplyString().contains(&quot;OK UID FETCH completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -1187,7 +1213,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
   ic.uid(&quot;SEARCH&quot;,&quot;ALL&quot;);
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -1222,7 +1248,8 @@ vars.putObject(&quot;MSGUID&quot;,msguid);
 if (!ic.getReplyString().contains(&quot;OK UID SEARCH completed&quot;)) {
   SampleResult.setSuccessful(false);
   continue_flag = &quot;false&quot;;
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -1243,7 +1270,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; UID STORE&quot;);
   ic.uid(&quot;STORE&quot;,&quot;1 +FLAGS (\\Seen)&quot;);
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -1256,7 +1283,8 @@ try {
 
 if (!ic.getReplyString().contains(&quot;OK UID STORE completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString()); 
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -1275,7 +1303,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; UNSELECT&quot;);
   ic.sendCommand(&quot;UNSELECT&quot;);
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -1288,7 +1316,8 @@ try {
 
 if (!ic.getReplyString().contains(&quot;OK UNSELECT completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -1307,7 +1336,7 @@ String continue_flag = &quot;true&quot;;
 try {
   log.info(Thread.currentThread().getName()+&quot; UNSUBSCRIBE&quot;);
   ic.unsubscribe(&quot;INBOX&quot;);
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -1320,7 +1349,8 @@ try {
 
 if (!ic.getReplyString().contains(&quot;OK UNSUBSCRIBE completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false; 
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
