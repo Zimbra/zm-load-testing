@@ -32,6 +32,7 @@
     <ivy:install organisation="kg.apc" module="jmeter-plugins-standard" revision="1.1.3" settingsRef="dev.settings" from="chain-resolver" to="build-dist" overwrite="true" transitive="true" type="jar"/>
     <ivy:install organisation="kg.apc" module="jmeter-plugins-extras" revision="1.4.0" settingsRef="dev.settings" from="chain-resolver" to="build-dist" overwrite="true" transitive="true" type="jar"/>
     <ivy:install organisation="kg.apc" module="jmeter-plugins-manager" revision="0.10" settingsRef="dev.settings" from="chain-resolver" to="build-dist" overwrite="true" transitive="true" type="jar"/>
+    <ivy:install organisation="kg.apc" module="jmeter-plugins-casutg" revision="2.8" settingsRef="dev.settings" from="chain-resolver" to="build-dist" overwrite="true" transitive="true" type="jar"/>
     <copy todir="${jmeter.lib.ext}">
       <fileset dir="${build.jar.dir}">
         <include name="cmdrunner-1.0.1.jar"/>
@@ -39,6 +40,7 @@
         <include name="jmeter-plugins-extras-libs-1.2.0.jar"/>
         <include name="jmeter-plugins-manager-0.10.jar"/>
         <include name="jmeter-plugins-standard-1.1.3.jar"/>
+        <include name="jmeter-plugins-casutg-2.8.jar"/>
      </fileset>
     </copy>
    <copy todir="${jar.dir}">
@@ -277,6 +279,78 @@
       <property name="ACCOUNTS.csv" value="${users}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/fixed/soapbenchmarking/load.prop"/>
+    </jmeter>
+  </target>
+  <target name="BSP-zsoap" depends="src,jar,logs">
+    <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/BSP/zsoap/zsoap.jmx"
+            jmeterlogfile="${logs}/BSP-zsoap-jmeter.log"
+            resultlog="${logs}/BSP-zsoap-requests.log">
+      <property name="ACCOUNTS.csv" value="${users}"/>
+      <property name="user.classpath" value="${zjmeter}"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+      <jmeterarg value="-q${basedir}/tests/BSP/zsoap/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/BSP/zsoap/profiles/basic.prop"/>
+    </jmeter>
+  </target>
+  <target name="BSP-imap" depends="src,jar,logs">
+    <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/BSP/imap/imap.jmx"
+            jmeterlogfile="${logs}/BSP-imap-jmeter.log"
+            resultlog="${logs}/BSP-imap-requests.log">
+      <property name="ACCOUNTS.csv" value="${users}"/>
+      <property name="user.classpath" value="${zjmeter}"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+      <jmeterarg value="-q${basedir}/tests/BSP/imap/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/BSP/imap/profiles/basic.prop"/>
+    </jmeter>
+  </target>
+  <target name="BSP-pop" depends="src,jar,logs">
+    <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/BSP/pop/pop.jmx"
+            jmeterlogfile="${logs}/BSP-pop-jmeter.log"
+            resultlog="${logs}/BSP-pop-requests.log">
+      <property name="ACCOUNTS.csv" value="${users}"/>
+      <property name="user.classpath" value="${zjmeter}"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+      <jmeterarg value="-q${basedir}/tests/BSP/pop/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/BSP/pop/profiles/basic.prop"/>
+    </jmeter>
+  </target>
+  <target name="CSP-zsoap" depends="src,jar,logs">
+    <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/CSP/zsoap/zsoap.jmx"
+            jmeterlogfile="${logs}/CSP-zsoap-jmeter.log"
+            resultlog="${logs}/CSP-zsoap-requests.log">
+      <property name="ACCOUNTS.csv" value="${users}"/>
+      <property name="user.classpath" value="${zjmeter}"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+      <jmeterarg value="-q${basedir}/tests/CSP/zsoap/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/CSP/zsoap/profiles/basic.prop"/>
+    </jmeter>
+  </target>
+  <target name="CSP-imap" depends="src,jar,logs">
+    <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/CSP/imap/imap.jmx"
+            jmeterlogfile="${logs}/CSP-imap-jmeter.log"
+            resultlog="${logs}/CSP-imap-requests.log">
+      <property name="ACCOUNTS.csv" value="${users}"/>
+      <property name="user.classpath" value="${zjmeter}"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+      <jmeterarg value="-q${basedir}/tests/CSP/imap/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/CSP/imap/profiles/basic.prop"/>
+    </jmeter>
+  </target>
+  <target name="CSP-pop" depends="src,jar,logs">
+    <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/CSP/pop/pop.jmx"
+            jmeterlogfile="${logs}/CSP-pop-jmeter.log"
+            resultlog="${logs}/CSP-pop-requests.log">
+      <property name="ACCOUNTS.csv" value="${users}"/>
+      <property name="user.classpath" value="${zjmeter}"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+      <jmeterarg value="-q${basedir}/tests/CSP/pop/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/CSP/pop/profiles/basic.prop"/>
     </jmeter>
   </target>
   <target name="genUsers" depends="logs">
