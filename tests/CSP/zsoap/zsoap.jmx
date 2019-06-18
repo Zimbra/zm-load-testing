@@ -199,36 +199,20 @@ vars.put(&quot;URL&quot;,url);
   </stringProp>
       </BeanShellPreProcessor>
       <hashTree/>
-      <kg.apc.jmeter.threads.UltimateThreadGroup guiclass="kg.apc.jmeter.threads.UltimateThreadGroupGui" testclass="kg.apc.jmeter.threads.UltimateThreadGroup" testname="ZSOAP User" enabled="true">
-        <collectionProp name="ultimatethreadgroupdata">
-          <collectionProp name="-2061366266">
-            <stringProp name="-1064415843">${__P(LOAD.ZSOAP.Ausers)}</stringProp>
-            <stringProp name="48">0</stringProp>
-            <stringProp name="1997177827">${__P(LOAD.ZSOAP.rampup)}</stringProp>
-            <stringProp name="1206072734">${__P(LOAD.ZSOAP.avgloadDuration)}</stringProp>
-            <stringProp name="1997177827">${__P(LOAD.ZSOAP.rampup)}</stringProp>
-          </collectionProp>
-          <collectionProp name="-900526851">
-            <stringProp name="-692064594">${__P(LOAD.ZSOAP.Pusers)}</stringProp>
-            <stringProp name="1206072734">${__P(LOAD.ZSOAP.avgloadDuration)}</stringProp>
-            <stringProp name="1997177827">${__P(LOAD.ZSOAP.rampup)}</stringProp>
-            <stringProp name="732050223">${__P(LOAD.ZSOAP.peakloadDuration)}</stringProp>
-            <stringProp name="1997177827">${__P(LOAD.ZSOAP.rampup)}</stringProp>
-          </collectionProp>
-          <collectionProp name="1328040148">
-            <stringProp name="-1064415843">${__P(LOAD.ZSOAP.Ausers)}</stringProp>
-            <stringProp name="2132348706">${__P(LOAD.ZSOAP.initialDelay)}</stringProp>
-            <stringProp name="1997177827">${__P(LOAD.ZSOAP.rampup)}</stringProp>
-            <stringProp name="1206072734">${__P(LOAD.ZSOAP.avgloadDuration)}</stringProp>
-            <stringProp name="1997177827">${__P(LOAD.ZSOAP.rampup)}</stringProp>
-          </collectionProp>
-        </collectionProp>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="ZSOAP User" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <intProp name="LoopController.loops">-1</intProp>
+          <stringProp name="LoopController.loops">${__P(LOAD.ZSOAP.loopcount)}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-      </kg.apc.jmeter.threads.UltimateThreadGroup>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.ZSOAP.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.ZSOAP.rampup)}</stringProp>
+        <longProp name="ThreadGroup.start_time">1529531218000</longProp>
+        <longProp name="ThreadGroup.end_time">1529531240000</longProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
+      </ThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="randomVariableNameGenerator" enabled="true">
           <stringProp name="BeanShellSampler.query">import java.text.SimpleDateFormat;
