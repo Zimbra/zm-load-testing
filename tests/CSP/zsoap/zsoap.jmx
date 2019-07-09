@@ -150,8 +150,6 @@
         <stringProp name="soaptest_tagName">soaptag</stringProp>
         <stringProp name="soaptest_SearchFolderName">soapsearchtest</stringProp>
         <stringProp name="endDate">0</stringProp>
-        <stringProp name="intialDelay">0</stringProp>
-        <stringProp name="initialDelay"></stringProp>
       </ConfigTestElement>
       <hashTree/>
       <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="ZSOAP HTTP Config" enabled="true">
@@ -174,8 +172,6 @@
         <stringProp name="parameters"></stringProp>
         <boolProp name="resetInterpreter">false</boolProp>
         <stringProp name="script">import com.zimbra.jmeter.Zimbra;
-import com.zimbra.jmeter.Command;
-
 //debug();
 Zimbra soap = new Zimbra(props,&quot;ZSOAP&quot;);
 vars.putObject(&quot;ZSOAP&quot;,soap);
@@ -188,15 +184,7 @@ if (!props.get(&quot;HTTP.port&quot;).equals(&quot;&quot;) ) {
 }
 url = url+&quot;/service/soap&quot;;
 //log.info(url);
-vars.put(&quot;URL&quot;,url);
-
-  int delay1 = Integer.parseInt(props.get(&quot;LOAD.ZSOAP.avgloadDuration&quot;));
-  int delay2 = Integer.parseInt(props.get(&quot;LOAD.ZSOAP.peakloadDuration&quot;));
-
-  int initialDelay = delay1 + delay2;
-  vars.putObject(&quot;initialDelay&quot;,initialDelay.toString());
-
-  </stringProp>
+vars.put(&quot;URL&quot;,url);</stringProp>
       </BeanShellPreProcessor>
       <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="ZSOAP User" enabled="true">
