@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="3.2" jmeter="3.3 r1808647">
+<jmeterTestPlan version="1.2" properties="2.9" jmeter="3.0 r1743807">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -128,7 +128,7 @@ if (commands.size() &gt; 0) {
 //log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
 IMAPClient ic = new IMAPClient();
 try {
-  log.info(&quot;IMAP connection: &quot;+props.get(&quot;IMAP.server&quot;)+&quot; &quot;+props.get(&quot;IMAP.port&quot;));
+//log.info(&quot;IMAP connection: &quot;+props.get(&quot;IMAP.server&quot;)+&quot; &quot;+props.get(&quot;IMAP.port&quot;));
   ic.connect(props.get(&quot;IMAP.server&quot;),Integer.parseInt(props.get(&quot;IMAP.port&quot;)));
 } catch (Exception x) {
   log.info(&quot;connect error: &quot;,x);
@@ -141,8 +141,7 @@ vars.put(&quot;imap_folder2&quot;,&quot;imapfolder2_${__Random(1,1000)}&quot;);
 //log.info(&quot;Imap folder1 name is: &quot; +vars.get(&quot;imap_folder1&quot;));
 //log.info(&quot;Imap folder2 name is: &quot; +vars.get(&quot;imap_folder2&quot;));
 
-//log.info(Thread.currentThread().getName()+&quot; &quot;+ctx.getThreadNum().toString()+&quot; START&quot;);
-log.info(Thread.currentThread().getName()+&quot; START&quot;);
+//log.info(Thread.currentThread().getName()+&quot; START&quot;);
 //Capture IMAP response and include as sampler Response
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
@@ -206,7 +205,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; APPEND&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; APPEND&quot;);
   ic.append(&quot;INBOX&quot;,null,null,&quot;From: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;IMAP.domain&quot;)+
                               &quot;\nTo: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;IMAP.domain&quot;)+
                               &quot;\nSubject: Testing\n\nThis is a test of IMAP append.\n&quot;);
@@ -241,7 +240,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; CAPABILITY&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; CAPABILITY&quot;);
   ic.capability();
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -275,7 +274,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; CHECK&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; CHECK&quot;);
   ic.check();
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -308,7 +307,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; CLOSE&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; CLOSE&quot;);
   ic.close();
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -343,7 +342,7 @@ String continue_flag = &quot;true&quot;;
 // need to add support for situational copy of real things found
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; COPY&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; COPY&quot;);
   ic.copy(&quot;1&quot;,vars.get(&quot;imap_folder1&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -376,7 +375,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; CREATE&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; CREATE&quot;);
   ic.create(vars.get(&quot;imap_folder1&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -409,7 +408,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; DELETE&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; DELETE&quot;);
   ic.delete(vars.get(&quot;imap_folder2&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -442,7 +441,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; EXAMINE&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; EXAMINE&quot;);
   ic.examine(&quot;INBOX&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -475,7 +474,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; EXPUNGE&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; EXPUNGE&quot;);
   ic.expunge();
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -519,7 +518,7 @@ if (msgid != null &amp;&amp; msgid.size() &gt; 0) {
 
 try {
   //log.info(&quot;MSGID: &quot;+i);
-   log.info(Thread.currentThread().getName()+&quot; FETCH&quot;);
+   //log.info(Thread.currentThread().getName()+&quot; FETCH&quot;);
   ic.fetch(i,&quot;BODY[TEXT]&quot;);
   // log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -552,7 +551,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; ID&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; ID&quot;);
   ic.sendCommand(&quot;ID&quot;,&quot;(\&quot;JMeter\&quot; \&quot;BeanShell\&quot; \&quot;Commons-Net\&quot; \&quot;Testing\&quot;)&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -586,7 +585,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
   ic.sendCommand(&quot;IDLE&quot;);
   TimeUnit.SECONDS.sleep(10);
   ic.sendData(&quot;DONE&quot;);
@@ -623,7 +622,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; LIST&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; LIST&quot;);
   ic.list(&quot;\&quot;\&quot;&quot;,&quot;\&quot;*\&quot;&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -671,7 +670,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; LOGIN&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; LOGIN&quot;);
   ic.login(vars.get(&quot;USER&quot;),vars.get(&quot;PASS&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -704,7 +703,7 @@ String logout_error;
 
 try {
   ic.logout();
-  log.info(Thread.currentThread().getName()+&quot; LOGOUT&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; LOGOUT&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -741,7 +740,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; LSUB&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; LSUB&quot;);
   ic.lsub(&quot;\&quot;\&quot;&quot;,&quot;\&quot;*\&quot;&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -774,7 +773,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; NAMESPACE&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; NAMESPACE&quot;);
   ic.sendCommand(&quot;NAMESPACE&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -807,7 +806,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
   ic.noop();
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -840,7 +839,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; RENAME&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; RENAME&quot;);
   ic.rename(vars.get(&quot;imap_folder1&quot;),vars.get(&quot;imap_folder2&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -875,7 +874,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; SEARCH&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; SEARCH&quot;);
   ic.search(&quot;ALL&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -929,7 +928,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
   ic.select(&quot;INBOX&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -960,7 +959,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; STATUS&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; STATUS&quot;);
   ic.status(&quot;INBOX&quot;,new String[]{&quot;MESSAGES&quot;,&quot;RECENT&quot;,&quot;UIDNEXT&quot;,&quot;UIDVALIDITY&quot;,&quot;UNSEEN&quot;});
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -995,7 +994,7 @@ String continue_flag = &quot;true&quot;;
 // need to add support for situational store of real things found
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; STORE&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; STORE&quot;);
   ic.store(&quot;1&quot;,&quot;+FLAGS&quot;,&quot;(\\Seen)&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1028,7 +1027,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; SUBSCRIBE&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; SUBSCRIBE&quot;);
   ic.subscribe(&quot;INBOX&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1071,7 +1070,7 @@ if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
 }
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; UID COPY&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; UID COPY&quot;);
   ic.uid(&quot;COPY&quot;,i+&quot; &quot;+vars.get(&quot;imap_folder1&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1115,7 +1114,7 @@ if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
 
 try {
   //log.info(&quot;MSGUID: &quot;+i);
-  log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
   ic.uid(&quot;FETCH&quot;,i+&quot; BODY[TEXT]&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1150,7 +1149,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
   ic.uid(&quot;SEARCH&quot;,&quot;ALL&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1207,7 +1206,7 @@ String continue_flag = &quot;true&quot;;
 // need to add support for situational uic copy of real things found
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; UID STORE&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; UID STORE&quot;);
   ic.uid(&quot;STORE&quot;,&quot;1 +FLAGS (\\Seen)&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1240,7 +1239,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; UNSELECT&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; UNSELECT&quot;);
   ic.sendCommand(&quot;UNSELECT&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1273,7 +1272,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; UNSUBSCRIBE&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; UNSUBSCRIBE&quot;);
   ic.unsubscribe(&quot;INBOX&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1317,7 +1316,7 @@ String continue_flag = &quot;true&quot;;
 //log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
 IMAPClient ic = new IMAPClient();
 try {
-  log.info(&quot;IMAP connection: &quot;+props.get(&quot;IMAP.server&quot;)+&quot; &quot;+props.get(&quot;IMAP.port&quot;));
+//log.info(&quot;IMAP connection: &quot;+props.get(&quot;IMAP.server&quot;)+&quot; &quot;+props.get(&quot;IMAP.port&quot;));
   ic.connect(props.get(&quot;IMAP.server&quot;),Integer.parseInt(props.get(&quot;IMAP.port&quot;)));
 } catch (Exception x) {
   log.info(&quot;connect error: &quot;,x);
@@ -1325,7 +1324,7 @@ try {
 vars.putObject(&quot;IMAPCLIENT&quot;,ic);
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; LOGIN&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; LOGIN&quot;);
   ic.login(vars.get(&quot;USER&quot;),vars.get(&quot;PASS&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1361,7 +1360,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
   ic.noop();
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1400,7 +1399,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; ID&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; ID&quot;);
   ic.sendCommand(&quot;ID&quot;,&quot;(\&quot;JMeter\&quot; \&quot;BeanShell\&quot; \&quot;Commons-Net\&quot; \&quot;Testing\&quot;)&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1440,7 +1439,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
   ic.sendCommand(&quot;IDLE&quot;);
   TimeUnit.SECONDS.sleep(10);
   ic.sendData(&quot;DONE&quot;);
@@ -1481,7 +1480,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
   ic.noop();
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1520,7 +1519,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; ID&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; ID&quot;);
   ic.sendCommand(&quot;ID&quot;,&quot;(\&quot;JMeter\&quot; \&quot;BeanShell\&quot; \&quot;Commons-Net\&quot; \&quot;Testing\&quot;)&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1559,7 +1558,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
   ic.select(&quot;INBOX&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1598,7 +1597,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
   ic.uid(&quot;SEARCH&quot;,&quot;ALL&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1670,7 +1669,7 @@ if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
 
 try {
   //log.info(&quot;MSGUID: &quot;+i);
-  log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
   ic.uid(&quot;FETCH&quot;,i+&quot; BODY[TEXT]&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1720,7 +1719,7 @@ if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
 
 try {
   //log.info(&quot;MSGUID: &quot;+i);
-  log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
   ic.uid(&quot;FETCH&quot;,i+&quot; BODY[TEXT]&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1760,7 +1759,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
   ic.sendCommand(&quot;IDLE&quot;);
   TimeUnit.SECONDS.sleep(10);
   ic.sendData(&quot;DONE&quot;);
@@ -1803,7 +1802,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
   ic.uid(&quot;SEARCH&quot;,&quot;ALL&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1875,7 +1874,7 @@ if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
 
 try {
   //log.info(&quot;MSGUID: &quot;+i);
-  log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
   ic.uid(&quot;FETCH&quot;,i+&quot; BODY[TEXT]&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1916,7 +1915,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
   ic.uid(&quot;SEARCH&quot;,&quot;ALL&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1974,7 +1973,7 @@ String logout_error;
 
 try {
   ic.logout();
-  log.info(Thread.currentThread().getName()+&quot; LOGOUT&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; LOGOUT&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -2017,7 +2016,7 @@ String continue_flag = &quot;true&quot;;
 //log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
 IMAPClient ic = new IMAPClient();
 try {
-  log.info(&quot;IMAP connection: &quot;+props.get(&quot;IMAP.server&quot;)+&quot; &quot;+props.get(&quot;IMAP.port&quot;));
+//log.info(&quot;IMAP connection: &quot;+props.get(&quot;IMAP.server&quot;)+&quot; &quot;+props.get(&quot;IMAP.port&quot;));
   ic.connect(props.get(&quot;IMAP.server&quot;),Integer.parseInt(props.get(&quot;IMAP.port&quot;)));
 } catch (Exception x) {
   log.info(&quot;connect error: &quot;,x);
@@ -2025,7 +2024,7 @@ try {
 vars.putObject(&quot;IMAPCLIENT&quot;,ic);
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; LOGIN&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; LOGIN&quot;);
   ic.login(vars.get(&quot;USER&quot;),vars.get(&quot;PASS&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2061,7 +2060,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
   ic.noop();
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2100,7 +2099,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; STATUS&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; STATUS&quot;);
   ic.status(&quot;INBOX&quot;,new String[]{&quot;MESSAGES&quot;,&quot;RECENT&quot;,&quot;UIDNEXT&quot;,&quot;UIDVALIDITY&quot;,&quot;UNSEEN&quot;});
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2139,7 +2138,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
   ic.noop();
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2179,7 +2178,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
   ic.sendCommand(&quot;IDLE&quot;);
   TimeUnit.SECONDS.sleep(10);
   ic.sendData(&quot;DONE&quot;);
@@ -2220,7 +2219,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
   ic.noop();
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2259,7 +2258,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; ID&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; ID&quot;);
   ic.sendCommand(&quot;ID&quot;,&quot;(\&quot;JMeter\&quot; \&quot;BeanShell\&quot; \&quot;Commons-Net\&quot; \&quot;Testing\&quot;)&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2298,7 +2297,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
   ic.select(&quot;INBOX&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2337,7 +2336,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
   ic.uid(&quot;SEARCH&quot;,&quot;ALL&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2409,7 +2408,7 @@ if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
 
 try {
   //log.info(&quot;MSGUID: &quot;+i);
-  log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
   ic.uid(&quot;FETCH&quot;,i+&quot; BODY[TEXT]&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2448,7 +2447,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
   ic.select(&quot;INBOX&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2496,7 +2495,7 @@ if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
 
 try {
   //log.info(&quot;MSGUID: &quot;+i);
-  log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
   ic.uid(&quot;FETCH&quot;,i+&quot; BODY[TEXT]&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2532,7 +2531,7 @@ String logout_error;
 
 try {
   ic.logout();
-  log.info(Thread.currentThread().getName()+&quot; LOGOUT&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; LOGOUT&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -2573,7 +2572,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 
 try {
   ic.disconnect();
-  log.info(Thread.currentThread().getName()+&quot; END&quot;);
+  //log.info(Thread.currentThread().getName()+&quot; END&quot;);
 } catch (Exception e) {
   log.info(Thread.currentThread().getName()+&quot; END: &quot;+e);
 }
