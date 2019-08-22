@@ -6,6 +6,8 @@
   <property name="test" location="${build}/test"/>
   <property name="jar" location="${build}/jar"/>
   <property name="doc" location="${build}/doc"/>
+  <property name="ext" value="zimbraext.jar"/>
+  <property name="jmeter.home" value="/opt/apache-jmeter-3.0"/>
   <path id="test.path">
     <pathelement location="${jar}/zjmeter.jar"/>
   </path>
@@ -15,14 +17,59 @@
     <antcall target="test"/>
     <antcall target="doc"/>
   </target>
+  <path id="jmeter-classpath">
+    <fileset dir="${jmeter.home}/lib/ext">
+      <include name="ApacheJMeter_core.jar"/>
+      <include name="ApacheJMeter_java.jar"/>
+    </fileset>
+    <fileset dir="${jmeter.home}/lib">
+      <!-- jmeter logging -->
+      <include name="slf4j-api-*.jar"/>
+      <!-- EAS http -->
+      <include name="httpclient-*.jar"/>
+      <include name="httpcore-*.jar"/>
+      <!-- EAS base64 -->
+      <include name="commons-codec-*.jar"/>
+    </fileset>
+    <fileset dir="build/jar">
+      <!-- EAS wbxml -->
+      <include name="zm-sync-common.jar"/>
+    </fileset>
+  </path>
+  <target name="zm-sync-common-test">
+    <available file="build/jar/zm-sync-common.jar"
+              property="zm-sync-common-jar.present"/>
+  </target>
   <target name="build">
     <mkdir dir="${classes}"/>
-    <javac srcdir="${src}" destdir="${classes}" fork="yes"
+    <javac srcdir="${src}/com" destdir="${classes}" fork="yes"
            includeAntRuntime="false"/>
+    <antcall target="extbuild"/>
   </target>
-  <target name="jar" depends="build">
+  <target name="extbuild" depends="zm-sync-common-test"
+          if="zm-sync-common-jar.present">
+    <javac srcdir="${src}/ext" destdir="${classes}" fork="yes"
+           includeAntRuntime="false">
+      <classpath refid="jmeter-classpath"/>
+    </javac>
+  </target>
+  <target name="install">
+    <copy todir="${jmeter.home}/lib/ext">
+      <fileset dir="${jar}">
+        <include name="${ext}"/>
+      </fileset>
+    </copy>
+  </target>
+  <target name="jar" depends="build,zm-sync-common-test">
     <jar destfile="${jar}/zjmeter.jar" basedir="${classes}">
-      <include name="com/zimbra/jmeter/*"/>
+      <include name="com/zimbra/jmeter/*.class"/>
+    </jar>
+    <antcall target="extjar"/>
+  </target>
+  <target name="extjar" depends="zm-sync-common-test"
+          if="zm-sync-common-jar.present">
+    <jar destfile="${jar}/${ext}" basedir="${classes}">
+      <include name="com/zimbra/jmeter/ext/*"/>
     </jar>
   </target>
   <target name="Loganalyzer.jar" depends="build">
@@ -41,7 +88,9 @@
     </junit>
   </target>
   <target name="doc">
-    <javadoc sourcepath="${src}" destdir="${doc}"/>
+    <javadoc sourcepath="${src}" destdir="${doc}">
+      <classpath refid="jmeter-classpath"/>
+    </javadoc>
   </target>
   <target name="clean">
     <delete dir="${build}"/>
