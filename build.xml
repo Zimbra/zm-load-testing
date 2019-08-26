@@ -282,14 +282,14 @@
   </target>
   <target name="BSP-zsoap" depends="src,logs">
     <jmeter jmeterhome="${jmeter.home}"
-            testplan="${basedir}/tests/BSP/zsoap/zsoap.jmx"
+            testplan="${basedir}/tests/BSP/business/zsoap/zsoap.jmx"
             jmeterlogfile="${logs}/BSP-zsoap-jmeter.log"
             resultlog="${logs}/BSP-zsoap-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
-      <jmeterarg value="-q${basedir}/tests/BSP/zsoap/load.prop"/>
-      <jmeterarg value="-q${basedir}/tests/BSP/zsoap/profiles/basic.prop"/>
+      <jmeterarg value="-q${basedir}/tests/BSP/business/zsoap/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/BSP/business/zsoap/profiles/basic.prop"/>
     </jmeter>
   </target>
   <target name="BSP-imap" depends="src,logs">
