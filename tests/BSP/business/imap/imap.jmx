@@ -84,20 +84,36 @@
         <boolProp name="ignoreFirstLine">false</boolProp>
       </CSVDataSet>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="IMAP User" enabled="true">
-        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+      <kg.apc.jmeter.threads.UltimateThreadGroup guiclass="kg.apc.jmeter.threads.UltimateThreadGroupGui" testclass="kg.apc.jmeter.threads.UltimateThreadGroup" testname="IMAP User" enabled="true">
+        <collectionProp name="ultimatethreadgroupdata">
+          <collectionProp name="-1063152230">
+            <stringProp name="-1064415843">${__P(LOAD.IMAP.Ausers)}</stringProp>
+            <stringProp name="48">0</stringProp>
+            <stringProp name="-1182500902">${__P(LOAD.IMAP.rampup)}</stringProp>
+            <stringProp name="-449238496">${__P(LOAD.IMAP.avgloadDuration)}</stringProp>
+            <stringProp name="-1182500902">${__P(LOAD.IMAP.rampup)}</stringProp>
+          </collectionProp>
+          <collectionProp name="-1907826060">
+            <stringProp name="-692064594">${__P(LOAD.IMAP.Pusers)}</stringProp>
+            <stringProp name="-449238496">${__P(LOAD.IMAP.avgloadDuration)}</stringProp>
+            <stringProp name="-1182500902">${__P(LOAD.IMAP.rampup)}</stringProp>
+            <stringProp name="-923261007">${__P(LOAD.IMAP.peakloadDuration)}</stringProp>
+            <stringProp name="-1182500902">${__P(LOAD.IMAP.rampup)}</stringProp>
+          </collectionProp>
+          <collectionProp name="1673629778">
+            <stringProp name="-1064415843">${__P(LOAD.IMAP.Ausers)}</stringProp>
+            <stringProp name="-305008701">${__P(LOAD.IMAP.initialDelay)}</stringProp>
+            <stringProp name="-1182500902">${__P(LOAD.IMAP.rampup)}</stringProp>
+            <stringProp name="-449238496">${__P(LOAD.IMAP.avgloadDuration)}</stringProp>
+            <stringProp name="-1182500902">${__P(LOAD.IMAP.rampup)}</stringProp>
+          </collectionProp>
+        </collectionProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">${__P(LOAD.IMAP.loopcount)}</stringProp>
+          <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.IMAP.users)}</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">$(__P(LOAD.IMAP.rampup)}</stringProp>
-        <longProp name="ThreadGroup.start_time">1497658914000</longProp>
-        <longProp name="ThreadGroup.end_time">1497658914000</longProp>
-        <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
-      </ThreadGroup>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+      </kg.apc.jmeter.threads.UltimateThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
           <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
@@ -128,7 +144,7 @@ if (commands.size() &gt; 0) {
 //log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
 IMAPClient ic = new IMAPClient();
 try {
-//log.info(&quot;IMAP connection: &quot;+props.get(&quot;IMAP.server&quot;)+&quot; &quot;+props.get(&quot;IMAP.port&quot;));
+  log.info(&quot;IMAP connection: &quot;+props.get(&quot;IMAP.server&quot;)+&quot; &quot;+props.get(&quot;IMAP.port&quot;));
   ic.connect(props.get(&quot;IMAP.server&quot;),Integer.parseInt(props.get(&quot;IMAP.port&quot;)));
 } catch (Exception x) {
   log.info(&quot;connect error: &quot;,x);
@@ -141,7 +157,8 @@ vars.put(&quot;imap_folder2&quot;,&quot;imapfolder2_${__Random(1,1000)}&quot;);
 //log.info(&quot;Imap folder1 name is: &quot; +vars.get(&quot;imap_folder1&quot;));
 //log.info(&quot;Imap folder2 name is: &quot; +vars.get(&quot;imap_folder2&quot;));
 
-//log.info(Thread.currentThread().getName()+&quot; START&quot;);
+//log.info(Thread.currentThread().getName()+&quot; &quot;+ctx.getThreadNum().toString()+&quot; START&quot;);
+log.info(Thread.currentThread().getName()+&quot; START&quot;);
 //Capture IMAP response and include as sampler Response
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
@@ -240,7 +257,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; CAPABILITY&quot;);
+  log.info(Thread.currentThread().getName()+&quot; CAPABILITY&quot;);
   ic.capability();
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -274,7 +291,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; CHECK&quot;);
+  log.info(Thread.currentThread().getName()+&quot; CHECK&quot;);
   ic.check();
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -307,7 +324,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; CLOSE&quot;);
+  log.info(Thread.currentThread().getName()+&quot; CLOSE&quot;);
   ic.close();
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -342,7 +359,7 @@ String continue_flag = &quot;true&quot;;
 // need to add support for situational copy of real things found
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; COPY&quot;);
+  log.info(Thread.currentThread().getName()+&quot; COPY&quot;);
   ic.copy(&quot;1&quot;,vars.get(&quot;imap_folder1&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -375,7 +392,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; CREATE&quot;);
+  log.info(Thread.currentThread().getName()+&quot; CREATE&quot;);
   ic.create(vars.get(&quot;imap_folder1&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -408,7 +425,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; DELETE&quot;);
+  log.info(Thread.currentThread().getName()+&quot; DELETE&quot;);
   ic.delete(vars.get(&quot;imap_folder2&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -441,7 +458,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; EXAMINE&quot;);
+  log.info(Thread.currentThread().getName()+&quot; EXAMINE&quot;);
   ic.examine(&quot;INBOX&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -474,7 +491,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; EXPUNGE&quot;);
+  log.info(Thread.currentThread().getName()+&quot; EXPUNGE&quot;);
   ic.expunge();
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -518,7 +535,7 @@ if (msgid != null &amp;&amp; msgid.size() &gt; 0) {
 
 try {
   //log.info(&quot;MSGID: &quot;+i);
-   //log.info(Thread.currentThread().getName()+&quot; FETCH&quot;);
+   log.info(Thread.currentThread().getName()+&quot; FETCH&quot;);
   ic.fetch(i,&quot;BODY[TEXT]&quot;);
   // log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -551,7 +568,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; ID&quot;);
+  log.info(Thread.currentThread().getName()+&quot; ID&quot;);
   ic.sendCommand(&quot;ID&quot;,&quot;(\&quot;JMeter\&quot; \&quot;BeanShell\&quot; \&quot;Commons-Net\&quot; \&quot;Testing\&quot;)&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -585,7 +602,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
   ic.sendCommand(&quot;IDLE&quot;);
   TimeUnit.SECONDS.sleep(10);
   ic.sendData(&quot;DONE&quot;);
@@ -622,7 +639,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; LIST&quot;);
+  log.info(Thread.currentThread().getName()+&quot; LIST&quot;);
   ic.list(&quot;\&quot;\&quot;&quot;,&quot;\&quot;*\&quot;&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -670,7 +687,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; LOGIN&quot;);
+  log.info(Thread.currentThread().getName()+&quot; LOGIN&quot;);
   ic.login(vars.get(&quot;USER&quot;),vars.get(&quot;PASS&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -703,7 +720,7 @@ String logout_error;
 
 try {
   ic.logout();
-  //log.info(Thread.currentThread().getName()+&quot; LOGOUT&quot;);
+  log.info(Thread.currentThread().getName()+&quot; LOGOUT&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -740,7 +757,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; LSUB&quot;);
+  log.info(Thread.currentThread().getName()+&quot; LSUB&quot;);
   ic.lsub(&quot;\&quot;\&quot;&quot;,&quot;\&quot;*\&quot;&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -773,7 +790,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; NAMESPACE&quot;);
+  log.info(Thread.currentThread().getName()+&quot; NAMESPACE&quot;);
   ic.sendCommand(&quot;NAMESPACE&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -806,7 +823,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
+  log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
   ic.noop();
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -839,7 +856,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; RENAME&quot;);
+  log.info(Thread.currentThread().getName()+&quot; RENAME&quot;);
   ic.rename(vars.get(&quot;imap_folder1&quot;),vars.get(&quot;imap_folder2&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -874,7 +891,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; SEARCH&quot;);
+  log.info(Thread.currentThread().getName()+&quot; SEARCH&quot;);
   ic.search(&quot;ALL&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -928,7 +945,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
+  log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
   ic.select(&quot;INBOX&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -959,7 +976,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; STATUS&quot;);
+  log.info(Thread.currentThread().getName()+&quot; STATUS&quot;);
   ic.status(&quot;INBOX&quot;,new String[]{&quot;MESSAGES&quot;,&quot;RECENT&quot;,&quot;UIDNEXT&quot;,&quot;UIDVALIDITY&quot;,&quot;UNSEEN&quot;});
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -994,7 +1011,7 @@ String continue_flag = &quot;true&quot;;
 // need to add support for situational store of real things found
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; STORE&quot;);
+  log.info(Thread.currentThread().getName()+&quot; STORE&quot;);
   ic.store(&quot;1&quot;,&quot;+FLAGS&quot;,&quot;(\\Seen)&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1027,7 +1044,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; SUBSCRIBE&quot;);
+  log.info(Thread.currentThread().getName()+&quot; SUBSCRIBE&quot;);
   ic.subscribe(&quot;INBOX&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1070,7 +1087,7 @@ if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
 }
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; UID COPY&quot;);
+  log.info(Thread.currentThread().getName()+&quot; UID COPY&quot;);
   ic.uid(&quot;COPY&quot;,i+&quot; &quot;+vars.get(&quot;imap_folder1&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1114,7 +1131,7 @@ if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
 
 try {
   //log.info(&quot;MSGUID: &quot;+i);
-  //log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
+  log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
   ic.uid(&quot;FETCH&quot;,i+&quot; BODY[TEXT]&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1149,7 +1166,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
+  log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
   ic.uid(&quot;SEARCH&quot;,&quot;ALL&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1206,7 +1223,7 @@ String continue_flag = &quot;true&quot;;
 // need to add support for situational uic copy of real things found
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; UID STORE&quot;);
+  log.info(Thread.currentThread().getName()+&quot; UID STORE&quot;);
   ic.uid(&quot;STORE&quot;,&quot;1 +FLAGS (\\Seen)&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1239,7 +1256,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; UNSELECT&quot;);
+  log.info(Thread.currentThread().getName()+&quot; UNSELECT&quot;);
   ic.sendCommand(&quot;UNSELECT&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1272,7 +1289,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; UNSUBSCRIBE&quot;);
+  log.info(Thread.currentThread().getName()+&quot; UNSUBSCRIBE&quot;);
   ic.unsubscribe(&quot;INBOX&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1301,7 +1318,7 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
               <hashTree/>
               <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="LOOP" enabled="true">
                 <boolProp name="LoopController.continue_forever">true</boolProp>
-                <stringProp name="LoopController.loops">50</stringProp>
+                <stringProp name="LoopController.loops">15</stringProp>
               </LoopController>
               <hashTree>
                 <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="LOGIN" enabled="true">
@@ -1316,7 +1333,7 @@ String continue_flag = &quot;true&quot;;
 //log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
 IMAPClient ic = new IMAPClient();
 try {
-//log.info(&quot;IMAP connection: &quot;+props.get(&quot;IMAP.server&quot;)+&quot; &quot;+props.get(&quot;IMAP.port&quot;));
+  log.info(&quot;IMAP connection: &quot;+props.get(&quot;IMAP.server&quot;)+&quot; &quot;+props.get(&quot;IMAP.port&quot;));
   ic.connect(props.get(&quot;IMAP.server&quot;),Integer.parseInt(props.get(&quot;IMAP.port&quot;)));
 } catch (Exception x) {
   log.info(&quot;connect error: &quot;,x);
@@ -1324,7 +1341,7 @@ try {
 vars.putObject(&quot;IMAPCLIENT&quot;,ic);
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; LOGIN&quot;);
+  log.info(Thread.currentThread().getName()+&quot; LOGIN&quot;);
   ic.login(vars.get(&quot;USER&quot;),vars.get(&quot;PASS&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1349,19 +1366,22 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                   <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
                 </BeanShellSampler>
                 <hashTree/>
-                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="NOOP" enabled="true">
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IDLE" enabled="true">
                   <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
                   <boolProp name="IfController.evaluateAll">false</boolProp>
                 </IfController>
                 <hashTree>
-                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="NOOP" enabled="true">
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="IDLE" enabled="true">
                     <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+import java.util.concurrent.TimeUnit;
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
-  ic.noop();
+  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  ic.sendCommand(&quot;IDLE&quot;);
+  TimeUnit.SECONDS.sleep(10);
+  ic.sendData(&quot;DONE&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
@@ -1370,12 +1390,12 @@ try {
   }
   
   IsSuccess=false;
-  log.info(Thread.currentThread().getName()+&quot; NOOP: &quot;+e);
+  log.info(Thread.currentThread().getName()+&quot; IDLE: &quot;+e);
 }
 
-if (!ic.getReplyString().contains(&quot;OK NOOP completed&quot;)) {
+if (!ic.getReplyString().contains(&quot;OK IDLE completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false;
+  IsSuccess=false; 
   log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
@@ -1399,7 +1419,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; ID&quot;);
+  log.info(Thread.currentThread().getName()+&quot; ID&quot;);
   ic.sendCommand(&quot;ID&quot;,&quot;(\&quot;JMeter\&quot; \&quot;BeanShell\&quot; \&quot;Commons-Net\&quot; \&quot;Testing\&quot;)&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1439,7 +1459,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
   ic.sendCommand(&quot;IDLE&quot;);
   TimeUnit.SECONDS.sleep(10);
   ic.sendData(&quot;DONE&quot;);
@@ -1469,19 +1489,19 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                   </BeanShellSampler>
                   <hashTree/>
                 </hashTree>
-                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="NOOP" enabled="true">
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="STATUS" enabled="true">
                   <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
                   <boolProp name="IfController.evaluateAll">false</boolProp>
                 </IfController>
                 <hashTree>
-                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="NOOP" enabled="true">
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="STATUS" enabled="true">
                     <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
-  ic.noop();
+  log.info(Thread.currentThread().getName()+&quot; STATUS&quot;);
+  ic.status(&quot;INBOX&quot;,new String[]{&quot;MESSAGES&quot;,&quot;RECENT&quot;,&quot;UIDNEXT&quot;,&quot;UIDVALIDITY&quot;,&quot;UNSEEN&quot;});
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
@@ -1490,13 +1510,13 @@ try {
   }
   
   IsSuccess=false;
-  log.info(Thread.currentThread().getName()+&quot; NOOP: &quot;+e);
+  log.info(Thread.currentThread().getName()+&quot; STATUS: &quot;+e);
 }
 
-if (!ic.getReplyString().contains(&quot;OK NOOP completed&quot;)) {
+if (!ic.getReplyString().contains(&quot;OK STATUS completed&quot;)) {
   SampleResult.setSuccessful(false);
   IsSuccess=false;
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  log.info(&quot;Command response is: &quot; + ic.getReplyString()); 
 }
 
 vars.put(&quot;CONTINUE&quot;,continue_flag);
@@ -1508,19 +1528,22 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                   </BeanShellSampler>
                   <hashTree/>
                 </hashTree>
-                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="ID" enabled="true">
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IDLE" enabled="true">
                   <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
                   <boolProp name="IfController.evaluateAll">false</boolProp>
                 </IfController>
                 <hashTree>
-                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="ID" enabled="true">
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="IDLE" enabled="true">
                     <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+import java.util.concurrent.TimeUnit;
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; ID&quot;);
-  ic.sendCommand(&quot;ID&quot;,&quot;(\&quot;JMeter\&quot; \&quot;BeanShell\&quot; \&quot;Commons-Net\&quot; \&quot;Testing\&quot;)&quot;);
+  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  ic.sendCommand(&quot;IDLE&quot;);
+  TimeUnit.SECONDS.sleep(10);
+  ic.sendData(&quot;DONE&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
@@ -1528,13 +1551,13 @@ try {
   continue_flag = &quot;false&quot;;
   }
   
-  IsSuccess=false; 
-  log.info(Thread.currentThread().getName()+&quot; ID: &quot;+e);
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; IDLE: &quot;+e);
 }
 
-if (!ic.getReplyString().contains(&quot;OK ID completed&quot;)) {
+if (!ic.getReplyString().contains(&quot;OK IDLE completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false;
+  IsSuccess=false; 
   log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
@@ -1558,7 +1581,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
+  log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
   ic.select(&quot;INBOX&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1584,69 +1607,6 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                   </BeanShellSampler>
                   <hashTree/>
                 </hashTree>
-                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="UID SEARCH" enabled="true">
-                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
-                  <boolProp name="IfController.evaluateAll">false</boolProp>
-                </IfController>
-                <hashTree>
-                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID SEARCH" enabled="true">
-                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
-String continue_flag = &quot;true&quot;;
-
-try {
-  //log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
-  ic.uid(&quot;SEARCH&quot;,&quot;ALL&quot;);
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
-} catch (Exception e) {
-  SampleResult.setSuccessful(false);
-  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
-  continue_flag = &quot;false&quot;;
-  }
-  
-  IsSuccess=false;
-  log.info(Thread.currentThread().getName()+&quot; UID SEARCH: &quot;+e);
-}
-
-// store the response UID for posible use in other commands
-// available in the jmeter variable MSGUID
-ArrayList msguid = new ArrayList();
-String[] lines = ic.getReplyString().split(&quot;\\r?\\n&quot;);
-for (String s: lines) {
-	// * SEARCH # # # # #
-	Pattern p = Pattern.compile(&quot; *(\\d+) +&quot;);
-	Matcher m = p.matcher(s);
-     while (m.find()) {
-	  //log.info(m.group(1));
-	  msguid.add(m.group(1));
-     }
-}
-// to reduce memory usage only keep limit records
-int limit = Integer.parseInt(props.getProperty(&quot;SETTING.limit&quot;,&quot;5&quot;));
-if (limit &gt; 0 &amp;&amp; msguid.size() &gt; limit) {
-  msguid.subList(limit,msguid.size()).clear();
-}
-//log.info(&quot;MSGIDS: &quot;+msguid.size());
-vars.putObject(&quot;MSGUID&quot;,msguid);
-
-if (!ic.getReplyString().contains(&quot;OK UID SEARCH completed&quot;)) {
-  SampleResult.setSuccessful(false);
-  continue_flag = &quot;false&quot;;
-  IsSuccess=false;
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
-}
-
-vars.put(&quot;CONTINUE&quot;,continue_flag);
-SampleResult.setResponseData(ic.getReplyString());
-SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                    <stringProp name="BeanShellSampler.filename"></stringProp>
-                    <stringProp name="BeanShellSampler.parameters"></stringProp>
-                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-                  </BeanShellSampler>
-                  <hashTree/>
-                </hashTree>
                 <IfController guiclass="IfControllerPanel" testclass="IfController" testname="UID FETCH" enabled="true">
                   <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
                   <boolProp name="IfController.evaluateAll">false</boolProp>
@@ -1669,57 +1629,7 @@ if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
 
 try {
   //log.info(&quot;MSGUID: &quot;+i);
-  //log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
-  ic.uid(&quot;FETCH&quot;,i+&quot; BODY[TEXT]&quot;);
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
-} catch (Exception e) {
-  SampleResult.setSuccessful(false);
-  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
-  continue_flag = &quot;false&quot;;
-  }
-  
-  IsSuccess=false;
-  log.info(Thread.currentThread().getName()+&quot; UID FETCH: &quot;+e);
-}
-
-if (!ic.getReplyString().contains(&quot;OK UID FETCH completed&quot;)) {
-  SampleResult.setSuccessful(false);
-  IsSuccess=false;
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
-}
-
-vars.put(&quot;CONTINUE&quot;,continue_flag);
-SampleResult.setResponseData(ic.getReplyString());
-SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                    <stringProp name="BeanShellSampler.filename"></stringProp>
-                    <stringProp name="BeanShellSampler.parameters"></stringProp>
-                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-                  </BeanShellSampler>
-                  <hashTree/>
-                </hashTree>
-                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="UID FETCH" enabled="true">
-                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
-                  <boolProp name="IfController.evaluateAll">false</boolProp>
-                </IfController>
-                <hashTree>
-                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID FETCH" enabled="true">
-                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
-String continue_flag = &quot;true&quot;;
-
-// use MSGUID from uid search if done
-ArrayList msguid = vars.getObject(&quot;MSGUID&quot;);
-String i = &quot;1&quot;;
-if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
-  Random r = new Random();
-  Integer x = r.nextInt(msguid.size());
-  //log.info(&quot;Random Index: &quot;+x+&quot; Value: &quot;+msguid.get(x));
-  i = msguid.get(x);
-}
-
-try {
-  //log.info(&quot;MSGUID: &quot;+i);
-  //log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
+  log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
   ic.uid(&quot;FETCH&quot;,i+&quot; BODY[TEXT]&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1759,7 +1669,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
   ic.sendCommand(&quot;IDLE&quot;);
   TimeUnit.SECONDS.sleep(10);
   ic.sendData(&quot;DONE&quot;);
@@ -1802,7 +1712,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
+  log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
   ic.uid(&quot;SEARCH&quot;,&quot;ALL&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1837,6 +1747,82 @@ if (limit &gt; 0 &amp;&amp; msguid.size() &gt; limit) {
 vars.putObject(&quot;MSGUID&quot;,msguid);
 
 if (!ic.getReplyString().contains(&quot;OK UID SEARCH completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  continue_flag = &quot;false&quot;;
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="NOOP" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="NOOP" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
+  ic.noop();
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; NOOP: &quot;+e);
+}
+
+if (!ic.getReplyString().contains(&quot;OK NOOP completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="SELECT" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="SELECT" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
+  ic.select(&quot;INBOX&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  continue_flag = &quot;false&quot;;
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; SELECT: &quot;+e);
+}
+
+if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString().contains(&quot;SELECT completed&quot;))) {
   SampleResult.setSuccessful(false);
   continue_flag = &quot;false&quot;;
   IsSuccess=false;
@@ -1874,7 +1860,7 @@ if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
 
 try {
   //log.info(&quot;MSGUID: &quot;+i);
-  //log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
+  log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
   ic.uid(&quot;FETCH&quot;,i+&quot; BODY[TEXT]&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -1902,69 +1888,6 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                   </BeanShellSampler>
                   <hashTree/>
                 </hashTree>
-                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="UID SEARCH" enabled="true">
-                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
-                  <boolProp name="IfController.evaluateAll">false</boolProp>
-                </IfController>
-                <hashTree>
-                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID SEARCH" enabled="true">
-                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
-String continue_flag = &quot;true&quot;;
-
-try {
-  //log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
-  ic.uid(&quot;SEARCH&quot;,&quot;ALL&quot;);
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
-} catch (Exception e) {
-  SampleResult.setSuccessful(false);
-  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
-  continue_flag = &quot;false&quot;;
-  }
-  
-  IsSuccess=false;
-  log.info(Thread.currentThread().getName()+&quot; UID SEARCH: &quot;+e);
-}
-
-// store the response UID for posible use in other commands
-// available in the jmeter variable MSGUID
-ArrayList msguid = new ArrayList();
-String[] lines = ic.getReplyString().split(&quot;\\r?\\n&quot;);
-for (String s: lines) {
-	// * SEARCH # # # # #
-	Pattern p = Pattern.compile(&quot; *(\\d+) +&quot;);
-	Matcher m = p.matcher(s);
-     while (m.find()) {
-	  //log.info(m.group(1));
-	  msguid.add(m.group(1));
-     }
-}
-// to reduce memory usage only keep limit records
-int limit = Integer.parseInt(props.getProperty(&quot;SETTING.limit&quot;,&quot;5&quot;));
-if (limit &gt; 0 &amp;&amp; msguid.size() &gt; limit) {
-  msguid.subList(limit,msguid.size()).clear();
-}
-//log.info(&quot;MSGIDS: &quot;+msguid.size());
-vars.putObject(&quot;MSGUID&quot;,msguid);
-
-if (!ic.getReplyString().contains(&quot;OK UID SEARCH completed&quot;)) {
-  SampleResult.setSuccessful(false);
-  continue_flag = &quot;false&quot;;
-  IsSuccess=false;
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
-}
-
-vars.put(&quot;CONTINUE&quot;,continue_flag);
-SampleResult.setResponseData(ic.getReplyString());
-SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                    <stringProp name="BeanShellSampler.filename"></stringProp>
-                    <stringProp name="BeanShellSampler.parameters"></stringProp>
-                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-                  </BeanShellSampler>
-                  <hashTree/>
-                </hashTree>
                 <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="LOGOUT" enabled="true">
                   <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
@@ -1973,7 +1896,7 @@ String logout_error;
 
 try {
   ic.logout();
-  //log.info(Thread.currentThread().getName()+&quot; LOGOUT&quot;);
+  log.info(Thread.currentThread().getName()+&quot; LOGOUT&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -2016,7 +1939,7 @@ String continue_flag = &quot;true&quot;;
 //log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
 IMAPClient ic = new IMAPClient();
 try {
-//log.info(&quot;IMAP connection: &quot;+props.get(&quot;IMAP.server&quot;)+&quot; &quot;+props.get(&quot;IMAP.port&quot;));
+  log.info(&quot;IMAP connection: &quot;+props.get(&quot;IMAP.server&quot;)+&quot; &quot;+props.get(&quot;IMAP.port&quot;));
   ic.connect(props.get(&quot;IMAP.server&quot;),Integer.parseInt(props.get(&quot;IMAP.port&quot;)));
 } catch (Exception x) {
   log.info(&quot;connect error: &quot;,x);
@@ -2024,7 +1947,7 @@ try {
 vars.putObject(&quot;IMAPCLIENT&quot;,ic);
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; LOGIN&quot;);
+  log.info(Thread.currentThread().getName()+&quot; LOGIN&quot;);
   ic.login(vars.get(&quot;USER&quot;),vars.get(&quot;PASS&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2049,123 +1972,6 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                   <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
                 </BeanShellSampler>
                 <hashTree/>
-                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="NOOP" enabled="true">
-                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
-                  <boolProp name="IfController.evaluateAll">false</boolProp>
-                </IfController>
-                <hashTree>
-                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="NOOP" enabled="true">
-                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
-String continue_flag = &quot;true&quot;;
-
-try {
-  //log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
-  ic.noop();
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
-} catch (Exception e) {
-  SampleResult.setSuccessful(false);
-  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
-  continue_flag = &quot;false&quot;;
-  }
-  
-  IsSuccess=false;
-  log.info(Thread.currentThread().getName()+&quot; NOOP: &quot;+e);
-}
-
-if (!ic.getReplyString().contains(&quot;OK NOOP completed&quot;)) {
-  SampleResult.setSuccessful(false);
-  IsSuccess=false;
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
-}
-
-vars.put(&quot;CONTINUE&quot;,continue_flag);
-SampleResult.setResponseData(ic.getReplyString());
-SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                    <stringProp name="BeanShellSampler.filename"></stringProp>
-                    <stringProp name="BeanShellSampler.parameters"></stringProp>
-                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-                  </BeanShellSampler>
-                  <hashTree/>
-                </hashTree>
-                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="STATUS" enabled="true">
-                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
-                  <boolProp name="IfController.evaluateAll">false</boolProp>
-                </IfController>
-                <hashTree>
-                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="STATUS" enabled="true">
-                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
-String continue_flag = &quot;true&quot;;
-
-try {
-  //log.info(Thread.currentThread().getName()+&quot; STATUS&quot;);
-  ic.status(&quot;INBOX&quot;,new String[]{&quot;MESSAGES&quot;,&quot;RECENT&quot;,&quot;UIDNEXT&quot;,&quot;UIDVALIDITY&quot;,&quot;UNSEEN&quot;});
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
-} catch (Exception e) {
-  SampleResult.setSuccessful(false);
-  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
-  continue_flag = &quot;false&quot;;
-  }
-  
-  IsSuccess=false;
-  log.info(Thread.currentThread().getName()+&quot; STATUS: &quot;+e);
-}
-
-if (!ic.getReplyString().contains(&quot;OK STATUS completed&quot;)) {
-  SampleResult.setSuccessful(false);
-  IsSuccess=false;
-  log.info(&quot;Command response is: &quot; + ic.getReplyString()); 
-}
-
-vars.put(&quot;CONTINUE&quot;,continue_flag);
-SampleResult.setResponseData(ic.getReplyString());
-SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                    <stringProp name="BeanShellSampler.filename"></stringProp>
-                    <stringProp name="BeanShellSampler.parameters"></stringProp>
-                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-                  </BeanShellSampler>
-                  <hashTree/>
-                </hashTree>
-                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="NOOP" enabled="true">
-                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
-                  <boolProp name="IfController.evaluateAll">false</boolProp>
-                </IfController>
-                <hashTree>
-                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="NOOP" enabled="true">
-                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
-String continue_flag = &quot;true&quot;;
-
-try {
-  //log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
-  ic.noop();
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
-} catch (Exception e) {
-  SampleResult.setSuccessful(false);
-  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
-  continue_flag = &quot;false&quot;;
-  }
-  
-  IsSuccess=false;
-  log.info(Thread.currentThread().getName()+&quot; NOOP: &quot;+e);
-}
-
-if (!ic.getReplyString().contains(&quot;OK NOOP completed&quot;)) {
-  SampleResult.setSuccessful(false);
-  IsSuccess=false;
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
-}
-
-vars.put(&quot;CONTINUE&quot;,continue_flag);
-SampleResult.setResponseData(ic.getReplyString());
-SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                    <stringProp name="BeanShellSampler.filename"></stringProp>
-                    <stringProp name="BeanShellSampler.parameters"></stringProp>
-                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-                  </BeanShellSampler>
-                  <hashTree/>
-                </hashTree>
                 <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IDLE" enabled="true">
                   <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
                   <boolProp name="IfController.evaluateAll">false</boolProp>
@@ -2178,7 +1984,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
   ic.sendCommand(&quot;IDLE&quot;);
   TimeUnit.SECONDS.sleep(10);
   ic.sendData(&quot;DONE&quot;);
@@ -2219,7 +2025,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
+  log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
   ic.noop();
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2258,7 +2064,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; ID&quot;);
+  log.info(Thread.currentThread().getName()+&quot; ID&quot;);
   ic.sendCommand(&quot;ID&quot;,&quot;(\&quot;JMeter\&quot; \&quot;BeanShell\&quot; \&quot;Commons-Net\&quot; \&quot;Testing\&quot;)&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2297,7 +2103,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
+  log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
   ic.select(&quot;INBOX&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2323,6 +2129,137 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                   </BeanShellSampler>
                   <hashTree/>
                 </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="NOOP" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="NOOP" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
+  ic.noop();
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; NOOP: &quot;+e);
+}
+
+if (!ic.getReplyString().contains(&quot;OK NOOP completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="UID FETCH" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID FETCH" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+// use MSGUID from uid search if done
+ArrayList msguid = vars.getObject(&quot;MSGUID&quot;);
+String i = &quot;1&quot;;
+if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
+  Random r = new Random();
+  Integer x = r.nextInt(msguid.size());
+  //log.info(&quot;Random Index: &quot;+x+&quot; Value: &quot;+msguid.get(x));
+  i = msguid.get(x);
+}
+
+try {
+  //log.info(&quot;MSGUID: &quot;+i);
+  log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
+  ic.uid(&quot;FETCH&quot;,i+&quot; BODY[TEXT]&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; UID FETCH: &quot;+e);
+}
+
+if (!ic.getReplyString().contains(&quot;OK UID FETCH completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IDLE" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="IDLE" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+import java.util.concurrent.TimeUnit;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  ic.sendCommand(&quot;IDLE&quot;);
+  TimeUnit.SECONDS.sleep(10);
+  ic.sendData(&quot;DONE&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; IDLE: &quot;+e);
+}
+
+if (!ic.getReplyString().contains(&quot;OK IDLE completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  IsSuccess=false; 
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
                 <IfController guiclass="IfControllerPanel" testclass="IfController" testname="UID SEARCH" enabled="true">
                   <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
                   <boolProp name="IfController.evaluateAll">false</boolProp>
@@ -2336,7 +2273,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
+  log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
   ic.uid(&quot;SEARCH&quot;,&quot;ALL&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2386,6 +2323,349 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                   </BeanShellSampler>
                   <hashTree/>
                 </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IDLE" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="IDLE" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+import java.util.concurrent.TimeUnit;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  ic.sendCommand(&quot;IDLE&quot;);
+  TimeUnit.SECONDS.sleep(10);
+  ic.sendData(&quot;DONE&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; IDLE: &quot;+e);
+}
+
+if (!ic.getReplyString().contains(&quot;OK IDLE completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  IsSuccess=false; 
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="SELECT" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="SELECT" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
+  ic.select(&quot;INBOX&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  continue_flag = &quot;false&quot;;
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; SELECT: &quot;+e);
+}
+
+if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString().contains(&quot;SELECT completed&quot;))) {
+  SampleResult.setSuccessful(false);
+  continue_flag = &quot;false&quot;;
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="UID STORE" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID STORE" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+// need to add support for situational uic copy of real things found
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; UID STORE&quot;);
+  ic.uid(&quot;STORE&quot;,&quot;1 +FLAGS (\\Seen)&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; UID STORE: &quot;+e);
+}
+
+if (!ic.getReplyString().contains(&quot;OK UID STORE completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString()); 
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IDLE" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="IDLE" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+import java.util.concurrent.TimeUnit;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  ic.sendCommand(&quot;IDLE&quot;);
+  TimeUnit.SECONDS.sleep(10);
+  ic.sendData(&quot;DONE&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; IDLE: &quot;+e);
+}
+
+if (!ic.getReplyString().contains(&quot;OK IDLE completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  IsSuccess=false; 
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="SELECT" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="SELECT" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
+  ic.select(&quot;INBOX&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  continue_flag = &quot;false&quot;;
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; SELECT: &quot;+e);
+}
+
+if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString().contains(&quot;SELECT completed&quot;))) {
+  SampleResult.setSuccessful(false);
+  continue_flag = &quot;false&quot;;
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="UID SEARCH" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID SEARCH" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
+  ic.uid(&quot;SEARCH&quot;,&quot;ALL&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; UID SEARCH: &quot;+e);
+}
+
+// store the response UID for posible use in other commands
+// available in the jmeter variable MSGUID
+ArrayList msguid = new ArrayList();
+String[] lines = ic.getReplyString().split(&quot;\\r?\\n&quot;);
+for (String s: lines) {
+	// * SEARCH # # # # #
+	Pattern p = Pattern.compile(&quot; *(\\d+) +&quot;);
+	Matcher m = p.matcher(s);
+     while (m.find()) {
+	  //log.info(m.group(1));
+	  msguid.add(m.group(1));
+     }
+}
+// to reduce memory usage only keep limit records
+int limit = Integer.parseInt(props.getProperty(&quot;SETTING.limit&quot;,&quot;5&quot;));
+if (limit &gt; 0 &amp;&amp; msguid.size() &gt; limit) {
+  msguid.subList(limit,msguid.size()).clear();
+}
+//log.info(&quot;MSGIDS: &quot;+msguid.size());
+vars.putObject(&quot;MSGUID&quot;,msguid);
+
+if (!ic.getReplyString().contains(&quot;OK UID SEARCH completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  continue_flag = &quot;false&quot;;
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="NOOP" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="NOOP" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
+  ic.noop();
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; NOOP: &quot;+e);
+}
+
+if (!ic.getReplyString().contains(&quot;OK NOOP completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IDLE" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="IDLE" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+import java.util.concurrent.TimeUnit;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  ic.sendCommand(&quot;IDLE&quot;);
+  TimeUnit.SECONDS.sleep(10);
+  ic.sendData(&quot;DONE&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; IDLE: &quot;+e);
+}
+
+if (!ic.getReplyString().contains(&quot;OK IDLE completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  IsSuccess=false; 
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
                 <IfController guiclass="IfControllerPanel" testclass="IfController" testname="UID FETCH" enabled="true">
                   <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
                   <boolProp name="IfController.evaluateAll">false</boolProp>
@@ -2408,7 +2688,7 @@ if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
 
 try {
   //log.info(&quot;MSGUID: &quot;+i);
-  //log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
+  log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
   ic.uid(&quot;FETCH&quot;,i+&quot; BODY[TEXT]&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2447,7 +2727,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  //log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
+  log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
   ic.select(&quot;INBOX&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2460,6 +2740,242 @@ try {
 if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString().contains(&quot;SELECT completed&quot;))) {
   SampleResult.setSuccessful(false);
   continue_flag = &quot;false&quot;;
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IDLE" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="IDLE" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+import java.util.concurrent.TimeUnit;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  ic.sendCommand(&quot;IDLE&quot;);
+  TimeUnit.SECONDS.sleep(10);
+  ic.sendData(&quot;DONE&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; IDLE: &quot;+e);
+}
+
+if (!ic.getReplyString().contains(&quot;OK IDLE completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  IsSuccess=false; 
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="UID SEARCH" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID SEARCH" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; UID SEARCH&quot;);
+  ic.uid(&quot;SEARCH&quot;,&quot;ALL&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; UID SEARCH: &quot;+e);
+}
+
+// store the response UID for posible use in other commands
+// available in the jmeter variable MSGUID
+ArrayList msguid = new ArrayList();
+String[] lines = ic.getReplyString().split(&quot;\\r?\\n&quot;);
+for (String s: lines) {
+	// * SEARCH # # # # #
+	Pattern p = Pattern.compile(&quot; *(\\d+) +&quot;);
+	Matcher m = p.matcher(s);
+     while (m.find()) {
+	  //log.info(m.group(1));
+	  msguid.add(m.group(1));
+     }
+}
+// to reduce memory usage only keep limit records
+int limit = Integer.parseInt(props.getProperty(&quot;SETTING.limit&quot;,&quot;5&quot;));
+if (limit &gt; 0 &amp;&amp; msguid.size() &gt; limit) {
+  msguid.subList(limit,msguid.size()).clear();
+}
+//log.info(&quot;MSGIDS: &quot;+msguid.size());
+vars.putObject(&quot;MSGUID&quot;,msguid);
+
+if (!ic.getReplyString().contains(&quot;OK UID SEARCH completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  continue_flag = &quot;false&quot;;
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IDLE" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="IDLE" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+import java.util.concurrent.TimeUnit;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  ic.sendCommand(&quot;IDLE&quot;);
+  TimeUnit.SECONDS.sleep(10);
+  ic.sendData(&quot;DONE&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; IDLE: &quot;+e);
+}
+
+if (!ic.getReplyString().contains(&quot;OK IDLE completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  IsSuccess=false; 
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="FETCH" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="FETCH" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+// use MSGID from search if done
+ArrayList msgid = vars.getObject(&quot;MSGID&quot;);
+String i = &quot;1&quot;;
+if (msgid != null &amp;&amp; msgid.size() &gt; 0) {
+  Random r = new Random();
+  Integer x = r.nextInt(msgid.size());
+  //log.info(&quot;Random Index: &quot;+x+&quot; Value: &quot;+msgid.get(x));
+  i = msgid.get(x);
+}
+
+try {
+  //log.info(&quot;MSGID: &quot;+i);
+   log.info(Thread.currentThread().getName()+&quot; FETCH&quot;);
+  ic.fetch(i,&quot;BODY[TEXT]&quot;);
+  // log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false; 
+  log.info(Thread.currentThread().getName()+&quot; FETCH: &quot;+e);
+}
+
+if (!ic.getReplyString().contains(&quot;OK FETCH completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="ID" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="ID" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; ID&quot;);
+  ic.sendCommand(&quot;ID&quot;,&quot;(\&quot;JMeter\&quot; \&quot;BeanShell\&quot; \&quot;Commons-Net\&quot; \&quot;Testing\&quot;)&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false; 
+  log.info(Thread.currentThread().getName()+&quot; ID: &quot;+e);
+}
+
+if (!ic.getReplyString().contains(&quot;OK ID completed&quot;)) {
+  SampleResult.setSuccessful(false);
   IsSuccess=false;
   log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
@@ -2495,7 +3011,7 @@ if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
 
 try {
   //log.info(&quot;MSGUID: &quot;+i);
-  //log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
+  log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
   ic.uid(&quot;FETCH&quot;,i+&quot; BODY[TEXT]&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
@@ -2523,6 +3039,87 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                   </BeanShellSampler>
                   <hashTree/>
                 </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IDLE" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="IDLE" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+import java.util.concurrent.TimeUnit;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; IDLE&quot;);
+  ic.sendCommand(&quot;IDLE&quot;);
+  TimeUnit.SECONDS.sleep(10);
+  ic.sendData(&quot;DONE&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; IDLE: &quot;+e);
+}
+
+if (!ic.getReplyString().contains(&quot;OK IDLE completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  IsSuccess=false; 
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
+                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="UNSELECT" enabled="true">
+                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                  <boolProp name="IfController.evaluateAll">false</boolProp>
+                </IfController>
+                <hashTree>
+                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UNSELECT" enabled="true">
+                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName()+&quot; UNSELECT&quot;);
+  ic.sendCommand(&quot;UNSELECT&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
+  continue_flag = &quot;false&quot;;
+  }
+  
+  IsSuccess=false;
+  log.info(Thread.currentThread().getName()+&quot; UNSELECT: &quot;+e);
+}
+
+if (!ic.getReplyString().contains(&quot;OK UNSELECT completed&quot;)) {
+  SampleResult.setSuccessful(false);
+  IsSuccess=false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;,continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                    <stringProp name="BeanShellSampler.filename"></stringProp>
+                    <stringProp name="BeanShellSampler.parameters"></stringProp>
+                    <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                  </BeanShellSampler>
+                  <hashTree/>
+                </hashTree>
                 <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="LOGOUT" enabled="true">
                   <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
@@ -2531,7 +3128,7 @@ String logout_error;
 
 try {
   ic.logout();
-  //log.info(Thread.currentThread().getName()+&quot; LOGOUT&quot;);
+  log.info(Thread.currentThread().getName()+&quot; LOGOUT&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -2572,7 +3169,7 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 
 try {
   ic.disconnect();
-  //log.info(Thread.currentThread().getName()+&quot; END&quot;);
+  log.info(Thread.currentThread().getName()+&quot; END&quot;);
 } catch (Exception e) {
   log.info(Thread.currentThread().getName()+&quot; END: &quot;+e);
 }
