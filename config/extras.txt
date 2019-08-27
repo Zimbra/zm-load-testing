@@ -1,0 +1,4 @@
+PROFILE.CalDAV.appointment=tests/generic/caldav/profiles/appointments.csv
+PROFILE.CardDAV.cards=tests/generic/carddav/profiles/cards.csv
+PROFILE.SMTP.message=tests/generic/smtp/profiles/message.txt
+PROFILE.LMTP.message=tests/generic/lmtp/profiles/message.txt
