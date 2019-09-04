@@ -84,36 +84,20 @@
         <boolProp name="ignoreFirstLine">false</boolProp>
       </CSVDataSet>
       <hashTree/>
-      <kg.apc.jmeter.threads.UltimateThreadGroup guiclass="kg.apc.jmeter.threads.UltimateThreadGroupGui" testclass="kg.apc.jmeter.threads.UltimateThreadGroup" testname="POP User" enabled="true">
-        <collectionProp name="ultimatethreadgroupdata">
-          <collectionProp name="-662792342">
-            <stringProp name="-1064415843">${__P(LOAD.POP.Ausers)}</stringProp>
-            <stringProp name="48">0</stringProp>
-            <stringProp name="-1182500902">${__P(LOAD.POP.rampup)}</stringProp>
-            <stringProp name="-449238496">${__P(LOAD.POP.avgloadDuration)}</stringProp>
-            <stringProp name="-1182500902">${__P(LOAD.POP.rampup)}</stringProp>
-          </collectionProp>
-          <collectionProp name="-1560863664">
-            <stringProp name="-692064594">${__P(LOAD.POP.Pusers)}</stringProp>
-            <stringProp name="-449238496">${__P(LOAD.POP.avgloadDuration)}</stringProp>
-            <stringProp name="-1182500902">${__P(LOAD.POP.rampup)}</stringProp>
-            <stringProp name="-923261007">${__P(LOAD.POP.peakloadDuration)}</stringProp>
-            <stringProp name="-1182500902">${__P(LOAD.POP.rampup)}</stringProp>
-          </collectionProp>
-          <collectionProp name="153758254">
-            <stringProp name="-1064415843">${__P(LOAD.POP.Ausers)}</stringProp>
-            <stringProp name="-305008701">${__P(LOAD.POP.initialDelay)}</stringProp>
-            <stringProp name="-1182500902">${__P(LOAD.POP.rampup)}</stringProp>
-            <stringProp name="-449238496">${__P(LOAD.POP.avgloadDuration)}</stringProp>
-            <stringProp name="-1182500902">${__P(LOAD.POP.rampup)}</stringProp>
-          </collectionProp>
-        </collectionProp>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="POP User" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <intProp name="LoopController.loops">-1</intProp>
+          <stringProp name="LoopController.loops">${__P(LOAD.POP.loopcount)}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-      </kg.apc.jmeter.threads.UltimateThreadGroup>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.POP.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.POP.rampup)}</stringProp>
+        <longProp name="ThreadGroup.start_time">1497658914000</longProp>
+        <longProp name="ThreadGroup.end_time">1497658914000</longProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
+      </ThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
           <stringProp name="BeanShellSampler.query">import org.apache.commons.net.pop3.POP3Client;
