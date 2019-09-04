@@ -207,8 +207,8 @@ String continue_flag = &quot;true&quot;;
 
 try {
   //log.info(Thread.currentThread().getName()+&quot; APPEND&quot;);
-  ic.append(&quot;INBOX&quot;,null,null,&quot;From: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;IMAP.domain&quot;)+
-                              &quot;\nTo: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;IMAP.domain&quot;)+
+  ic.append(&quot;INBOX&quot;,null,null,&quot;From: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+
+                              &quot;\nTo: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+
                               &quot;\nSubject: Testing\n\nThis is a test of IMAP append.\n&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());                            
 } catch (Exception e) {

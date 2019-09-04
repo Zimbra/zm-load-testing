@@ -508,9 +508,9 @@ if (commands.size() == 0) {
                     <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
                   </XPathExtractor>
                   <hashTree/>
-                  <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="csrf" enabled="true">
+                  <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="csrfAdmin" enabled="true">
                     <stringProp name="XPathExtractor.default"></stringProp>
-                    <stringProp name="XPathExtractor.refname">csrf</stringProp>
+                    <stringProp name="XPathExtractor.refname">csrfAdmin</stringProp>
                     <stringProp name="XPathExtractor.xpathQuery">//csrfToken</stringProp>
                     <boolProp name="XPathExtractor.validate">false</boolProp>
                     <boolProp name="XPathExtractor.tolerant">false</boolProp>
@@ -1574,7 +1574,7 @@ if (commands.size() == 0) {
                   <collectionProp name="HeaderManager.headers">
                     <elementProp name="" elementType="Header">
                       <stringProp name="Header.name">X-Zimbra-Csrf-Token</stringProp>
-                      <stringProp name="Header.value">${csrf}</stringProp>
+                      <stringProp name="Header.value">${csrfAdmin}</stringProp>
                     </elementProp>
                   </collectionProp>
                 </HeaderManager>
@@ -1981,7 +1981,7 @@ if (commands.size() == 0) {
                   <collectionProp name="HeaderManager.headers">
                     <elementProp name="" elementType="Header">
                       <stringProp name="Header.name">X-Zimbra-Csrf-Token</stringProp>
-                      <stringProp name="Header.value">${csrf}</stringProp>
+                      <stringProp name="Header.value">${csrfAdmin}</stringProp>
                     </elementProp>
                   </collectionProp>
                 </HeaderManager>
@@ -2077,7 +2077,7 @@ if (commands.size() == 0) {
                   <collectionProp name="HeaderManager.headers">
                     <elementProp name="" elementType="Header">
                       <stringProp name="Header.name">X-Zimbra-Csrf-Token</stringProp>
-                      <stringProp name="Header.value">${csrf}</stringProp>
+                      <stringProp name="Header.value">${csrfAdmin}</stringProp>
                     </elementProp>
                   </collectionProp>
                 </HeaderManager>
@@ -2410,7 +2410,7 @@ if (commands.size() == 0) {
                   <collectionProp name="HeaderManager.headers">
                     <elementProp name="" elementType="Header">
                       <stringProp name="Header.name">X-Zimbra-Csrf-Token</stringProp>
-                      <stringProp name="Header.value">${csrf}</stringProp>
+                      <stringProp name="Header.value">${csrfAdmin}</stringProp>
                     </elementProp>
                   </collectionProp>
                 </HeaderManager>
@@ -2457,7 +2457,7 @@ if (commands.size() == 0) {
                   <collectionProp name="HeaderManager.headers">
                     <elementProp name="" elementType="Header">
                       <stringProp name="Header.name">X-Zimbra-Csrf-Token</stringProp>
-                      <stringProp name="Header.value">${csrf}</stringProp>
+                      <stringProp name="Header.value">${csrfAdmin}</stringProp>
                     </elementProp>
                   </collectionProp>
                 </HeaderManager>
@@ -2506,7 +2506,7 @@ if (commands.size() == 0) {
                   <collectionProp name="HeaderManager.headers">
                     <elementProp name="" elementType="Header">
                       <stringProp name="Header.name">X-Zimbra-Csrf-Token</stringProp>
-                      <stringProp name="Header.value">${csrf}</stringProp>
+                      <stringProp name="Header.value">${csrfAdmin}</stringProp>
                     </elementProp>
                   </collectionProp>
                 </HeaderManager>
@@ -2868,7 +2868,7 @@ if (commands.size() == 0) {
                   <collectionProp name="HeaderManager.headers">
                     <elementProp name="" elementType="Header">
                       <stringProp name="Header.name">X-Zimbra-Csrf-Token</stringProp>
-                      <stringProp name="Header.value">${csrf}</stringProp>
+                      <stringProp name="Header.value">${csrfAdmin}</stringProp>
                     </elementProp>
                   </collectionProp>
                 </HeaderManager>
@@ -3344,7 +3344,7 @@ if (commands.size() == 0) {
                   <collectionProp name="HeaderManager.headers">
                     <elementProp name="" elementType="Header">
                       <stringProp name="Header.name">X-Zimbra-Csrf-Token</stringProp>
-                      <stringProp name="Header.value">${csrf}</stringProp>
+                      <stringProp name="Header.value">${csrfAdmin}</stringProp>
                     </elementProp>
                   </collectionProp>
                 </HeaderManager>
@@ -4233,6 +4233,16 @@ if (commands.size() == 0) {
                       </elementProp>
                     </collectionProp>
                   </HeaderManager>
+                  <hashTree/>
+                  <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="COMPNUM" enabled="true">
+                    <stringProp name="XPathExtractor.default"></stringProp>
+                    <stringProp name="XPathExtractor.refname">COMPNUM</stringProp>
+                    <stringProp name="XPathExtractor.xpathQuery">//comp/@compNum</stringProp>
+                    <boolProp name="XPathExtractor.validate">false</boolProp>
+                    <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                    <boolProp name="XPathExtractor.namespace">false</boolProp>
+                    <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  </XPathExtractor>
                   <hashTree/>
                 </hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="conversation" enabled="true">
