@@ -1,8 +1,6 @@
+LOAD.duration=604800
 LOAD.delay=2
+LOAD.IMAP.users=700
 LOAD.IMAP.userduration=2
 LOAD.IMAP.rampup=10
-LOAD.IMAP.Ausers=700
-LOAD.IMAP.Pusers=800
-LOAD.IMAP.avgloadDuration=32400
-LOAD.IMAP.peakloadDuration=21600
-LOAD.IMAP.initialDelay=54000
+LOAD.IMAP.loopcount=-1
