@@ -1,8 +1,6 @@
+LOAD.duration=600
 LOAD.delay=5
-LOAD.ZSOAP.userduration=100
-LOAD.ZSOAP.rampup=10
-LOAD.ZSOAP.Ausers=40
-LOAD.ZSOAP.Pusers=80
-LOAD.ZSOAP.avgloadDuration=32400
-LOAD.ZSOAP.peakloadDuration=21600
-LOAD.ZSOAP.initialDelay=54000
+LOAD.ZSOAP.users=10
+LOAD.ZSOAP.userduration=200
+LOAD.ZSOAP.rampup=0
+LOAD.ZSOAP.loopcount=-1
