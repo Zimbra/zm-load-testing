@@ -1,8 +1,0 @@
-LOAD.delay=5
-LOAD.POP.userduration=2
-LOAD.POP.rampup=10
-LOAD.POP.Ausers=200
-LOAD.POP.Pusers=450
-LOAD.POP.avgloadDuration=32400
-LOAD.POP.peakloadDuration=21600
-LOAD.POP.initialDelay=54000

@@ -1,5 +1,0 @@
-PROFILE.IMAP.type=sequence
-PROFILE.IMAP.sequence.1=LOGIN
-PROFILE.IMAP.sequence.2=LIST
-PROFILE.IMAP.sequence.3=APPEND
-PROFILE.IMAP.sequence.4=LOGOUT
