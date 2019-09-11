@@ -1,0 +1,53 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,grpThreads,allThreads,Latency,IdleTime
+1568017977908,42,START,200,OK,IMAP User 1-1,text,true,,35,1,1,0,0
+1568017977952,5,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017977994,2,default,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017977957,2,Command_Execution,200,"Number of samples in transaction : 1, number of failing samples : 0",IMAP User 1-1,,true,,0,1,1,0,37
+1568017977997,3,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017978038,122,LOGIN,200,OK,IMAP User 1-1,text,true,,302,1,1,0,0
+1568017978001,122,Command_Execution,200,"Number of samples in transaction : 1, number of failing samples : 0",IMAP User 1-1,,true,,302,1,1,0,38
+1568017978161,2,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017978200,6,NAMESPACE,200,OK,IMAP User 1-1,text,true,,74,1,1,0,0
+1568017978163,6,Command_Execution,200,"Number of samples in transaction : 1, number of failing samples : 0",IMAP User 1-1,,true,,74,1,1,0,37
+1568017978206,1,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017978245,31,STATUS,200,OK,IMAP User 1-1,text,true,,103,1,1,0,0
+1568017978208,31,Command_Execution,200,"Number of samples in transaction : 1, number of failing samples : 0",IMAP User 1-1,,true,,103,1,1,0,37
+1568017978276,2,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017978315,16,LIST,200,OK,IMAP User 1-1,text,true,,517,1,1,0,0
+1568017978278,16,Command_Execution,200,"Number of samples in transaction : 1, number of failing samples : 0",IMAP User 1-1,,true,,517,1,1,0,37
+1568017978332,1,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017978370,3,NAMESPACE,200,OK,IMAP User 1-1,text,true,,74,1,1,0,0
+1568017978333,3,Command_Execution,200,"Number of samples in transaction : 1, number of failing samples : 0",IMAP User 1-1,,true,,74,1,1,0,37
+1568017978374,2,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017978414,32,APPEND,200,OK,IMAP User 1-1,text,true,,44,1,1,0,0
+1568017978377,32,Command_Execution,200,"Number of samples in transaction : 1, number of failing samples : 0",IMAP User 1-1,,true,,44,1,1,0,37
+1568017978446,1,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017978485,14,STATUS,200,OK,IMAP User 1-1,text,true,,103,1,1,0,0
+1568017978448,14,Command_Execution,200,"Number of samples in transaction : 1, number of failing samples : 0",IMAP User 1-1,,true,,103,1,1,0,37
+1568017978500,2,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017978539,6,LIST,200,OK,IMAP User 1-1,text,true,,517,1,1,0,0
+1568017978502,6,Command_Execution,200,"Number of samples in transaction : 1, number of failing samples : 0",IMAP User 1-1,,true,,517,1,1,0,38
+1568017978546,1,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017978585,5,CLOSE,200,OK,IMAP User 1-1,text,false,,35,1,1,0,0
+1568017978547,5,Command_Execution,,"Number of samples in transaction : 1, number of failing samples : 1",IMAP User 1-1,,false,,35,1,1,0,38
+1568017978590,1,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017978628,2,NAMESPACE,200,OK,IMAP User 1-1,text,true,,74,1,1,0,0
+1568017978591,2,Command_Execution,200,"Number of samples in transaction : 1, number of failing samples : 0",IMAP User 1-1,,true,,74,1,1,0,38
+1568017978631,1,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017978669,7,LIST,200,OK,IMAP User 1-1,text,true,,517,1,1,0,0
+1568017978632,7,Command_Execution,200,"Number of samples in transaction : 1, number of failing samples : 0",IMAP User 1-1,,true,,517,1,1,0,37
+1568017978677,1,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017978715,5,CAPABILITY,200,OK,IMAP User 1-1,text,true,,308,1,1,0,0
+1568017978678,5,Command_Execution,200,"Number of samples in transaction : 1, number of failing samples : 0",IMAP User 1-1,,true,,308,1,1,0,37
+1568017978721,1,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017978759,20,APPEND,200,OK,IMAP User 1-1,text,true,,44,1,1,0,0
+1568017978722,20,Command_Execution,200,"Number of samples in transaction : 1, number of failing samples : 0",IMAP User 1-1,,true,,44,1,1,0,37
+1568017978780,0,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017978817,10,STATUS,200,OK,IMAP User 1-1,text,true,,103,1,1,0,0
+1568017978780,10,Command_Execution,200,"Number of samples in transaction : 1, number of failing samples : 0",IMAP User 1-1,,true,,103,1,1,0,37
+1568017978827,1,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017978866,8,LSUB,200,OK,IMAP User 1-1,text,true,,24,1,1,0,0
+1568017978829,8,Command_Execution,200,"Number of samples in transaction : 1, number of failing samples : 0",IMAP User 1-1,,true,,24,1,1,0,37
+1568017978875,0,Next_Command,200,OK,IMAP User 1-1,text,true,,0,1,1,0,0
+1568017978912,5,EXPUNGE,200,OK,IMAP User 1-1,text,false,,35,1,1,0,0
+1568017978875,5,Command_Execution,,"Number of samples in transaction : 1, number of failing samples : 1",IMAP User 1-1,,false,,35,1,1,0,37

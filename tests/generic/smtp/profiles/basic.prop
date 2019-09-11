@@ -1,7 +1,0 @@
-PROFILE.SMTP.message=tests/generic/smtp/profiles/message.txt
-PROFILE.SMTP.type=sequence
-PROFILE.SMTP.sequence.1=HELO
-PROFILE.SMTP.sequence.2=MAIL
-PROFILE.SMTP.sequence.3=RCPT
-PROFILE.SMTP.sequence.4=DATA
-PROFILE.SMTP.sequence.5=QUIT

@@ -1,0 +1,50 @@
+2019/09/09 08:32:55 INFO  - jmeter.util.JMeterUtils: Setting Locale to en_US 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: Loading user properties from: /opt/apache-jmeter-3.0/bin/user.properties 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: Loading system properties from: /opt/apache-jmeter-3.0/bin/system.properties 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: Setting JMeter property: ACCOUNTS.csv=/root/zm-load-testing/config/users.csv 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: Setting JMeter property: user.classpath=/root/zm-load-testing/src/build/jar/zjmeter.jar 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: Copyright (c) 1998-2016 The Apache Software Foundation 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: Version 3.0 r1743807 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: java.version=1.8.0_222 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: java.vm.name=OpenJDK 64-Bit Server VM 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: os.name=Linux 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: os.arch=amd64 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: os.version=4.4.0-1092-aws 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: file.encoding=UTF-8 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: Max memory     =14671151104 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: Available Processors =16 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: Default Locale=English (United States) 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: JMeter  Locale=English (United States) 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: JMeterHome=/opt/apache-jmeter-3.0 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: user.dir  =/opt/apache-jmeter-3.0/bin 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: PWD       =/opt/apache-jmeter-3.0/bin 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: IP: 172.31.23.218 Name: ip-172-31-23-218 FullName: ip-172-31-23-218.ap-south-1.compute.internal 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: user.classpath=/root/zm-load-testing/src/build/jar/zjmeter.jar 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: Adding to classpath and loader: /root/zm-load-testing/src/build/jar/zjmeter.jar 
+2019/09/09 08:32:55 INFO  - jmeter.services.FileServer: Default base='/opt/apache-jmeter-3.0/bin' 
+2019/09/09 08:32:55 INFO  - jmeter.services.FileServer: Set new base='/root/zm-load-testing/tests/BSP/pop' 
+2019/09/09 08:32:55 INFO  - jmeter.save.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2 
+2019/09/09 08:32:55 INFO  - jmeter.save.SaveService: Using SaveService properties file encoding UTF-8 
+2019/09/09 08:32:55 INFO  - jmeter.save.SaveService: Using SaveService properties version 2.9 
+2019/09/09 08:32:55 INFO  - jmeter.save.SaveService: All converter versions present and correct 
+2019/09/09 08:32:55 INFO  - jmeter.save.SaveService: Loading file: /root/zm-load-testing/tests/BSP/pop/pop.jmx 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: Creating summariser <summary> 
+2019/09/09 08:32:55 INFO  - jmeter.engine.StandardJMeterEngine: Running the test! 
+2019/09/09 08:32:55 INFO  - jmeter.samplers.SampleEvent: List of sample_variables: [] 
+2019/09/09 08:32:55 INFO  - jmeter.samplers.SampleEvent: List of sample_variables: [] 
+2019/09/09 08:32:55 INFO  - jmeter.engine.util.CompoundVariable: Note: Function class names must contain the string: '.functions.' 
+2019/09/09 08:32:55 INFO  - jmeter.engine.util.CompoundVariable: Note: Function class names must not contain the string: '.gui.' 
+2019/09/09 08:32:55 INFO  - jmeter.JMeter: Running test (1568017975792) 
+2019/09/09 08:32:55 INFO  - jmeter.engine.StandardJMeterEngine: Starting ThreadGroup: 1 : POP User 
+2019/09/09 08:32:55 INFO  - jmeter.engine.StandardJMeterEngine: Starting 1 threads for group POP User. 
+2019/09/09 08:32:55 INFO  - jmeter.engine.StandardJMeterEngine: Thread will continue on error 
+2019/09/09 08:32:55 INFO  - jmeter.threads.ThreadGroup: Starting thread group number 1 threads 1 ramp-up 10 perThread 10000.0 delayedStart=false 
+2019/09/09 08:32:56 INFO  - jmeter.threads.ThreadGroup: Started thread group number 1 
+2019/09/09 08:32:56 INFO  - jmeter.engine.StandardJMeterEngine: All thread groups have been started 
+2019/09/09 08:32:56 INFO  - jmeter.samplers.SampleResult: Note: Sample TimeStamps are START times 
+2019/09/09 08:32:56 INFO  - jmeter.samplers.SampleResult: sampleresult.default.encoding is set to ISO-8859-1 
+2019/09/09 08:32:56 INFO  - jmeter.samplers.SampleResult: sampleresult.useNanoTime=true 
+2019/09/09 08:32:56 INFO  - jmeter.samplers.SampleResult: sampleresult.nanoThreadSleep=5000 
+2019/09/09 08:33:00 INFO  - jmeter.threads.JMeterThread: Thread started: POP User 1-1 
+2019/09/09 08:33:00 INFO  - jmeter.services.FileServer: Stored: /root/zm-load-testing/config/users.csv 
+2019/09/09 08:33:00 INFO  - jmeter.util.BeanShellTestElement: POP connection: localhost 30353 

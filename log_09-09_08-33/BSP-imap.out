@@ -1,0 +1,23 @@
+Buildfile: /root/zm-load-testing/build.xml
+
+src:
+
+build:
+
+jar:
+
+logs:
+
+BSP-imap:
+   [jmeter] Executing test plan: /root/zm-load-testing/tests/BSP/imap/imap.jmx ==> /root/zm-load-testing/logs/BSP-imap-requests.log
+   [jmeter] Writing log file to: /root/zm-load-testing/logs/BSP-imap-jmeter.log
+   [jmeter] Creating summariser <summary>
+   [jmeter] Created the tree successfully using /root/zm-load-testing/tests/BSP/imap/imap.jmx
+   [jmeter] Starting the test @ Mon Sep 09 08:32:55 UTC 2019 (1568017975670)
+   [jmeter] Waiting for possible Shutdown/StopTestNow/Heapdump message on port 4445
+   [jmeter] summary =     52 in 00:00:03 =   16.4/s Avg:    12 Min:     0 Max:   122 Err:     4 (7.69%)
+   [jmeter] Tidying up ...    @ Mon Sep 09 08:32:58 UTC 2019 (1568017978920)
+   [jmeter] ... end of run
+
+BUILD SUCCESSFUL
+Total time: 4 seconds

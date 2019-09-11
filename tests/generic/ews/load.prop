@@ -1,6 +1,0 @@
-LOAD.duration=130
-LOAD.delay=0
-LOAD.EWS.users=1
-LOAD.EWS.userduration=1
-LOAD.EWS.rampup=0
-LOAD.EWS.loopcount=1
