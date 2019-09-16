@@ -1361,6 +1361,7 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
+<<<<<<< HEAD
 <<<<<<< c8168426600ef2f418879654172a6a7ebcb2443c
               <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="LOOP" enabled="true">
                 <boolProp name="LoopController.continue_forever">true</boolProp>
@@ -1419,11 +1420,8 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                 <hashTree>
                   <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="IDLE" enabled="true">
                     <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-import java.util.concurrent.TimeUnit;
-=======
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="ENABLE" enabled="true">
+	       <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="ENABLE" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
->>>>>>> added imap and pop BSP test plans
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
