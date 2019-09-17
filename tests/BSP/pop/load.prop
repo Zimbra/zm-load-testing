@@ -1,6 +1,6 @@
-LOAD.duration=604800
+LOAD.duration=600
 LOAD.delay=5
-LOAD.POP.users=300
-LOAD.POP.userduration=2
+LOAD.POP.users=10
+LOAD.POP.userduration=120
 LOAD.POP.rampup=0
 LOAD.POP.loopcount=-1
