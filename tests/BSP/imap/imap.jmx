@@ -268,8 +268,8 @@ String continue_flag = &quot;true&quot;;
 
 try {
   log.info(Thread.currentThread().getName()+&quot; APPEND&quot;);
-  ic.append(&quot;INBOX&quot;,null,null,&quot;From: &quot;+vars.get(&quot;USER&quot;)+
-                              &quot;\nTo: &quot;+vars.get(&quot;USER&quot;)+
+  ic.append(&quot;INBOX&quot;,null,null,&quot;From: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;IMAP.domain&quot;)+
+                              &quot;\nTo: &quot;+vars.get(&quot;USER&quot;)+&quot;@&quot;+props.get(&quot;IMAP.domain&quot;)+
                               &quot;\nSubject: Testing\n\nThis is a test of IMAP append.\n&quot;);
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());                            
 } catch (Exception e) {
@@ -1361,66 +1361,7 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
-<<<<<<< HEAD
-<<<<<<< c8168426600ef2f418879654172a6a7ebcb2443c
-              <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="LOOP" enabled="true">
-                <boolProp name="LoopController.continue_forever">true</boolProp>
-                <stringProp name="LoopController.loops">1</stringProp>
-              </LoopController>
-              <hashTree>
-                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="LOGIN" enabled="true">
-                  <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-import com.zimbra.jmeter.Zimbra;
-import com.zimbra.jmeter.Command;
-
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
-String continue_flag = &quot;true&quot;;
-
-//Create IMAP conncection and store for all future use
-//log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
-IMAPClient ic = new IMAPClient();
-try {
-  log.info(&quot;IMAP connection: &quot;+props.get(&quot;IMAP.server&quot;)+&quot; &quot;+props.get(&quot;IMAP.port&quot;));
-  ic.connect(props.get(&quot;IMAP.server&quot;),Integer.parseInt(props.get(&quot;IMAP.port&quot;)));
-} catch (Exception x) {
-  log.info(&quot;connect error: &quot;,x);
-}
-vars.putObject(&quot;IMAPCLIENT&quot;,ic);
-
-try {
-  log.info(Thread.currentThread().getName()+&quot; LOGIN&quot;);
-  ic.login(vars.get(&quot;USER&quot;),vars.get(&quot;PASS&quot;));
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
-} catch (Exception e) {
-  SampleResult.setSuccessful(false);
-  continue_flag = &quot;false&quot;;
-  IsSuccess=false;
-  log.info(Thread.currentThread().getName()+&quot; LOGIN: &quot;+e);
-}
-
-if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString().contains(&quot;LOGIN completed&quot;))) {
-  SampleResult.setSuccessful(false);
-  continue_flag = &quot;false&quot;;
-  IsSuccess=false;
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
-}
-
-vars.put(&quot;CONTINUE&quot;,continue_flag);
-SampleResult.setResponseData(ic.getReplyString());
-SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                  <stringProp name="BeanShellSampler.filename"></stringProp>
-                  <stringProp name="BeanShellSampler.parameters"></stringProp>
-                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-                </BeanShellSampler>
-                <hashTree/>
-                <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IDLE" enabled="true">
-                  <stringProp name="IfController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
-                  <boolProp name="IfController.evaluateAll">false</boolProp>
-                </IfController>
-                <hashTree>
-                  <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="IDLE" enabled="true">
-                    <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-	       <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="ENABLE" enabled="true">
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="ENABLE" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
