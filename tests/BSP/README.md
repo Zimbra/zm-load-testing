@@ -40,7 +40,9 @@ Below are the steps that I have followed to create the users.
 
 	2) Then we need to create a users file for our test execution using the below command. We need execute this command from the repo -->   zm-load-testing/tests/BSP/business/zsoap
 
-	for i in {1..10} ; do j=$(($i+1)); echo "user_business$i@zmc.com,test123,user_business$j@zmc.com"; done > users.csv  (This will create a user list file for users_business1@zmc.com to user_business10@zmc.com)
+		for i in {1..10} ; do j=$(($i+1)); echo "user_business$i@zmc.com,test123,user_business$j@zmc.com"; done > users.csv  
+	
+	(This will create a user list file for users_business1@zmc.com to user_business10@zmc.com)
 
 	We need to repeat the steps from 1 and 2 for creating different types of COS and set of users. For example : user_businessplus1@zmc.com, user_standard1@zmc.com and users_professional1@zmc.com.
 
@@ -51,7 +53,7 @@ Example : zm-load-testing/tests/BSP/businessplus/zsoap , zm-load-testing/tests/B
 
 	3) Similarly we need to create users for Imap and Pop scenarios also. The below command will create set of users for four editions of zimbra-X. In case if you plan to run the BSP test for only one single edition, then modify the below command accordingly for your requirement. Therefore execute this below command from repo zm-load-testing/config
 
-	for i in {1..10} ; do j=$(($i+1)); echo "user_business$i@zmc.com,test123,user_business$j@zmc.com";echo "user_businessplus$i@zmc.com,test123,user_businessplus$j@zmc.com";echo "user_standard$i@zmc.com,test123,user_standard$j@zmc.com";echo "user_professional$i@zmc.com,test123,user_professional$j@zmc.com"; done >> users.csv
+		for i in {1..10} ; do j=$(($i+1)); echo "user_business$i@zmc.com,test123,user_business$j@zmc.com";echo "user_businessplus$i@zmc.com,test123,user_businessplus$j@zmc.com";echo "user_standard$i@zmc.com,test123,user_standard$j@zmc.com";echo "user_professional$i@zmc.com,test123,user_professional$j@zmc.com"; done >> users.csv
 
 	The above three steps will complete user creation and providing permissions to access Zimbra-X business edition features.
 
