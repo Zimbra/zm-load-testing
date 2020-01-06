@@ -1,0 +1,5 @@
+PROFILE.ZSOAP.type=sequence
+PROFILE.ZSOAP.sequence.1=AuthRequest(AUTHTYPE=user)
+PROFILE.ZSOAP.sequence.2=GetAccountInfoRequest
+PROFILE.ZSOAP.sequence.3=CreateAppointmentRequest
+
