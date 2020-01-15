@@ -1,11 +1,11 @@
 PROFILE.ZSOAP.type=sequence
 PROFILE.ZSOAP.sequence.1=AuthRequest(AUTHTYPE=user)
-PROFILE.ZSOAP.sequence.2=SendMsgRequest
+PROFILE.ZSOAP.sequence.2=SaveDraftRequest
 PROFILE.ZSOAP.sequence.3=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.4=NoOpRequest
 PROFILE.ZSOAP.sequence.5=GetInfoRequest
 PROFILE.ZSOAP.sequence.6=GetMailboxMetadataRequest
-PROFILE.ZSOAP.sequence.7=SaveDraftRequest
+PROFILE.ZSOAP.sequence.7=SendMsgRequest
 PROFILE.ZSOAP.sequence.8=SearchRequest(SEARCHTYPE=message,SEARCH="not is:read",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.9=NoOpRequest
 PROFILE.ZSOAP.sequence.10=GetDomainInfoRequest
@@ -39,7 +39,7 @@ PROFILE.ZSOAP.sequence.37=GetMsgRequest
 PROFILE.ZSOAP.sequence.38=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.39=NoOpRequest
 PROFILE.ZSOAP.sequence.40=GetMsgRequest
-PROFILE.ZSOAP.sequence.41=AutoCompleteRequest
+PROFILE.ZSOAP.sequence.41=AutoCompleteRequest(username=user12)
 PROFILE.ZSOAP.sequence.42=GetInfoRequest
 PROFILE.ZSOAP.sequence.43=NoOpRequest
 PROFILE.ZSOAP.sequence.44=GetDomainInfoRequest
@@ -85,7 +85,7 @@ PROFILE.ZSOAP.sequence.83=GetInfoRequest
 PROFILE.ZSOAP.sequence.84=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.85=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox Treehouse",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.86=GetMsgRequest
-PROFILE.ZSOAP.sequence.87=SendMsgRequest
+PROFILE.ZSOAP.sequence.87=SavePreviousDraft
 PROFILE.ZSOAP.sequence.88=GetInfoRequest
 PROFILE.ZSOAP.sequence.89=NoOpRequest
 PROFILE.ZSOAP.sequence.90=GetMsgRequest
@@ -121,7 +121,7 @@ PROFILE.ZSOAP.sequence.119=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.120=NoOpRequest
 PROFILE.ZSOAP.sequence.121=GetMsgRequest
 PROFILE.ZSOAP.sequence.122=NoOpRequest
-PROFILE.ZSOAP.sequence.123=AutoCompleteRequest
+PROFILE.ZSOAP.sequence.123=AutoCompleteRequest(username=user12@zmc.com)
 PROFILE.ZSOAP.sequence.124=NoOpRequest
 PROFILE.ZSOAP.sequence.125=GetMsgRequest
 PROFILE.ZSOAP.sequence.126=GetDomainInfoRequest
@@ -137,7 +137,7 @@ PROFILE.ZSOAP.sequence.135=SearchRequest(SEARCHTYPE=message,SEARCH="to:${TOUSER}
 PROFILE.ZSOAP.sequence.136=GetMailboxMetadataRequest
 PROFILE.ZSOAP.sequence.137=GetMsgRequest
 PROFILE.ZSOAP.sequence.138=NoOpRequest
-PROFILE.ZSOAP.sequence.139=SaveDraftRequest
+PROFILE.ZSOAP.sequence.139=SendMsgRequest
 PROFILE.ZSOAP.sequence.140=NoOpRequest
 PROFILE.ZSOAP.sequence.141=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.142=NoOpRequest
@@ -171,7 +171,7 @@ PROFILE.ZSOAP.sequence.169=NoOpRequest
 PROFILE.ZSOAP.sequence.170=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.171=NoOpRequest
 PROFILE.ZSOAP.sequence.172=SearchRequest(SEARCHTYPE=message,SEARCH="subject:Coverfox",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.173=AutoCompleteRequest
+PROFILE.ZSOAP.sequence.173=AutoCompleteRequest(username=user12@zmc)
 PROFILE.ZSOAP.sequence.174=NoOpRequest
 PROFILE.ZSOAP.sequence.175=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.176=NoOpRequest
@@ -182,7 +182,7 @@ PROFILE.ZSOAP.sequence.180=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.181=NoOpRequest
 PROFILE.ZSOAP.sequence.182=SearchRequest(SEARCHTYPE=message,SEARCH="TestTxt.txt",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.183=NoOpRequest
-PROFILE.ZSOAP.sequence.184=AutoCompleteRequest
+PROFILE.ZSOAP.sequence.184=AutoCompleteRequest(username=user12@zmc.c)
 PROFILE.ZSOAP.sequence.185=NoOpRequest
 PROFILE.ZSOAP.sequence.186=GetInfoRequest
 PROFILE.ZSOAP.sequence.187=NoOpRequest

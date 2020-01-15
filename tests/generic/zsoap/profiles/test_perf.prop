@@ -1,6 +1,6 @@
 PROFILE.ZSOAP.type=sequence
 PROFILE.ZSOAP.sequence.1=AuthRequest(AUTHTYPE=user)
-PROFILE.ZSOAP.sequence.2=SendMsgRequest
+PROFILE.ZSOAP.sequence.2=SaveDraftRequest
 PROFILE.ZSOAP.sequence.3=GetInfoRequest
 PROFILE.ZSOAP.sequence.4=NoOpRequest
 PROFILE.ZSOAP.sequence.5=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox JMeter*")
@@ -18,7 +18,7 @@ PROFILE.ZSOAP.sequence.16=SearchRequest(SEARCHTYPE=message,SEARCH="is:flagged")
 PROFILE.ZSOAP.sequence.17=GetInfoRequest
 PROFILE.ZSOAP.sequence.18=NoOpRequest
 PROFILE.ZSOAP.sequence.19=GetAvailableSkinsRequest
-PROFILE.ZSOAP.sequence.20=SaveDraftRequest
+PROFILE.ZSOAP.sequence.20=SendMsgRequest
 PROFILE.ZSOAP.sequence.21=GetMailboxMetadataRequest
 PROFILE.ZSOAP.sequence.22=GetFolderRequest
 PROFILE.ZSOAP.sequence.23=GetAvailableLocalesRequest
@@ -26,6 +26,6 @@ PROFILE.ZSOAP.sequence.24=DiscoverRightsRequest
 PROFILE.ZSOAP.sequence.25=GetMiniCalRequest
 PROFILE.ZSOAP.sequence.26=SearchConvRequest
 PROFILE.ZSOAP.sequence.27=GetContactsRequest
-PROFILE.ZSOAP.sequence.28=AutoCompleteRequest
+PROFILE.ZSOAP.sequence.28=AutoCompleteRequest(username=user12)
 PROFILE.ZSOAP.sequence.29=ConvActionRequest(CONVACTIONTYPE=readConv)
 PROFILE.ZSOAP.sequence.30=EndSessionRequest
