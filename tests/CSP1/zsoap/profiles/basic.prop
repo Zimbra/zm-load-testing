@@ -1,6 +1,6 @@
 PROFILE.ZSOAP.type=sequence
 PROFILE.ZSOAP.sequence.1=AuthRequest(AUTHTYPE=user)
-PROFILE.ZSOAP.sequence.2=SendMsgRequest
+PROFILE.ZSOAP.sequence.2=SaveDraftRequest
 PROFILE.ZSOAP.sequence.3=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.4=NoOpRequest
 PROFILE.ZSOAP.sequence.5=GetInfoRequest
@@ -9,13 +9,13 @@ PROFILE.ZSOAP.sequence.7=GetAvailableSkinsRequest
 PROFILE.ZSOAP.sequence.8=SearchRequest(SEARCHTYPE=message,SEARCH="not is:read",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.9=GetInfoRequest
 PROFILE.ZSOAP.sequence.10=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.11=NoOpRequest
+PROFILE.ZSOAP.sequence.11=SavePreviousDraft
 PROFILE.ZSOAP.sequence.12=CreateWaitSetRequest
 PROFILE.ZSOAP.sequence.13=MsgActionRequest(MSGACTIONTYPE=read)
 PROFILE.ZSOAP.sequence.14=SearchRequest(SEARCHTYPE=message,SEARCH="not is:invite subject:plain",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.15=GetInfoRequest
 PROFILE.ZSOAP.sequence.16=SearchRequest(SEARCHTYPE=appointment,SEARCH="in:Calendar",OFFSET="0",LIMIT="500")
-PROFILE.ZSOAP.sequence.17=NoOpRequest
+PROFILE.ZSOAP.sequence.17=SendMsgRequest
 PROFILE.ZSOAP.sequence.18=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox test",OFFSET="0",LIMIT="10")
 PROFILE.ZSOAP.sequence.19=GetMiniCalRequest
 PROFILE.ZSOAP.sequence.20=GetMsgRequest
@@ -34,7 +34,7 @@ PROFILE.ZSOAP.sequence.32=WaitSetRequest
 PROFILE.ZSOAP.sequence.33=GetMsgRequest
 PROFILE.ZSOAP.sequence.34=DestroyWaitSetRequest
 PROFILE.ZSOAP.sequence.35=AuthRequest(AUTHTYPE=user)
-PROFILE.ZSOAP.sequence.36=AutoCompleteRequest
+PROFILE.ZSOAP.sequence.36=AutoCompleteRequest(username=user12)
 PROFILE.ZSOAP.sequence.37=GetInfoRequest
 PROFILE.ZSOAP.sequence.38=SearchRequest(SEARCHTYPE=conversation,SEARCH="conversation",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.39=NoOpRequest
@@ -46,7 +46,7 @@ PROFILE.ZSOAP.sequence.44=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.45=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox/Healthline HEALTHLINE Stress Yoga",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.46=GetMsgRequest
 PROFILE.ZSOAP.sequence.47=NoOpRequest
-PROFILE.ZSOAP.sequence.48=SaveDraftRequest
+PROFILE.ZSOAP.sequence.48=AutoCompleteRequest(username=user12@zmc.com)
 PROFILE.ZSOAP.sequence.49=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.50=SearchRequest(SEARCHTYPE=message,SEARCH="to:${USER} OR in:inbox",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.51=GetMsgRequest
@@ -104,7 +104,7 @@ PROFILE.ZSOAP.sequence.102=GetMsgRequest
 PROFILE.ZSOAP.sequence.103=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.104=NoOpRequest
 PROFILE.ZSOAP.sequence.105=GetMailboxMetadataRequest
-PROFILE.ZSOAP.sequence.106=SaveDraftRequest
+PROFILE.ZSOAP.sequence.106=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.107=NoOpRequest
 PROFILE.ZSOAP.sequence.108=SearchConvRequest
 PROFILE.ZSOAP.sequence.109=NoOpRequest
@@ -134,7 +134,7 @@ PROFILE.ZSOAP.sequence.132=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.133=GetInfoRequest
 PROFILE.ZSOAP.sequence.134=SearchRequest(SEARCHTYPE=message,SEARCH="TestTxt.txt",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.135=NoOpRequest
-PROFILE.ZSOAP.sequence.136=AutoCompleteRequest
+PROFILE.ZSOAP.sequence.136=AutoCompleteRequest(username=user15@zmc)
 PROFILE.ZSOAP.sequence.137=GetInfoRequest
 PROFILE.ZSOAP.sequence.138=NoOpRequest
 PROFILE.ZSOAP.sequence.139=GetDomainInfoRequest
