@@ -14,189 +14,204 @@ PROFILE.ZSOAP.sequence.12=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.13=MsgActionRequest(MSGACTIONTYPE=read)
 PROFILE.ZSOAP.sequence.14=SearchRequest(SEARCHTYPE=message,SEARCH="not is:invite subject:plain",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.15=GetInfoRequest
-PROFILE.ZSOAP.sequence.16=SearchRequest(SEARCHTYPE=appointment,SEARCH="in:Calendar",OFFSET="0",LIMIT="500")
-PROFILE.ZSOAP.sequence.17=NoOpRequest
-PROFILE.ZSOAP.sequence.18=SearchRequest(SEARCHTYPE=conversation,SEARCH="not is:invite",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.19=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox test",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.20=GetMiniCalRequest
-PROFILE.ZSOAP.sequence.21=GetMsgRequest
-PROFILE.ZSOAP.sequence.22=NoOpRequest
-PROFILE.ZSOAP.sequence.23=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.24=NoOpRequest
-PROFILE.ZSOAP.sequence.25=GetInfoRequest
-PROFILE.ZSOAP.sequence.26=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox",OFFSET="0",LIMIT="10")
-PROFILE.ZSOAP.sequence.27=GetMsgRequest
-PROFILE.ZSOAP.sequence.28=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox",OFFSET="10",LIMIT="5")
-PROFILE.ZSOAP.sequence.29=GetMsgRequest
-PROFILE.ZSOAP.sequence.30=SearchRequest(SEARCHTYPE=message,SEARCH="content:Graphical",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.31=GetAvailableLocalesRequest
-PROFILE.ZSOAP.sequence.32=NoOpRequest
+PROFILE.ZSOAP.sequence.16=AutoCompleteRequest(username=ad)
+PROFILE.ZSOAP.sequence.17=SearchRequest(SEARCHTYPE=appointment,SEARCH="in:Calendar",OFFSET="0",LIMIT="500")
+PROFILE.ZSOAP.sequence.18=NoOpRequest
+PROFILE.ZSOAP.sequence.19=SearchRequest(SEARCHTYPE=conversation,SEARCH="not is:invite",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.20=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox test",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.21=GetMiniCalRequest
+PROFILE.ZSOAP.sequence.22=GetMsgRequest
+PROFILE.ZSOAP.sequence.23=NoOpRequest
+PROFILE.ZSOAP.sequence.24=AutoCompleteRequest(username=yung)
+PROFILE.ZSOAP.sequence.25=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.26=NoOpRequest
+PROFILE.ZSOAP.sequence.27=GetInfoRequest
+PROFILE.ZSOAP.sequence.28=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox",OFFSET="0",LIMIT="10")
+PROFILE.ZSOAP.sequence.29=AutoCompleteRequest(username=rikk)
+PROFILE.ZSOAP.sequence.30=GetMsgRequest
+PROFILE.ZSOAP.sequence.31=SearchFromSentMail(SEARCHTYPE=message,OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.32=AutoCompleteRequest(username=${TOUSER})
 PROFILE.ZSOAP.sequence.33=GetMsgRequest
-PROFILE.ZSOAP.sequence.34=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox/Healthline April",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.35=GetInfoRequest
-PROFILE.ZSOAP.sequence.36=AuthRequest(AUTHTYPE=user)
-PROFILE.ZSOAP.sequence.37=GetMsgRequest
-PROFILE.ZSOAP.sequence.38=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.39=NoOpRequest
-PROFILE.ZSOAP.sequence.40=GetMsgRequest
-PROFILE.ZSOAP.sequence.41=AutoCompleteRequest(username=user12)
-PROFILE.ZSOAP.sequence.42=GetInfoRequest
-PROFILE.ZSOAP.sequence.43=NoOpRequest
+PROFILE.ZSOAP.sequence.34=SearchRequest(SEARCHTYPE=message,SEARCH="content:Graphical",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.35=GetAvailableLocalesRequest
+PROFILE.ZSOAP.sequence.36=AutoCompleteRequest(username=al)
+PROFILE.ZSOAP.sequence.37=NoOpRequest
+PROFILE.ZSOAP.sequence.38=GetMsgRequest
+PROFILE.ZSOAP.sequence.39=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox/Healthline April",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.40=GetInfoRequest
+PROFILE.ZSOAP.sequence.41=AuthRequest(AUTHTYPE=user)
+PROFILE.ZSOAP.sequence.42=GetMsgRequest
+PROFILE.ZSOAP.sequence.43=AutoCompleteRequest(username=Jenise.Bonet@zmc)
 PROFILE.ZSOAP.sequence.44=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.45=GetMailboxMetadataRequest
-PROFILE.ZSOAP.sequence.46=GetMsgRequest
-PROFILE.ZSOAP.sequence.47=SearchRequest(SEARCHTYPE=conversation,SEARCH="conversation",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.48=NoOpRequest
-PROFILE.ZSOAP.sequence.49=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.50=SearchConvRequest
-PROFILE.ZSOAP.sequence.51=SearchRequest(SEARCHTYPE=appointment,SEARCH="in:Calendar",OFFSET="0",LIMIT="500")
-PROFILE.ZSOAP.sequence.52=SearchRequest(SEARCHTYPE=message,SEARCH="Feature Freeze",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.53=GetMsgRequest
-PROFILE.ZSOAP.sequence.54=NoOpRequest
-PROFILE.ZSOAP.sequence.55=GetMiniCalRequest
+PROFILE.ZSOAP.sequence.45=NoOpRequest
+PROFILE.ZSOAP.sequence.46=AutoCompleteRequest(username=alex.yung)
+PROFILE.ZSOAP.sequence.47=GetMsgRequest
+PROFILE.ZSOAP.sequence.48=AutoCompleteRequest(username=user12)
+PROFILE.ZSOAP.sequence.49=GetInfoRequest
+PROFILE.ZSOAP.sequence.50=NoOpRequest
+PROFILE.ZSOAP.sequence.51=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.52=AutoCompleteRequest(username=Abraham)
+PROFILE.ZSOAP.sequence.53=GetMailboxMetadataRequest
+PROFILE.ZSOAP.sequence.54=GetMsgRequest
+PROFILE.ZSOAP.sequence.55=SearchRequest(SEARCHTYPE=conversation,SEARCH="conversation",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.56=NoOpRequest
-PROFILE.ZSOAP.sequence.57=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.58=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox/Healthline HEALTHLINE Stress Yoga",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.59=GetMsgRequest
-PROFILE.ZSOAP.sequence.60=AuthRequest(AUTHTYPE=user)
-PROFILE.ZSOAP.sequence.61=NoOpRequest
-PROFILE.ZSOAP.sequence.62=SaveDraftRequest
-PROFILE.ZSOAP.sequence.63=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.64=SearchRequest(SEARCHTYPE=message,SEARCH="to:${USER} OR in:inbox",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.65=GetMsgRequest
+PROFILE.ZSOAP.sequence.57=AutoCompleteRequest(username=Abr)
+PROFILE.ZSOAP.sequence.58=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.59=SearchConvRequest
+PROFILE.ZSOAP.sequence.60=AutoCompleteRequest(username=Abrah)
+PROFILE.ZSOAP.sequence.61=SearchRequest(SEARCHTYPE=appointment,SEARCH="in:Calendar",OFFSET="0",LIMIT="500")
+PROFILE.ZSOAP.sequence.62=SearchRequest(SEARCHTYPE=message,SEARCH="Feature Freeze",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.63=GetMsgRequest
+PROFILE.ZSOAP.sequence.64=NoOpRequest
+PROFILE.ZSOAP.sequence.65=GetMiniCalRequest
 PROFILE.ZSOAP.sequence.66=NoOpRequest
 PROFILE.ZSOAP.sequence.67=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.68=SearchRequest(SEARCHTYPE=message,SEARCH="has:attachment Software",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.69=GetAvailableSkinsRequest
-PROFILE.ZSOAP.sequence.70=NoOpRequest
-PROFILE.ZSOAP.sequence.71=GetMsgRequest
-PROFILE.ZSOAP.sequence.72=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.73=NoOpRequest
-PROFILE.ZSOAP.sequence.74=SearchRequest(SEARCHTYPE=conversation,SEARCH="from:user*",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.75=NoOpRequest
-PROFILE.ZSOAP.sequence.76=GetMsgRequest
-PROFILE.ZSOAP.sequence.77=AuthRequest(AUTHTYPE=user)
-PROFILE.ZSOAP.sequence.78=NoOpRequest
-PROFILE.ZSOAP.sequence.79=GetInfoRequest
-PROFILE.ZSOAP.sequence.80=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.68=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox/Healthline HEALTHLINE Stress Yoga",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.69=GetMsgRequest
+PROFILE.ZSOAP.sequence.70=AuthRequest(AUTHTYPE=user)
+PROFILE.ZSOAP.sequence.71=NoOpRequest
+PROFILE.ZSOAP.sequence.72=SaveDraftRequest
+PROFILE.ZSOAP.sequence.73=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.74=SearchRequest(SEARCHTYPE=message,SEARCH="to:${USER} OR in:inbox",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.75=GetMsgRequest
+PROFILE.ZSOAP.sequence.76=NoOpRequest
+PROFILE.ZSOAP.sequence.77=AutoCompleteRequest(username=adam.rikki@zmc.com)
+PROFILE.ZSOAP.sequence.78=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.79=SearchRequest(SEARCHTYPE=message,SEARCH="has:attachment Software",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.80=GetAvailableSkinsRequest
 PROFILE.ZSOAP.sequence.81=NoOpRequest
 PROFILE.ZSOAP.sequence.82=GetMsgRequest
-PROFILE.ZSOAP.sequence.83=GetInfoRequest
-PROFILE.ZSOAP.sequence.84=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.85=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox Treehouse",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.86=GetMsgRequest
-PROFILE.ZSOAP.sequence.87=SavePreviousDraft
-PROFILE.ZSOAP.sequence.88=GetInfoRequest
+PROFILE.ZSOAP.sequence.83=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.84=NoOpRequest
+PROFILE.ZSOAP.sequence.85=SearchRequest(SEARCHTYPE=conversation,SEARCH="from:user*",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.86=NoOpRequest
+PROFILE.ZSOAP.sequence.87=GetMsgRequest
+PROFILE.ZSOAP.sequence.88=AuthRequest(AUTHTYPE=user)
 PROFILE.ZSOAP.sequence.89=NoOpRequest
-PROFILE.ZSOAP.sequence.90=GetMsgRequest
-PROFILE.ZSOAP.sequence.91=GetInfoRequest
-PROFILE.ZSOAP.sequence.92=NoOpRequest
-PROFILE.ZSOAP.sequence.93=GetFilterRulesRequest
+PROFILE.ZSOAP.sequence.90=GetInfoRequest
+PROFILE.ZSOAP.sequence.91=AutoCompleteRequest(username=alex)
+PROFILE.ZSOAP.sequence.92=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.93=NoOpRequest
 PROFILE.ZSOAP.sequence.94=GetMsgRequest
-PROFILE.ZSOAP.sequence.95=NoOpRequest
-PROFILE.ZSOAP.sequence.96=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.97=SearchRequest(SEARCHTYPE="conversation",SEARCH="subject:Comics OR subject:Subject of meeting perf zsoap testing OR subject:Jmeter test",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.98=GetMiniCalRequest
+PROFILE.ZSOAP.sequence.95=GetInfoRequest
+PROFILE.ZSOAP.sequence.96=AutoCompleteRequest(username=admin)
+PROFILE.ZSOAP.sequence.97=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.98=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox Treehouse",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.99=GetMsgRequest
-PROFILE.ZSOAP.sequence.100=GetInfoRequest
-PROFILE.ZSOAP.sequence.101=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.100=SavePreviousDraft
+PROFILE.ZSOAP.sequence.101=GetInfoRequest
 PROFILE.ZSOAP.sequence.102=NoOpRequest
-PROFILE.ZSOAP.sequence.103=SearchRequest(SEARCHTYPE=appointment,SEARCH="in:Calendar",OFFSET="0",LIMIT="150")
-PROFILE.ZSOAP.sequence.104=GetMsgRequest
-PROFILE.ZSOAP.sequence.105=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox legal",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.106=GetMsgRequest
-PROFILE.ZSOAP.sequence.107=AuthRequest(AUTHTYPE=user)
-PROFILE.ZSOAP.sequence.108=GetInfoRequest
+PROFILE.ZSOAP.sequence.103=GetMsgRequest
+PROFILE.ZSOAP.sequence.104=GetInfoRequest
+PROFILE.ZSOAP.sequence.105=NoOpRequest
+PROFILE.ZSOAP.sequence.106=GetFilterRulesRequest
+PROFILE.ZSOAP.sequence.107=GetMsgRequest
+PROFILE.ZSOAP.sequence.108=NoOpRequest
 PROFILE.ZSOAP.sequence.109=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.110=NoOpRequest
-PROFILE.ZSOAP.sequence.111=GetInfoRequest
+PROFILE.ZSOAP.sequence.110=SearchRequest(SEARCHTYPE="conversation",SEARCH="subject:Comics OR subject:Subject of meeting perf zsoap testing OR subject:Jmeter test",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.111=GetMiniCalRequest
 PROFILE.ZSOAP.sequence.112=GetMsgRequest
-PROFILE.ZSOAP.sequence.113=NoOpRequest
+PROFILE.ZSOAP.sequence.113=GetInfoRequest
 PROFILE.ZSOAP.sequence.114=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.115=SearchRequest(SEARCHTYPE=message,SEARCH="content:MariaDB",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.116=GetMiniCalRequest
+PROFILE.ZSOAP.sequence.115=NoOpRequest
+PROFILE.ZSOAP.sequence.116=SearchRequest(SEARCHTYPE=appointment,SEARCH="in:Calendar",OFFSET="0",LIMIT="150")
 PROFILE.ZSOAP.sequence.117=GetMsgRequest
-PROFILE.ZSOAP.sequence.118=NoOpRequest
-PROFILE.ZSOAP.sequence.119=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.120=NoOpRequest
-PROFILE.ZSOAP.sequence.121=GetMsgRequest
-PROFILE.ZSOAP.sequence.122=NoOpRequest
-PROFILE.ZSOAP.sequence.123=AutoCompleteRequest(username=user12@zmc.com)
-PROFILE.ZSOAP.sequence.124=NoOpRequest
+PROFILE.ZSOAP.sequence.118=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox legal",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.119=GetMsgRequest
+PROFILE.ZSOAP.sequence.120=AuthRequest(AUTHTYPE=user)
+PROFILE.ZSOAP.sequence.121=GetInfoRequest
+PROFILE.ZSOAP.sequence.122=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.123=NoOpRequest
+PROFILE.ZSOAP.sequence.124=GetInfoRequest
 PROFILE.ZSOAP.sequence.125=GetMsgRequest
-PROFILE.ZSOAP.sequence.126=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.127=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox quality",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.128=EndSessionRequest
-PROFILE.ZSOAP.sequence.129=AuthRequest(AUTHTYPE=user)
-PROFILE.ZSOAP.sequence.130=SearchRequest(SEARCHTYPE=conversation,SEARCH="to:${USER}",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.126=NoOpRequest
+PROFILE.ZSOAP.sequence.127=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.128=SearchRequest(SEARCHTYPE=message,SEARCH="content:MariaDB",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.129=GetMiniCalRequest
+PROFILE.ZSOAP.sequence.130=GetMsgRequest
 PROFILE.ZSOAP.sequence.131=NoOpRequest
-PROFILE.ZSOAP.sequence.132=GetMsgRequest
-PROFILE.ZSOAP.sequence.133=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.134=NoOpRequest
-PROFILE.ZSOAP.sequence.135=SearchRequest(SEARCHTYPE=message,SEARCH="to:${TOUSER} OR in:sent",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.136=GetMailboxMetadataRequest
-PROFILE.ZSOAP.sequence.137=GetMsgRequest
-PROFILE.ZSOAP.sequence.138=NoOpRequest
-PROFILE.ZSOAP.sequence.139=SendMsgRequest
-PROFILE.ZSOAP.sequence.140=NoOpRequest
-PROFILE.ZSOAP.sequence.141=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.142=NoOpRequest
-PROFILE.ZSOAP.sequence.143=SearchConvRequest
-PROFILE.ZSOAP.sequence.144=AuthRequest(AUTHTYPE=user)
-PROFILE.ZSOAP.sequence.145=NoOpRequest
-PROFILE.ZSOAP.sequence.146=SearchRequest(SEARCHTYPE=conversation,SEARCH="Scotland",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.132=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.133=NoOpRequest
+PROFILE.ZSOAP.sequence.134=GetMsgRequest
+PROFILE.ZSOAP.sequence.135=NoOpRequest
+PROFILE.ZSOAP.sequence.136=AutoCompleteRequest(username=user12@zmc.com)
+PROFILE.ZSOAP.sequence.137=NoOpRequest
+PROFILE.ZSOAP.sequence.138=GetMsgRequest
+PROFILE.ZSOAP.sequence.139=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.140=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox quality",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.141=EndSessionRequest
+PROFILE.ZSOAP.sequence.142=AuthRequest(AUTHTYPE=user)
+PROFILE.ZSOAP.sequence.143=SearchRequest(SEARCHTYPE=conversation,SEARCH="to:${USER}",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.144=NoOpRequest
+PROFILE.ZSOAP.sequence.145=GetMsgRequest
+PROFILE.ZSOAP.sequence.146=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.147=NoOpRequest
-PROFILE.ZSOAP.sequence.148=GetInfoRequest
-PROFILE.ZSOAP.sequence.149=NoOpRequest
-PROFILE.ZSOAP.sequence.150=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.151=GetMailboxMetadataRequest
-PROFILE.ZSOAP.sequence.152=NoOpRequest
-PROFILE.ZSOAP.sequence.153=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.154=NoOpRequest
-PROFILE.ZSOAP.sequence.155=SearchRequest(SEARCHTYPE=message,SEARCH="larger:500kb",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.156=NoOpRequest
-PROFILE.ZSOAP.sequence.157=GetInfoRequest
-PROFILE.ZSOAP.sequence.158=GetAvailableLocalesRequest
-PROFILE.ZSOAP.sequence.159=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.160=AuthRequest(AUTHTYPE=user)
-PROFILE.ZSOAP.sequence.161=SearchRequest(SEARCHTYPE=message,SEARCH="subject:Hello World OR Jmeter test",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.148=SearchRequest(SEARCHTYPE=message,SEARCH="to:${TOUSER} OR in:sent",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.149=GetMailboxMetadataRequest
+PROFILE.ZSOAP.sequence.150=GetMsgRequest
+PROFILE.ZSOAP.sequence.151=NoOpRequest
+PROFILE.ZSOAP.sequence.152=SendMsgRequest
+PROFILE.ZSOAP.sequence.153=NoOpRequest
+PROFILE.ZSOAP.sequence.154=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.155=NoOpRequest
+PROFILE.ZSOAP.sequence.156=SearchConvRequest
+PROFILE.ZSOAP.sequence.157=AuthRequest(AUTHTYPE=user)
+PROFILE.ZSOAP.sequence.158=NoOpRequest
+PROFILE.ZSOAP.sequence.159=SearchRequest(SEARCHTYPE=conversation,SEARCH="Scotland",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.160=NoOpRequest
+PROFILE.ZSOAP.sequence.161=GetInfoRequest
 PROFILE.ZSOAP.sequence.162=NoOpRequest
-PROFILE.ZSOAP.sequence.163=SearchRequest(SEARCHTYPE=message,SEARCH="SKIPPED test",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.164=NoOpRequest
-PROFILE.ZSOAP.sequence.165=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.166=GetAvailableLocalesRequest
+PROFILE.ZSOAP.sequence.163=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.164=GetMailboxMetadataRequest
+PROFILE.ZSOAP.sequence.165=NoOpRequest
+PROFILE.ZSOAP.sequence.166=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.167=NoOpRequest
-PROFILE.ZSOAP.sequence.168=GetInfoRequest
+PROFILE.ZSOAP.sequence.168=SearchRequest(SEARCHTYPE=message,SEARCH="larger:500kb",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.169=NoOpRequest
-PROFILE.ZSOAP.sequence.170=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.171=NoOpRequest
-PROFILE.ZSOAP.sequence.172=SearchRequest(SEARCHTYPE=message,SEARCH="subject:Coverfox",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.173=AutoCompleteRequest(username=user12@zmc)
-PROFILE.ZSOAP.sequence.174=NoOpRequest
-PROFILE.ZSOAP.sequence.175=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.170=GetInfoRequest
+PROFILE.ZSOAP.sequence.171=GetAvailableLocalesRequest
+PROFILE.ZSOAP.sequence.172=SearchFromSentMail(SEARCHTYPE=message,OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.173=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.174=AuthRequest(AUTHTYPE=user)
+PROFILE.ZSOAP.sequence.175=SearchRequest(SEARCHTYPE=message,SEARCH="subject:Hello World OR Jmeter test",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.176=NoOpRequest
-PROFILE.ZSOAP.sequence.177=GetInfoRequest
+PROFILE.ZSOAP.sequence.177=SearchRequest(SEARCHTYPE=message,SEARCH="SKIPPED test",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.178=NoOpRequest
-PROFILE.ZSOAP.sequence.179=AuthRequest(AUTHTYPE=user)
-PROFILE.ZSOAP.sequence.180=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.179=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.180=GetAvailableLocalesRequest
 PROFILE.ZSOAP.sequence.181=NoOpRequest
-PROFILE.ZSOAP.sequence.182=SearchRequest(SEARCHTYPE=message,SEARCH="TestTxt.txt",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.182=GetInfoRequest
 PROFILE.ZSOAP.sequence.183=NoOpRequest
-PROFILE.ZSOAP.sequence.184=AutoCompleteRequest(username=user12@zmc.c)
+PROFILE.ZSOAP.sequence.184=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.185=NoOpRequest
-PROFILE.ZSOAP.sequence.186=GetInfoRequest
-PROFILE.ZSOAP.sequence.187=NoOpRequest
-PROFILE.ZSOAP.sequence.188=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.189=GetAvailableLocalesRequest
-PROFILE.ZSOAP.sequence.190=SearchRequest(SEARCHTYPE=message,SEARCH="content:This is test message from zsoap jmeter test OR content:This includes two image attachments as a generic SMTP test message. OR CES and CEM will still exist",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.191=NoOpRequest
-PROFILE.ZSOAP.sequence.192=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.193=NoOpRequest
-PROFILE.ZSOAP.sequence.194=GetInfoRequest
+PROFILE.ZSOAP.sequence.186=SearchRequest(SEARCHTYPE=message,SEARCH="subject:Coverfox",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.187=AutoCompleteRequest(username=user12@zmc)
+PROFILE.ZSOAP.sequence.188=NoOpRequest
+PROFILE.ZSOAP.sequence.189=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.190=NoOpRequest
+PROFILE.ZSOAP.sequence.191=GetInfoRequest
+PROFILE.ZSOAP.sequence.192=NoOpRequest
+PROFILE.ZSOAP.sequence.193=AuthRequest(AUTHTYPE=user)
+PROFILE.ZSOAP.sequence.194=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.195=NoOpRequest
-PROFILE.ZSOAP.sequence.196=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.197=SearchRequest(SEARCHTYPE=message,SEARCH="in:sent",OFFSET="0",LIMIT="100")
-#PROFILE.ZSOAP.sequence.198=SearchRequest(SEARCHTYPE=message,SEARCH="has:attachment Exchange",OFFSET="0",LIMIT="100")
-#PROFILE.ZSOAP.sequence.199=SearchRequest(SEARCHTYPE=message,SEARCH="MigrationTool",OFFSET="0",LIMIT="100")
-#PROFILE.ZSOAP.sequence.200=SearchRequest(SEARCHTYPE=message,SEARCH="has:attachment TestTxt.txt",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.198=EndSessionRequest
+PROFILE.ZSOAP.sequence.196=SearchRequest(SEARCHTYPE=message,SEARCH="TestTxt.txt",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.197=NoOpRequest
+PROFILE.ZSOAP.sequence.198=AutoCompleteRequest(username=user12@zmc.c)
+PROFILE.ZSOAP.sequence.199=NoOpRequest
+PROFILE.ZSOAP.sequence.200=GetInfoRequest
+PROFILE.ZSOAP.sequence.201=NoOpRequest
+PROFILE.ZSOAP.sequence.202=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.203=GetAvailableLocalesRequest
+PROFILE.ZSOAP.sequence.204=SearchRequest(SEARCHTYPE=message,SEARCH="content:This is test message from zsoap jmeter test OR content:This includes two image attachments as a generic SMTP test message. OR CES and CEM will still exist",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.205=NoOpRequest
+PROFILE.ZSOAP.sequence.206=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.207=NoOpRequest
+PROFILE.ZSOAP.sequence.208=GetInfoRequest
+PROFILE.ZSOAP.sequence.209=NoOpRequest
+PROFILE.ZSOAP.sequence.210=GetDomainInfoRequest
+PROFILE.ZSOAP.sequence.211=SearchRequest(SEARCHTYPE=message,SEARCH="in:sent",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.212=AutoCompleteRequest(username=adam)
+PROFILE.ZSOAP.sequence.213=EndSessionRequest
+#PROFILE.ZSOAP.sequence.211=SearchRequest(SEARCHTYPE=message,SEARCH="has:attachment Exchange",OFFSET="0",LIMIT="100")
+#PROFILE.ZSOAP.sequence.211=SearchRequest(SEARCHTYPE=message,SEARCH="MigrationTool",OFFSET="0",LIMIT="100")
+#PROFILE.ZSOAP.sequence.211=SearchRequest(SEARCHTYPE=message,SEARCH="has:attachment TestTxt.txt",OFFSET="0",LIMIT="100")
