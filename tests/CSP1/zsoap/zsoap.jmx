@@ -145,6 +145,18 @@
         <boolProp name="ignoreFirstLine">false</boolProp>
       </CSVDataSet>
       <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="RandomWords" enabled="true">
+        <stringProp name="filename">${__P(Words.csv)}</stringProp>
+        <stringProp name="fileEncoding"></stringProp>
+        <stringProp name="variableNames">message_random</stringProp>
+        <stringProp name="delimiter">,</stringProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="ignoreFirstLine">false</boolProp>
+      </CSVDataSet>
+      <hashTree/>
       <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
         <collectionProp name="CookieManager.cookies"/>
         <boolProp name="CookieManager.clearEachIteration">false</boolProp>
@@ -567,6 +579,10 @@ if (commands.size() == 0) {
                     </elementProp>
                   </collectionProp>
                 </HeaderManager>
+                <hashTree/>
+                <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+                  <stringProp name="DurationAssertion.duration">1000</stringProp>
+                </DurationAssertion>
                 <hashTree/>
               </hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BrowseRequest" enabled="true">
@@ -2502,7 +2518,7 @@ if (commands.size() == 0) {
                 <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
-                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="false">
                   <collectionProp name="HeaderManager.headers">
                     <elementProp name="" elementType="Header">
                       <stringProp name="Header.name">X-Zimbra-Csrf-Token</stringProp>
@@ -4370,6 +4386,80 @@ if (commands.size() == 0) {
                   <hashTree/>
                 </hashTree>
               </hashTree>
+              <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="SearchFromSentMail" enabled="true">
+                <stringProp name="SwitchController.value">${SEARCHTYPE}</stringProp>
+              </SwitchController>
+              <hashTree>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="message" enabled="true">
+                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                    <collectionProp name="Arguments.arguments">
+                      <elementProp name="" elementType="HTTPArgument">
+                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;SearchRequest types=&quot;${SEARCHTYPE}&quot; offset=&quot;${__evalVar(OFFSET)}&quot; limit=&quot;${__evalVar(LIMIT)}&quot; xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;query&gt;${message_random}&lt;/query&gt;&#xd;
+    &lt;/SearchRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                        <stringProp name="Argument.metadata">=</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </elementProp>
+                  <stringProp name="HTTPSampler.domain"></stringProp>
+                  <stringProp name="HTTPSampler.port"></stringProp>
+                  <stringProp name="HTTPSampler.protocol"></stringProp>
+                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                  <stringProp name="HTTPSampler.method">POST</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                </HTTPSamplerProxy>
+                <hashTree>
+                  <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="COMPNUM" enabled="true">
+                    <stringProp name="XPathExtractor.default"></stringProp>
+                    <stringProp name="XPathExtractor.refname">COMPNUM</stringProp>
+                    <stringProp name="XPathExtractor.xpathQuery">//comp/@compNum</stringProp>
+                    <boolProp name="XPathExtractor.validate">false</boolProp>
+                    <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                    <boolProp name="XPathExtractor.namespace">false</boolProp>
+                    <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  </XPathExtractor>
+                  <hashTree/>
+                  <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="MESSAGE" enabled="true">
+                    <stringProp name="XPathExtractor.default"></stringProp>
+                    <stringProp name="XPathExtractor.refname">MESSAGE</stringProp>
+                    <stringProp name="XPathExtractor.xpathQuery">//m/@id</stringProp>
+                    <boolProp name="XPathExtractor.validate">false</boolProp>
+                    <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                    <boolProp name="XPathExtractor.namespace">false</boolProp>
+                    <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  </XPathExtractor>
+                  <hashTree/>
+                  <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                    <collectionProp name="HeaderManager.headers">
+                      <elementProp name="" elementType="Header">
+                        <stringProp name="Header.name">X-Zimbra-Csrf-Token</stringProp>
+                        <stringProp name="Header.value">${csrf}</stringProp>
+                      </elementProp>
+                    </collectionProp>
+                  </HeaderManager>
+                  <hashTree/>
+                </hashTree>
+              </hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SendDeliveryReportRequest" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -4484,7 +4574,7 @@ if (commands.size() == 0) {
         &lt;e a=&quot;${USER}&quot; t=&quot;f&quot;/&gt;&#xd;
         &lt;e a=&quot;${TOUSER}&quot; t=&quot;t&quot;/&gt;&#xd;
          &lt;mp ct=&quot;text/plain&quot;&gt;&#xd;
-           &lt;content&gt;This is test message sent from zsoap jmeter test&lt;/content&gt;&#xd;
+           &lt;content&gt;This is test message sent from zsoap jmeter test with random work ${message_random}&lt;/content&gt;&#xd;
          &lt;/mp&gt;&#xd;
       &lt;/m&gt;&#xd;
     &lt;/SendMsgRequest&gt;&#xd;
@@ -4517,6 +4607,10 @@ if (commands.size() == 0) {
                     </elementProp>
                   </collectionProp>
                 </HeaderManager>
+                <hashTree/>
+                <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+                  <stringProp name="DurationAssertion.duration">1500</stringProp>
+                </DurationAssertion>
                 <hashTree/>
               </hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SetCustomMetadataRequest" enabled="true">

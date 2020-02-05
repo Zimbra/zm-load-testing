@@ -39,7 +39,7 @@ PROFILE.ZSOAP.sequence.37=GetMsgRequest
 PROFILE.ZSOAP.sequence.38=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.39=NoOpRequest
 PROFILE.ZSOAP.sequence.40=GetMsgRequest
-PROFILE.ZSOAP.sequence.41=AutoCompleteRequest(username=user12)
+PROFILE.ZSOAP.sequence.41=AutoCompleteRequest(username=Abraha)
 PROFILE.ZSOAP.sequence.42=GetInfoRequest
 PROFILE.ZSOAP.sequence.43=NoOpRequest
 PROFILE.ZSOAP.sequence.44=GetDomainInfoRequest
@@ -121,7 +121,7 @@ PROFILE.ZSOAP.sequence.119=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.120=NoOpRequest
 PROFILE.ZSOAP.sequence.121=GetMsgRequest
 PROFILE.ZSOAP.sequence.122=NoOpRequest
-PROFILE.ZSOAP.sequence.123=AutoCompleteRequest(username=user12@zmc.com)
+PROFILE.ZSOAP.sequence.123=AutoCompleteRequest(username=Jenise.Bonet@zmc.com)
 PROFILE.ZSOAP.sequence.124=NoOpRequest
 PROFILE.ZSOAP.sequence.125=GetMsgRequest
 PROFILE.ZSOAP.sequence.126=GetDomainInfoRequest
@@ -171,7 +171,7 @@ PROFILE.ZSOAP.sequence.169=NoOpRequest
 PROFILE.ZSOAP.sequence.170=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.171=NoOpRequest
 PROFILE.ZSOAP.sequence.172=SearchRequest(SEARCHTYPE=message,SEARCH="subject:Coverfox",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.173=AutoCompleteRequest(username=user12@zmc)
+PROFILE.ZSOAP.sequence.173=AutoCompleteRequest(username=alex.al)
 PROFILE.ZSOAP.sequence.174=NoOpRequest
 PROFILE.ZSOAP.sequence.175=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.176=NoOpRequest
@@ -182,7 +182,7 @@ PROFILE.ZSOAP.sequence.180=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.181=NoOpRequest
 PROFILE.ZSOAP.sequence.182=SearchRequest(SEARCHTYPE=message,SEARCH="TestTxt.txt",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.183=NoOpRequest
-PROFILE.ZSOAP.sequence.184=AutoCompleteRequest(username=user12@zmc.c)
+PROFILE.ZSOAP.sequence.184=AutoCompleteRequest(username=Jenise.Bonet@zmc.c)
 PROFILE.ZSOAP.sequence.185=NoOpRequest
 PROFILE.ZSOAP.sequence.186=GetInfoRequest
 PROFILE.ZSOAP.sequence.187=NoOpRequest
