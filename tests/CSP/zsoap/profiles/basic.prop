@@ -133,7 +133,7 @@ PROFILE.ZSOAP.sequence.131=NoOpRequest
 PROFILE.ZSOAP.sequence.132=GetMsgRequest
 PROFILE.ZSOAP.sequence.133=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.134=NoOpRequest
-PROFILE.ZSOAP.sequence.135=SearchRequest(SEARCHTYPE=message,SEARCH="to:${TOUSER} OR in:sent",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.135=SearchFromSentMail(SEARCHTYPE=message,OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.136=GetMailboxMetadataRequest
 PROFILE.ZSOAP.sequence.137=GetMsgRequest
 PROFILE.ZSOAP.sequence.138=NoOpRequest
@@ -195,7 +195,7 @@ PROFILE.ZSOAP.sequence.193=NoOpRequest
 PROFILE.ZSOAP.sequence.194=GetInfoRequest
 PROFILE.ZSOAP.sequence.195=NoOpRequest
 PROFILE.ZSOAP.sequence.196=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.197=SearchRequest(SEARCHTYPE=message,SEARCH="in:sent",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.197=SearchFromSentMail(SEARCHTYPE=message,OFFSET="0",LIMIT="100")
 #PROFILE.ZSOAP.sequence.198=SearchRequest(SEARCHTYPE=message,SEARCH="has:attachment Exchange",OFFSET="0",LIMIT="100")
 #PROFILE.ZSOAP.sequence.199=SearchRequest(SEARCHTYPE=message,SEARCH="MigrationTool",OFFSET="0",LIMIT="100")
 #PROFILE.ZSOAP.sequence.200=SearchRequest(SEARCHTYPE=message,SEARCH="has:attachment TestTxt.txt",OFFSET="0",LIMIT="100")
