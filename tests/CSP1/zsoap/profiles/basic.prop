@@ -145,5 +145,5 @@ PROFILE.ZSOAP.sequence.143=NoOpRequest
 PROFILE.ZSOAP.sequence.144=GetInfoRequest
 PROFILE.ZSOAP.sequence.145=GetAvailableLocalesRequest
 PROFILE.ZSOAP.sequence.146=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.147=SearchRequest(SEARCHTYPE=message,SEARCH="in:sent",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.147=SearchFromSentMail(SEARCHTYPE=message,OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.148=EndSessionRequest
