@@ -4386,17 +4386,13 @@ if (commands.size() == 0) {
                   <hashTree/>
                 </hashTree>
               </hashTree>
-              <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="SearchFromSentMail" enabled="true">
-                <stringProp name="SwitchController.value">${SEARCHTYPE}</stringProp>
-              </SwitchController>
-              <hashTree>
-                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="message" enabled="true">
-                  <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                    <collectionProp name="Arguments.arguments">
-                      <elementProp name="" elementType="HTTPArgument">
-                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                        <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SearchFromSentMail" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
   &lt;soap:Header&gt;&#xd;
     &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
       &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
@@ -4410,55 +4406,63 @@ if (commands.size() == 0) {
     &lt;/SearchRequest&gt;&#xd;
   &lt;/soap:Body&gt;&#xd;
 &lt;/soap:Envelope&gt;</stringProp>
-                        <stringProp name="Argument.metadata">=</stringProp>
-                      </elementProp>
-                    </collectionProp>
-                  </elementProp>
-                  <stringProp name="HTTPSampler.domain"></stringProp>
-                  <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.protocol"></stringProp>
-                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                  <stringProp name="HTTPSampler.path">${URL}</stringProp>
-                  <stringProp name="HTTPSampler.method">POST</stringProp>
-                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
-                </HTTPSamplerProxy>
-                <hashTree>
-                  <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="COMPNUM" enabled="true">
-                    <stringProp name="XPathExtractor.default"></stringProp>
-                    <stringProp name="XPathExtractor.refname">COMPNUM</stringProp>
-                    <stringProp name="XPathExtractor.xpathQuery">//comp/@compNum</stringProp>
-                    <boolProp name="XPathExtractor.validate">false</boolProp>
-                    <boolProp name="XPathExtractor.tolerant">false</boolProp>
-                    <boolProp name="XPathExtractor.namespace">false</boolProp>
-                    <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  </XPathExtractor>
-                  <hashTree/>
-                  <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="MESSAGE" enabled="true">
-                    <stringProp name="XPathExtractor.default"></stringProp>
-                    <stringProp name="XPathExtractor.refname">MESSAGE</stringProp>
-                    <stringProp name="XPathExtractor.xpathQuery">//m/@id</stringProp>
-                    <boolProp name="XPathExtractor.validate">false</boolProp>
-                    <boolProp name="XPathExtractor.tolerant">false</boolProp>
-                    <boolProp name="XPathExtractor.namespace">false</boolProp>
-                    <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  </XPathExtractor>
-                  <hashTree/>
-                  <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-                    <collectionProp name="HeaderManager.headers">
-                      <elementProp name="" elementType="Header">
-                        <stringProp name="Header.name">X-Zimbra-Csrf-Token</stringProp>
-                        <stringProp name="Header.value">${csrf}</stringProp>
-                      </elementProp>
-                    </collectionProp>
-                  </HeaderManager>
-                  <hashTree/>
-                </hashTree>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain"></stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.protocol"></stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="COMPNUM" enabled="true">
+                  <stringProp name="XPathExtractor.default"></stringProp>
+                  <stringProp name="XPathExtractor.refname">COMPNUM</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//comp/@compNum</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="MESSAGE" enabled="true">
+                  <stringProp name="XPathExtractor.default"></stringProp>
+                  <stringProp name="XPathExtractor.refname">MESSAGE</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//m/@id</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                </XPathExtractor>
+                <hashTree/>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">X-Zimbra-Csrf-Token</stringProp>
+                      <stringProp name="Header.value">${csrf}</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="XPath Assertion" enabled="true">
+                  <boolProp name="XPath.negate">false</boolProp>
+                  <stringProp name="XPath.xpath">//m/@id=&apos;${SENTMSGID}&apos;</stringProp>
+                  <boolProp name="XPath.validate">false</boolProp>
+                  <boolProp name="XPath.whitespace">false</boolProp>
+                  <boolProp name="XPath.tolerant">false</boolProp>
+                  <boolProp name="XPath.namespace">false</boolProp>
+                </XPathAssertion>
+                <hashTree/>
               </hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SendDeliveryReportRequest" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
@@ -4611,6 +4615,16 @@ if (commands.size() == 0) {
                 <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
                   <stringProp name="DurationAssertion.duration">1000</stringProp>
                 </DurationAssertion>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="SENTMSGID" enabled="true">
+                  <stringProp name="XPathExtractor.default">NOTFOUND</stringProp>
+                  <stringProp name="XPathExtractor.refname">SENTMSGID</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//m/@id</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
                 <hashTree/>
               </hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SetCustomMetadataRequest" enabled="true">
