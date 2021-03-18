@@ -1,0 +1,61 @@
+PROFILE.ZSOAP.type=sequence
+PROFILE.ZSOAP.sequence.1=AuthRequest(AUTHTYPE=user)
+PROFILE.ZSOAP.sequence.2=SaveDraftRequest
+PROFILE.ZSOAP.sequence.3=SearchRequest(SEARCHTYPE=message,SEARCH="not is:read",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.4=MsgActionRequest(MSGACTIONTYPE=readMsg)
+PROFILE.ZSOAP.sequence.5=SavePreviousDraft
+PROFILE.ZSOAP.sequence.6=MsgActionRequest(MSGACTIONTYPE=unreadMsg)
+PROFILE.ZSOAP.sequence.7=CreateTagRequest
+PROFILE.ZSOAP.sequence.8=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox/Healthline Paramount’s Monthly Health Magazine",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.9=GetMsgRequest
+PROFILE.ZSOAP.sequence.10=CreateFolderRequest
+PROFILE.ZSOAP.sequence.11=SearchRequest(SEARCHTYPE=appointment,SEARCH="in:Calendar test team meeting for HA perf test",OFFSET="0",LIMIT="500")
+PROFILE.ZSOAP.sequence.12=SendMsgRequest
+PROFILE.ZSOAP.sequence.13=GetMsgRequest
+PROFILE.ZSOAP.sequence.14=GetFolderRequest(PATH=FolderRequest)
+PROFILE.ZSOAP.sequence.15=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox reviewed WestLB's optional",OFFSET="0",LIMIT="10")
+PROFILE.ZSOAP.sequence.16=MsgActionRequest(MSGACTIONTYPE=tagMsg)
+PROFILE.ZSOAP.sequence.17=TagActionRequest(TAGACTIONTYPE=readTag)
+PROFILE.ZSOAP.sequence.18=SearchRequest(SEARCHTYPE=message,SEARCH="More significance testing stuff",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.19=GetMsgRequest
+PROFILE.ZSOAP.sequence.20=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox/Healthline April",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.21=GetMsgRequest
+PROFILE.ZSOAP.sequence.22=EndSessionRequest
+PROFILE.ZSOAP.sequence.23=AuthRequest(AUTHTYPE=user)
+PROFILE.ZSOAP.sequence.24=AutoCompleteRequest(username=alex.al)
+PROFILE.ZSOAP.sequence.25=SearchRequest(SEARCHTYPE=message,SEARCH="Your mailbox size is currently",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.26=GetMsgRequest
+PROFILE.ZSOAP.sequence.27=MsgActionRequest(MSGACTIONTYPE=flagMsg)
+PROFILE.ZSOAP.sequence.28=SearchRequest(SEARCHTYPE=message,SEARCH="when not traveling",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.29=GetMsgRequest
+PROFILE.ZSOAP.sequence.30=AutoCompleteRequest(username=Jenise.Bonet@zmc.c)
+PROFILE.ZSOAP.sequence.31=SearchRequest(SEARCHTYPE=message,SEARCH="BUG Rebooking",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.32=GetMsgRequest
+PROFILE.ZSOAP.sequence.33=CreateAppointmentRequest
+PROFILE.ZSOAP.sequence.34=SearchRequest(SEARCHTYPE=message,SEARCH="has:attachment Software",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.35=GetMsgRequest
+PROFILE.ZSOAP.sequence.36=MsgActionRequest(MSGACTIONTYPE=tagMsg)
+PROFILE.ZSOAP.sequence.37=TagActionRequest(TAGACTIONTYPE=readTag)
+PROFILE.ZSOAP.sequence.38=SearchRequest(SEARCHTYPE=conversation,SEARCH="from:user*",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.39=ConvActionRequest(CONVACTIONTYPE=readConv)
+PROFILE.ZSOAP.sequence.40=SearchRequest(SEARCHTYPE=message,SEARCH="from:clayton.vernon@enron.com",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.41=MsgActionRequest(MSGACTIONTYPE=readMsg)
+PROFILE.ZSOAP.sequence.42=GetMsgRequest
+PROFILE.ZSOAP.sequence.43=MsgActionRequest(MSGACTIONTYPE=unreadMsg)
+PROFILE.ZSOAP.sequence.44=SearchFromSentMail(SEARCHTYPE=message,OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.45=MsgActionRequest(MSGACTIONTYPE=moveMsg)
+PROFILE.ZSOAP.sequence.46=FolderActionRequest(FOLDERACTIONTYPE=readFolder)
+PROFILE.ZSOAP.sequence.47=MsgActionRequest(MSGACTIONTYPE=deleteMsg)
+PROFILE.ZSOAP.sequence.48=SearchRequest(SEARCHTYPE="conversation",SEARCH="subject:Comics",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.49=TagActionRequest(TAGACTIONTYPE=renameTag)
+PROFILE.ZSOAP.sequence.50=FolderActionRequest(FOLDERACTIONTYPE=renameFolder)
+PROFILE.ZSOAP.sequence.51=GetSignaturesRequest
+PROFILE.ZSOAP.sequence.52=SearchRequest(SEARCHTYPE=message,SEARCH="Can we be on the agenda the afternoon",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.53=TagActionRequest(TAGACTIONTYPE=deleteTag)
+PROFILE.ZSOAP.sequence.54=GetMsgRequest
+PROFILE.ZSOAP.sequence.55=FolderActionRequest(FOLDERACTIONTYPE=deleteFolder)
+PROFILE.ZSOAP.sequence.56=AutoCompleteRequest(username=Abraha)
+PROFILE.ZSOAP.sequence.57=SearchRequest(SEARCHTYPE=message,SEARCH="content:Can we be on the agenda OR content:This is am automated email sent using LMTP performace OR CES and CEM will still exist",OFFSET="0",LIMIT="100")
+PROFILE.ZSOAP.sequence.58=FolderActionRequest(FOLDERACTIONTYPE=deleteFolder)
+PROFILE.ZSOAP.sequence.59=GetMsgRequest
+PROFILE.ZSOAP.sequence.60=EndSessionRequest

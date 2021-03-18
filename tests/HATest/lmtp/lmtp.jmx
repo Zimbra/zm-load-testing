@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="3.2" jmeter="3.3 r1808647">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>false</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>false</threadName>
+            <dataType>false</dataType>
+            <encoding>false</encoding>
+            <assertions>false</assertions>
+            <subresults>false</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <url>true</url>
+          </value>
+        </objProp>
+        <objProp>
+          <name></name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>false</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>false</threadName>
+            <dataType>false</dataType>
+            <encoding>false</encoding>
+            <assertions>false</assertions>
+            <subresults>false</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename">${__P(jmetercsv,${__P(REQUEST.log)})}</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <objProp>
+          <name></name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Accounts" enabled="true">
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding"></stringProp>
+        <stringProp name="filename">${__P(ACCOUNTS.csv)}</stringProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="variableNames">USER,PASS,TOUSER</stringProp>
+        <boolProp name="ignoreFirstLine">false</boolProp>
+      </CSVDataSet>
+      <hashTree/>
+      <ConfigTestElement guiclass="SimpleConfigGui" testclass="ConfigTestElement" testname="Simple Config Element" enabled="true">
+        <stringProp name="soaptest_folderName">soaptest</stringProp>
+        <stringProp name="soaptest_tagName">soaptag</stringProp>
+        <stringProp name="soaptest_SearchFolderName">soapsearchtest</stringProp>
+        <stringProp name="endDate">0</stringProp>
+        <stringProp name="randomMessage">message</stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="ZSOAP HTTP Config" enabled="true">
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+        <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+        <stringProp name="HTTPSampler.port">${__P(HTTP.port)}</stringProp>
+        <stringProp name="HTTPSampler.protocol"></stringProp>
+        <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+        <stringProp name="HTTPSampler.path"></stringProp>
+        <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+        <stringProp name="HTTPSampler.implementation">Java</stringProp>
+        <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+        <stringProp name="HTTPSampler.response_timeout"></stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="ZSOAP Setup" enabled="true">
+        <stringProp name="filename"></stringProp>
+        <stringProp name="parameters"></stringProp>
+        <boolProp name="resetInterpreter">false</boolProp>
+        <stringProp name="script">import com.zimbra.jmeter.Zimbra;
+//debug();
+
+String url = &quot;https://&quot;+props.get(&quot;HTTP.server&quot;);
+String admin = url+&quot;:7071/service/admin/soap&quot;;
+vars.put(&quot;ADMIN&quot;,admin);
+if (!props.get(&quot;HTTP.port&quot;).equals(&quot;&quot;) ) {
+  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;); 
+}
+url = url+&quot;/service/soap&quot;;
+//log.info(url);
+vars.put(&quot;URL&quot;,url);</stringProp>
+      </BeanShellPreProcessor>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="LMTP User" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">${__P(LOAD.LMTP.loopcount)}</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.LMTP.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">$(__P(LOAD.LMTP.rampup)}</stringProp>
+        <longProp name="ThreadGroup.start_time">1497658914000</longProp>
+        <longProp name="ThreadGroup.end_time">1497658914000</longProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
+          <stringProp name="BeanShellSampler.query">import org.apache.commons.net.smtp.SMTPClient;
+import com.zimbra.jmeter.Zimbra;
+import com.zimbra.jmeter.Command;
+//debug();
+Zimbra lmtp = new Zimbra(props,&quot;LMTP&quot;);
+ArrayList commands = lmtp.getcommands();
+
+vars.putObject(&quot;COMMANDS&quot;,commands);
+// generate command DELAY
+if (props.get(&quot;LOAD.LMTP.userduration&quot;) == null || commands.size() == 0) {
+  vars.putObject(&quot;DELAY&quot;,&quot;0&quot;);
+} else {
+  int delay = Integer.parseInt(props.get(&quot;LOAD.LMTP.userduration&quot;))*1000/commands.size();
+  vars.putObject(&quot;DELAY&quot;,delay.toString());
+}
+// initialize CONTINUE
+if (commands.size() &gt; 0) {
+  vars.put(&quot;CONTINUE&quot;,&quot;true&quot;);
+} else {
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+} 
+
+//Create IMAP conncection and store for all future use
+//log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
+SMTPClient sc = new SMTPClient();
+try {
+  log.info(&quot;LMTP connection: &quot;+props.get(&quot;LMTP.server&quot;)+&quot; &quot;+props.get(&quot;LMTP.port&quot;));
+  sc.connect(props.get(&quot;LMTP.server&quot;),Integer.parseInt(props.get(&quot;LMTP.port&quot;)));
+  vars.putObject(&quot;LMTPCLIENT&quot;,sc);
+} catch (Exception x) {
+  log.info(&quot;connect error: &quot;,x);
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+}
+
+//log.info(Thread.currentThread().getName()+&quot; &quot;+ctx.getThreadNum().toString()+&quot; START&quot;);
+log.info(Thread.currentThread().getName()+&quot; START&quot;);
+//Capture IMAP response and include as sampler Response
+SampleResult.setResponseData(sc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="randomVariableNameGenerator" enabled="true">
+          <stringProp name="BeanShellSampler.query">import java.text.SimpleDateFormat;
+
+vars.put(&quot;randomMessage&quot;,&quot;message_${__Random(1,10000000)}&quot;);</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="createMessageFile" enabled="true">
+          <stringProp name="BeanShellSampler.query">import org.apache.jmeter.services.FileServer;
+
+
+// Random message generation
+part1 = &quot;subject: mail from LMTP jmeter&quot;; 
+part2 = &quot;This is am automated email sent using LMTP performace test and random message is sent using random number generator  &quot;;
+part3 = vars.get(&quot;randomMessage&quot;);
+
+// Open File(s)
+f = new FileOutputStream(&quot;LMTP_message_${__eval(${__threadNum})}.txt&quot;, false);
+p = new PrintStream(f); 
+
+// Write data to file
+this.interpreter.setOut(p); 
+p.println(part1 + &quot;\n&quot;);
+p.println(part2 + part3);
+// Close File(s)
+p.close();f.close();</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Run_Commands" enabled="true">
+          <stringProp name="WhileController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+        </WhileController>
+        <hashTree>
+          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Next_Command" enabled="true">
+            <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Command;
+
+ArrayList commands = vars.getObject(&quot;COMMANDS&quot;);
+if (commands.size() &gt; 0) {
+  //log.info(&quot;Testing: &quot;+commands);
+  Command c = commands.remove(0);
+  vars.put(&quot;COMMAND&quot;,c.getName());
+  for (Map.Entry a: c.argsSet()) {
+  	vars.put(a.getKey(),a.getValue());
+  }
+  //log.info(vars.get(&quot;COMMAND&quot;));
+}
+if (commands.size() == 0) {
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+}</stringProp>
+            <stringProp name="BeanShellSampler.filename"></stringProp>
+            <stringProp name="BeanShellSampler.parameters"></stringProp>
+            <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+          </BeanShellSampler>
+          <hashTree/>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Command_Execution" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Command Delay" enabled="true">
+              <stringProp name="ConstantTimer.delay">${DELAY}</stringProp>
+            </ConstantTimer>
+            <hashTree/>
+            <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="Commands" enabled="true">
+              <stringProp name="SwitchController.value">${COMMAND}</stringProp>
+            </SwitchController>
+            <hashTree>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="default" enabled="true">
+                <stringProp name="BeanShellSampler.query">log.info(Thread.currentThread().getName()+&quot; &quot;+vars.get(&quot;COMMAND&quot;)+&quot; not currently supported&quot;);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="LHLO" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.smtp.SMTPClient;
+SMTPClient sc = vars.getObject(&quot;LMTPCLIENT&quot;);
+
+try {
+  sc.sendCommand(&quot;LHLO &quot;+InetAddress.getLocalHost().getHostName());
+  log.info(Thread.currentThread().getName()+&quot; LHLO&quot;);
+} catch (Exception e) {
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  log.info(Thread.currentThread().getName()+&quot; LHLO: &quot;+e);
+}
+
+SampleResult.setResponseData(sc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="MAIL" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.smtp.SMTPClient;
+SMTPClient sc = vars.getObject(&quot;LMTPCLIENT&quot;);
+
+try {
+  sc.mail(&quot;&lt;&quot;+vars.get(&quot;USER&quot;)+&quot;&gt;&quot;);
+  log.info(Thread.currentThread().getName()+&quot; MAIL&quot;);
+} catch (Exception e) {
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  log.info(Thread.currentThread().getName()+&quot; MAIL: &quot;+e);
+}
+
+SampleResult.setResponseData(sc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="RCPT" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.smtp.SMTPClient;
+SMTPClient sc = vars.getObject(&quot;LMTPCLIENT&quot;);
+
+try {
+  sc.rcpt(&quot;&lt;&quot;+vars.get(&quot;TOUSER&quot;)+&quot;&gt;&quot;);
+  log.info(Thread.currentThread().getName()+&quot; RCPT&quot;);
+} catch (Exception e) {
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  log.info(Thread.currentThread().getName()+&quot; RCPT: &quot;+e);
+}
+
+SampleResult.setResponseData(sc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="DATA" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.smtp.SMTPClient;
+import java.io.FileReader;
+SMTPClient sc = vars.getObject(&quot;LMTPCLIENT&quot;);
+
+try {
+  Writer w = sc.sendMessageData();
+  // add canned From and To lines
+  w.write(&quot;From: &quot;+vars.get(&quot;USER&quot;)+&quot;\r\n&quot;);
+  w.write(&quot;To: &quot;+vars.get(&quot;TOUSER&quot;)+&quot;\r\n&quot;);
+
+  // read and send a files contents as message
+  FileReader m = new FileReader(&quot;LMTP_message_${__eval(${__threadNum})}.txt&quot;);
+  BufferedReader b = new BufferedReader(m);
+  String line = b.readLine();
+  while(line != null) {
+    w.write(line+&quot;\r\n&quot;);
+    line = b.readLine();
+  }
+  w.close();
+  sc.completePendingCommand();
+  log.info(Thread.currentThread().getName()+&quot; DATA&quot;);
+} catch (Exception e) {
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  log.info(Thread.currentThread().getName()+&quot; DATA: &quot;+e);
+}
+
+SampleResult.setResponseData(sc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="QUIT" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.smtp.SMTPClient;
+SMTPClient sc = vars.getObject(&quot;LMTPCLIENT&quot;);
+
+try {
+  sc.quit();
+  log.info(Thread.currentThread().getName()+&quot; QUIT&quot;);
+} catch (Exception e) {
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+  log.info(Thread.currentThread().getName()+&quot; QUIT: &quot;+e);
+}
+
+SampleResult.setResponseData(sc.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="DeleteMessageFile" enabled="false">
+                <stringProp name="BeanShellSampler.query"> import org.apache.jmeter.services.FileServer;
+
+ customers = new FileOutputStream(&quot;LMTP_message.txt&quot;);
+
+ try {
+
+  File file = new File(customers);
+
+  if (file.delete()) {
+    log.info(file.getName() + &quot; is deleted!&quot;);
+  } else {
+    log.info(&quot;Delete operation has failed!&quot;);
+  }
+ } catch (Exception e) {
+  e.printStackTrace();
+ }</stringProp>
+                <stringProp name="BeanShellSampler.filename"></stringProp>
+                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+                <stringProp name="ConstantTimer.delay">10000</stringProp>
+              </ConstantTimer>
+              <hashTree/>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AuthRequest" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+       &lt;authToken/&gt;&#xd;
+       &lt;nosession/&gt;&#xd;
+       &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+   &lt;AuthRequest xmlns=&quot;urn:zimbraAccount&quot; csrfTokenSecured=&quot;1&quot;&gt;&#xd;
+     &lt;account by=&quot;name&quot;&gt;${TOUSER}&lt;/account&gt;&#xd;
+     &lt;password&gt;${PASS}&lt;/password&gt;&#xd;
+   &lt;/AuthRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain"></stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.protocol"></stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="AUTHTOKEN" enabled="true">
+                  <stringProp name="XPathExtractor.default">NOTFOUND</stringProp>
+                  <stringProp name="XPathExtractor.refname">AUTHTOKEN</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//authToken</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="Scope.variable">authToken</stringProp>
+                  <boolProp name="XPathExtractor.quiet">false</boolProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="csrf" enabled="true">
+                  <stringProp name="XPathExtractor.default"></stringProp>
+                  <stringProp name="XPathExtractor.refname">csrf</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//csrfToken</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="Scope.variable">authToken</stringProp>
+                  <boolProp name="XPathExtractor.quiet">false</boolProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                </XPathExtractor>
+                <hashTree/>
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SearchRequest" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;SearchRequest types=&apos;message&apos; limit=&apos;5&apos; xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;query&gt;&quot;${randomMessage}&quot;&lt;/query&gt;&#xd;
+    &lt;/SearchRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain"></stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.protocol"></stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="COMPNUM" enabled="true">
+                  <stringProp name="XPathExtractor.default"></stringProp>
+                  <stringProp name="XPathExtractor.refname">COMPNUM</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//comp/@compNum</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="MESSAGE" enabled="true">
+                  <stringProp name="XPathExtractor.default"></stringProp>
+                  <stringProp name="XPathExtractor.refname">MESSAGE</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//m/@id</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                </XPathExtractor>
+                <hashTree/>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">X-Zimbra-Csrf-Token</stringProp>
+                      <stringProp name="Header.value">${csrf}</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="1179523024">${randomMessage}</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">2</intProp>
+                </ResponseAssertion>
+                <hashTree/>
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetMsgRequest" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;GetMsgRequest xmlns=&quot;urn:zimbraMail&quot;&gt;&#xd;
+      &lt;m id=&quot;${MESSAGE}&quot;/&gt;&#xd;
+    &lt;/GetMsgRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain"></stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.protocol"></stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="1179523024">${randomMessage}</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">2</intProp>
+                </ResponseAssertion>
+                <hashTree/>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">X-Zimbra-Csrf-Token</stringProp>
+                      <stringProp name="Header.value">${csrf}</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EndSessionRequest" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${AUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;EndSessionRequest xmlns=&quot;urn:zimbraAccount&quot;/&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain"></stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.protocol"></stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">${URL}</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="END" enabled="true">
+          <stringProp name="BeanShellSampler.query">import org.apache.commons.net.smtp.SMTPClient;
+SMTPClient sc = vars.getObject(&quot;LMTPCLIENT&quot;);
+
+try {
+  sc.disconnect();
+  log.info(Thread.currentThread().getName()+&quot; END&quot;);
+} catch (Exception e) {
+  log.info(Thread.currentThread().getName()+&quot; END: &quot;+e);
+}
+
+//SampleResult.setResponseData(sc.getReplyString());
+//SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+    <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
+      <boolProp name="WorkBench.save">true</boolProp>
+    </WorkBench>
+    <hashTree/>
+  </hashTree>
+</jmeterTestPlan>
