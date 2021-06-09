@@ -3,18 +3,18 @@ PROFILE.ZSOAP.sequence.1=AuthRequest(AUTHTYPE=user)
 PROFILE.ZSOAP.sequence.2=CreateFolderRequest
 PROFILE.ZSOAP.sequence.3=CreateContactRequest
 PROFILE.ZSOAP.sequence.4=CreateTagRequest
-PROFILE.ZSOAP.sequence.5=AutoCompleteRequest
+PROFILE.ZSOAP.sequence.5=AutoCompleteRequest(username=user_standard12)
 PROFILE.ZSOAP.sequence.6=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox test",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.7=GetMsgRequest
 PROFILE.ZSOAP.sequence.8=MsgActionRequest(MSGACTIONTYPE=read)
 PROFILE.ZSOAP.sequence.9=GetDomainInfoRequest
-PROFILE.ZSOAP.sequence.10=NoOpRequest
+PROFILE.ZSOAP.sequence.10=SaveDraftRequest
 PROFILE.ZSOAP.sequence.11=GetInfoRequest
 PROFILE.ZSOAP.sequence.12=SearchRequest(SEARCHTYPE=message,SEARCH="in:inbox test",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.13=SendMsgRequest
 PROFILE.ZSOAP.sequence.14=GetMsgRequest
-PROFILE.ZSOAP.sequence.15=AutoCompleteRequest
-PROFILE.ZSOAP.sequence.16=SaveDraftRequest
+PROFILE.ZSOAP.sequence.15=AutoCompleteRequest(username=user_standard15@zmc)
+PROFILE.ZSOAP.sequence.16=NoOpRequest
 PROFILE.ZSOAP.sequence.17=GetFolderRequest(PATH=FolderRequest)
 PROFILE.ZSOAP.sequence.18=MsgActionRequest(MSGACTIONTYPE=tagMsg)
 PROFILE.ZSOAP.sequence.19=CreateAppointmentRequest
@@ -31,7 +31,7 @@ PROFILE.ZSOAP.sequence.29=GetInfoRequest
 PROFILE.ZSOAP.sequence.30=GetFilterRulesRequest
 PROFILE.ZSOAP.sequence.31=GetMsgRequest
 PROFILE.ZSOAP.sequence.32=GetFolderRequest(PATH=FolderRequest)
-PROFILE.ZSOAP.sequence.33=NoOpRequest
+PROFILE.ZSOAP.sequence.33=SendMsgRequest
 PROFILE.ZSOAP.sequence.34=DismissCalendarItemAlarmRequest
 PROFILE.ZSOAP.sequence.35=GetInfoRequest
 PROFILE.ZSOAP.sequence.36=CreateAppointmentRequest
@@ -40,7 +40,7 @@ PROFILE.ZSOAP.sequence.38=SnoozeCalendarItemAlarmRequest
 PROFILE.ZSOAP.sequence.39=NoOpRequest
 PROFILE.ZSOAP.sequence.40=GetInfoRequest
 PROFILE.ZSOAP.sequence.41=SearchRequest(SEARCHTYPE=message,SEARCH="to:${TOUSER} OR in:sent OR in:inbox",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.42=AutoCompleteRequest
+PROFILE.ZSOAP.sequence.42=AutoCompleteRequest(username=user_standard12@zmc.com)
 PROFILE.ZSOAP.sequence.43=GetMsgRequest
 #PROFILE.ZSOAP.sequence.44=MsgActionRequest(MSGACTIONTYPE=trash)
 PROFILE.ZSOAP.sequence.44=MsgActionRequest(MSGACTIONTYPE=unread)
@@ -53,7 +53,7 @@ PROFILE.ZSOAP.sequence.50=GetAvailableLocalesRequest
 PROFILE.ZSOAP.sequence.51=SearchRequest(SEARCHTYPE=message,SEARCH="Hello World larger:50b",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.52=GetInfoRequest
 PROFILE.ZSOAP.sequence.53=GetMsgRequest
-PROFILE.ZSOAP.sequence.54=NoOpRequest
+PROFILE.ZSOAP.sequence.54=SendMsgRequest
 PROFILE.ZSOAP.sequence.55=TagActionRequest(TAGACTIONTYPE=readTag)
 PROFILE.ZSOAP.sequence.56=TagActionRequest(TAGACTIONTYPE=renameTag)
 PROFILE.ZSOAP.sequence.57=TagActionRequest(TAGACTIONTYPE=deleteTag)
@@ -86,7 +86,7 @@ PROFILE.ZSOAP.sequence.81=GetFolderRequest(PATH=FolderRequest)
 PROFILE.ZSOAP.sequence.82=GetDomainInfoRequest
 PROFILE.ZSOAP.sequence.83=GetInfoRequest
 PROFILE.ZSOAP.sequence.84=SearchRequest(SEARCHTYPE="appointment,message",SEARCH="in:Calendar",OFFSET="0",LIMIT="100")
-PROFILE.ZSOAP.sequence.85=NoOpRequest
+PROFILE.ZSOAP.sequence.85=SendMsgRequest
 PROFILE.ZSOAP.sequence.86=NoOpRequest
 PROFILE.ZSOAP.sequence.87=SearchRequest(SEARCHTYPE=message,SEARCH="content:This is test message from zsoap jmeter test OR content:This includes two image attachments as a generic SMTP test message. OR CES and CEM will still exist",OFFSET="0",LIMIT="100")
 PROFILE.ZSOAP.sequence.88=GetFolderRequest(PATH=FolderRequest)
