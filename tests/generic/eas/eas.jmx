@@ -806,13 +806,13 @@ if (hr.getEntity().getContentLength() &gt; 0) {
       if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
         result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.START_TAG) {
-        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
+        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.END_TAG) {
-        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.TEXT) {
-        result+=bp.getText(); 	
+        result+=bp.getText();
       }
     }
   } catch (Exception e) {
@@ -833,6 +833,100 @@ if (hr.getEntity().getContentLength() &gt; 0) {
                 </BeanShellSampler>
                 <hashTree/>
                 <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="14.1" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpEntity;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.conn.ssl.SSLContextBuilder;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.util.EntityUtils;
+import org.apache.commons.codec.binary.Base64;
+import java.nio.charset.StandardCharsets;
+import org.apache.http.HttpHeaders;
+import com.zimbra.zimbrasync.wbxml.BinarySerializer;
+import com.zimbra.zimbrasync.wbxml.BinaryParser;
+
+String message = &quot;From: &lt;&quot;+vars.get(&quot;USER&quot;)+&quot;&gt;\n&quot;;
+message += &quot;To: &lt;&quot;+vars.get(&quot;USER&quot;)+&quot;&gt;\n&quot;;
+message += &quot;Subject: From Active Sync\n&quot;;
+message += &quot;MIME-Version: 1.0\n&quot;;
+message += &quot;Content-Type:  text/plain; charset=utf-8\n&quot;;
+message += &quot;Content-Transfer-Encoding: 7bit\n\n&quot;;
+message += &quot;This is the test message.\n&quot;;
+
+try {
+//Setup HTTP Request
+HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=&quot;+vars.get(&quot;COMMAND&quot;)+&quot;&amp;User=&quot;+vars.get(&quot;USER&quot;)+
+                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
+String auth = vars.get(&quot;USER&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
+byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
+String authHeader = &quot;Basic &quot;+new String(encodedAuth);
+hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
+hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
+
+//Generate WBXML Request Body
+ByteArrayOutputStream bao = new ByteArrayOutputStream();
+BinarySerializer bs = new BinarySerializer(bao,false);
+bs.openTag(BinarySerializer.NAMESPACE_COMPOSEMAIL,BinarySerializer.COMPOSEMAIL_SENDMAIL);
+bs.textElement(BinarySerializer.NAMESPACE_COMPOSEMAIL,BinarySerializer.COMPOSEMAIL_CLIENTID,UUID.randomUUID().toString());
+bs.opaqueElement(BinarySerializer.NAMESPACE_COMPOSEMAIL,BinarySerializer.COMPOSEMAIL_SAVEINSENTITEMS);
+bs.opaqueElement(BinarySerializer.NAMESPACE_COMPOSEMAIL,BinarySerializer.COMPOSEMAIL_MIME,message);
+bs.closeTag();
+
+HttpEntity entity = new ByteArrayEntity(bao.toByteArray());
+hp.setEntity(entity);
+
+SSLContextBuilder builder = new SSLContextBuilder();
+builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build(),SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+
+CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+HttpResponse hr = dhc.execute(hp);
+
+//Process reponse for reporting results in jmeter
+ResponseCode = hr.getStatusLine().getStatusCode();
+ResponseMessage = hr.getStatusLine().getReasonPhrase();
+
+//Convert WBXML to readable form for jmeter
+if (hr.getEntity().getContentLength() &gt; 0) {
+  String result=&quot;&quot;;
+  try {
+    BinaryParser bp = new BinaryParser(new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())),false);
+    while (bp.next() != null) {
+      if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
+        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
+      } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
+        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
+      } else if (bp.getEventType() == BinaryParser.START_TAG) {
+        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
+      } else if (bp.getEventType() == BinaryParser.END_TAG) {
+        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
+      } else if (bp.getEventType() == BinaryParser.TEXT) {
+        result+=bp.getText();
+      }
+    }
+  } catch (Exception e) {
+    if (e.getMessage().equals(&quot;Unexpected EOF&quot;)) {
+      // ignore
+    } else {
+      throw e;
+    }
+  }
+  SampleResult.setResponseData(result);
+}
+} catch (Exception e) {
+	log.error(&quot;SendMail exception: &quot;+e.toString());
+}</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="16.0" enabled="true">
                   <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -899,13 +993,106 @@ if (hr.getEntity().getContentLength() &gt; 0) {
       if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
         result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
-        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.START_TAG) {
-        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;; 	
+        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.END_TAG) {
-        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;; 	
+        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
       } else if (bp.getEventType() == BinaryParser.TEXT) {
-        result+=bp.getText(); 	
+        result+=bp.getText();
+      }
+    }
+  } catch (Exception e) {
+    if (e.getMessage().equals(&quot;Unexpected EOF&quot;)) {
+      // ignore
+    } else {
+      throw e;
+    }
+  }
+  SampleResult.setResponseData(result);
+}
+} catch (Exception e) {
+	log.error(&quot;SendMail exception: &quot;+e.toString());
+}</stringProp>
+                  <stringProp name="BeanShellSampler.filename"></stringProp>
+                  <stringProp name="BeanShellSampler.parameters"></stringProp>
+                  <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+                </BeanShellSampler>
+                <hashTree/>
+                <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="16.1" enabled="true">
+                  <stringProp name="BeanShellSampler.query">import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpEntity;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.conn.ssl.SSLContextBuilder;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.util.EntityUtils;
+import org.apache.commons.codec.binary.Base64;
+import java.nio.charset.StandardCharsets;
+import org.apache.http.HttpHeaders;
+import com.zimbra.zimbrasync.wbxml.BinarySerializer;
+import com.zimbra.zimbrasync.wbxml.BinaryParser;
+
+String message = &quot;From: &lt;&quot;+vars.get(&quot;USER&quot;)+&quot;&gt;\n&quot;;
+message += &quot;To: &lt;&quot;+vars.get(&quot;USER&quot;)+&quot;&gt;\n&quot;;
+message += &quot;Subject: From Active Sync\n&quot;;
+message += &quot;MIME-Version: 1.0\n&quot;;
+message += &quot;Content-Type:  text/plain; charset=utf-8\n&quot;;
+message += &quot;Content-Transfer-Encoding: 7bit\n\n&quot;;
+message += &quot;This is the test message.\n&quot;;
+
+try {
+//Setup HTTP Request
+HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=&quot;+vars.get(&quot;COMMAND&quot;)+&quot;&amp;User=&quot;+vars.get(&quot;USER&quot;)+
+                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
+String auth = vars.get(&quot;USER&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
+byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
+String authHeader = &quot;Basic &quot;+new String(encodedAuth);
+hp.setHeader(HttpHeaders.AUTHORIZATION,authHeader);
+hp.setHeader(&quot;Content-Type&quot;,&quot;application/vnd.ms-sync.wbxml&quot;);
+hp.setHeader(&quot;MS-ASProtocolVersion&quot;,props.getProperty(&quot;EAS.version&quot;,&quot;12.1&quot;));
+
+//Generate WBXML Request Body
+ByteArrayOutputStream bao = new ByteArrayOutputStream();
+BinarySerializer bs = new BinarySerializer(bao,false);
+bs.openTag(BinarySerializer.NAMESPACE_COMPOSEMAIL,BinarySerializer.COMPOSEMAIL_SENDMAIL);
+bs.textElement(BinarySerializer.NAMESPACE_COMPOSEMAIL,BinarySerializer.COMPOSEMAIL_CLIENTID,UUID.randomUUID().toString());
+bs.opaqueElement(BinarySerializer.NAMESPACE_COMPOSEMAIL,BinarySerializer.COMPOSEMAIL_MIME,message);
+bs.closeTag();
+
+HttpEntity entity = new ByteArrayEntity(bao.toByteArray());
+hp.setEntity(entity);
+
+SSLContextBuilder builder = new SSLContextBuilder();
+builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build(),SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+
+CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+HttpResponse hr = dhc.execute(hp);
+
+//Process reponse for reporting results in jmeter
+ResponseCode = hr.getStatusLine().getStatusCode();
+ResponseMessage = hr.getStatusLine().getReasonPhrase();
+
+//Convert WBXML to readable form for jmeter
+if (hr.getEntity().getContentLength() &gt; 0) {
+  String result=&quot;&quot;;
+  try {
+    BinaryParser bp = new BinaryParser(new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())),false);
+    while (bp.next() != null) {
+      if (bp.getEventType() == BinaryParser.START_DOCUMENT) {
+        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
+      } else if (bp.getEventType() == BinaryParser.END_DOCUMENT) {
+        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
+      } else if (bp.getEventType() == BinaryParser.START_TAG) {
+        result+=&quot;&lt;&quot;+bp.getName()+&quot;&gt;&quot;;
+      } else if (bp.getEventType() == BinaryParser.END_TAG) {
+        result+=&quot;&lt;/&quot;+bp.getName()+&quot;&gt;&quot;;
+      } else if (bp.getEventType() == BinaryParser.TEXT) {
+        result+=bp.getText();
       }
     }
   } catch (Exception e) {
