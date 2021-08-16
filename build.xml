@@ -70,6 +70,7 @@
   </target>
   <target name="fixed">
     <antcall target="fixed-ephemeral"/>
+    <antcall target="fixed-multiVal"/>
     <antcall target="fixed-smtpbenchmarking"/>
     <antcall target="fixed-imapbenchmarking"/>
     <antcall target="fixed-soapbenchmarking"/>
@@ -242,6 +243,16 @@
       <property name="ACCOUNTS.csv" value="${users}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/fixed/ephemeral/load.prop"/>
+    </jmeter>
+  </target>
+  <target name="fixed-multiVal" depends="logs">
+    <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/fixed/multiVal/multiVal.jmx"
+            jmeterlogfile="${logs}/fixed-multiVal-jmeter.log"
+            resultlog="${logs}/fixed-multiVal-requests.log">
+      <property name="ACCOUNTS.csv" value="${users}"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+      <jmeterarg value="-q${basedir}/tests/fixed/multiVal/load.prop"/>
     </jmeter>
   </target>
   <target name="fixed-imapbenchmarking" depends="logs">
