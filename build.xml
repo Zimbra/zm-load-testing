@@ -64,6 +64,10 @@
     <antcall target="generic-zsoap-perf"/>
     <antcall target="generic-mix"/>
   </target>
+  <target name="HATest">
+    <antcall target="HATest-zsoap"/>
+    <antcall target="HATest-lmtp"/>
+  </target>
   <target name="fixed">
     <antcall target="fixed-ephemeral"/>
     <antcall target="fixed-smtpbenchmarking"/>
@@ -449,6 +453,32 @@
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/CSP1/pop/load.prop"/>
       <jmeterarg value="-q${basedir}/tests/CSP1/pop/profiles/basic.prop"/>
+    </jmeter>
+  </target>
+  <target name="HATest-zsoap" depends="src,logs">
+    <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/HATest/zsoap/zsoap.jmx"
+            jmeterlogfile="${logs}/HATest-zsoap-jmeter.log"
+            resultlog="${logs}/HATest-zsoap-requests.log">
+      <property name="ACCOUNTS.csv" value="${users}"/>
+      <property name="Words.csv" value="${randomWords}"/>
+      <property name="user.classpath" value="${zjmeter}"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+      <jmeterarg value="-q${basedir}/tests/HATest/zsoap/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/HATest/zsoap/profiles/basic.prop"/>
+    </jmeter>
+  </target>
+  <target name="HATest-lmtp" depends="src,logs">
+    <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/HATest/lmtp/lmtp.jmx"
+            jmeterlogfile="${logs}/HATest-lmtp-jmeter.log"
+            resultlog="${logs}/HATest-lmtp-requests.log">
+      <property name="ACCOUNTS.csv" value="${users}"/>
+      <property name="PROFILE.LMTP.message" value="${jmeter.home}/bin/LMTP_message.txt"/>
+      <property name="user.classpath" value="${zjmeter}"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+      <jmeterarg value="-q${basedir}/tests/HATest/lmtp/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/HATest/lmtp/profiles/basic.prop"/>
     </jmeter>
   </target>
   <target name="genUsers" depends="logs">
