@@ -1,0 +1,6 @@
+LOAD.duration=600
+LOAD.delay=0
+LOAD.WEB.users=100
+LOAD.WEB.userduration=1
+LOAD.WEB.rampup=0
+LOAD.WEB.loopcount=-1

@@ -90,7 +90,7 @@ $ sh reportGen/scripts/loadtest.sh -t <test name> -w < workspace path>
 ### Assumptions
 
 1. Java Developer Kit (JDK) 7 or higher installed.
-2. [jmeter 3.0](https://archive.apache.org/dist/jmeter/binaries/) installed.
+2. [jmeter 3.3](https://archive.apache.org/dist/jmeter/binaries/) installed.
 
 ### Execution
 
