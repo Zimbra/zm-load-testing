@@ -36,7 +36,7 @@ This contains zimbra jmeter load tests.
 
 1. Java Developer Kit (JDK) 7 or higher installed.
 2. Ant 1.9 or higher installed.
-3. [jmeter 3.0](https://archive.apache.org/dist/jmeter/binaries/) installed at /opt/apache-jmeter-3.0 if not modify build.xml jmeter.home appropriately.
+3. [jmeter 3.3](https://archive.apache.org/dist/jmeter/binaries/) installed at /opt/apache-jmeter-3.3 if not modify build.xml jmeter.home appropriately.
 4. config/env.prop is configured for the Zimbra environment to be tested.
 5. admin account exists and has password of test123 in the Zimbra environment (modify config/users.csv if other account(s) desired).
 6. See src [README.md](src/README.md) for addtional requirements to generate Zimbra JMeter Java Library.
