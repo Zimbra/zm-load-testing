@@ -151,7 +151,7 @@
             jmeterlogfile="${logs}/generic-lmtp-jmeter.log"
             resultlog="${logs}/generic-lmtp-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
-      <property name="PROFILE.LMTP.message" value="${basedir}/tests/generic/lmtp/profiles/mime2_160k"/>
+      <property name="PROFILE.LMTP.message" value="${basedir}/tests/generic/lmtp/profiles/message.txt"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/generic/lmtp/load.prop"/>
