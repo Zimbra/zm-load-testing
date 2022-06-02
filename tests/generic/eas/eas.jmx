@@ -196,7 +196,8 @@ if (commands.size() &gt; 0) {
 vars.put(&quot;FOLDERSYNCKEY&quot;,&quot;0&quot;);
 vars.put(&quot;SYNCSYNCKEY&quot;,&quot;0&quot;);
 vars.put(&quot;FOLDERNAME&quot;, &quot;TestDir${__Random(1,10000)}&quot;);
-vars.put(&quot;MOREAVAILABLE&quot;, &quot;true&quot;);</stringProp>
+vars.put(&quot;MOREAVAILABLE&quot;, &quot;true&quot;);
+vars.put(&quot;DEVICEID&quot;, &quot;TestDevice${__Random(1,10000)}&quot;);</stringProp>
           <stringProp name="BeanShellSampler.filename"></stringProp>
           <stringProp name="BeanShellSampler.parameters"></stringProp>
           <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
@@ -268,7 +269,7 @@ import com.zimbra.zimbrasync.wbxml.BinaryParser;
 try {
 //Setup HTTP Request
 HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=&quot;+vars.get(&quot;COMMAND&quot;)+&quot;&amp;User=&quot;+vars.get(&quot;USER&quot;)+
-                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
+                           &quot;&amp;DeviceId=&quot;+vars.get(&quot;DEVICEID&quot;)+&quot;&amp;DeviceType=jmeter&quot;);
 String auth = vars.get(&quot;USER&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
 byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
@@ -379,7 +380,7 @@ import com.zimbra.zimbrasync.wbxml.BinaryParser;
 try {
 //Setup HTTP Request
 HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=&quot;+vars.get(&quot;COMMAND&quot;)+&quot;&amp;User=&quot;+vars.get(&quot;USER&quot;)+
-                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
+                           &quot;&amp;DeviceId=&quot;+vars.get(&quot;DEVICEID&quot;)+&quot;&amp;DeviceType=jmeter&quot;);
 String auth = vars.get(&quot;USER&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
 byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
@@ -478,7 +479,7 @@ import com.zimbra.zimbrasync.wbxml.BinaryParser;
 try {
 //Setup HTTP Request
 HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=&quot;+vars.get(&quot;COMMAND&quot;)+&quot;&amp;User=&quot;+vars.get(&quot;USER&quot;)+
-                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
+                           &quot;&amp;DeviceId=&quot;+vars.get(&quot;DEVICEID&quot;)+&quot;&amp;DeviceType=jmeter&quot;);
 String auth = vars.get(&quot;USER&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
 byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
@@ -576,7 +577,7 @@ import com.zimbra.zimbrasync.wbxml.BinaryParser;
 try {
 //Setup HTTP Request
 HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=&quot;+vars.get(&quot;COMMAND&quot;)+&quot;&amp;User=&quot;+vars.get(&quot;USER&quot;)+
-                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
+                           &quot;&amp;DeviceId=&quot;+vars.get(&quot;DEVICEID&quot;)+&quot;&amp;DeviceType=jmeter&quot;);
 String auth = vars.get(&quot;USER&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
 byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
@@ -956,7 +957,7 @@ message += &quot;This is the test message.\n&quot;;
 try {
 //Setup HTTP Request
 HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=&quot;+vars.get(&quot;COMMAND&quot;)+&quot;&amp;User=&quot;+vars.get(&quot;USER&quot;)+
-                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
+                           &quot;&amp;DeviceId=&quot;+vars.get(&quot;DEVICEID&quot;)+&quot;&amp;DeviceType=jmeter&quot;);
 String auth = vars.get(&quot;USER&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
 byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
@@ -1049,7 +1050,7 @@ message += &quot;This is the test message.\n&quot;;
 try {
 //Setup HTTP Request
 HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=&quot;+vars.get(&quot;COMMAND&quot;)+&quot;&amp;User=&quot;+vars.get(&quot;USER&quot;)+
-                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
+                           &quot;&amp;DeviceId=&quot;+vars.get(&quot;DEVICEID&quot;)+&quot;&amp;DeviceType=jmeter&quot;);
 String auth = vars.get(&quot;USER&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
 byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
@@ -1142,8 +1143,7 @@ import org.apache.http.Header;
 
 try {
 //Setup HTTP Request
-HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=Sync&amp;User=&quot;+vars.get(&quot;USER&quot;)+
-                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
+HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=Sync&amp;User=&quot;+vars.get(&quot;USER&quot;)+ &quot;&amp;DeviceId=&quot;+vars.get(&quot;DEVICEID&quot;)+&quot;&amp;DeviceType=jmeter&quot;);
 String auth = vars.get(&quot;USER&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
 byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
@@ -1268,8 +1268,7 @@ import org.apache.http.Header;
 
 try {
 //Setup HTTP Request
-HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=Sync&amp;User=&quot;+vars.get(&quot;USER&quot;)+
-                           &quot;&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;);
+HttpPost hp = new HttpPost(vars.get(&quot;URL&quot;)+&quot;?Cmd=Sync&amp;User=&quot;+vars.get(&quot;USER&quot;)+&quot;&amp;DeviceId=&quot;+vars.get(&quot;DEVICEID&quot;)+&quot;&amp;DeviceType=jmeter&quot;);
 String auth = vars.get(&quot;USER&quot;)+&quot;:&quot;+vars.get(&quot;PASS&quot;);
 byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
 String authHeader = &quot;Basic &quot;+new String(encodedAuth);
