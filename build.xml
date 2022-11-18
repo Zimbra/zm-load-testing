@@ -3,7 +3,7 @@
 
   <property name="build.dir" location="${basedir}/build"/>
   <property name="build.jar.dir" location="${basedir}/build/dist"/>
-  <property name="jmeter.home" location="/opt/apache-jmeter-3.0"/>
+  <property name="jmeter.home" location="/opt/apache-jmeter-5.4.3"/>
   <property name="env" value="config/env.prop"/>
   <property name="users" location="config/users.csv"/>
   <property name="mail" location="data/Book.csv"/>
@@ -63,6 +63,7 @@
     <antcall target="generic-zsoap-all"/>
     <antcall target="generic-zsoap-perf"/>
     <antcall target="generic-mix"/>
+    <antcall target="generic-onlyoffice"/>
   </target>
   <target name="HATest">
     <antcall target="HATest-zsoap"/>
@@ -232,6 +233,17 @@
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/generic/mix/load.prop"/>
       <jmeterarg value="-q${basedir}/tests/generic/mix/profiles/basic.prop"/>
+    </jmeter>
+  </target>
+<target name="generic-onlyoffice" depends="src,logs">
+    <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/generic/onlyoffice/onlyoffice.jmx"
+            jmeterlogfile="${logs}/generic-onlyoffice-jmeter.log"
+            resultlog="${logs}/generic-onlyoffice-requests.log">
+      <property name="ACCOUNTS.csv" value="${users}"/>
+      <property name="user.classpath" value="${zjmeter}"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+      <jmeterarg value="-q${basedir}/tests/generic/onlyoffice/load.prop"/>
     </jmeter>
   </target>
   <target name="fixed-ephemeral" depends="logs">
