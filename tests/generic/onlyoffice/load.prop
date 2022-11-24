@@ -1,0 +1,7 @@
+LOAD.duration=400
+LOAD.delay=0
+LOAD.onlyoffice.users=10
+LOAD.onlyoffice.userduration=300
+LOAD.onlyoffice.rampup=50
+LOAD.onlyoffice.rampdown=50
+LOAD.EAS.loopcount=-1
