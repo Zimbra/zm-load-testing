@@ -1,0 +1,6 @@
+LOAD.duration=3600
+LOAD.delay=0
+LOAD.chat.users=30
+LOAD.chat.userduration=0
+LOAD.chat.rampup=120
+LOAD.chat.loopcount=-1
