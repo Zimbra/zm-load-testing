@@ -137,9 +137,9 @@
   </target>
   <target name="generic-imap" depends="src,logs">
     <jmeter jmeterhome="${jmeter.home}"
-            testplan="${basedir}/tests/generic/imap/imap.jmx"
+            testplan="${basedir}/tests/generic/imap/imap_trace.jmx"
             jmeterlogfile="${logs}/generic-imap-jmeter.log"
-            resultlog="${logs}/generic-imap-requests.log"> 
+            resultlog="${logs}/generic-imap-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
@@ -149,7 +149,7 @@
   </target>
   <target name="generic-lmtp" depends="src,logs">
     <jmeter jmeterhome="${jmeter.home}"
-            testplan="${basedir}/tests/generic/lmtp/lmtp.jmx"
+            testplan="${basedir}/tests/generic/lmtp/lmtp_trace.jmx"
             jmeterlogfile="${logs}/generic-lmtp-jmeter.log"
             resultlog="${logs}/generic-lmtp-requests.log"> 
       <property name="ACCOUNTS.csv" value="${users}"/>
@@ -162,7 +162,7 @@
   </target>
   <target name="generic-pop" depends="src,logs">
     <jmeter jmeterhome="${jmeter.home}"
-            testplan="${basedir}/tests/generic/pop/pop.jmx"
+            testplan="${basedir}/tests/generic/pop/pop_trace.jmx"
             jmeterlogfile="${logs}/generic-pop-jmeter.log"
 	    resultlog="${logs}/generic-pop-requests.log"> 
 	      <property name="ACCOUNTS.csv" value="${users}"/>
@@ -187,7 +187,7 @@
 	  </target>
 	  <target name="generic-zsoap" depends="src,logs">
 	    <jmeter jmeterhome="${jmeter.home}"
-		    testplan="${basedir}/tests/generic/zsoap/zsoap.jmx"
+		    testplan="${basedir}/tests/generic/zsoap/zsoap_trace.jmx"
 		    jmeterlogfile="${logs}/generic-zsoap-jmeter.log"
 		    resultlog="${logs}/generic-zsoap-requests.csv"> 
 	      <property name="ACCOUNTS.csv" value="${users}"/>
