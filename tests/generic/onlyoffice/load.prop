@@ -1,0 +1,7 @@
+LOAD.duration=3600
+LOAD.delay=0
+LOAD.onlyoffice.users=30
+LOAD.onlyoffice.userduration=1
+LOAD.onlyoffice.rampup=150
+LOAD.onlyoffice.rampdown=150
+LOAD.onlyoffic.loopcount=-1
