@@ -199,7 +199,7 @@
 	  </target>
 	  <target name="generic-onlyoffice" depends="src,logs">
 	    <jmeter jmeterhome="${jmeter.home}"
-		    testplan="${basedir}/tests/generic/onlyoffice/onlyoffice_test.jmx"
+		    testplan="${basedir}/tests/generic/onlyoffice/onlyoffice.jmx"
 		    jmeterlogfile="${logs}/generic-onlyoffice-jmeter.log"
 		    resultlog="${logs}/generic-onlyoffice-requests.csv">
 	      <property name="ACCOUNTS.csv" value="${users}"/>
