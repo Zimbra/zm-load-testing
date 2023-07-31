@@ -1,0 +1,9 @@
+UI.CHROME_DRIVER_PATH=/home/opc/zm-load-testing/config/chromedriver
+UI.URL=https://zimbra-app-ne.vercel.app
+UI.USERNAME=performance@testdomain.com
+UI.PASSWORD=z1mbr4@123
+UI.THINKTIME=5000
+UI.PAGE_LOAD_THINKTIME=5000
+UI.TIMEOUT=10
+UI.SEARCH_STRING=test
+UI.EVENT=Sample Event
