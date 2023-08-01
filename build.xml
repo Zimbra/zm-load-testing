@@ -229,7 +229,7 @@
               <property name="user.classpath" value="${zjmeter}"/>
               <jmeterarg value="-q${basedir}/${env}"/>
               <jmeterarg value="-q${basedir}/tests/Modern_UI/load.prop"/>
-	      <jmeterarg value="-q${basedir}/tests/Modern_UI/basic.prop"/>
+	      <jmeterarg value="-q${basedir}/tests/Modern_UI/config.prop"/>
             </jmeter>
           </target>
 	  <target name="generic-zsoap-all" depends="src,logs,generic-zsoap">
