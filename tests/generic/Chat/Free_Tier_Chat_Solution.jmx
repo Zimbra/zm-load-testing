@@ -25,17 +25,17 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="CHAT_URL" elementType="Argument">
             <stringProp name="Argument.name">CHAT_URL</stringProp>
-            <stringProp name="Argument.value">test-api.qa.immail.ca</stringProp>
+            <stringProp name="Argument.value">${__P(CHAT.server)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="P_PASSWORD" elementType="Argument">
             <stringProp name="Argument.name">P_PASSWORD</stringProp>
-            <stringProp name="Argument.value">123456</stringProp>
+            <stringProp name="Argument.value">${__P(CHAT.PASSWORD)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="SOCKET_URL" elementType="Argument">
             <stringProp name="Argument.name">SOCKET_URL</stringProp>
-            <stringProp name="Argument.value">test-socket.qa.immail.ca</stringProp>
+            <stringProp name="Argument.value">${__P(CHAT.server)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>

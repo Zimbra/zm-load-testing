@@ -1,0 +1,94 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk
+
+    steps:
+      - checkout
+
+      # Install SSH client
+      - run:
+          name: Install SSH client
+          command: sudo apt-get update && sudo apt-get install -y openssh-client
+
+      # Set up SSH key
+      - add_ssh_keys:
+          fingerprints:
+            - "18:3d:67:c0:96:a6:b9:46:0e:3d:27:16:e9:93:81:ff"
+
+      # Create the results directory
+      - run:
+          name: Create Results Directory
+          command: 
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
+            mkdir -p /tmp/result
+          
+      # Connect to remote server and run JMeter test
+      - run:
+          name: Run JMeter test on remote server
+          command: 
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
+            "cd /home/opc/zm-load-testing; sh regression_load_test_run.sh"
+          no_output_timeout: 120m
+       
+   #  Generate CSV file from jtl input
+      - run:
+          name: Generate CSV file from jtl file
+          command: 
+             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
+             "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter_B2.sh"
+
+     #  Run response time comparison across builds and create comparison report for soap
+      - run:
+          name: 
+          command: 
+             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
+             "cd /home/opc/zm-load-testing; python3 calc_resp_time_zsoap.py"
+
+    #  Run response time comparison across builds and create comparison report for imap
+      - run:
+          name: 
+          command: 
+             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
+             "cd /home/opc/zm-load-testing; python3 calc_resp_time_imap.py"
+
+     #  Run response time comparison across builds and create comparison report for pop
+      - run:
+          name: 
+          command: 
+             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
+             "cd /home/opc/zm-load-testing; python3 calc_resp_time_pop.py"
+
+    #  Run response time comparison across builds and create comparison report for lmtp
+      - run:
+          name: 
+          command: 
+             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
+             "cd /home/opc/zm-load-testing; python3 calc_resp_time_lmtp.py"
+
+      # Copy test artifacts to the results directory
+      - run:
+          name: Copy Test files to Artifacts
+          command: |
+            scp -r ${USER}@${SERVER}:/tmp/results /tmp/result
+          
+      - run:
+          name: Create HTML Results Directory
+          command: 
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
+             mkdir -p /tmp/result/html_report
+
+      - run:
+          name: Copy soap Test Artifacts
+          command: |
+            scp -r ${USER}@${SERVER}:/tmp/result /tmp/result
+           
+      - store_artifacts:
+          path: /tmp/result
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
