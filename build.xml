@@ -3,7 +3,7 @@
 
   <property name="build.dir" location="${basedir}/build"/>
   <property name="build.jar.dir" location="${basedir}/build/dist"/>
-  <property name="jmeter.home" location="/opt/apache-jmeter-5.4.3"/>
+  <property name="jmeter.home" location="/opt/apache-jmeter-5.6.2"/>
   <property name="env" value="config/env.prop"/>
   <property name="users" location="config/users.csv"/>
   <property name="mail" location="data/Book.csv"/>
@@ -65,6 +65,7 @@
     <antcall target="generic-mix"/>
     <antcall target="generic-onlyoffice"/>
     <antcall target="generic-chat"/>
+    <antcall target="generic-modern-ui-client"/>
   </target>
   <target name="HATest">
     <antcall target="HATest-zsoap"/>
@@ -217,6 +218,18 @@
               <property name="user.classpath" value="${zjmeter}"/>
               <jmeterarg value="-q${basedir}/${env}"/>
               <jmeterarg value="-q${basedir}/tests/generic/chat/load.prop"/>
+            </jmeter>
+          </target>
+	  <target name="generic-modern-ui-client" depends="src,logs">
+            <jmeter jmeterhome="${jmeter.home}"
+                    testplan="${basedir}/tests/Modern_UI/Modern_UI_User_Actions.jmx"
+                    jmeterlogfile="${logs}/generic-modern-ui-jmeter.log"
+                    resultlog="${logs}/generic-modern-ui-requests.csv">
+              <property name="ACCOUNTS.csv" value="${users}"/>
+              <property name="user.classpath" value="${zjmeter}"/>
+              <jmeterarg value="-q${basedir}/${env}"/>
+              <jmeterarg value="-q${basedir}/tests/Modern_UI/load.prop"/>
+	      <jmeterarg value="-q${basedir}/tests/Modern_UI/basic.prop"/>
             </jmeter>
           </target>
 	  <target name="generic-zsoap-all" depends="src,logs,generic-zsoap">

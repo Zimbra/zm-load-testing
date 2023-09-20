@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.2">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Simulate User Actions in Browser" enabled="true">
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="CHROME_DRIVER_PATH" elementType="Argument">
+            <stringProp name="Argument.value">${__P(UI.CHROME_DRIVER_PATH)}</stringProp>
+            <stringProp name="Argument.name">CHROME_DRIVER_PATH</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="URL" elementType="Argument">
+            <stringProp name="Argument.value">${__P(UI.URL)}</stringProp>
+            <stringProp name="Argument.name">URL</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="USERNAME" elementType="Argument">
+            <stringProp name="Argument.value">${__P(UI.USERNAME)}</stringProp>
+            <stringProp name="Argument.name">USERNAME</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="PASSWORD" elementType="Argument">
+            <stringProp name="Argument.name">PASSWORD</stringProp>
+            <stringProp name="Argument.value">${__P(UI.PASSWORD)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="thinktime" elementType="Argument">
+            <stringProp name="Argument.value">${__P(UI.THINKTIME)}</stringProp>
+            <stringProp name="Argument.name">thinktime</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="page_load_thinktime" elementType="Argument">
+            <stringProp name="Argument.name">page_load_thinktime</stringProp>
+            <stringProp name="Argument.value">${__P(UI.PAGE_LOAD_THINKTIME)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="timeout" elementType="Argument">
+            <stringProp name="Argument.name">timeout</stringProp>
+            <stringProp name="Argument.value">${__P(UI.TIMEOUT)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="Search_String" elementType="Argument">
+            <stringProp name="Argument.value">${__P(UI.SEARCH_STRING)}</stringProp>
+            <stringProp name="Argument.name">Search_String</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="Event" elementType="Argument">
+            <stringProp name="Argument.name">${__P(UI.EVENT)}</stringProp>
+            <stringProp name="Argument.value">Sample Event</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.UI.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.UI.rampup)}</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <boolProp name="ThreadGroup.delayedStart">false</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Browser User Actions" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.util.Arrays;
+import java.util.List;
+import org.openqa.selenium.Keys
+import java.time.Duration; 
+import org.openqa.selenium.interactions.Actions;
+import java.util.concurrent.TimeUnit;
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.nodes.Element
+import org.jsoup.select.Elements
+import org.openqa.selenium.By
+import org.openqa.selenium.WebDriver
+import org.openqa.selenium.WebElement
+import org.openqa.selenium.chrome.ChromeDriver
+import java.util.concurrent.TimeUnit
+import org.apache.jmeter.protocol.http.control.Header;
+import org.apache.jmeter.protocol.http.control.HeaderManager;
+import org.apache.jmeter.protocol.http.sampler.HTTPSampler;
+import org.apache.jmeter.protocol.http.util.HTTPConstants;
+import org.apache.jmeter.samplers.SampleResult;
+import org.openqa.selenium.support.ui.ExpectedConditions
+import org.openqa.selenium.support.ui.WebDriverWait
+
+// set the path to the ChromeDriver executable path
+System.setProperty(&quot;webdriver.chrome.driver&quot;, &quot;${CHROME_DRIVER_PATH}&quot;);
+
+// initialize the ChromeDriver
+WebDriver driver = new ChromeDriver();
+
+try {
+// start measuring the response time for the launch transaction
+    startTime = System.currentTimeMillis();
+
+// define the target URL
+    String targetPage = &quot;${URL}&quot;;
+
+// navigate to the target page
+    driver.get(targetPage);
+
+// end measuring the response time for the launch transaction
+    endTime = System.currentTimeMillis();
+    responseTime = endTime - startTime;
+
+// print the response time for the launch transaction
+    System.out.println(&quot;Launch transaction response time: &quot; + responseTime + &quot; milliseconds&quot;);
+
+// define the timeout in seconds 
+    Duration timeout = Duration.ofSeconds(${timeout});
+
+    int thinktime = ${thinktime};
+    int page_load_thinktime = ${page_load_thinktime};
+
+// start measuring the response time for the login transaction
+    startTime_login = System.currentTimeMillis();
+
+// find the email input field
+    WebElement emailInput = new WebDriverWait(driver,timeout)
+    .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(&quot;#login-form_2-email&quot;)));
+
+// scroll the email input field into view
+    ((JavascriptExecutor) driver).executeScript(&quot;arguments[0].scrollIntoView(true);&quot;, emailInput);
+
+// get the type attribute of the email input field
+    String emailType = (String) ((JavascriptExecutor) driver).executeScript(&quot;return arguments[0].type;&quot;, emailInput);
+
+// check if the type is one of the supported types
+    List&lt;String&gt; supportedTypes = Arrays.asList(&quot;textarea&quot;, &quot;select-one&quot;, &quot;text&quot;, &quot;url&quot;, &quot;tel&quot;, &quot;search&quot;, &quot;password&quot;, &quot;number&quot;, &quot;email&quot;);
+    if (supportedTypes.contains(emailType)) {
+// type the email address of a user
+    emailInput.sendKeys(&quot;${USERNAME}&quot;);
+    } else {
+    // use JavaScript to set the value and trigger the input and change events
+    ((JavascriptExecutor) driver).executeScript(&quot;arguments[0].value = arguments[1];&quot;, emailInput, &quot;${USERNAME}&quot;);
+    ((JavascriptExecutor) driver).executeScript(&quot;arguments[0].dispatchEvent(new Event(&apos;input&apos;, { bubbles: true }));&quot;, emailInput);
+    ((JavascriptExecutor) driver).executeScript(&quot;arguments[0].dispatchEvent(new Event(&apos;change&apos;, { bubbles: true }));&quot;, emailInput);
+    }
+
+// find the password input field
+    WebElement passwordInput = new WebDriverWait(driver, timeout)
+    .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(&quot;#login-form_2-password&quot;)));
+
+// scroll the password input field into view
+    ((JavascriptExecutor) driver).executeScript(&quot;arguments[0].scrollIntoView(true);&quot;, passwordInput);
+
+// get the type attribute of the password input field
+    String passwordType = (String) ((JavascriptExecutor) driver).executeScript(&quot;return arguments[0].type;&quot;, passwordInput);
+
+// check if the type is one of the supported types
+    if (supportedTypes.contains(passwordType)) {
+// type the password 
+    passwordInput.sendKeys(&quot;${PASSWORD}&quot;);
+    } else {
+     // use JavaScript to set the value and trigger the input and change events
+    ((JavascriptExecutor) driver).executeScript(&quot;arguments[0].value = arguments[1];&quot;, passwordInput, &quot;${PASSWORD}&quot;);
+    ((JavascriptExecutor) driver).executeScript(&quot;arguments[0].dispatchEvent(new Event(&apos;input&apos;, { bubbles: true }));&quot;, passwordInput);
+    ((JavascriptExecutor) driver).executeScript(&quot;arguments[0].dispatchEvent(new Event(&apos;change&apos;, { bubbles: true }));&quot;, passwordInput);
+    }
+
+// wait for the 'Sign in' button to be visible
+    WebElement signInButton = new WebDriverWait(driver, timeout).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(&quot;button.blocks_button_regular&quot;)));
+
+// scroll the &quot;Sign in&quot; button into view
+    ((JavascriptExecutor) driver).executeScript(&quot;arguments[0].scrollIntoView(true);&quot;, signInButton);
+
+// click the &quot;Sign in&quot; button
+    signInButton.click();
+
+     Thread.sleep(page_load_thinktime);
+    
+// end measuring the response time for the login transaction
+     endTime_login = System.currentTimeMillis();
+     responseTime_login = endTime_login - startTime_login - thinktime ;
+
+// print the response time for the login transaction
+     System.out.println(&quot;Login transaction response time: &quot; + responseTime_login + &quot; milliseconds&quot;);
+
+     Thread.sleep(thinktime);
+
+// start measuring the response time for clicking mail preview transaction
+     startTime_mail = System.currentTimeMillis();
+
+// find the element with the specified class and attributes
+    WebElement ul_element = driver.findElement(By.cssSelector(&apos;ul.zimbra-client_smart-list_inner[tabindex=&quot;0&quot;][role=&quot;listbox&quot;]&apos;))
+
+// interact with the element (e.g., send an arrow down key to the &lt;ul&gt; element)
+    ul_element.sendKeys(Keys.ARROW_DOWN)
+
+// Wait for a specific element to become visible or clickable
+    WebElement selected_mail_item = new WebDriverWait(driver,timeout).until(ExpectedConditions.presenceOfElementLocated(By.id(&apos;mail_item_-144491&apos;))) 
+
+     Thread.sleep(thinktime)
+
+// click on the mail item
+    selected_mail_item.click()
+
+    WebElement element_1 = driver.findElement(By.cssSelector(&quot;#mail_item_-144453 &gt; div &gt; div &gt; div &gt; div.zimbra-client_mail-list-item_messageContent &gt; div:nth-child(2) &gt; h3&quot;))
+     
+// click on the mail item
+    element_1.click()
+
+    Thread.sleep(thinktime)
+
+// find the button using the given CSS selector
+    WebElement arrow_mail_button = driver.findElement(By.cssSelector(&quot;button.zimbra-client_action-button_button.zimbra-client_action-button_iconOnly.zimbra-client_action-button_md.zimbra-client_mail-list-header-action-menu_arrowButtonClass&quot;))
+
+// Click the button
+    arrow_mail_button.click()
+
+    Thread.sleep(thinktime)
+
+// find the button using the given CSS selector
+    WebElement arrow_mail_button_1 = driver.findElement(By.cssSelector(&quot;button.zimbra-client_action-button_button.zimbra-client_action-button_iconOnly.zimbra-client_action-button_md.zimbra-client_mail-list-header-action-menu_arrowButtonClass&quot;))
+
+// Click the button
+    arrow_mail_button_1.click()
+
+    Thread.sleep(thinktime)
+
+    WebElement element_mail_folder_click_1 = driver.findElement(By.cssSelector(&quot;#zimbra-client &gt; div &gt; main &gt; div &gt; div.blocks_container-size_containerSize.zimbra-client_sidebar_wrap.zimbra-client_sidebar_inline &gt; div &gt; div.zimbra-client_sidebar_inner &gt; div &gt; div.zimbra-client_mail-sidebar_sidebarListWrapper &gt; div:nth-child(1) &gt; div:nth-child(112) &gt; div:nth-child(4) &gt; div &gt; div &gt; div &gt; a &gt; span &gt; div&quot;))
+
+    element_mail_folder_click_1.click();
+  
+// add a delay to see the action in action (1000 ms = 1 second)
+    Thread.sleep(thinktime)
+
+    WebElement element_mail_folder_click_2 = driver.findElement(By.cssSelector(&quot;#zimbra-client &gt; div &gt; main &gt; div &gt; div.blocks_container-size_containerSize.zimbra-client_sidebar_wrap.zimbra-client_sidebar_inline &gt; div &gt; div.zimbra-client_sidebar_inner &gt; div &gt; div.zimbra-client_mail-sidebar_sidebarListWrapper &gt; div:nth-child(1) &gt; div:nth-child(112) &gt; div:nth-child(3) &gt; div &gt; div &gt; div &gt; a &gt; span &gt; div&quot;))
+
+    element_mail_folder_click_2.click();
+  
+// add a delay to see the action in action (1000 ms = 1 second)
+    Thread.sleep(thinktime)
+
+// find the element using the given CSS selector
+    WebElement element_mail_folder_click_3 = driver.findElement(By.cssSelector(&quot;#zimbra-client &gt; div &gt; main &gt; div &gt; div.blocks_container-size_containerSize.zimbra-client_sidebar_wrap.zimbra-client_sidebar_inline &gt; div &gt; div.zimbra-client_sidebar_inner &gt; div &gt; div.zimbra-client_mail-sidebar_sidebarListWrapper &gt; div:nth-child(1) &gt; div:nth-child(111) &gt; div &gt; div &gt; div &gt; a &gt; span &gt; div&quot;))
+
+// click the element
+    element_mail_folder_click_3.click()
+
+// add a delay to see the action in action (1000 ms = 1 second)
+    Thread.sleep(thinktime)
+
+// find and click on the first element
+    WebElement element_mail_folder_click_4 = driver.findElement(By.cssSelector(&quot;#zimbra-client &gt; div &gt; main &gt; div &gt; div.blocks_container-size_containerSize.zimbra-client_sidebar_wrap.zimbra-client_sidebar_inline &gt; div &gt; div.zimbra-client_sidebar_inner &gt; div &gt; div.zimbra-client_mail-sidebar_sidebarListWrapper &gt; div:nth-child(1) &gt; div:nth-child(112) &gt; div.zimbra-client_folder-list_folderWithSubFolders &gt; div:nth-child(6) &gt; div &gt; div &gt; div &gt; a &gt; span &gt; div&quot;))
+    element_mail_folder_click_4.click()
+
+// add a delay to see the action in action (1000 ms = 1 second)
+    Thread.sleep(thinktime)
+
+// find and click on the second element
+    WebElement element_mail_folder_click_5 = driver.findElement(By.cssSelector(&quot;#zimbra-client &gt; div &gt; main &gt; div &gt; div.blocks_container-size_containerSize.zimbra-client_sidebar_wrap.zimbra-client_sidebar_inline &gt; div &gt; div.zimbra-client_sidebar_inner &gt; div &gt; div.zimbra-client_mail-sidebar_sidebarListWrapper &gt; div:nth-child(1) &gt; div:nth-child(9) &gt; div &gt; div &gt; div &gt; a &gt; span&quot;))
+    element_mail_folder_click_5.click()
+
+// add a delay to see the action in action (1000 ms = 1 second)
+    Thread.sleep(thinktime)
+
+// find and click on the third element
+    WebElement element_mail_folder_click_6 = driver.findElement(By.cssSelector(&quot;#zimbra-client &gt; div &gt; main &gt; div &gt; div.blocks_container-size_containerSize.zimbra-client_sidebar_wrap.zimbra-client_sidebar_inline &gt; div &gt; div.zimbra-client_sidebar_inner &gt; div &gt; div.zimbra-client_mail-sidebar_sidebarListWrapper &gt; div:nth-child(1) &gt; div:nth-child(4) &gt; div &gt; div &gt; div &gt; a &gt; span&quot;))
+    element_mail_folder_click_6.click()
+
+// add a delay to see the action in action (1000 ms = 1 second)
+    Thread.sleep(thinktime)
+
+// find and click on the fourth element
+    WebElement element_mail_folder_click_7 = driver.findElement(By.cssSelector(&quot;#zimbra-client &gt; div &gt; main &gt; div &gt; div.blocks_container-size_containerSize.zimbra-client_sidebar_wrap.zimbra-client_sidebar_inline &gt; div &gt; div.zimbra-client_sidebar_inner &gt; div &gt; div.zimbra-client_mail-sidebar_sidebarListWrapper &gt; div:nth-child(1) &gt; div:nth-child(1) &gt; div &gt; div &gt; div &gt; div &gt; a &gt; span&quot;))
+    element_mail_folder_click_7.click()
+
+// end measuring the response time 
+    endTime_mail = System.currentTimeMillis();
+    responseTime_mail = endTime_mail - startTime_mail -  (thinktime*10);
+
+// print the response time 
+    System.out.println(&quot;Click Mail Preview and mail folder navigation response time: &quot; + responseTime_mail + &quot; milliseconds&quot;);
+
+// add a delay to see the action in action (1000 ms = 1 second)
+    Thread.sleep(thinktime)
+    
+// start measuring the response time for search mail transaction
+    startTime_search_mail = System.currentTimeMillis();
+
+// locate the element with the role &quot;button&quot; and the class &quot;zimbra-icon-search&quot;
+    WebElement searchButton = driver.findElement(By.cssSelector(&quot;span.zimbra-icon.zimbra-icon-search&quot;));
+            
+// perform any desired action on the element, e.g., click:
+    searchButton.click();
+
+// find the &lt;input&gt; element with the specified class and attributes
+    WebElement searchInput = driver.findElement(By.cssSelector(&apos;input.zimbra-client_search-input_input&apos;))
+
+// type text into the search input box
+    searchInput.sendKeys(&quot;${Search_String}&quot;)
+
+// simulate pressing the Enter key
+    searchInput.sendKeys(Keys.ENTER)
+      
+// end measuring the response time for search mail 
+    endTime_search_mail = System.currentTimeMillis();
+    responseTime_search_mail = endTime_mail - startTime_search_mail -  thinktime;
+
+// print the response time 
+    System.out.println(&quot;Search mail response time: &quot; + responseTime_mail + &quot; milliseconds&quot;);
+
+    Thread.sleep(thinktime);
+
+// start measuring the response time for clicking briefcase link transaction
+    startTime_briefcase = System.currentTimeMillis();
+
+// find and click the briefcase link
+    WebElement briefcaseLink1 = driver.findElement(By.cssSelector(&quot;a[href=&apos;/briefcase&apos;][title=&apos;Briefcase&apos;][class=&apos;zimbra-client_app-navigation_link&apos;]&quot;));
+
+    briefcaseLink1.click()
+
+// end measuring the response time 
+     endTime_briefcase = System.currentTimeMillis();
+     responseTime_briefcase = endTime_briefcase - startTime_briefcase -  thinktime;
+
+// print the response time 
+     System.out.println(&quot;Click briefcase link response time: &quot; + responseTime_briefcase + &quot; milliseconds&quot;);
+
+     Thread.sleep(thinktime);
+	
+// start measuring the response time for clicking Preview Document transaction
+    startTime_briefcase_doc = System.currentTimeMillis();
+
+    WebElement doc_element1 = new WebDriverWait(driver, timeout).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(&quot;#document_item_144611 &gt; div &gt; div &gt; div.zimbra-client_briefcase_pane_list_listItem &gt; div.zimbra-client_briefcase_pane_list_narrowInlineHandlers &gt; span&quot;)));
+    
+    doc_element1.click()
+
+// end measuring the response time 
+    endTime_briefcase_doc = System.currentTimeMillis();
+    responseTime_briefcase_doc = endTime_briefcase_doc - startTime_briefcase_doc - thinktime;
+
+// print the response time 
+    System.out.println(&quot;Click briefcase_doc response time: &quot; + responseTime_briefcase_doc + &quot; milliseconds&quot;);
+       
+    Thread.sleep(thinktime);
+	 
+// start measuring response time for click calender transaction
+    startTime_click_calender=System.currentTimeMillis();
+
+// define the CSS selector
+    String cssSelector = &quot;#zimbra-client &gt; div &gt; div.zimbra-client_header.zimbra-client_app_hideSmDown.zimbra-client_header_headerSearch &gt; ul &gt; li:nth-child(2) &gt; a &gt; span.zimbra-client_app-navigation_iconText&quot;;
+
+// find the element by CSS selector
+    WebElement element1 = driver.findElement(By.cssSelector(cssSelector));
+
+// click on the element
+    element1.click();
+
+// end measuring the response time 
+    endTime_click_calender = System.currentTimeMillis();
+    responseTime_click_calender = endTime_click_calender - startTime_click_calender - thinktime;
+
+// print the response time for click calender
+    System.out.println(&quot;Click calender response time: &quot; + responseTime_click_calender + &quot; milliseconds&quot;);
+
+    Thread.sleep(thinktime)
+
+    //start measuring response time for task creation transactions
+    startTime_task=System.currentTimeMillis();
+
+// Create a task-- Click add task
+// Find the element using the given selector
+    String selector = &quot;#zimbra-client &gt; div &gt; main &gt; div &gt; div.zimbra-client_calendar_calendarWrapper &gt; div.zimbra-client_calendar_tasks-wrapper_rightbar &gt; div &gt; div &gt; header &gt; button.zimbra-client_action-button_button.zimbra-client_action-button_iconOnly.zimbra-client_action-button_xs.zimbra-client_tasks_toggleAdd &gt; span&quot;;
+    
+    WebElement taskelement = new WebDriverWait(driver, timeout)
+    .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selector)));
+
+     taskelement.click();
+
+     Thread.sleep(thinktime)
+
+// find the element using its CSS selector
+    WebElement taskelement1 = new WebDriverWait(driver, timeout).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(&quot;body &gt; div.blocks_dialog_overlay &gt; div &gt; div &gt; div.zimbra-client_modal-dialog_content &gt; div &gt; div:nth-child(1) &gt; input&quot;)));
+
+// perform actions on the element
+    taskelement1.sendKeys(&quot;test task #1&quot;);
+
+// find the button element using its CSS selector
+    WebElement taskbuttonElement = new WebDriverWait(driver, timeout).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(&quot;body &gt; div.blocks_dialog_overlay &gt; div &gt; div &gt; footer &gt; button.blocks_button.blocks_button_primary.blocks_button_regular.blocks_button_brand-primary&quot;)));
+
+// perform button click to save the task
+    taskbuttonElement.click();
+
+// end measuring the response time for Click task and save it transaction
+    endTime_task = System.currentTimeMillis();
+    responseTime_task= endTime_task - startTime_task - (thinktime);
+
+// print the response time 
+    System.out.println(&quot;Click task and save it response time: &quot; + responseTime_task + &quot; milliseconds&quot;);
+
+    Thread.sleep(thinktime)
+	
+// start measuring response time for click Click New Event and Save transaction
+     startTime_click_New_Event_Save=System.currentTimeMillis();
+
+// find the button element with the specified class
+     WebElement button_element = driver.findElement(By.className(&quot;blocks_button_primary&quot;))
+
+// interact with the button element (e.g., click on it)
+     button_element.click()
+
+     Thread.sleep(thinktime)
+
+// find the input element with the specified class and placeholder attribute
+     WebElement inputElement_event = driver.findElement(By.cssSelector(&apos;input.zimbra-client_text-input_input[placeholder=&quot;Add Event&quot;]&apos;))
+   
+// Set a value to the input element - calender meeting event name
+    inputElement_event.sendKeys(&quot;${Event}&quot;)
+
+     WebElement saveButton = driver.findElement(By.cssSelector(&quot;#zimbra-client &gt; div &gt; main &gt; div &gt; div.zimbra-client_calendar_calendarInner.zimbra-client_calendar_appointment-edit_wrapper &gt; div.zimbra-client_calendar_appointment-edit_footer &gt; button.blocks_button.blocks_button_primary.blocks_button_regular.blocks_button_brand-primary.zimbra-client_calendar_appointment-edit_addEventAction&quot;))
+
+// Click on the Save button
+    saveButton.click()
+
+// end measuring the response time for Click New Event and Save button
+    endTime_click_New_Event_Save = System.currentTimeMillis();
+    responseTime_click_New_Event_Save = endTime_click_New_Event_Save - startTime_click_New_Event_Save - thinktime;
+
+// print the response time 
+    System.out.println(&quot;Click New Event and Save response time: &quot; + responseTime_click_New_Event_Save + &quot; milliseconds&quot;);
+
+    Thread.sleep(thinktime);
+
+// start measuring response time for click Chat-video transaction
+    startTime_chat=System.currentTimeMillis();
+
+// define the CSS selector
+    String cssSelector1 = &quot;#zimbra-client &gt; div &gt; div.zimbra-client_header.zimbra-client_app_hideSmDown.zimbra-client_header_headerSearch &gt; ul &gt; li:nth-child(5) &gt; a &gt; span&quot;;
+
+// find the element by CSS selector
+    WebElement chat_element = driver.findElement(By.cssSelector(cssSelector1));
+
+// click on the element
+    chat_element.click();
+
+    //end measuring the response time for Click chat trnsaction
+    endTime_chat = System.currentTimeMillis();
+    responseTime_chat = endTime_chat - startTime_chat - thinktime;
+
+// print the response time 
+    System.out.println(&quot;Click chat response time: &quot; + responseTime_chat + &quot; milliseconds&quot;);
+
+    Thread.sleep(thinktime);
+
+// start measuring response time for click video transaction
+    startTime_video=System.currentTimeMillis();
+
+// define the CSS selector
+    String cssSelector2 = &quot;#zimbra-client &gt; div &gt; div.zimbra-client_header.zimbra-client_app_hideSmDown.zimbra-client_header_headerSearch &gt; ul &gt; li:nth-child(4) &gt; a &gt; span&quot;;
+
+// find the element by CSS selector
+    WebElement video_element = driver.findElement(By.cssSelector(cssSelector2));
+
+// click on the element
+    video_element.click();
+
+// end measuring response time for click video transaction
+    endTime_video = System.currentTimeMillis();
+    responseTime_video = endTime_video - startTime_video - thinktime;
+
+// print the response time 
+    System.out.println(&quot;Click video response time: &quot; + responseTime_video + &quot; milliseconds&quot;);
+
+    Thread.sleep(thinktime);
+	
+// start measuring response time for click Cloud Storage transaction
+    startTime_click_cloud=System.currentTimeMillis();
+
+// define the CSS selector
+    String cssSelector3 = &quot;#zimbra-client &gt; div &gt; div.zimbra-client_header.zimbra-client_app_hideSmDown.zimbra-client_header_headerSearch &gt; ul &gt; li:nth-child(6) &gt; a &gt; span&quot;;
+
+// find the element by CSS selector
+    WebElement cloud_element = driver.findElement(By.cssSelector(cssSelector3));
+
+// click on the element
+    cloud_element.click();
+
+// end measuring response time for click Cloud Storage transaction
+    endTime_click_cloud = System.currentTimeMillis();
+    responseTime_click_cloud = endTime_click_cloud - startTime_click_cloud - thinktime;
+
+// print the response time 
+    System.out.println(&quot;Click Cloud Storage response time: &quot; + responseTime_click_cloud+ &quot; milliseconds&quot;);
+
+    Thread.sleep(thinktime);
+	
+    // start measuring the response time for clicking briefcase link transaction
+    startTime_briefcase = System.currentTimeMillis();
+
+// find and click the briefcase link
+     WebElement briefcase_link = driver.findElement(By.cssSelector(&quot;a[href=&apos;/briefcase&apos;][title=&apos;Briefcase&apos;][class=&apos;zimbra-client_app-navigation_link&apos;]&quot;));
+
+    briefcase_link.click()
+
+// end measuring the response time for clicking briefcase link transaction
+      endTime_briefcase = System.currentTimeMillis();
+      responseTime_briefcase = endTime_briefcase - startTime_briefcase -  thinktime;
+
+// print the response time 
+      System.out.println(&quot;Click briefcase link response time: &quot; + responseTime_briefcase + &quot; milliseconds&quot;);
+
+      Thread.sleep(thinktime);
+	
+// start measuring the response time for clicking Preview Document transaction
+      startTime_briefcase_doc = System.currentTimeMillis();
+
+      WebElement preview_doc_element = new WebDriverWait(driver, timeout).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(&quot;#document_item_144611 &gt; div &gt; div &gt; div.zimbra-client_briefcase_pane_list_listItem &gt; div.zimbra-client_briefcase_pane_list_narrowInlineHandlers &gt; span&quot;)));
+
+      preview_doc_element.click()
+
+// end measuring the response time 
+      endTime_briefcase_doc = System.currentTimeMillis();
+      responseTime_briefcase_doc = endTime_briefcase_doc - startTime_briefcase_doc - thinktime;
+
+// print the response time 
+     System.out.println(&quot;Click briefcase_doc response time: &quot; + responseTime_briefcase_doc + &quot; milliseconds&quot;);
+      
+     Thread.sleep(thinktime);
+
+// start measuring response time for click Integrations transaction
+     startTime_click_Integrations=System.currentTimeMillis();
+
+// define the CSS selector
+    String cssSelector4 = &quot;#zimbra-client &gt; div &gt; div.zimbra-client_header.zimbra-client_app_hideSmDown.zimbra-client_header_headerSearch &gt; ul &gt; li:nth-child(7) &gt; a &gt; span&quot;;
+
+// find the element by CSS selector
+    WebElement Integration_element = driver.findElement(By.cssSelector(cssSelector4));
+
+// click on the element
+    Integration_element.click();
+
+// end measuring response time for click Integrations transaction
+    endTime_click_Integrations = System.currentTimeMillis();
+    responseTime_click_Integrations= endTime_click_Integrations - startTime_click_Integrations - thinktime;
+
+// print the response time 
+   System.out.println(&quot;Click Integrations response time: &quot; + responseTime_click_Integrations+ &quot; milliseconds&quot;);
+
+   Thread.sleep(thinktime);
+
+// start measuring response time for click Contacts transaction
+   startTime_click_Contacts=System.currentTimeMillis();
+
+// define the CSS selector
+    String cssSelector5 = &quot;#zimbra-client &gt; div &gt; div.zimbra-client_header.zimbra-client_app_hideSmDown.zimbra-client_header_headerSearch &gt; ul &gt; li:nth-child(6) &gt; a &gt; span&quot;;
+
+// find the element by CSS selector
+    WebElement contact_element = driver.findElement(By.cssSelector(cssSelector5));
+
+// click on the element
+    contact_element.click();
+
+// measuring response time for click Contacts transaction
+    endTime_click_Contacts = System.currentTimeMillis();
+    responseTime_click_Contacts= endTime_click_Contacts - startTime_click_Contacts- thinktime;
+
+// print the response time 
+    System.out.println(&quot;Click contacts response time: &quot; + responseTime_click_Contacts+ &quot; milliseconds&quot;);
+
+    Thread.sleep(thinktime);
+}
+ catch (Exception ex) {
+    // Handle any exceptions if necessary
+    ex.printStackTrace();
+} finally {
+    // Don&apos;t forget to close the WebDriver once you&apos;re done with it
+    driver.quit();
+}
+</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>false</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>false</threadName>
+              <dataType>false</dataType>
+              <encoding>false</encoding>
+              <assertions>false</assertions>
+              <subresults>false</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <url>true</url>
+            </value>
+          </objProp>
+          <objProp>
+            <name></name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>false</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>false</threadName>
+              <dataType>false</dataType>
+              <encoding>false</encoding>
+              <assertions>false</assertions>
+              <subresults>false</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <threadCounts>true</threadCounts>
+            </value>
+          </objProp>
+          <stringProp name="filename">${__P(jmetercsv,${__P(REQUEST.log)})}</stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
