@@ -65,6 +65,7 @@
     <antcall target="generic-mix"/>
     <antcall target="generic-onlyoffice"/>
     <antcall target="generic-chat"/>
+    <antcall target="generic-on-prem-chat">
     <antcall target="generic-modern-ui-client"/>
   </target>
   <target name="HATest">
@@ -215,6 +216,21 @@
                     jmeterlogfile="${logs}/generic-chat-jmeter.log"
                     resultlog="${logs}/generic-chat-requests.csv">
               <property name="ACCOUNTS.csv" value="${users}"/>
+              <property name="user.classpath" value="${zjmeter}"/>
+              <jmeterarg value="-q${basedir}/${env}"/>
+              <jmeterarg value="-q${basedir}/tests/generic/chat/load.prop"/>
+            </jmeter>
+          </target>
+	   <target name="generic-on-prem-chat" depends="src,logs">
+            <jmeter jmeterhome="${jmeter.home}"
+                    testplan="${basedir}/tests/generic/Chat/On_Prem_Chat_Solution.jmx"
+                    jmeterlogfile="${logs}/generic-On-Prem-chat-jmeter.log"
+                    resultlog="${logs}/generic-on-prem-chat-requests.csv">
+              <property name="ACCOUNTS.csv" value="${users}"/>
+	      <property name="ACTIVITY.csv" value="${ACTIVITY}"/>
+	      <property name="IMAGES.csv" value="${IMAGES}"/>
+              <property name="DOCS.csv" value="${DOCS}"/>
+	      <property name="MESSAGE.csv" value="${MESSAGE}"/>
               <property name="user.classpath" value="${zjmeter}"/>
               <jmeterarg value="-q${basedir}/${env}"/>
               <jmeterarg value="-q${basedir}/tests/generic/chat/load.prop"/>
