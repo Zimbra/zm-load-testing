@@ -163,21 +163,20 @@
       </kg.apc.jmeter.threads.UltimateThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
-          <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-import org.apache.commons.net.imap.IMAPSClient;
-import com.zimbra.jmeter.Zimbra;
-import com.zimbra.jmeter.Command;
-import javax.net.ssl.SSLSocketFactory;
+          <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
+	import org.apache.commons.net.imap.IMAPSClient;
+	import com.zimbra.jmeter.Zimbra;
+	import com.zimbra.jmeter.Command;
+	import javax.net.ssl.SSLSocketFactory;
 	
-	//debug();
 	Zimbra imap = new Zimbra(props,&quot;IMAP&quot;);
 	ArrayList commands = imap.getcommands();
 	vars.putObject(&quot;COMMANDS&quot;,commands);
 
+        // enable imap over ssl
 	props.put(&quot;mail.imap.ssl.enable&quot;, &quot;true&quot;);
 	props.setProperty(&quot;mail.store.protocol&quot;, &quot;imaps&quot;);
-	//props.put(&quot;mail.imap.ssl.trust&quot;, &quot;/opt/apache-jmeter-5.4.3/bin/truststore.jks&quot;);
-	//System.setProperty(&quot;javax.net.ssl.keyStorePassword&quot;, &quot;changeit&quot;);
 
 	// generate command DELAY
 	if (props.get(&quot;LOAD.IMAPS.userduration&quot;) == null || commands.size() == 0) {
@@ -194,29 +193,23 @@ import javax.net.ssl.SSLSocketFactory;
 	  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
 	} 
 
-	//Create IMAP conncection and store for all future use
-	//log.info(&quot;This is the user: &quot;+vars.get(&quot;USER&quot;));
+	// create IMAP conncection and store for all future use
 	IMAPClient ic = new IMAPClient();
-	// Set the security mode to implicit
-	//ic.setSecurityOptions(SecurityOptions.SSLImplicit);
+	// establish a secure encrypted connection when interacting with the IMAP server
 	ic.setSocketFactory(SSLSocketFactory.getDefault());
 	try {
-	  //log.info(&quot;IMAP connection: &quot;+props.get(&quot;IMAPS.server&quot;)+&quot; &quot;+props.get(&quot;IMAPS.port&quot;));
 	  ic.connect(props.get(&quot;IMAPS.server&quot;),Integer.parseInt(props.get(&quot;IMAPS.port&quot;)));
 	} catch (Exception x) {
 	  log.info(&quot;connect error: &quot;,x);
 	}
 	vars.putObject(&quot;IMAPCLIENT&quot;,ic);
 
-	// Random folder names to be used by IMAP
+	// random folder names to be used by IMAP
 	vars.put(&quot;imap_folder1&quot;,&quot;imapfolder1_${__Random(1,1000)}&quot;);
 	vars.put(&quot;imap_folder2&quot;,&quot;imapfolder2_${__Random(1,1000)}&quot;);
-	//log.info(&quot;Imap folder1 name is: &quot; +vars.get(&quot;imap_folder1&quot;));
-	//log.info(&quot;Imap folder2 name is: &quot; +vars.get(&quot;imap_folder2&quot;));
 
-	//log.info(Thread.currentThread().getName()+&quot; &quot;+ctx.getThreadNum().toString()+&quot; START&quot;);
 	log.info(Thread.currentThread().getName()+&quot; START&quot;);
-	//Capture IMAP response and include as sampler Response
+	// capture IMAP response and include as sampler Response
 	SampleResult.setResponseData(ic.getReplyString());
 	SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
           <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
@@ -227,20 +220,16 @@ import javax.net.ssl.SSLSocketFactory;
         </WhileController>
         <hashTree>
           <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Next_Command" enabled="true">
-            <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Command;
+            <stringProp name="BeanShellSampler.query">
+	import com.zimbra.jmeter.Command;
 
 	ArrayList commands = vars.getObject(&quot;COMMANDS&quot;);
 	if (commands.size() &gt; 0) {
-	  //log.info(&quot;Testing: &quot;+commands);
 	  Command c = commands.remove(0);
 	  vars.put(&quot;COMMAND&quot;,c.getName());
 	  for (Map.Entry a: c.argsSet()) {
 		vars.put(a.getKey(),a.getValue());
 	  }
-
-	//Below log code to debug issues with command
-	//log.info(&quot;Command executed is: &quot; +vars.get(&quot;COMMAND&quot;));
-	//log.info(&quot;Command execution flag is: &quot; +vars.get(&quot;CONTINUE&quot;));
 
 	}
 	if (commands.size() == 0) {
@@ -268,7 +257,8 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="APPEND_FOLDER" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
@@ -276,8 +266,7 @@ import javax.net.ssl.SSLSocketFactory;
 	  log.info(Thread.currentThread().getName()+&quot; APPEND&quot;);
 	  ic.append(&quot;${__evalVar(FOLDER)}&quot;,null,null,&quot;From: &quot;+vars.get(&quot;USER&quot;)+
 				      &quot;\nTo: &quot;+vars.get(&quot;USER&quot;)+
-				      &quot;\nSubject: Testing\n\nThis is a test of IMAP append in ${__evalVar(FOLDER)} folder.\n&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());                            
+				      &quot;\nSubject: Testing\n\nThis is a test of IMAPS append in ${__evalVar(FOLDER)} folder.\n&quot;);                           
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -308,7 +297,6 @@ import javax.net.ssl.SSLSocketFactory;
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; CHECK&quot;);
 	  ic.check();
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -332,14 +320,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="CLOSE" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; CLOSE&quot;);
 	  ic.close();
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -370,7 +358,6 @@ import javax.net.ssl.SSLSocketFactory;
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; ENABLE&quot;);
 	  ic.sendCommand(&quot;ENABLE&quot;, &quot;CONDSTORE&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -394,14 +381,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="EXPUNGE" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; EXPUNGE&quot;);
 	  ic.expunge();
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -425,7 +412,8 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="FETCH" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
@@ -435,15 +423,12 @@ import javax.net.ssl.SSLSocketFactory;
 	if (msgid != null &amp;&amp; msgid.size() &gt; 0) {
 	  Random r = new Random();
 	  Integer x = r.nextInt(msgid.size());
-	  //log.info(&quot;Random Index: &quot;+x+&quot; Value: &quot;+msgid.get(x));
 	  i = msgid.get(x);
 	}
 
 	try {
-	  //log.info(&quot;MSGID: &quot;+i);
 	   log.info(Thread.currentThread().getName()+&quot; FETCH&quot;);
 	  ic.fetch(i,&quot;BODY[TEXT]&quot;);
-	  // log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -467,14 +452,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="GETACL" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; GETACL&quot;);
 	  ic.sendCommand(&quot;GETACL&quot;, &quot;INBOX&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -498,14 +483,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="GETACL_FOLDER" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; GETACL&quot;);
 	  ic.sendCommand(&quot;GETACL&quot;, &quot;${__evalVar(FOLDER)}&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -529,14 +514,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="GETQUOTAROOT" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; GETQUOTAROOT&quot;);
 	  ic.sendCommand(&quot;GETQUOTAROOT&quot;, &quot;INBOX&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -560,14 +545,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="GETQUOTAROOT_FOLDER" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; GETQUOTAROOT&quot;);
 	  ic.sendCommand(&quot;GETQUOTAROOT&quot;, &quot;${__evalVar(FOLDER)}&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -591,14 +576,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="ID" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; ID&quot;);
 	  ic.sendCommand(&quot;ID&quot;,&quot;(\&quot;JMeter\&quot; \&quot;BeanShell\&quot; \&quot;Commons-Net\&quot; \&quot;Testing\&quot;)&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -622,7 +607,8 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="IDLE" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	import java.util.concurrent.TimeUnit;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
@@ -632,7 +618,6 @@ import javax.net.ssl.SSLSocketFactory;
 	  ic.sendCommand(&quot;IDLE&quot;);
 	  TimeUnit.SECONDS.sleep(10);
 	  ic.sendData(&quot;DONE&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -656,7 +641,8 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="LIST" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	import java.util.regex.Matcher;
 	import java.util.regex.Pattern;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
@@ -665,7 +651,6 @@ import javax.net.ssl.SSLSocketFactory;
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; LIST&quot;);
 	  ic.list(&quot;\&quot;\&quot;&quot;,&quot;\&quot;*\&quot;&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -675,21 +660,6 @@ import javax.net.ssl.SSLSocketFactory;
 	  IsSuccess=false;
 	  log.info(Thread.currentThread().getName()+&quot; LIST: &quot;+e);
 	}
-
-	// store the response mailboxes for posible use in other commands
-	// available in the jmeter variable MAILBOXES
-	//ArrayList mailboxes = new ArrayList();
-	//String[] lines = icw.toString().split(&quot;\\r?\\n&quot;);
-	//for (String s: lines) {
-	//	// * LIST (\HasNoChildren \Drafts) &quot;/&quot; &quot;Drafts&quot;
-	//	Pattern p = Pattern.compile(&quot;\\* LIST \\(([^\\)]+)\\) \&quot;([^\&quot;]+)\&quot; \&quot;([^\&quot;]+)\&quot;&quot;);
-	//	Matcher m = p.matcher(s);
-	//     while (m.find()) {
-	//	  //log.info(m.group(2)+m.group(3));
-	//	  mailboxes.add(m.group(2)+m.group(3));
-	//     }
-	//}
-	//vars.putObject(&quot;MAILBOXES&quot;,mailboxes);
 
 	if (!ic.getReplyString().contains(&quot;OK LIST completed&quot;)) {
 	  SampleResult.setSuccessful(false);
@@ -704,14 +674,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="LOGIN" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; LOGIN&quot;);
 	  ic.login(vars.get(&quot;USER&quot;),vars.get(&quot;PASS&quot;));
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  continue_flag = &quot;false&quot;;
@@ -733,7 +703,8 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="LOGOUT" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 	String logout_error;
@@ -741,7 +712,6 @@ import javax.net.ssl.SSLSocketFactory;
 	try {
 	  ic.logout();
 	  log.info(Thread.currentThread().getName()+&quot; LOGOUT&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
 	  logout_error=&quot;true&quot;;
@@ -770,14 +740,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="LSUB" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; LSUB&quot;);
 	  ic.lsub(&quot;\&quot;\&quot;&quot;,&quot;\&quot;*\&quot;&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -801,14 +771,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="MYRIGHTS" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; MYRIGHTS&quot;);
 	  ic.sendCommand(&quot;MYRIGHTS&quot;, &quot;INBOX&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -832,14 +802,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="NAMESPACE" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; NAMESPACE&quot;);
 	  ic.sendCommand(&quot;NAMESPACE&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -863,14 +833,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="NOOP" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; NOOP&quot;);
 	  ic.noop();
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -894,7 +864,8 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="SEARCH_KEYWORD" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	import java.util.regex.Matcher;
 	import java.util.regex.Pattern;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
@@ -903,7 +874,6 @@ import javax.net.ssl.SSLSocketFactory;
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; SEARCH&quot;);
 	  ic.search(&quot;TEXT ${__evalVar(KEYWORD)}&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -927,14 +897,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="SELECT" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
 	  ic.select(&quot;INBOX&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  continue_flag = &quot;false&quot;;
@@ -956,14 +926,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="SELECT_FOLDER" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; SELECT&quot;);
 	  ic.select(&quot;${__evalVar(FOLDER)}&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  continue_flag = &quot;false&quot;;
@@ -985,14 +955,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="STATUS" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; STATUS&quot;);
 	  ic.status(&quot;INBOX&quot;,new String[]{&quot;MESSAGES&quot;,&quot;RECENT&quot;,&quot;UIDNEXT&quot;,&quot;UIDVALIDITY&quot;,&quot;UNSEEN&quot;});
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -1016,14 +986,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="STATUS_FOLDER" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; STATUS&quot;);
 	  ic.status(&quot;${__evalVar(FOLDER)}&quot;,new String[]{&quot;MESSAGES&quot;,&quot;RECENT&quot;,&quot;UIDNEXT&quot;,&quot;UIDVALIDITY&quot;,&quot;UNSEEN&quot;});
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -1047,14 +1017,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="SUBSCRIBE_FOLDER" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; SUBSCRIBE&quot;);
 	  ic.subscribe(&quot;${__evalVar(FOLDER)}&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -1078,7 +1048,8 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID FETCH" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
@@ -1088,15 +1059,12 @@ import javax.net.ssl.SSLSocketFactory;
 	if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
 	  Random r = new Random();
 	  Integer x = r.nextInt(msguid.size());
-	  //log.info(&quot;Random Index: &quot;+x+&quot; Value: &quot;+msguid.get(x));
 	  i = msguid.get(x);
 	}
 
 	try {
-	  //log.info(&quot;MSGUID: &quot;+i);
 	  log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
 	  ic.uid(&quot;FETCH&quot;,i+&quot; BODY[TEXT]&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -1120,16 +1088,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID STORE" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
-
-	// need to add support for situational uic copy of real things found
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; UID STORE&quot;);
 	  ic.uid(&quot;STORE&quot;,&quot;1 +FLAGS (\\Seen)&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -1153,14 +1119,14 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UNSUBSCRIBE_FOLDER" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 	String continue_flag = &quot;true&quot;;
 
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; UNSUBSCRIBE&quot;);
 	  ic.unsubscribe(&quot;${__evalVar(FOLDER)}&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -1184,7 +1150,8 @@ import javax.net.ssl.SSLSocketFactory;
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="XLIST" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+                <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	import java.util.regex.Matcher;
 	import java.util.regex.Pattern;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
@@ -1193,7 +1160,6 @@ import javax.net.ssl.SSLSocketFactory;
 	try {
 	  log.info(Thread.currentThread().getName()+&quot; XLIST&quot;);
 	  ic.sendCommand(&quot;XLIST&quot;, &quot;\&quot;\&quot; \&quot;*\&quot;&quot;);
-	  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 	} catch (Exception e) {
 	  SampleResult.setSuccessful(false);
 	  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
@@ -1220,7 +1186,8 @@ import javax.net.ssl.SSLSocketFactory;
           </hashTree>
         </hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="END" enabled="true">
-          <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+          <stringProp name="BeanShellSampler.query">
+	import org.apache.commons.net.imap.IMAPClient;
 	IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 
 	try {
