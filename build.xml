@@ -67,6 +67,12 @@
     <antcall target="generic-onlyoffice"/>
     <antcall target="generic-chat"/>
   </target>
+  <target name="NRTC">
+    <antcall target="NRTC-zsoap"/>
+    <antcall target="NRTC-imap"/>
+    <antcall target="NRTC-pop"/>
+    <antcall target="NRTC-lmtp"/>
+  </target>
   <target name="HATest">
     <antcall target="HATest-zsoap"/>
     <antcall target="HATest-lmtp"/>
@@ -529,6 +535,56 @@
 	      <jmeterarg value="-q${basedir}/tests/HATest/lmtp/profiles/basic.prop"/>
 	    </jmeter>
 	  </target>
+	 <target name="NRTC-zsoap" depends="src,logs">
+            <jmeter jmeterhome="${jmeter.home}"
+                    testplan="${basedir}/tests/NRTC/SOAP/zsoap.jmx"
+                    jmeterlogfile="${logs}/NRTC-zsoap-jmeter.log"
+                    resultlog="${logs}/NRTC-zsoap-requests.log">
+              <property name="ACCOUNTS.csv" value="${users}"/>
+              <property name="Words.csv" value="${randomWords}"/>
+              <property name="user.classpath" value="${zjmeter}"/>
+              <jmeterarg value="-q${basedir}/${env}"/>
+              <jmeterarg value="-q${basedir}/tests/NRTC/SOAP/load.prop"/>
+              <jmeterarg value="-q${basedir}/tests/NRTC/SOAP/profiles/test.prop"/>
+            </jmeter>
+          </target>
+          <target name="NRTC-imap" depends="src,logs">
+            <jmeter jmeterhome="${jmeter.home}"
+                    testplan="${basedir}/tests/NRTC/IMAP/imap.jmx"
+                    jmeterlogfile="${logs}/NRTC-imap-jmeter.log"
+                    resultlog="${logs}/NRTC-imap-requests.log">
+              <property name="ACCOUNTS.csv" value="${users}"/>
+              <property name="user.classpath" value="${zjmeter}"/>
+              <jmeterarg value="-q${basedir}/${env}"/>
+              <jmeterarg value="-q${basedir}/tests/NRTC/IMAP/load.prop"/>
+              <jmeterarg value="-q${basedir}/tests/NRTC/IMAP/profiles/test.prop"/>
+            </jmeter>
+          </target>
+          <target name="NRTC-pop" depends="src,logs">
+            <jmeter jmeterhome="${jmeter.home}"
+                    testplan="${basedir}/tests/NRTC/POP/pop.jmx"
+                    jmeterlogfile="${logs}/NRTC-pop-jmeter.log"
+                    resultlog="${logs}/NRTC-pop-requests.log">
+              <property name="ACCOUNTS.csv" value="${users}"/>
+              <property name="user.classpath" value="${zjmeter}"/>
+              <jmeterarg value="-q${basedir}/${env}"/>
+              <jmeterarg value="-q${basedir}/tests/NRTC/POP/load.prop"/>
+              <jmeterarg value="-q${basedir}/tests/NRTC/POP/profiles/basic.prop"/>
+            </jmeter>
+          </target>
+	  <target name="NRTC-lmtp" depends="src,logs">
+            <jmeter jmeterhome="${jmeter.home}"
+                    testplan="${basedir}/tests/NRTC/LMTP/lmtp.jmx"
+                    jmeterlogfile="${logs}/NRTC-lmtp-jmeter.log"
+                    resultlog="${logs}/NRTC-lmtp-requests.log">
+              <property name="ACCOUNTS.csv" value="${users}"/>
+              <property name="PROFILE.LMTP.message" value="${basedir}/tests/NRTC/LMTP/profiles/lmtp_message.txt"/>
+	      <property name="user.classpath" value="${zjmeter}"/>
+              <jmeterarg value="-q${basedir}/${env}"/>
+              <jmeterarg value="-q${basedir}/tests/NRTC/LMTP/load.prop"/>
+              <jmeterarg value="-q${basedir}/tests/NRTC/LMTP/profiles/basic.prop"/>
+            </jmeter>
+          </target>
 	  <target name="genUsers" depends="logs">
 		<exec executable="${basedir}/generateUsers.sh">
 		</exec>
