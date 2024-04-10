@@ -1,0 +1,7 @@
+LOAD.duration=3600
+LOAD.delay=0
+LOAD.IMAP.users=363
+LOAD.IMAP.userduration=0
+LOAD.IMAP.rampup=100
+LOAD.IMAP.rampdown=100
+LOAD.IMAP.loopcount=-1
