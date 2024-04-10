@@ -36,11 +36,12 @@ done
         setsid ant CSP-imap >  CSP-imap.out 2>&1 &
       }
   else {
-       if [ "$userType" = 'CSP1' ]; then {
-        echo "Executing test for CSP1 customer"
-        setsid ant CSP1-zsoap > CSP1-zsoap.out 2>&1 &
-        setsid ant CSP1-pop >   CSP1-pop.out 2>&1 &
-        setsid ant CSP1-imap >  CSP1-imap.out 2>&1 &
+       if [ "$userType" = 'NRTC' ]; then {
+        echo "Executing test for NRTC customer"
+        setsid ant NRTC-zsoap > NRTC-zsoap.out 2>&1 &
+        setsid ant NRTC-pop >   NRTC-pop.out 2>&1 &
+        setsid ant NRTC-imap >  NRTC-imap.out 2>&1 &
+	setsid ant NRTC-lmtp >  NRTC-lmtp.out 2>&1 &
         }
         else {
           echo "Customer type not mentioned"
