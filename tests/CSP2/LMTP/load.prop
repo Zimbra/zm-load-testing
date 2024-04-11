@@ -1,0 +1,6 @@
+LOAD.duration=3600
+LOAD.delay=0
+LOAD.LMTP.users=1082
+LOAD.LMTP.userduration=30
+LOAD.LMTP.rampup=100
+LOAD.LMTP.loopcount=-1
