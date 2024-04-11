@@ -1,7 +1,0 @@
-LOAD.duration=3600
-LOAD.delay=0
-LOAD.ZSOAP.users=100
-LOAD.ZSOAP.userduration=100
-LOAD.ZSOAP.rampup=100
-LOAD.ZSOAP.rampdown=100
-LOAD.ZSOAP.loopcount=-1
