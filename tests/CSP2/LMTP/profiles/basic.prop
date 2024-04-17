@@ -1,0 +1,7 @@
+PROFILE.LMTP.message=tests/generic/lmtp/profiles/IIJ_message.txt
+PROFILE.LMTP.type=sequence
+PROFILE.LMTP.sequence.1=LHLO
+PROFILE.LMTP.sequence.2=MAIL
+PROFILE.LMTP.sequence.3=RCPT
+PROFILE.LMTP.sequence.4=DATA
+PROFILE.LMTP.sequence.5=QUIT

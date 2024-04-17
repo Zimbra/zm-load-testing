@@ -50,11 +50,12 @@ done
            [ ! -d generic-smtp.out ] && mv generic-smtp.out log_$(date +'%m-%d_%H-%M')
         }
         else {
-          if [ "$userType" = 'CSP1' ]; then {
+          if [ "$userType" = 'CSP2' ]; then {
              for i in `ps -fx|grep jmeter |awk -F " " {'print$1'}`; do kill -9 $i; done
-             [ ! -d CSP1-imap.out ] && mv CSP1-imap.out log_$(date +'%m-%d_%H-%M')
-             [ ! -d CSP1-pop.out ] &&  mv CSP1-pop.out log_$(date +'%m-%d_%H-%M')
-             [ ! -d CSP1-zsoap.out ] && mv CSP1-zsoap.out log_$(date +'%m-%d_%H-%M')
+             [ ! -d CSP2-imap.out ] && mv CSP2-imap.out log_$(date +'%m-%d_%H-%M')
+             [ ! -d CSP2-pop.out ] &&  mv CSP2-pop.out log_$(date +'%m-%d_%H-%M')
+             [ ! -d CSP2-zsoap.out ] && mv CSP2-zsoap.out log_$(date +'%m-%d_%H-%M')
+	     [ ! -d CSP2-lmtp.out ] && mv CSP2-lmtp.out log_$(date +'%m-%d_%H-%M')
           }
           fi
         }

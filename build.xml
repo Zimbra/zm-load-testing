@@ -67,6 +67,12 @@
     <antcall target="generic-onlyoffice"/>
     <antcall target="generic-chat"/>
   </target>
+  <target name="CSP2">
+    <antcall target="CSP2-zsoap"/>
+    <antcall target="CSP2-imap"/>
+    <antcall target="CSP2-pop"/>
+    <antcall target="CSP2-lmtp"/>
+  </target>
   <target name="HATest">
     <antcall target="HATest-zsoap"/>
     <antcall target="HATest-lmtp"/>
@@ -529,6 +535,56 @@
 	      <jmeterarg value="-q${basedir}/tests/HATest/lmtp/profiles/basic.prop"/>
 	    </jmeter>
 	  </target>
+	 <target name="CSP2-zsoap" depends="src,logs">
+            <jmeter jmeterhome="${jmeter.home}"
+                    testplan="${basedir}/tests/CSP2/SOAP/zsoap.jmx"
+                    jmeterlogfile="${logs}/CSP2-zsoap-jmeter.log"
+                    resultlog="${logs}/CSP2-zsoap-requests.log">
+              <property name="ACCOUNTS.csv" value="${users}"/>
+              <property name="Words.csv" value="${randomWords}"/>
+              <property name="user.classpath" value="${zjmeter}"/>
+              <jmeterarg value="-q${basedir}/${env}"/>
+              <jmeterarg value="-q${basedir}/tests/CSP2/SOAP/load.prop"/>
+              <jmeterarg value="-q${basedir}/tests/CSP2/SOAP/profiles/test.prop"/>
+            </jmeter>
+          </target>
+          <target name="CSP2-imap" depends="src,logs">
+            <jmeter jmeterhome="${jmeter.home}"
+                    testplan="${basedir}/tests/CSP2/IMAP/imap.jmx"
+                    jmeterlogfile="${logs}/CSP2-imap-jmeter.log"
+                    resultlog="${logs}/CSP2-imap-requests.log">
+              <property name="ACCOUNTS.csv" value="${users}"/>
+              <property name="user.classpath" value="${zjmeter}"/>
+              <jmeterarg value="-q${basedir}/${env}"/>
+              <jmeterarg value="-q${basedir}/tests/CSP2/IMAP/load.prop"/>
+              <jmeterarg value="-q${basedir}/tests/CSP2/IMAP/profiles/test.prop"/>
+            </jmeter>
+          </target>
+          <target name="CSP2-pop" depends="src,logs">
+            <jmeter jmeterhome="${jmeter.home}"
+                    testplan="${basedir}/tests/CSP2/POP/pop.jmx"
+                    jmeterlogfile="${logs}/CSP2-pop-jmeter.log"
+                    resultlog="${logs}/CSP2-pop-requests.log">
+              <property name="ACCOUNTS.csv" value="${users}"/>
+              <property name="user.classpath" value="${zjmeter}"/>
+              <jmeterarg value="-q${basedir}/${env}"/>
+              <jmeterarg value="-q${basedir}/tests/CSP2/POP/load.prop"/>
+              <jmeterarg value="-q${basedir}/tests/CSP2/POP/profiles/basic.prop"/>
+            </jmeter>
+          </target>
+	  <target name="CSP2-lmtp" depends="src,logs">
+            <jmeter jmeterhome="${jmeter.home}"
+                    testplan="${basedir}/tests/CSP2/LMTP/lmtp.jmx"
+                    jmeterlogfile="${logs}/CSP2-lmtp-jmeter.log"
+                    resultlog="${logs}/CSP2-lmtp-requests.log">
+              <property name="ACCOUNTS.csv" value="${users}"/>
+              <property name="PROFILE.LMTP.message" value="${basedir}/tests/CSP2/LMTP/profiles/lmtp_message.txt"/>
+	      <property name="user.classpath" value="${zjmeter}"/>
+              <jmeterarg value="-q${basedir}/${env}"/>
+              <jmeterarg value="-q${basedir}/tests/CSP2/LMTP/load.prop"/>
+              <jmeterarg value="-q${basedir}/tests/CSP2/LMTP/profiles/basic.prop"/>
+            </jmeter>
+          </target>
 	  <target name="genUsers" depends="logs">
 		<exec executable="${basedir}/generateUsers.sh">
 		</exec>
