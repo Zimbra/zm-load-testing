@@ -1,72 +1,73 @@
 import csv
 
-# Function to read the response time and transaction name from the CSV file
-def get_response_time(csv_file):
-    response_time = {}
-    with open(csv_file, 'r') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            # Adjust the column names below if needed
-            transaction_name = row['Label']
-            elapsed_time = float(row['90% Line'])
-            response_time[transaction_name] = elapsed_time
-    return response_time
+test_path="/home/opc/zm-load-testing"
 
-# Compare response times for two builds
-def compare_builds(build1_csv, build2_csv):
-    build1_response_time = get_response_time(build1_csv)
-    build2_response_time = get_response_time(build2_csv)
-    
-    # Calculate the average response time for each build
-    build1_avg_response_time = sum(build1_response_time.values()) / len(build1_response_time)
-    build2_avg_response_time = sum(build2_response_time.values()) / len(build2_response_time)
-    
-    # Compare the average response times
-    if build1_avg_response_time < build2_avg_response_time:
-        print("Build 1 has a lower average response time.")
-    elif build1_avg_response_time > build2_avg_response_time:
-        print("Build 2 has a lower average response time.")
+# Function to read a CSV file and return the data as a list of dictionaries
+def read_csv(file_name):
+    with open(file_name, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        return list(reader)
+
+# Function to calculate the degradation percentage
+def calculate_degradation(build1_90, build2_90):
+    if build1_90 == 0:
+        return 0.0  # Avoid division by zero if the original 90% line is 0
+    return ((build2_90 - build1_90) / build1_90) * 100
+
+# Function to determine the color based on degradation percentage
+def apply_color(degradation):
+    if degradation > 50:
+        return 'Red'       # High degradation (> 50%)
+    elif 20 <= degradation <= 50:
+        return 'Orange'    # Moderate degradation (20% - 50%)
+    elif 0 <= degradation < 1:
+        return 'Green'     # Low degradation (0% - 1%)
+    elif degradation <= 0:
+        return 'Dark Green'     # Negative degradation (improvement)
     else:
-        print("Both builds have the same average response time.")
-    
-    # Calculate percent change for each transaction
-    transaction_percent_change = {}
-    for transaction_name in build1_response_time:
-        if transaction_name in build2_response_time:
-            response_time_build1 = build1_response_time[transaction_name]
-            response_time_build2 = build2_response_time[transaction_name]
-            percent_change = ((response_time_build2 - response_time_build1) / response_time_build1) * 100
-            transaction_percent_change[transaction_name] = percent_change
-    
-    # Publish the transaction response times with percent change in CSV format
-    output_csv = '/tmp/results/transaction_response_times_comparison_imap.csv'
-    with open(output_csv, 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(['Transaction', 'Build 1 Response Time (ms)', 'Build 2 Response Time (ms)', 'Percent Change'])
-        for transaction_name in build1_response_time:
-            if transaction_name in build2_response_time:
-                response_time_build1 = build1_response_time[transaction_name]
-                response_time_build2 = build2_response_time[transaction_name]
-                percent_change = transaction_percent_change.get(transaction_name, 0)
-                
-                # Set the color based on percent change
-                #if percent_change > 10:
-                 #   percent_change_color = '\033[91m'  # Red
-                #elif percent_change > 5:
-                 #   percent_change_color = '\033[93m'  # Orange
-                #else:
-                 #   percent_change_color = '\033[92m'  # Green
-               
-		 # Remove the ANSI escape codes and store the percentage change without color
-                percent_change_without_color = str(percent_change) + '%'
+        return 'Negligible'      # No degradation or negligible
 
-                writer.writerow([transaction_name, response_time_build1, response_time_build2, percent_change_without_color])    
-    print(f"Transaction response times with percent change have been published in {output_csv}.")
+# Read Build 1 and Build 2 CSV files
+build1_data = read_csv(f'{test_path}/build_comparison/generic_imap_baseline.csv')
+build2_data = read_csv(f'{test_path}/build_comparison/generic_imap_benchmark.csv')
 
-# Specify the CSV files for the two builds
-build1_csv_file = '/home/opc/zm-load-testing/build_comparison/generic_imap_B1.csv'
-build2_csv_file = '/home/opc/zm-load-testing/build_comparison/generic_imap_B2.csv'
+# Create a list to hold the final results with comparison and degradation
+results = []
 
-# Compare the response times for the two builds and publish in CSV format
-compare_builds(build1_csv_file, build2_csv_file)
+# Assuming both CSV files have the same 'Label' order, so we can iterate over one of them
+for row1 in build1_data:
+    label = row1['Label']
+    # Get the corresponding row from Build 2 by matching the label
+    row2 = next((row for row in build2_data if row['Label'] == label), None)
 
+    if row2:
+        # Get the '90% Line' values for both builds (ensure they're floats)
+        try:
+            build1_90 = float(row1['90% Line'])
+            build2_90 = float(row2['90% Line'])
+
+            # Calculate the degradation
+            degradation = calculate_degradation(build1_90, build2_90)
+            color = apply_color(degradation)
+
+            # Append the result as a dictionary
+            results.append({
+                'Label': label,
+                'Resp Time for v10.1.3': build1_90,
+                'Resp Time for v10.1.4': build2_90,
+                'Degradation (%)': degradation,
+                'Color': color
+            })
+        except ValueError:
+            print(f"Invalid 90% Line value for {label} in one of the builds.")
+
+# Write the results to a new CSV file
+with open('/tmp/results/transaction_response_times_comparison_imap.csv', mode='w', newline='') as csvfile:
+    fieldnames = ['Label', 'Resp Time for v10.1.3', 'Resp Time for v10.1.4', 'Degradation (%)', 'Color']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+    writer.writeheader()
+    for result in results:
+        writer.writerow(result)
+
+print("Comparison results have been saved for IMAP")
