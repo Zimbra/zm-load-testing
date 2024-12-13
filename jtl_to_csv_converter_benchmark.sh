@@ -20,10 +20,10 @@ done
 wait
 
 # Copy CSV file to build_comparison folder for response time comparison across build
-cp /tmp/results/generic_zsoap.csv ${test_path}/build_comparison/generic_zsoap_B2.csv
-cp /tmp/results/generic_imap.csv ${test_path}/build_comparison/generic_imap_B2.csv
-cp /tmp/results/generic_pop.csv ${test_path}/build_comparison/generic_pop_B2.csv
-cp /tmp/results/generic_lmtp.csv ${test_path}/build_comparison/generic_lmtp_B2.csv
-cp /tmp/results/generic_eas.csv ${test_path}/build_comparison/generic_eas_B2.csv
+cp /tmp/results/generic_zsoap.csv ${test_path}/build_comparison/generic_zsoap_benchmark.csv
+cp /tmp/results/generic_imap.csv ${test_path}/build_comparison/generic_imap_benchmark.csv
+cp /tmp/results/generic_pop.csv ${test_path}/build_comparison/generic_pop_benchmark.csv
+cp /tmp/results/generic_lmtp.csv ${test_path}/build_comparison/generic_lmtp_benchmark.csv
+cp /tmp/results/generic_eas.csv ${test_path}/build_comparison/generic_eas_benchmark.csv
 
 echo "JTL to CSV conversion is successful..!!"
