@@ -54,4 +54,4 @@ wait
 cat /tmp/result/*.out
 
 # Print message when all tests have finished
-echo "Execution for all tests have been completed !!"
+echo "Load test execution has been completed !!"
