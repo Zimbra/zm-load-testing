@@ -28,8 +28,8 @@ def apply_color(degradation):
         return 'Negligible'      # No degradation or negligible
 
 # Read Build 1 and Build 2 CSV files
-build1_data = read_csv(f'{test_path}/build_comparison/generic_zsoap_B1.csv')
-build2_data = read_csv(f'{test_path}/build_comparison/generic_zsoap_B2.csv')
+build1_data = read_csv(f'{test_path}/build_comparison/generic_zsoap_baseline.csv')
+build2_data = read_csv(f'{test_path}/build_comparison/generic_zsoap_benchmark.csv')
 
 # Create a list to hold the final results with comparison and degradation
 results = []
