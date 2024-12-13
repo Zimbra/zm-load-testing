@@ -18,6 +18,7 @@ echo "cleanup of last test result files successful..!!"
 
 # Function to run JMeter test
 run_jmeter_test() {
+    jmeter_path="/opt/apache-jmeter-5.6.2"
     test_file=$1
     load_file=$2
     prop_file=$3
@@ -32,14 +33,18 @@ run_jmeter_test() {
         classpath_option="-Juser.classpath=${test_path}/src/build/jar/zjmeter.jar"
     fi
 
-    nohup sh /opt/apache-jmeter-5.6.2/bin/jmeter.sh -n -Juser.classpath=/home/opc/zm-load-testing/src/build/jar/zjmeter.jar -t "$test_file" -q /home/opc/zm-load-testing/config/env.prop -q "$load_file" -q "$prop_file" -l "$results_file" -e -o "$html_report" -jmeter.save.saveservice.thread_counts=true -q /home/opc/zm-load-testing/config/extras.txt > "$out_files" &
+    # Run JMeter with the appropriate classpath argument
+    nohup sh ${jmeter_path}/bin/jmeter.sh -n $classpath_option -t "$test_file" -q ${test_path}/config/env.prop -q "$load_file" -q "$prop_file" -l "$results_file" -e -o "$html_report" -jmeter.save.saveservice.thread_counts=true -q ${test_path}/config/extras.txt > "$out_files" &
 }
 
+# Test path for execution
+test_path="/home/opc/zm-load-testing"
+
 # Run the JMeter tests concurrently
-run_jmeter_test "/home/opc/zm-load-testing/tests/generic/zsoap/zsoap.jmx" "/home/opc/zm-load-testing/tests/generic/zsoap/load.prop" "/home/opc/zm-load-testing/tests/generic/zsoap/profiles/test.prop" "/tmp/soap/generic_zsoap.jtl" "/tmp/result/soap_html_report" "/tmp/result/generic-zsoap.out"
-run_jmeter_test "/home/opc/zm-load-testing/tests/generic/imap/imap.jmx" "/home/opc/zm-load-testing/tests/generic/imap/load.prop" "/home/opc/zm-load-testing/tests/generic/imap/profiles/test.prop" "/tmp/imap/generic_imap.jtl" "/tmp/result/imap_html_report" "/tmp/result/generic-imap.out"
-run_jmeter_test "/home/opc/zm-load-testing/tests/generic/lmtp/lmtp.jmx" "/home/opc/zm-load-testing/tests/generic/lmtp/load.prop" "/home/opc/zm-load-testing/tests/generic/lmtp/profiles/basic.prop" "/tmp/lmtp/generic_lmtp.jtl" "/tmp/result/lmtp_html_report" "/tmp/result/generic-lmtp.out"
-run_jmeter_test "/home/opc/zm-load-testing/tests/generic/pop/pop.jmx" "/home/opc/zm-load-testing/tests/generic/pop/load.prop" "/home/opc/zm-load-testing/tests/generic/pop/profiles/basic.prop" "/tmp/pop/generic_pop.jtl" "/tmp/result/pop_html_report" "/tmp/result/generic-pop.out"
+run_jmeter_test "${test_path}/tests/generic/zsoap/zsoap.jmx" "${test_path}/tests/generic/zsoap/load.prop" "${test_path}/tests/generic/zsoap/profiles/test.prop" "/tmp/soap/generic_zsoap.jtl" "/tmp/result/soap_html_report" "/tmp/result/generic-zsoap.out"
+run_jmeter_test "${test_path}/tests/generic/imap/imap.jmx" "${test_path}/tests/generic/imap/load.prop" "${test_path}/tests/generic/imap/profiles/test.prop" "/tmp/imap/generic_imap.jtl" "/tmp/result/imap_html_report" "/tmp/result/generic-imap.out"
+run_jmeter_test "${test_path}/tests/generic/lmtp/lmtp.jmx" "${test_path}/tests/generic/lmtp/load.prop" "${test_path}/tests/generic/lmtp/profiles/basic.prop" "/tmp/lmtp/generic_lmtp.jtl" "/tmp/result/lmtp_html_report" "/tmp/result/generic-lmtp.out"
+run_jmeter_test "${test_path}/tests/generic/pop/pop.jmx" "${test_path}/tests/generic/pop/load.prop" "${test_path}/tests/generic/pop/profiles/basic.prop" "/tmp/pop/generic_pop.jtl" "/tmp/result/pop_html_report" "/tmp/result/generic-pop.out"
 run_jmeter_test "${test_path}/tests/generic/eas/eas.jmx" "${test_path}/tests/generic/eas/load.prop" "${test_path}/tests/generic/eas/profiles/basic.prop" "/tmp/eas/generic_eas.jtl" "/tmp/result/eas_html_report" "/tmp/result/generic-eas.out"
 
 # Wait for all tests to complete
@@ -49,4 +54,4 @@ wait
 cat /tmp/result/*.out
 
 # Print message when all tests have finished
-echo "All tests have been completed !!"
+echo "Execution for all tests have been completed !!"
