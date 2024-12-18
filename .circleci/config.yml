@@ -1,96 +1,150 @@
 version: 2.1
+# Runs performance test on baseline build
 jobs:
-  build:
+  perf_test_baseline:  
     docker:
       - image: circleci/openjdk:8-jdk
-
     steps:
       - checkout
-        
-  #  Install SSH client
+
+      # Install SSH client
       - run:
           name: Install SSH client
           command: sudo apt-get update && sudo apt-get install -y openssh-client
 
-  #  Set up SSH key
+      # Set up SSH key
       - add_ssh_keys:
           fingerprints:
             - "SHA256:Afc6ZY8tntqqdMKQRPjUfe1blywjlQaaRZv9xN95eW8"
 
-  #  Create the results directory
+      # Create the results directory
       - run:
           name: Create Results Directory
-          command: 
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
-            mkdir -p /tmp/result
-          
-  #  Connect to remote server and run JMeter test
+          command: |
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "mkdir -p /tmp/result"
+
+      # Connect to remote server and run JMeter test
       - run:
           name: Run JMeter test on remote server
-          command: 
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
-            "cd /home/opc/zm-load-testing; sh regression_load_test_run.sh"
-          no_output_timeout: 120m
-       
-  #  Generate CSV file from jtl input
+          command: |
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; sh regression_load_test_run.sh"
+          no_output_timeout: 1h
+
       - run:
           name: Generate CSV file from jtl file
-          command: 
-             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
-             "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter_B2.sh"
+          command: |
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; sh jtl_to_csv_converter_baseline.sh"
 
-  #  Run response time comparison across builds and create comparison report for soap
-      - run:
-          name: 
-          command: 
-             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
-             "cd /home/opc/zm-load-testing; python3 calc_resp_time_zsoap.py"
+ # Runs performance test on current/benchmark build
+  perf_test_benchmark:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - checkout
 
-  #  Run response time comparison across builds and create comparison report for imap
+      # Install SSH client
       - run:
-          name:
-          command: 
-             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
-             "cd /home/opc/zm-load-testing; python3 calc_resp_time_imap.py"
+          name: Install SSH client
+          command: sudo apt-get update && sudo apt-get install -y openssh-client
 
-  #  Run response time comparison across builds and create comparison report for pop
-      - run:
-          name: 
-          command: 
-             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
-             "cd /home/opc/zm-load-testing; python3 calc_resp_time_pop.py"
+      # Set up SSH key
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:Afc6ZY8tntqqdMKQRPjUfe1blywjlQaaRZv9xN95eW8"
 
-  #  Run response time comparison across builds and create comparison report for lmtp
+      # Create the results directory
       - run:
-          name: 
-          command: 
-             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
-             "cd /home/opc/zm-load-testing; python3 calc_resp_time_lmtp.py"
+          name: Create Results Directory
+          command: |
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "mkdir -p /tmp/result"
+
+      # Connect to remote server and run JMeter test
+      - run:
+          name: Run JMeter test on remote server
+          command: |
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; sh regression_load_test_run.sh"
+          no_output_timeout: 1h
+
+      - run:
+          name: Generate CSV file from jtl file
+          command: |
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; sh jtl_to_csv_converter_benchmark.sh"
+
+  # Run response time comparison across builds and create comparison report for SOAP
+      - run:
+          name: Run response time comparison for SOAP
+          command: |
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; python3 compare_resp_time_zsoap.py"
+
+      # Run response time comparison across builds and create comparison report for IMAP
+      - run:
+          name: Run response time comparison for IMAP
+          command: |
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; python3 compare_resp_time_imap.py"
+
+      # Run response time comparison across builds and create comparison report for POP
+      - run:
+          name: Run response time comparison for POP
+          command: |
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; python3 compare_resp_time_pop.py"
+
+      # Run response time comparison across builds and create comparison report for LMTP
+      - run:
+          name: Run response time comparison for LMTP
+          command: |
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; python3 compare_resp_time_lmtp.py"
+
+      # Run response time comparison across builds and create comparison report for ActiveSync
+      - run:
+          name: Run response time comparison for ActiveSync
+          command: |
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; python3 compare_resp_time_eas.py"
 
       # Copy test artifacts to the results directory
       - run:
           name: Copy Test files to Artifacts
           command: |
             scp -r ${USER}@${SERVER}:/tmp/results /tmp/result
-          
+
+      # Create HTML Results Directory
       - run:
           name: Create HTML Results Directory
-          command: 
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
-             mkdir -p /tmp/result/html_report
-  
+          command: |
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "mkdir -p /tmp/result/html_report"
+
+      # Copy Test Artifacts
       - run:
-          name: Copy Performance Test Artifacts
+          name: Copy Test Artifacts
           command: |
             scp -r ${USER}@${SERVER}:/tmp/result /tmp/result
-           
+
+      # Store artifacts in CircleCI
       - store_artifacts:
-          path: /tmp/result
-
-
+          path: /tmp/result          
+          
+# Define workflows with approval steps
 workflows:
   version: 2
-  build-and-deploy:
-    jobs:
-      - build
+  perf_test_workflow:
+   jobs:
+      # Step 1: Approval to run the test on baseline build
+      - perf_test_baseline_approval:
+          type: approval
+          description: "Approve to run the test on the baseline build"
+      
+      # Step 2: Run the baseline test after approval
+      - perf_test_baseline:
+          requires:
+            - perf_test_baseline_approval
 
+      # Step 3: Approval to run the test on benchmark build
+      - perf_test_benchmark_approval:
+          type: approval
+          description: "Approve to run the test on the benchmark build"
+          requires:
+            - perf_test_baseline
+        
+      # Step 4: Run the benchmark test after approval
+      - perf_test_benchmark:
+          requires:
+            - perf_test_benchmark_approval
