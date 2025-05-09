@@ -1,6 +1,8 @@
 import csv
 
 test_path="/home/opc/zm-load-testing"
+baseline_build = 'v10.1.7'
+benchmark_build = 'v10.1.8'
 
 # Function to read a CSV file and return the data as a list of dictionaries
 def read_csv(file_name):
@@ -53,8 +55,8 @@ for row1 in build1_data:
             # Append the result as a dictionary
             results.append({
                 'Label': label,
-                'Resp Time for v10.1.7': build1_90,
-                'Resp Time for v10.1.8': build2_90,
+                'Resp Time for {baseline_build}': build1_90,
+                'Resp Time for {benchmark_build}': build2_90,
                 'Degradation (%)': degradation,
                 'Color': color
             })
@@ -63,7 +65,7 @@ for row1 in build1_data:
 
 # Write the results to a new CSV file
 with open('/tmp/results/transaction_response_times_comparison_ews.csv', mode='w', newline='') as csvfile:
-    fieldnames = ['Label', 'Resp Time for v10.1.7', 'Resp Time for v10.1.8', 'Degradation (%)', 'Color']
+    fieldnames = ['Label', 'Resp Time for {baseline_build}', 'Resp Time for {benchmark_build}', 'Degradation (%)', 'Color']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
     writer.writeheader()
