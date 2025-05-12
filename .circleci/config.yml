@@ -100,6 +100,12 @@ jobs:
           command: |
             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; python3 compare_resp_time_eas.py"
 
+    # Run response time comparison across builds and create comparison report for EWS
+      - run:
+          name: Run response time comparison for EWS
+          command: |
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; python3 compare_resp_time_ews.py"
+
       # Copy test artifacts to the results directory
       - run:
           name: Copy Test files to Artifacts
