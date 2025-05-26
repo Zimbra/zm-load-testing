@@ -27,13 +27,13 @@ The environment file defines how to access the environment specific information.
 
 |Key                           |Value|Description                                 |
 |------------------------------|-----|--------------------------------------------|
-|LOAD.duration                 |900  |test duration in seconds                    |
+|LOAD.duration                 |3600 |test duration in seconds                    |
 |LOAD.delay                    |0    |test start delay in seconds                 |
 |LOAD.CHAT.users               |20   |concurrent users/threads to run during test |
 |LOAD.CHAT.rampup              |10   |time spent in ramping up users in seconds   |
 |LOAD.CHAT.loopcount           |-1   |action repeated in loop (-1 means infinite) |
-|LOAD.RPS.start                |200  |request Per sec startup point               |
-|LOAD.RPS.duration             |200  |request Per sec end point	                  |
+|LOAD.RPS.start                |200  |requests Per sec startup point              |
+|LOAD.RPS.duration             |3600 |requests Per sec end point	                |
 |LOAD.RPS.end                  |900  |throughput shaping timer duration in sec    |
 |LOAD.TPS_PERCENT.1            |100  |throughput controller in percentage         |
 |LOAD.TPS_PERCENT.2            |80   |throughput controller in percentage         |
