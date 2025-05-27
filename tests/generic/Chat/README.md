@@ -109,6 +109,6 @@ Advanced Chat
 4. test result files will be generated under logs folder
 
    ```
-   $ logs/generic-1-1-chat-jmeter.log   --- Jmeter Logs
-   $ logs/generic-1-1-chat-requests.csv --- Transaction Response Time Logs
+   $ logs/generic-advanced-chat-jmeter.log   --- Jmeter Logs
+   $ logs/generic-advanced-chat-requests.csv --- Transaction Response Time Logs
    ```
