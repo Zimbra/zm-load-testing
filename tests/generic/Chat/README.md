@@ -8,9 +8,10 @@ This test provides generic Zimbra supported protocol performance testing for one
 
 Protocol Support
 
-|Test Type|Test    |Protocol|
-|---------|--------|--------|
-|1:1 Chat |Chat    |HTTPS   |
+|Test Type |Test          |Protocol|
+|----------|--------------|--------|
+|Chat      |1:1 Chat      |HTTPS   |
+|Chat      |advanced Chat |HTTPS   |
 
 The environment file defines how to access the environment specific information.
 
