@@ -8,6 +8,7 @@
   <property name="users" location="config/users.csv"/>
   <property name="chat_users" location="config/chat_users.csv"/>
   <property name="message" location="config/message.csv"/>
+  <property name="emoji" location="config/Chat/emoji.csv"/>
   <property name="mail" location="data/Book.csv"/>
   <property name="randomWords" location="data/randomWords.csv"/>
   <property name="tests" location="tests"/>
