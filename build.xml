@@ -70,6 +70,7 @@
     <antcall target="generic-onlyoffice"/>
     <antcall target="generic-chat"/>
     <antcall target="generic-1-1-chat"/>
+    <antcall target="generic-advanced-chat"/>
   </target>
   <target name="CSP2">
     <antcall target="CSP2-zsoap"/>
@@ -249,6 +250,19 @@
                     resultlog="${logs}/generic-1-1-chat-requests.csv">
               <property name="CHAT_ACCOUNTS.csv" value="${chat_users}"/>
               <property name="MESSAGE.csv" value="${message}"/>
+              <property name="user.classpath" value="${zjmeter}"/>
+              <jmeterarg value="-q${basedir}/${env}"/>
+              <jmeterarg value="-q${basedir}/tests/generic/Chat/load.prop"/>
+            </jmeter>
+         </target>
+         <target name="generic-advanced-chat" depends="src,logs">
+            <jmeter jmeterhome="${jmeter.home}"
+                    testplan="${basedir}/tests/generic/Chat/Advanced_Chat_Solution.jmx"
+                    jmeterlogfile="${logs}/generic-advanced-chat-jmeter.log"
+                    resultlog="${logs}/generic-advanced-chat-requests.csv">
+              <property name="CHAT_ACCOUNTS.csv" value="${chat_users}"/>
+              <property name="MESSAGE.csv" value="${message}"/>
+              <property name="EMOJI.csv" value="${emoji}"/>
               <property name="user.classpath" value="${zjmeter}"/>
               <jmeterarg value="-q${basedir}/${env}"/>
               <jmeterarg value="-q${basedir}/tests/generic/Chat/load.prop"/>
