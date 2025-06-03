@@ -44,26 +44,26 @@ The environment file defines how to access the environment specific information.
 
 |Key                    |Value           |Description                         |
 |-----------------------|----------------|------------------------------------|
-|CHAT.URL               |chatserver.com  |Server Name   		      |
-|CHAT.PASSWORD          |Password        |Password      		      |
+|CHAT.URL               |chatserver.com  |Server Name   		                  |
+|CHAT.PASSWORD          |Password        |Password      		                  |
 |CHAT_ACCOUNTS.csv      |chat_users.csv  |csv file of test accounts (user,password)|
 |INFLUXDB.server        |influxdb.server |Influxdb Server Name                |
 |INFLUXDB.port          |8086            |Influxdb Port                       |
-|REQUEST.log            |requests.log    |file to log requests to   	      |
+|REQUEST.log            |requests.log    |file to log requests to   	        |
 |user.classpath         |src/build/jar/zjmeter.jar|Zimbra JMeter Java Library |
 
 The environment file in chat performance automation defines email configs and other test details to be sent to user.
 
 |Key                           |Value        |Description                       |
 |------------------------------|-------------|----------------------------------|
-|EMAIL_HOST                    |smtp.server  |Hostname                    	|
-|EMAIL_PORT                    |587    	     |Port                 		|
-|EMAIL_USER                    |user@test.com|user email 			|
-|EMAIL_PASS                    |password     |Password   			|
-|EMAIL_TO	               |perf@test.com|user email recipient 		|
-|CONCURRENT_USERS              |100          |Concurrent users              	|
-|TEST_DURATION_MINUTES         |60 	     |test duration in minutes          |
-|test_path                     |<test_path>  |Repo base path    		|
+|EMAIL_HOST                    |smtp.server  |Hostname                    	    |
+|EMAIL_PORT                    |587    	     |Port                 		          |
+|EMAIL_USER                    |user@test.com|user email 			                  |
+|EMAIL_PASS                    |password     |Password   			                  |
+|EMAIL_TO	                     |perf@test.com|user email recipient 		          |
+|CONCURRENT_USERS              |100          |Concurrent users              	  |
+|TEST_DURATION_MINUTES         |60 	         |test duration in minutes          |
+|test_path                     |<test_path>  |Repo base path    		            |
 
 ## Load
 
@@ -147,13 +147,13 @@ Comparison(baseline_vs_benchmark) Chat Performance Test Automation:
    note: some property files use relative paths that assume jmeter is run from the repo's top directory
 
    ```
-   $ nohup run_full_performance_pipeline_one_to_one_chat.sh > /tmp/comparison_one_to_one_chat.log
+   $ nohup run_full_performance_pipeline_one_to_one_chat.sh > /tmp/comparison_one_to_one_chat.log &
    ```
  
 4. run the test - Advanced Chat
    note: some property files use relative paths that assume jmeter is run from the repo's top directory
 
    ```
-   $ nohup run_full_performance_pipeline_advanced_chat.sh > /tmp/comparison_advanced_chat.log
+   $ nohup run_full_performance_pipeline_advanced_chat.sh > /tmp/comparison_advanced_chat.log &
    ```
 
