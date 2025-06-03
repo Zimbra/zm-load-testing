@@ -4,10 +4,15 @@ This test provides zimbra supported automated chat performance testing for one t
 
 # Features
 
-1. Automated performance chat automation for standalone and comparison tests for one to one and advanced chat
+1. Automated performance chat execution for standalone and release comparison tests for one to one and advanced chat
 2. Performance scripts integrated with InfluxDB & Grafana providing live test monitoring support
 3. Test reports are generated on the go and sent to user mailbox.
-4. Comparison test reports showing transaction response time comparison for baseline vs benchmark builds.
+4. Release Comparison test reports showing transaction response time comparison for baseline vs benchmark builds.
+   The transactions are highlighted as Dark Green, Green, Orange and Red where :
+      * Dark Green means Improved response time (Negative degradation (improvement))
+      * Green means Good response time (Low degradation 0% - 1%)
+      * Orange means Moderate Degradation in response time (degradation 1% - 10%)
+      * Red means Regressed Transaction (High degradation > 10%)
 
 ## Flow Diagram
 
