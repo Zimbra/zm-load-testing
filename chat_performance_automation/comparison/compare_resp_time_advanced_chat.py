@@ -19,9 +19,9 @@ def calculate_degradation(build1_90, build2_90):
 # Function to determine the color based on degradation percentage
 def apply_color(degradation):
     if degradation > 10:
-        return 'Red'       # High degradation (> 20%)
+        return 'Red'            # High degradation (> 10%)
     elif 1 <= degradation <= 10:
-        return 'Orange'    # Moderate degradation (1% - 10%)
+        return 'Orange'         # Moderate degradation (1% - 10%)
     elif 0 <= degradation < 1:
         return 'Green'          # Low degradation (0% - 1%)
     elif degradation < 0:
