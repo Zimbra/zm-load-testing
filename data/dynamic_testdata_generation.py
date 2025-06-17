@@ -145,7 +145,7 @@ attachment_interval = max(1, int(1 / ATTACHMENT_PERCENT)) if ATTACHMENT_PERCENT 
 calendar_interval = max(1, int(1 / CALENDAR_PERCENT)) if CALENDAR_PERCENT > 0 else float('inf')
 
 print(f"Generating .eml files targeting {args.size} in '{OUTPUT_DIR}'...")
-print(f"Attachments: {args.attachment_percent}% | 📅 Calendar Invites: {args.calendar_percent}% | "
+print(f"Attachments: {args.attachment_percent}% | Calendar Invites: {args.calendar_percent}% | "
       f"Avg Email Size: {TARGET_AVG_SIZE_KB} KB")
 
 folder_cycle = iter(FOLDERS)
