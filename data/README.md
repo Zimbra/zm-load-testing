@@ -18,8 +18,10 @@ This script generates realistic `.eml` test data with optional attachments, cale
 - Python 3.6+
 - `faker` Python package
 
-Install dependencies:
+## Install dependencies:
+```
 pip install faker
+```
 
 ## Usage
 ```
