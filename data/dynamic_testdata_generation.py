@@ -39,7 +39,7 @@ parser.add_argument("--attachment-percent", type=float, default=2.0,
                     help="Percentage of messages with attachments (default: 2)")
 parser.add_argument("--calendar-percent", type=float, default=1.0,
                     help="Percentage of messages as calendar invites (default: 1)")
-parser.add_argument("--avg-msg-size", type=int, default=100,
+parser.add_argument("--avg-msg-size", type=int, default=60,
                     help="Average email size in KB (default: 60)")
 parser.add_argument("--output-dir", type=str, default="~/eml_output_testdata",
                     help="Output directory for generated emails")
