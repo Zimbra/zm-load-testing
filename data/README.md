@@ -21,8 +21,10 @@ This script generates realistic `.eml` test data with optional attachments, cale
 Install dependencies:
 pip install faker
 
-## Usage:
+## Usage
+```
 python3 dynamic_testdata_generation.py -h
+```
 
 ### Options
 |Option	              | Description
@@ -58,7 +60,7 @@ Sent/
    python3 dynamic_testdata_generation.py --output-dir testdata --size 50MB
 ```
 
-## Output Summary:
+## Output Summary
 At the end, the script reports:
 ```
 - Total emails generated
@@ -67,7 +69,7 @@ At the end, the script reports:
 - Folder count
 ```
 
-### Example:
+### Example
 ```
 python3 dynamic_testdata_generation.py --size 10MB --attachment-percent 5 --calendar-percent 2 --avg-msg-size 80 --output-dir eml_test --clean
 Generating .eml files targeting 10MB in 'eml_test'...
@@ -75,7 +77,7 @@ Attachments: 5.0% | Calendar Invites: 2.0% | Avg Email Size: 80 KB
 Generated 123 emails (~10.07 MB / ~0.01 GB) in 'eml_test' across 6 folders.
 ```
 
-## Notes:
+## Notes
 ```
 - File names follow the format: message_0000001.eml, message_0000002.eml, ...
 - Calendar invites use basic iCalendar (VEVENT) format.
