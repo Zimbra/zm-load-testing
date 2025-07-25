@@ -87,3 +87,91 @@ Generated 123 emails (~10.07 MB / ~0.01 GB) in 'eml_test' across 6 folders.
 - Attachments are dummy binary data with realistic MIME types.
 - This script will generate .eml files under a folder structure which can further be populated as data using zmlmtpinject
 ```
+
+
+
+# testdata_cleanup.sh
+
+This script helps manage mailbox sizes on a **Zimbra** email server by **automatically deleting old messages** from user mailboxes until they fall below a specified size threshold. It identifies the largest folders and selectively deletes the oldestmessages in a controlled manner.
+---
+
+##  Features
+1. Estimates Current Mailbox Size
+Uses **zmmailbox gms** to get the user's total mailbox size in MB.
+
+2. Estimates Average Message Size
+Pulls a sample of recent messages (default: 10) and calculates their average size.
+
+3. Identifies Folders to Clean
+Detects folders under /Inbox, as well as Inbox and Sent.
+
+4. Sorts Folders by Message Count
+Cleans folders with the most messages first to free space efficiently.
+
+5. Deletes Messages in Batches
+Deletes oldest messages (ascending by date) in batches of up to MAX_DELETE_LIMIT (default: 10).
+
+6. Checks Size After Each Batch
+Continues deleting until the target size is met or no more deletable messages remain.
+---
+
+## Requirements
+- The script must be run as a zimbra user
+- mailbox should be up in the Env
+- user accounts must exist
+
+
+## Usage
+```
+bash testdata_cleanup.sh <TARGET_MB> <START> <END>
+```
+- TARGET_MB — The maximum mailbox size (in MB) you want each user to have.
+- START — Starting user number (e.g., 1 for user1@domain.zimbra.com)
+- END — Ending user number (e.g., 100 for user100@domain.zimbra.com)
+
+
+## Example
+```
+bash testdata_cleanup.sh 500 1 100
+```
+This command will reduce the mailboxes for user1@domain.zimbra.com to user100@domain.zimbra.com until each mailbox is under 500 MB.
+
+## Script Output Example
+```
+bash /home/ubuntu/delete_5.sh 580 102 103'
+ Checking mailbox for user102@domain.zimbra.com...
+ Initial size: 584.57 MB
+ Estimated avg. message size: 0.05 MB
+ Gathering folders under Inbox for user102@domain..zimbra.com...
+  Cleanup priority:
+  Sent (16 messages)
+  Inbox/Subfolder4 (16 messages)
+  Inbox/Subfolder3 (16 messages)
+  Inbox/Subfolder2 (16 messages)
+  Inbox/Subfolder1 (16 messages)
+  Inbox (16 messages)
+  Need to free ~4.57 MB — deleting up to 10 messages
+  Deleting from 'Sent'...
+  Deleted 10 messages from Sent
+  Updated size: 583.55 MB
+  Deleting from 'Inbox/Subfolder4'...
+  Deleted 10 messages from Inbox/Subfolder4
+  Updated size: 582.53 MB
+  Deleting from 'Inbox/Subfolder3'...
+  Deleted 10 messages from Inbox/Subfolder3
+  Updated size: 581.51 MB
+  Deleting from 'Inbox/Subfolder2'...
+  Deleted 10 messages from Inbox/Subfolder2
+  Updated size: 580.49 MB
+  Deleting from 'Inbox/Subfolder1'...
+  Deleted 10 messages from Inbox/Subfolder1
+  Updated size: 579.47 MB
+  Target reached for user102@domain.zimbra.com.
+  Final mailbox size for user102@domain.zimbra.com: 579.47 MB
+  ------------------------------------------
+  Checking mailbox for user103@domain.zimbra.com...
+  Initial size: 10.25 MB
+  Mailbox already under target.
+  ------------------------------------------
+  All users processed and reduced below 580 MB.
+```
