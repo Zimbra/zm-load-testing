@@ -71,6 +71,7 @@
     <antcall target="generic-chat"/>
     <antcall target="generic-1-1-chat"/>
     <antcall target="generic-advanced-chat"/>
+    <antcall target="generic-mail-recall"/>
   </target>
   <target name="CSP2">
     <antcall target="CSP2-zsoap"/>
@@ -268,6 +269,17 @@
               <jmeterarg value="-q${basedir}/tests/generic/Chat/load.prop"/>
             </jmeter>
          </target>
+         <target name="generic-mail-recall" depends="src,logs">
+            <jmeter jmeterhome="${jmeter.home}"
+                    testplan="${basedir}/tests/generic/mail_recall/mail_recall.jmx"
+                    jmeterlogfile="${logs}/generic-mail-recall-jmeter.log"
+                    resultlog="${logs}/generic-mail-recall-requests.csv">
+              <property name="ACCOUNTS.csv" value="${users}"/>
+              <property name="user.classpath" value="${zjmeter}"/>
+              <jmeterarg value="-q${basedir}/${env}"/>
+              <jmeterarg value="-q${basedir}/tests/generic/mail_recall/load.prop"/>
+            </jmeter>
+          </target>
 	  <target name="generic-zsoap-all" depends="src,logs,generic-zsoap">
 	    <jmeter jmeterhome="${jmeter.home}"
 		    testplan="${basedir}/tests/generic/zsoap/zsoap.jmx"
