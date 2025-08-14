@@ -1,0 +1,2672 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.2">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Mail Recall" enabled="true">
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">false</boolProp>
+    </TestPlan>
+    <hashTree>
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+        <collectionProp name="HeaderManager.headers"/>
+      </HeaderManager>
+      <hashTree/>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </Arguments>
+      <hashTree/>
+      <DNSCacheManager guiclass="DNSCachePanel" testclass="DNSCacheManager" testname="DNS Cache Manager" enabled="true">
+        <collectionProp name="DNSCacheManager.servers"/>
+        <boolProp name="DNSCacheManager.clearEachIteration">true</boolProp>
+        <boolProp name="DNSCacheManager.isCustomResolver">false</boolProp>
+      </DNSCacheManager>
+      <hashTree/>
+      <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager" enabled="true">
+        <collectionProp name="AuthManager.auth_list"/>
+        <boolProp name="AuthManager.controlledByThreadGroup">false</boolProp>
+      </AuthManager>
+      <hashTree/>
+      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+        <collectionProp name="CookieManager.cookies"/>
+        <boolProp name="CookieManager.clearEachIteration">true</boolProp>
+        <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+        <stringProp name="CookieManager.policy">standard-strict</stringProp>
+      </CookieManager>
+      <hashTree/>
+      <CacheManager guiclass="CacheManagerGui" testclass="CacheManager" testname="HTTP Cache Manager" enabled="true">
+        <boolProp name="clearEachIteration">false</boolProp>
+        <boolProp name="useExpires">false</boolProp>
+        <boolProp name="CacheManager.controlledByThread">false</boolProp>
+      </CacheManager>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Mail Recall" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <stringProp name="LoopController.loops">${__P(LOAD.loopcount)}</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.rampup)}</stringProp>
+        <boolProp name="ThreadGroup.delayedStart">false</boolProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <com.blazemeter.jmeter.RandomCSVDataSetConfig guiclass="com.blazemeter.jmeter.RandomCSVDataSetConfigGui" testclass="com.blazemeter.jmeter.RandomCSVDataSetConfig" testname="USERS" enabled="true">
+          <stringProp name="filename">${__P(ACCOUNTS.csv)}</stringProp>
+          <stringProp name="fileEncoding">UTF-8</stringProp>
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="variableNames">FROM_USER,TO_USER</stringProp>
+          <boolProp name="randomOrder">true</boolProp>
+          <boolProp name="ignoreFirstLine">false</boolProp>
+          <boolProp name="rewindOnTheEndOfList">true</boolProp>
+          <boolProp name="independentListPerThread">true</boolProp>
+        </com.blazemeter.jmeter.RandomCSVDataSetConfig>
+        <hashTree/>
+        <com.blazemeter.jmeter.RandomCSVDataSetConfig guiclass="com.blazemeter.jmeter.RandomCSVDataSetConfigGui" testclass="com.blazemeter.jmeter.RandomCSVDataSetConfig" testname="USERS_10" enabled="true">
+          <stringProp name="filename">${__P(ACCOUNTS_1.csv)}</stringProp>
+          <stringProp name="fileEncoding">UTF-8</stringProp>
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="variableNames">User1,User2,User3,User4,User5,User6,User7,User8,User9,User10,User11</stringProp>
+          <boolProp name="randomOrder">true</boolProp>
+          <boolProp name="ignoreFirstLine">true</boolProp>
+          <boolProp name="rewindOnTheEndOfList">true</boolProp>
+          <boolProp name="independentListPerThread">true</boolProp>
+        </com.blazemeter.jmeter.RandomCSVDataSetConfig>
+        <hashTree/>
+        <com.blazemeter.jmeter.RandomCSVDataSetConfig guiclass="com.blazemeter.jmeter.RandomCSVDataSetConfigGui" testclass="com.blazemeter.jmeter.RandomCSVDataSetConfig" testname="USERS_20" enabled="true">
+          <stringProp name="filename">${__P(ACCOUNTS_2.csv)}</stringProp>
+          <stringProp name="fileEncoding">UTF-8</stringProp>
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="variableNames">User1,User2,User3,User4,User5,User6,User7,User8,User9,User10,User11,User12,User13,User14,User15,User16,User17,User18,User19,User20,User21</stringProp>
+          <boolProp name="randomOrder">true</boolProp>
+          <boolProp name="ignoreFirstLine">true</boolProp>
+          <boolProp name="rewindOnTheEndOfList">true</boolProp>
+          <boolProp name="independentListPerThread">true</boolProp>
+        </com.blazemeter.jmeter.RandomCSVDataSetConfig>
+        <hashTree/>
+        <com.blazemeter.jmeter.RandomCSVDataSetConfig guiclass="com.blazemeter.jmeter.RandomCSVDataSetConfigGui" testclass="com.blazemeter.jmeter.RandomCSVDataSetConfig" testname="USERS_50" enabled="true">
+          <stringProp name="filename">${__P(ACCOUNTS_3.csv)}</stringProp>
+          <stringProp name="fileEncoding">UTF-8</stringProp>
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="variableNames">User1,User2,User3,User4,User5,User6,User7,User8,User9,User10,User11,User12,User13,User14,User15,User16,User17,User18,User19,User20,User21,User22,User23,User24,User25,User26,User27,User28,User29,User30,User31,User32,User33,User34,User35,User36,User37,User38,User39,User40,User41,User42,User43,User44,User45,User46,User47,User48,User49,User50,User51</stringProp>
+          <boolProp name="randomOrder">true</boolProp>
+          <boolProp name="ignoreFirstLine">true</boolProp>
+          <boolProp name="rewindOnTheEndOfList">true</boolProp>
+          <boolProp name="independentListPerThread">true</boolProp>
+        </com.blazemeter.jmeter.RandomCSVDataSetConfig>
+        <hashTree/>
+        <com.blazemeter.jmeter.RandomCSVDataSetConfig guiclass="com.blazemeter.jmeter.RandomCSVDataSetConfigGui" testclass="com.blazemeter.jmeter.RandomCSVDataSetConfig" testname="USERS_100" enabled="true">
+          <stringProp name="filename">${__P(ACCOUNTS_4.csv)}</stringProp>
+          <stringProp name="fileEncoding">UTF-8</stringProp>
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="variableNames">User1,User2,User3,User4,User5,User6,User7,User8,User9,User10,User11,User12,User13,User14,User15,User16,User17,User18,User19,User20,User21,User22,User23,User24,User25,User26,User27,User28,User29,User30,User31,User32,User33,User34,User35,User36,User37,User38,User39,User40,User41,User42,User43,User44,User45,User46,User47,User48,User49,User50,User51,User52,User53,User54,User55,User56,User57,User58,User59,User60,User61,User62,User63,User64,User65,User66,User67,User68,User69,User70,User71,User72,User73,User74,User75,User76,User77,User78,User79,User80,User81,User82,User83,User84,User85,User86,User87,User88,User89,User90,User91,User92,User93,User94,User95,User96,User97,User98,User99,User100,User101</stringProp>
+          <boolProp name="randomOrder">true</boolProp>
+          <boolProp name="ignoreFirstLine">true</boolProp>
+          <boolProp name="rewindOnTheEndOfList">true</boolProp>
+          <boolProp name="independentListPerThread">true</boolProp>
+        </com.blazemeter.jmeter.RandomCSVDataSetConfig>
+        <hashTree/>
+        <kg.apc.jmeter.timers.VariableThroughputTimer guiclass="kg.apc.jmeter.timers.VariableThroughputTimerGui" testclass="kg.apc.jmeter.timers.VariableThroughputTimer" testname="Throughput Shaping Timer" enabled="true">
+          <collectionProp name="load_profile">
+            <collectionProp name="41275712">
+              <stringProp name="1669959236">${__P(LOAD.RPS.start)}</stringProp>
+              <stringProp name="1244494845">${__P(LOAD.RPS.end)}</stringProp>
+              <stringProp name="-291202470">${__P(LOAD.RPS.duration)}</stringProp>
+            </collectionProp>
+          </collectionProp>
+        </kg.apc.jmeter.timers.VariableThroughputTimer>
+        <hashTree/>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - 1" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${__P(LOAD.TPS_PERCENT.1)}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="zcs_login" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="zcs_Login" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+       &lt;authToken/&gt;&#xd;
+       &lt;nosession/&gt;&#xd;
+       &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+   &lt;AuthRequest xmlns=&quot;urn:zimbraAccount&quot; csrfTokenSecured=&quot;1&quot;&gt;&#xd;
+     &lt;account by=&quot;name&quot;&gt;${FROM_USER}&lt;/account&gt;&#xd;
+     &lt;password&gt;${__P(HTTP.admin.pass)}&lt;/password&gt;&#xd;
+   &lt;/AuthRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.port">9071</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/admin/soap/AuthRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="AUTHTOKEN" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">AUTHTOKEN</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&lt;AuthResponse xmlns=&quot;urn:zimbraAccount&quot;&gt;&lt;authToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&lt;/authToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.default">NA</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="csrfToken" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">csrfToken</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&lt;csrfToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&lt;/csrfToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.default">NA</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">Login failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="save_draft_single" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="savedraft_single" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;Header&quot;: {&#xd;
+    &quot;context&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbra&quot;,&#xd;
+      &quot;authToken&quot;: &quot;${AUTHTOKEN}&quot;,&#xd;
+      &quot;nosession&quot;: {},&#xd;
+      &quot;userAgent&quot;: {&#xd;
+        &quot;name&quot;: &quot;jmeter-soap&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  },&#xd;
+  &quot;Body&quot;: {&#xd;
+    &quot;SaveDraftRequest&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbraMail&quot;,&#xd;
+      &quot;m&quot;: {&#xd;
+        &quot;su&quot;: &quot;Save Draft Test&quot;,&#xd;
+        &quot;mp&quot;: {&#xd;
+          &quot;ct&quot;: &quot;text/plain&quot;,&#xd;
+          &quot;content&quot;: &quot;This is save message in draft from zsoap jmeter test&quot;&#xd;
+        }&#xd;
+      }&#xd;
+    }&#xd;
+  }&#xd;
+}&#xd;
+</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/soap/SaveDraftRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
+                    <stringProp name="Header.value">${csrfToken}</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">save draft failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="DRAFTID" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">DRAFTID</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&quot;id&quot;:&quot;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&quot;,&quot;fr&quot;:</stringProp>
+                <stringProp name="BoundaryExtractor.default">NA</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="send_message_single" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="send_message_single_user" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;Header&quot;: {&#xd;
+    &quot;context&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbra&quot;,&#xd;
+      &quot;authToken&quot;: &quot;${AUTHTOKEN}&quot;,&#xd;
+      &quot;nosession&quot;: {},&#xd;
+      &quot;userAgent&quot;: {&#xd;
+        &quot;name&quot;: &quot;jmeter-soap&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  },&#xd;
+  &quot;Body&quot;: {&#xd;
+    &quot;SendMsgRequest&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbraMail&quot;,&#xd;
+      &quot;m&quot;: {&#xd;
+        &quot;su&quot;: &quot;Hello World&quot;,&#xd;
+        &quot;id&quot;: &quot;${DRAFTID}&quot;,&#xd;
+        &quot;l&quot;: &quot;6&quot;,&#xd;
+        &quot;f&quot;: &quot;d&quot;,&#xd;
+        &quot;did&quot;: &quot;${DRAFTID}&quot;,&#xd;
+        &quot;e&quot;: [&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${FROM_USER}&quot;,&#xd;
+            &quot;t&quot;: &quot;f&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${TO_USER}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;mp&quot;: {&#xd;
+          &quot;ct&quot;: &quot;text/plain&quot;,&#xd;
+          &quot;content&quot;: &quot;This is test message sent from zsoap jmeter test&quot;&#xd;
+        }&#xd;
+      }&#xd;
+    }&#xd;
+  }&#xd;
+}&#xd;
+</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/soap/SendMsgRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
+                    <stringProp name="Header.value">${csrfToken}</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="Mail_Item_Id" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">Mail_Item_Id</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">{&quot;SendMsgResponse&quot;:{&quot;m&quot;:[{&quot;id&quot;:&quot;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&quot;}],&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;}},&quot;_jsns&quot;:&quot;urn:zimbraSoap&quot;}</stringProp>
+                <stringProp name="BoundaryExtractor.default">Not found</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">send message single failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Mail Recall single" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="mail_recall_single_user" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;Header&quot;: {&#xd;
+    &quot;context&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbra&quot;,&#xd;
+      &quot;authToken&quot;: &quot;${AUTHTOKEN}&quot;,&#xd;
+      &quot;nosession&quot;: {},&#xd;
+      &quot;userAgent&quot;: {&#xd;
+        &quot;name&quot;: &quot;jmeter-soap&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  },&#xd;
+ &quot;Body&quot;: {&#xd;
+    &quot;MailRecallRequest&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbraMail&quot;,&#xd;
+      &quot;itemId&quot;: &quot;${Mail_Item_Id}&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/soap/MailRecallRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
+                    <stringProp name="Header.value">${csrfToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">referer</stringProp>
+                    <stringProp name="Header.value">https://${__P(HTTP.server)}/modern/email/Sent/message/${Mail_Item_Id}</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">mail recall for single user failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - 2" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${__P(LOAD.TPS_PERCENT.2)}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="zcs_login" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="zcs_Login" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+       &lt;authToken/&gt;&#xd;
+       &lt;nosession/&gt;&#xd;
+       &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+   &lt;AuthRequest xmlns=&quot;urn:zimbraAccount&quot; csrfTokenSecured=&quot;1&quot;&gt;&#xd;
+     &lt;account by=&quot;name&quot;&gt;${User1}&lt;/account&gt;&#xd;
+     &lt;password&gt;${__P(HTTP.admin.pass)}&lt;/password&gt;&#xd;
+   &lt;/AuthRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.port">9071</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/admin/soap/AuthRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="AUTHTOKEN" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">AUTHTOKEN</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&lt;AuthResponse xmlns=&quot;urn:zimbraAccount&quot;&gt;&lt;authToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&lt;/authToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.default">NA</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="csrfToken" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">csrfToken</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&lt;csrfToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&lt;/csrfToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.default">NA</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">Login failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="save draft_10" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="savedraft_10_users" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;Header&quot;: {&#xd;
+    &quot;context&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbra&quot;,&#xd;
+      &quot;authToken&quot;: &quot;${AUTHTOKEN}&quot;,&#xd;
+      &quot;nosession&quot;: {},&#xd;
+      &quot;userAgent&quot;: {&#xd;
+        &quot;name&quot;: &quot;jmeter-soap&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  },&#xd;
+  &quot;Body&quot;: {&#xd;
+    &quot;SaveDraftRequest&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbraMail&quot;,&#xd;
+      &quot;m&quot;: {&#xd;
+        &quot;su&quot;: &quot;Save Draft Test&quot;,&#xd;
+        &quot;mp&quot;: {&#xd;
+          &quot;ct&quot;: &quot;text/plain&quot;,&#xd;
+          &quot;content&quot;: &quot;This is save message in draft from zsoap jmeter test&quot;&#xd;
+        }&#xd;
+      }&#xd;
+    }&#xd;
+  }&#xd;
+}&#xd;
+</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/soap/SaveDraftRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
+                    <stringProp name="Header.value">${csrfToken}</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">save draft failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="DRAFTID1" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">DRAFTID1</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&quot;id&quot;:&quot;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&quot;,&quot;fr&quot;:</stringProp>
+                <stringProp name="BoundaryExtractor.default">NA</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="send_message_10" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="send_message_10_users" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;Header&quot;: {&#xd;
+    &quot;context&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbra&quot;,&#xd;
+      &quot;authToken&quot;: &quot;${AUTHTOKEN}&quot;,&#xd;
+      &quot;nosession&quot;: {},&#xd;
+      &quot;userAgent&quot;: {&#xd;
+        &quot;name&quot;: &quot;jmeter-soap&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  },&#xd;
+  &quot;Body&quot;: {&#xd;
+    &quot;SendMsgRequest&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbraMail&quot;,&#xd;
+      &quot;m&quot;: {&#xd;
+        &quot;su&quot;: &quot;Hello World&quot;,&#xd;
+        &quot;id&quot;: &quot;${DRAFTID1}&quot;,&#xd;
+        &quot;l&quot;: &quot;6&quot;,&#xd;
+        &quot;f&quot;: &quot;d&quot;,&#xd;
+        &quot;did&quot;: &quot;${DRAFTID1}&quot;,&#xd;
+        &quot;e&quot;: [&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User1}&quot;,&#xd;
+            &quot;t&quot;: &quot;f&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User2}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User3}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User4}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User5}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User6}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User7}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User8}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User9}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User10}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User11}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;mp&quot;: {&#xd;
+          &quot;ct&quot;: &quot;text/plain&quot;,&#xd;
+          &quot;content&quot;: &quot;This is test message sent from zsoap jmeter test&quot;&#xd;
+        }&#xd;
+      }&#xd;
+    }&#xd;
+  }&#xd;
+}&#xd;
+</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/soap/SendMsgRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
+                    <stringProp name="Header.value">${csrfToken}</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="Mail_Item_Id1" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">Mail_Item_Id1</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">{&quot;SendMsgResponse&quot;:{&quot;m&quot;:[{&quot;id&quot;:&quot;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&quot;}],&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;}},&quot;_jsns&quot;:&quot;urn:zimbraSoap&quot;}</stringProp>
+                <stringProp name="BoundaryExtractor.default">Not found</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">send message 10 users failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Mail Recall_10" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="mail_recall_10_users" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;Header&quot;: {&#xd;
+    &quot;context&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbra&quot;,&#xd;
+      &quot;authToken&quot;: &quot;${AUTHTOKEN}&quot;,&#xd;
+      &quot;nosession&quot;: {},&#xd;
+      &quot;userAgent&quot;: {&#xd;
+        &quot;name&quot;: &quot;jmeter-soap&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  },&#xd;
+ &quot;Body&quot;: {&#xd;
+    &quot;MailRecallRequest&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbraMail&quot;,&#xd;
+      &quot;itemId&quot;: &quot;${Mail_Item_Id1}&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/soap/MailRecallRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
+                    <stringProp name="Header.value">${csrfToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">referer</stringProp>
+                    <stringProp name="Header.value">https://${__P(HTTP.server)}/modern/email/Sent/message/${Mail_Item_Id1}</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">mail recall for 10 users failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - 3" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${__P(LOAD.TPS_PERCENT.3)}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="zcs_login" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="zcs_Login" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+       &lt;authToken/&gt;&#xd;
+       &lt;nosession/&gt;&#xd;
+       &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+   &lt;AuthRequest xmlns=&quot;urn:zimbraAccount&quot; csrfTokenSecured=&quot;1&quot;&gt;&#xd;
+     &lt;account by=&quot;name&quot;&gt;${User1}&lt;/account&gt;&#xd;
+     &lt;password&gt;${__P(HTTP.admin.pass)}&lt;/password&gt;&#xd;
+   &lt;/AuthRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.port">9071</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/admin/soap/AuthRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="AUTHTOKEN" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">AUTHTOKEN</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&lt;AuthResponse xmlns=&quot;urn:zimbraAccount&quot;&gt;&lt;authToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&lt;/authToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.default">NA</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="csrfToken" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">csrfToken</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&lt;csrfToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&lt;/csrfToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.default">NA</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">Login failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="save draft_20" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="savedraft_20_users" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;Header&quot;: {&#xd;
+    &quot;context&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbra&quot;,&#xd;
+      &quot;authToken&quot;: &quot;${AUTHTOKEN}&quot;,&#xd;
+      &quot;nosession&quot;: {},&#xd;
+      &quot;userAgent&quot;: {&#xd;
+        &quot;name&quot;: &quot;jmeter-soap&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  },&#xd;
+  &quot;Body&quot;: {&#xd;
+    &quot;SaveDraftRequest&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbraMail&quot;,&#xd;
+      &quot;m&quot;: {&#xd;
+        &quot;su&quot;: &quot;Save Draft Test&quot;,&#xd;
+        &quot;mp&quot;: {&#xd;
+          &quot;ct&quot;: &quot;text/plain&quot;,&#xd;
+          &quot;content&quot;: &quot;This is save message in draft from zsoap jmeter test&quot;&#xd;
+        }&#xd;
+      }&#xd;
+    }&#xd;
+  }&#xd;
+}&#xd;
+</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/soap/SaveDraftRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
+                    <stringProp name="Header.value">${csrfToken}</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">save draft failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="DRAFTID2" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">DRAFTID2</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&quot;id&quot;:&quot;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&quot;,&quot;fr&quot;:</stringProp>
+                <stringProp name="BoundaryExtractor.default">NA</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="send message_20" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="send_message_20_users" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;Header&quot;: {&#xd;
+    &quot;context&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbra&quot;,&#xd;
+      &quot;authToken&quot;: &quot;${AUTHTOKEN}&quot;,&#xd;
+      &quot;nosession&quot;: {},&#xd;
+      &quot;userAgent&quot;: {&#xd;
+        &quot;name&quot;: &quot;jmeter-soap&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  },&#xd;
+  &quot;Body&quot;: {&#xd;
+    &quot;SendMsgRequest&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbraMail&quot;,&#xd;
+      &quot;m&quot;: {&#xd;
+        &quot;su&quot;: &quot;Hello World&quot;,&#xd;
+        &quot;id&quot;: &quot;${DRAFTID2}&quot;,&#xd;
+        &quot;l&quot;: &quot;6&quot;,&#xd;
+        &quot;f&quot;: &quot;d&quot;,&#xd;
+        &quot;did&quot;: &quot;${DRAFTID2}&quot;,&#xd;
+        &quot;e&quot;: [&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User1}&quot;,&#xd;
+            &quot;t&quot;: &quot;f&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User2}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User3}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User4}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User5}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User6}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User7}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User8}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User9}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User10}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User11}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+             {&#xd;
+            &quot;a&quot;: &quot;${User12}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User13}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User14}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User15}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User16}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User17}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User18}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User19}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User20}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User21}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;mp&quot;: {&#xd;
+          &quot;ct&quot;: &quot;text/plain&quot;,&#xd;
+          &quot;content&quot;: &quot;This is test message sent from zsoap jmeter test&quot;&#xd;
+        }&#xd;
+      }&#xd;
+    }&#xd;
+  }&#xd;
+}&#xd;
+</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/soap/SendMsgRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
+                    <stringProp name="Header.value">${csrfToken}</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="Mail_Item_Id2" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">Mail_Item_Id2</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">{&quot;SendMsgResponse&quot;:{&quot;m&quot;:[{&quot;id&quot;:&quot;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&quot;}],&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;}},&quot;_jsns&quot;:&quot;urn:zimbraSoap&quot;}</stringProp>
+                <stringProp name="BoundaryExtractor.default">Not found</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">send message 20 users failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Mail Recall 20" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="mail_recall_20_users" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;Header&quot;: {&#xd;
+    &quot;context&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbra&quot;,&#xd;
+      &quot;authToken&quot;: &quot;${AUTHTOKEN}&quot;,&#xd;
+      &quot;nosession&quot;: {},&#xd;
+      &quot;userAgent&quot;: {&#xd;
+        &quot;name&quot;: &quot;jmeter-soap&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  },&#xd;
+ &quot;Body&quot;: {&#xd;
+    &quot;MailRecallRequest&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbraMail&quot;,&#xd;
+      &quot;itemId&quot;: &quot;${Mail_Item_Id2}&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}&#xd;
+&#xd;
+</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/soap/MailRecallRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
+                    <stringProp name="Header.value">${csrfToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">referer</stringProp>
+                    <stringProp name="Header.value">https://${__P(HTTP.server)}/modern/email/Sent/message/${Mail_Item_Id1}</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">mail recall for 10 users failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - 4" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${__P(LOAD.TPS_PERCENT.4)}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="zcs_login" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="zcs_Login" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+       &lt;authToken/&gt;&#xd;
+       &lt;nosession/&gt;&#xd;
+       &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+   &lt;AuthRequest xmlns=&quot;urn:zimbraAccount&quot; csrfTokenSecured=&quot;1&quot;&gt;&#xd;
+     &lt;account by=&quot;name&quot;&gt;${User1}&lt;/account&gt;&#xd;
+     &lt;password&gt;${__P(HTTP.admin.pass)}&lt;/password&gt;&#xd;
+   &lt;/AuthRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.port">9071</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/admin/soap/AuthRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="AUTHTOKEN" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">AUTHTOKEN</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&lt;AuthResponse xmlns=&quot;urn:zimbraAccount&quot;&gt;&lt;authToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&lt;/authToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.default">NA</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="csrfToken" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">csrfToken</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&lt;csrfToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&lt;/csrfToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.default">NA</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">Login failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="save draft_50" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="savedraft_50_users" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;Header&quot;: {&#xd;
+    &quot;context&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbra&quot;,&#xd;
+      &quot;authToken&quot;: &quot;${AUTHTOKEN}&quot;,&#xd;
+      &quot;nosession&quot;: {},&#xd;
+      &quot;userAgent&quot;: {&#xd;
+        &quot;name&quot;: &quot;jmeter-soap&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  },&#xd;
+  &quot;Body&quot;: {&#xd;
+    &quot;SaveDraftRequest&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbraMail&quot;,&#xd;
+      &quot;m&quot;: {&#xd;
+        &quot;su&quot;: &quot;Save Draft Test&quot;,&#xd;
+        &quot;mp&quot;: {&#xd;
+          &quot;ct&quot;: &quot;text/plain&quot;,&#xd;
+          &quot;content&quot;: &quot;This is save message in draft from zsoap jmeter test&quot;&#xd;
+        }&#xd;
+      }&#xd;
+    }&#xd;
+  }&#xd;
+}&#xd;
+</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/soap/SaveDraftRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
+                    <stringProp name="Header.value">${csrfToken}</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">save draft failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="DRAFTID3" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">DRAFTID3</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&quot;id&quot;:&quot;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&quot;,&quot;fr&quot;:</stringProp>
+                <stringProp name="BoundaryExtractor.default">NA</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="send message_50" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="send_message_50_users" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;Header&quot;: {&#xd;
+    &quot;context&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbra&quot;,&#xd;
+      &quot;authToken&quot;: &quot;${AUTHTOKEN}&quot;,&#xd;
+      &quot;nosession&quot;: {},&#xd;
+      &quot;userAgent&quot;: {&#xd;
+        &quot;name&quot;: &quot;jmeter-soap&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  },&#xd;
+  &quot;Body&quot;: {&#xd;
+    &quot;SendMsgRequest&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbraMail&quot;,&#xd;
+      &quot;m&quot;: {&#xd;
+        &quot;su&quot;: &quot;Hello World&quot;,&#xd;
+        &quot;id&quot;: &quot;${DRAFTID3}&quot;,&#xd;
+        &quot;l&quot;: &quot;6&quot;,&#xd;
+        &quot;f&quot;: &quot;d&quot;,&#xd;
+        &quot;did&quot;: &quot;${DRAFTID3}&quot;,&#xd;
+        &quot;e&quot;: [&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User1}&quot;,&#xd;
+            &quot;t&quot;: &quot;f&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User2}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User3}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User4}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User5}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User6}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User7}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User8}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User9}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User10}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User11}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+             {&#xd;
+            &quot;a&quot;: &quot;${User12}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User13}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User14}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User15}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User16}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User17}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User18}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User19}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User20}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User21}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User22}&quot;,&#xd;
+            &quot;t&quot;: &quot;f&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User23}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User24}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User25}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User26}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User27}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User28}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User29}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User30}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User31}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User32}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+             {&#xd;
+            &quot;a&quot;: &quot;${User33}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User34}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User35}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User36}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User37}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User38}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User39}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User40}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User41}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User42}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User43}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User44}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User45}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User46}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User47}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User48}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User49}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User50}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User51}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;mp&quot;: {&#xd;
+          &quot;ct&quot;: &quot;text/plain&quot;,&#xd;
+          &quot;content&quot;: &quot;This is test message sent from zsoap jmeter test&quot;&#xd;
+        }&#xd;
+      }&#xd;
+    }&#xd;
+  }&#xd;
+}&#xd;
+</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/soap/SendMsgRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
+                    <stringProp name="Header.value">${csrfToken}</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="Mail_Item_Id3" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">Mail_Item_Id3</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">{&quot;SendMsgResponse&quot;:{&quot;m&quot;:[{&quot;id&quot;:&quot;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&quot;}],&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;}},&quot;_jsns&quot;:&quot;urn:zimbraSoap&quot;}</stringProp>
+                <stringProp name="BoundaryExtractor.default">Not found</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">send message 20 users failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Mail Recall 50" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="mail_recall_50_users" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;Header&quot;: {&#xd;
+    &quot;context&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbra&quot;,&#xd;
+      &quot;authToken&quot;: &quot;${AUTHTOKEN}&quot;,&#xd;
+      &quot;nosession&quot;: {},&#xd;
+      &quot;userAgent&quot;: {&#xd;
+        &quot;name&quot;: &quot;jmeter-soap&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  },&#xd;
+ &quot;Body&quot;: {&#xd;
+    &quot;MailRecallRequest&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbraMail&quot;,&#xd;
+      &quot;itemId&quot;: &quot;${Mail_Item_Id3}&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}&#xd;
+&#xd;
+</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/soap/MailRecallRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
+                    <stringProp name="Header.value">${csrfToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">referer</stringProp>
+                    <stringProp name="Header.value">https://${__P(HTTP.server)}/modern/email/Sent/message/${Mail_Item_Id1}</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">mail recall for 10 users failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - 5" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${__P(LOAD.TPS_PERCENT.5)}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="zcs_login" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="zcs_Login" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+       &lt;authToken/&gt;&#xd;
+       &lt;nosession/&gt;&#xd;
+       &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+   &lt;AuthRequest xmlns=&quot;urn:zimbraAccount&quot; csrfTokenSecured=&quot;1&quot;&gt;&#xd;
+     &lt;account by=&quot;name&quot;&gt;${User1}&lt;/account&gt;&#xd;
+     &lt;password&gt;${__P(HTTP.admin.pass)}&lt;/password&gt;&#xd;
+   &lt;/AuthRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.port">9071</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/admin/soap/AuthRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="AUTHTOKEN" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">AUTHTOKEN</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&lt;AuthResponse xmlns=&quot;urn:zimbraAccount&quot;&gt;&lt;authToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&lt;/authToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.default">NA</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="csrfToken" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">csrfToken</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&lt;csrfToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&lt;/csrfToken&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.default">NA</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">Login failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="save draft_100" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="savedraft_100_users" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;Header&quot;: {&#xd;
+    &quot;context&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbra&quot;,&#xd;
+      &quot;authToken&quot;: &quot;${AUTHTOKEN}&quot;,&#xd;
+      &quot;nosession&quot;: {},&#xd;
+      &quot;userAgent&quot;: {&#xd;
+        &quot;name&quot;: &quot;jmeter-soap&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  },&#xd;
+  &quot;Body&quot;: {&#xd;
+    &quot;SaveDraftRequest&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbraMail&quot;,&#xd;
+      &quot;m&quot;: {&#xd;
+        &quot;su&quot;: &quot;Save Draft Test&quot;,&#xd;
+        &quot;mp&quot;: {&#xd;
+          &quot;ct&quot;: &quot;text/plain&quot;,&#xd;
+          &quot;content&quot;: &quot;This is save message in draft from zsoap jmeter test&quot;&#xd;
+        }&#xd;
+      }&#xd;
+    }&#xd;
+  }&#xd;
+}&#xd;
+</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/soap/SaveDraftRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
+                    <stringProp name="Header.value">${csrfToken}</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">save draft failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="DRAFTID4" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">DRAFTID4</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&quot;id&quot;:&quot;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&quot;,&quot;fr&quot;:</stringProp>
+                <stringProp name="BoundaryExtractor.default">NA</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="send message_100" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="send_message_100_users" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;Header&quot;: {&#xd;
+    &quot;context&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbra&quot;,&#xd;
+      &quot;authToken&quot;: &quot;${AUTHTOKEN}&quot;,&#xd;
+      &quot;nosession&quot;: {},&#xd;
+      &quot;userAgent&quot;: {&#xd;
+        &quot;name&quot;: &quot;jmeter-soap&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  },&#xd;
+  &quot;Body&quot;: {&#xd;
+    &quot;SendMsgRequest&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbraMail&quot;,&#xd;
+      &quot;m&quot;: {&#xd;
+        &quot;su&quot;: &quot;Hello World&quot;,&#xd;
+        &quot;id&quot;: &quot;${DRAFTID3}&quot;,&#xd;
+        &quot;l&quot;: &quot;6&quot;,&#xd;
+        &quot;f&quot;: &quot;d&quot;,&#xd;
+        &quot;did&quot;: &quot;${DRAFTID3}&quot;,&#xd;
+        &quot;e&quot;: [&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User1}&quot;,&#xd;
+            &quot;t&quot;: &quot;f&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User2}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User3}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User4}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User5}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User6}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User7}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User8}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User9}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User10}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User11}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+             {&#xd;
+            &quot;a&quot;: &quot;${User12}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User13}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User14}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User15}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User16}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User17}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User18}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User19}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User20}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User21}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User22}&quot;,&#xd;
+            &quot;t&quot;: &quot;f&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User23}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User24}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User25}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User26}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User27}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User28}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User29}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User30}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User31}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User32}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+             {&#xd;
+            &quot;a&quot;: &quot;${User33}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User34}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User35}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User36}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User37}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User38}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User39}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User40}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User41}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User42}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User43}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User44}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User45}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User46}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User47}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User48}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User49}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User50}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User51}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User52}&quot;,&#xd;
+            &quot;t&quot;: &quot;f&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User53}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User54}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User55}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User56}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User57}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User58}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User59}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User60}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User61}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User62}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+             {&#xd;
+            &quot;a&quot;: &quot;${User63}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User64}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User65}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User66}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User67}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User68}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User69}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User70}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User71}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User72}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User73}&quot;,&#xd;
+            &quot;t&quot;: &quot;f&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User74}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User75}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User76}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User77}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User78}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User79}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User80}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User81}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User82}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User83}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+             {&#xd;
+            &quot;a&quot;: &quot;${User84}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User85}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User86}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User87}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User88}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User89}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User90}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User91}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User92}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User93}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User94}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User95}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User96}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User97}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;a&quot;: &quot;${User98}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User99}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User100}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          },&#xd;
+           {&#xd;
+            &quot;a&quot;: &quot;${User101}&quot;,&#xd;
+            &quot;t&quot;: &quot;t&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;mp&quot;: {&#xd;
+          &quot;ct&quot;: &quot;text/plain&quot;,&#xd;
+          &quot;content&quot;: &quot;This is test message sent from zsoap jmeter test&quot;&#xd;
+        }&#xd;
+      }&#xd;
+    }&#xd;
+  }&#xd;
+}&#xd;
+</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/soap/SendMsgRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
+                    <stringProp name="Header.value">${csrfToken}</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="Mail_Item_Id4" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">Mail_Item_Id4</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">{&quot;SendMsgResponse&quot;:{&quot;m&quot;:[{&quot;id&quot;:&quot;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">&quot;}],&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;}},&quot;_jsns&quot;:&quot;urn:zimbraSoap&quot;}</stringProp>
+                <stringProp name="BoundaryExtractor.default">Not found</stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">send message 20 users failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Mail Recall 100" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">true</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="mail_recall_100_users" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;Header&quot;: {&#xd;
+    &quot;context&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbra&quot;,&#xd;
+      &quot;authToken&quot;: &quot;${AUTHTOKEN}&quot;,&#xd;
+      &quot;nosession&quot;: {},&#xd;
+      &quot;userAgent&quot;: {&#xd;
+        &quot;name&quot;: &quot;jmeter-soap&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  },&#xd;
+ &quot;Body&quot;: {&#xd;
+    &quot;MailRecallRequest&quot;: {&#xd;
+      &quot;_jsns&quot;: &quot;urn:zimbraMail&quot;,&#xd;
+      &quot;itemId&quot;: &quot;${Mail_Item_Id4}&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}&#xd;
+&#xd;
+</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.path">service/soap/MailRecallRequest</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
+                    <stringProp name="Header.value">${csrfToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">referer</stringProp>
+                    <stringProp name="Header.value">https://${__P(HTTP.server)}/modern/email/Sent/message/${Mail_Item_Id1}</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message">mail recall for 10 users failed</stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename">${__P(jmetercsv,${__P(REQUEST.log)})}</stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <BackendListener guiclass="BackendListenerGui" testclass="BackendListener" testname="Backend Listener" enabled="true">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="influxdbMetricsSender" elementType="Argument">
+                <stringProp name="Argument.name">influxdbMetricsSender</stringProp>
+                <stringProp name="Argument.value">org.apache.jmeter.visualizers.backend.influxdb.HttpMetricsSender</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="influxdbUrl" elementType="Argument">
+                <stringProp name="Argument.name">influxdbUrl</stringProp>
+                <stringProp name="Argument.value">http://${__P(INFLUXDB.server)}:${__P(INFLUXDB.port)}/write?db=jmeter</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="application" elementType="Argument">
+                <stringProp name="Argument.name">application</stringProp>
+                <stringProp name="Argument.value">Mail_Recall</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="measurement" elementType="Argument">
+                <stringProp name="Argument.name">measurement</stringProp>
+                <stringProp name="Argument.value">jmeter</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="summaryOnly" elementType="Argument">
+                <stringProp name="Argument.name">summaryOnly</stringProp>
+                <stringProp name="Argument.value">false</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="samplersRegex" elementType="Argument">
+                <stringProp name="Argument.name">samplersRegex</stringProp>
+                <stringProp name="Argument.value">.*</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="percentiles" elementType="Argument">
+                <stringProp name="Argument.name">percentiles</stringProp>
+                <stringProp name="Argument.value">90</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="testTitle" elementType="Argument">
+                <stringProp name="Argument.name">testTitle</stringProp>
+                <stringProp name="Argument.value">mail_recall_load_test</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="eventTags" elementType="Argument">
+                <stringProp name="Argument.name">eventTags</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">org.apache.jmeter.visualizers.backend.influxdb.InfluxdbBackendListenerClient</stringProp>
+        </BackendListener>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
