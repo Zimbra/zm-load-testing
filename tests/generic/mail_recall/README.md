@@ -43,11 +43,12 @@ LOAD.TPS_PERCENT.1 to LOAD.TPS_PERCENT.5 are used in advanced chat
 |LOAD.RPS.start                |1    |requests Per sec startup point              |
 |LOAD.RPS.duration             |3600 |requests Per sec end point	          |
 |LOAD.RPS.end                  |1    |throughput shaping timer duration in sec    |
-|LOAD.TPS_PERCENT.1            |20.0  |throughput controller in percentage         |
-|LOAD.TPS_PERCENT.2            |20.0   |throughput controller in percentage         |
-|LOAD.TPS_PERCENT.3            |20.0   |throughput controller in percentage         |
-|LOAD.TPS_PERCENT.4            |20.0   |throughput controller in percentage         |
-|LOAD.TPS_PERCENT.5            |20.0   |throughput controller in percentage         |
+|Load.timer.duration           |10000|timer/sleep duration in millisec            |
+|LOAD.TPS_PERCENT.1            |20.0 |throughput controller in percentage         |
+|LOAD.TPS_PERCENT.2            |20.0 |throughput controller in percentage         |
+|LOAD.TPS_PERCENT.3            |20.0 |throughput controller in percentage         |
+|LOAD.TPS_PERCENT.4            |20.0 |throughput controller in percentage         |
+|LOAD.TPS_PERCENT.5            |20.0 |throughput controller in percentage         |
 
 # Test Execution Steps
 
@@ -77,7 +78,7 @@ LOAD.TPS_PERCENT.1 to LOAD.TPS_PERCENT.5 are used in advanced chat
 4. test result files will be generated under logs folder
 
    ```
-   $ logs/generic-generic-mail-recall-jmeter.log   --- Jmeter Logs
-   $ logs/generic-generic-mail-recall-requests.csv	--- Transaction Response Time Logs
+   $ logs/generic-mail-recall-jmeter.log   --- Jmeter Logs
+   $ logs/generic-mail-recall-requests.csv --- Transaction Response Time Logs
    ```
 
