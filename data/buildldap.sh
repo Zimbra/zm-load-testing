@@ -1,11 +1,12 @@
 #! /bin/bash
-
+# Loop to generate LDIF entries for domains from 1 to 10
 for i in {1..10}; do
  ctsmts=$(date -u +"%Y%m%d%H%M%SZ")
- entry1=$(date -u +"%Y%m%d%H%M%S.%6NZ")
+ entry1=$(date -u +"%Y%m%d%H%M%S.%6NZ")  
  zct=$(date -u +"%Y%m%d%H%M%S.%3NZ")
  uuid1=$(uuidgen)
-
+ 
+# Output LDIF entry for the domain object
  echo dn: dc=some"$i",dc=com
  echo zimbraDomainStatus: active
  echo zimbraDomainType: local
@@ -27,6 +28,7 @@ for i in {1..10}; do
  echo modifiersName: uid=zimbra,cn=admins,cn=zimbra
  echo modifyTimestamp: "$ctsmts"
 
+# Create LDIF entry for organizational unit 'people' under the domain
  echo ""
  uuid2=$(uuidgen)
  entry2=$(date -u +"%Y%m%d%H%M%S.%6NZ")
@@ -42,6 +44,7 @@ for i in {1..10}; do
  echo modifiersName: uid=zimbra,cn=admins,cn=zimbra
  echo modifyTimestamp: "$ctsmts"
 
+# Create LDIF entry for 'groups' container under the domain
  echo ""
  uuid3=$(uuidgen)
  entry3=$(date -u +"%Y%m%d%H%M%S.%6NZ")
@@ -58,4 +61,3 @@ for i in {1..10}; do
  echo modifyTimestamp: "$ctsmts"
  echo ""
 done
-
