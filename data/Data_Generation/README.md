@@ -112,7 +112,7 @@ This script uploads data created in previous script to respective user mailboxes
 
 ## Requirements
 - Change the path in script to point to folder generated in Script#1
-  - DATA_ROOT="/opt/zimbra/datacreation"
+  - DATA_ROOT="/opt/zimbra/dataCreation"
 - Create below folders/files if there is any permission issues:
   - /opt/zimbra/upload.log
   - /opt/zimbra/tmp
