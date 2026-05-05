@@ -1,6 +1,12 @@
-LOAD.duration=130
+LOAD.duration=7200
 LOAD.delay=0
-LOAD.EWS.users=1
-LOAD.EWS.userduration=1
-LOAD.EWS.rampup=0
-LOAD.EWS.loopcount=1
+LOAD.EWS.users=30
+LOAD.EWS.userduration=50
+LOAD.EWS.rampup=10
+LOAD.EWS.loopcount=-1
+LOAD.RPS.start=10
+LOAD.RPS.end=20
+LOAD.TPS_PERCENT.1=60
+LOAD.TPS_PERCENT.2=10
+LOAD.TPS_PERCENT.3=10
+LOAD.TPS_PERCENT.4=20
