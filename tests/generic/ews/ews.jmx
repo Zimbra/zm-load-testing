@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.2">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
-      <stringProp name="TestPlan.comments"></stringProp>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="EWS Test Plan" enabled="true">
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
-      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-        <collectionProp name="Arguments.arguments"/>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="Global Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="CAL_START_OFFSET_DAYS" elementType="Argument">
+            <stringProp name="Argument.name">CAL_START_OFFSET_DAYS</stringProp>
+            <stringProp name="Argument.value">${__P(CAL_START_OFFSET_DAYS,0)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="CAL_RANGE_DAYS" elementType="Argument">
+            <stringProp name="Argument.name">CAL_RANGE_DAYS</stringProp>
+            <stringProp name="Argument.value">${__P(CAL_RANGE_DAYS,1)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="ns2" elementType="Argument">
+            <stringProp name="Argument.name">ns2</stringProp>
+            <stringProp name="Argument.value">http://schemas.microsoft.com/exchange/services/2006/types</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
       </elementProp>
-      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">false</boolProp>
     </TestPlan>
     <hashTree>
       <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
@@ -102,41 +117,13 @@
             <threadCounts>true</threadCounts>
           </value>
         </objProp>
-        <objProp>
-          <name></name>
-          <value class="SampleSaveConfiguration">
-            <time>true</time>
-            <latency>true</latency>
-            <timestamp>true</timestamp>
-            <success>true</success>
-            <label>true</label>
-            <code>true</code>
-            <message>true</message>
-            <threadName>true</threadName>
-            <dataType>true</dataType>
-            <encoding>false</encoding>
-            <assertions>true</assertions>
-            <subresults>true</subresults>
-            <responseData>false</responseData>
-            <samplerData>false</samplerData>
-            <xml>false</xml>
-            <fieldNames>false</fieldNames>
-            <responseHeaders>false</responseHeaders>
-            <requestHeaders>false</requestHeaders>
-            <responseDataOnError>false</responseDataOnError>
-            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
-            <assertionsResultsToSave>0</assertionsResultsToSave>
-            <bytes>true</bytes>
-            <threadCounts>true</threadCounts>
-          </value>
-        </objProp>
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
       <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Accounts" enabled="true">
         <stringProp name="filename">${__P(ACCOUNTS.csv)}</stringProp>
         <stringProp name="fileEncoding"></stringProp>
-        <stringProp name="variableNames">USER,PASS</stringProp>
+        <stringProp name="variableNames">USER,PASS,USER2</stringProp>
         <stringProp name="delimiter">,</stringProp>
         <boolProp name="quotedData">false</boolProp>
         <boolProp name="recycle">true</boolProp>
@@ -156,21 +143,19 @@
         <stringProp name="HTTPSampler.implementation">Java</stringProp>
       </ConfigTestElement>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="EWS User" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="EWS" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Mail&amp;Sync Loop" enabled="true">
           <stringProp name="LoopController.loops">${__P(LOAD.EWS.loopcount)}</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">${__P(LOAD.EWS.users)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.EWS.rampup)}</stringProp>
-        <longProp name="ThreadGroup.start_time">1505165237000</longProp>
-        <longProp name="ThreadGroup.end_time">1505165237000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
         <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
         <boolProp name="ThreadGroup.delayedStart">false</boolProp>
-        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
       </ThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
@@ -218,81 +203,46 @@ if (commands.size() &gt; 0) {
           <boolProp name="AuthManager.controlledByThreadGroup">false</boolProp>
         </AuthManager>
         <hashTree/>
-        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Run_Commands" enabled="true">
-          <stringProp name="WhileController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
-        </WhileController>
+        <kg.apc.jmeter.timers.VariableThroughputTimer guiclass="kg.apc.jmeter.timers.VariableThroughputTimerGui" testclass="kg.apc.jmeter.timers.VariableThroughputTimer" testname="Throughput Shaping Timer" enabled="true">
+          <collectionProp name="load_profile">
+            <collectionProp name="-1272062526">
+              <stringProp name="1669959236">${__P(LOAD.RPS.start)}</stringProp>
+              <stringProp name="1244494845">${__P(LOAD.RPS.end)}</stringProp>
+              <stringProp name="-838175455">${__P(LOAD.duration)}</stringProp>
+            </collectionProp>
+          </collectionProp>
+        </kg.apc.jmeter.timers.VariableThroughputTimer>
+        <hashTree/>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller -1 " enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${__P(LOAD.TPS_PERCENT.1)}</stringProp>
+        </ThroughputController>
         <hashTree>
-          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Next_Command" enabled="true">
-            <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Command;
-
-ArrayList commands = vars.getObject(&quot;COMMANDS&quot;);
-if (commands.size() &gt; 0) {
-  //log.info(&quot;Testing: &quot;+commands);
-  Command c = commands.remove(0);
-  vars.put(&quot;COMMAND&quot;,c.getName());
-  for (Map.Entry a: c.argsSet()) {
-  	vars.put(a.getKey(),a.getValue());
-  }
-  //Should find better home and approach for this but for now default types
-  if (c.getName().equals(&quot;FolderActionRequest&quot;)) {
-    if (c.getArg(&quot;FOLDERACTIONTYPE&quot;) == null) {
-    	 vars.put(&quot;FOLDERACTIONTYPE&quot;,&quot;read&quot;);
-    }
-  }
-  if (c.getName().equals(&quot;GetFolderRequest&quot;)) {
-    if (c.getArg(&quot;PATH&quot;) == null) {
-      vars.put(&quot;PATH&quot;,&quot;/inbox&quot;);
-    }
-  }
-  if (c.getName().equals(&quot;TagActionRequest&quot;)) {
-    if (c.getArg(&quot;TAGACTIONTYPE&quot;) == null) {
-      vars.put(&quot;TAGACTIONTYPE&quot;,&quot;read&quot;);
-    }
-  }
-  //log.info(vars.get(&quot;COMMAND&quot;));
-}
-if (commands.size() == 0) {
-  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
-}</stringProp>
-            <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-          </BeanShellSampler>
-          <hashTree/>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Command_Execution" enabled="true">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Mail CRUD Flow" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
             <boolProp name="TransactionController.parent">false</boolProp>
           </TransactionController>
           <hashTree>
-            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Command Delay" enabled="true">
-              <stringProp name="ConstantTimer.delay">${DELAY}</stringProp>
-            </ConstantTimer>
-            <hashTree/>
-            <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="Commands" enabled="true">
-              <stringProp name="SwitchController.value">${COMMAND}</stringProp>
-            </SwitchController>
-            <hashTree>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="default" enabled="true">
-                <stringProp name="BeanShellSampler.query">log.info(Thread.currentThread().getName()+&quot; &quot;+vars.get(&quot;COMMAND&quot;)+&quot; not currently supported&quot;);</stringProp>
-                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-              </BeanShellSampler>
-              <hashTree/>
-              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Unique_Folder_Creation" enabled="true">
-                <stringProp name="scriptLanguage">groovy</stringProp>
-                <stringProp name="parameters"></stringProp>
-                <stringProp name="filename"></stringProp>
-                <stringProp name="cacheKey">true</stringProp>
-                <stringProp name="script">def ts = System.currentTimeMillis().toString()[-5..-1]  // last 5 digits of timestamp
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Folder_Creation_Logic" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">def ts = System.currentTimeMillis().toString()[-5..-1]  // last 5 digits of timestamp
 def rnd = (100..999).toList().get(new Random().nextInt(900))
 def uniqueFolder = &quot;EWS-${ts}-${rnd}&quot;
 vars.put(&quot;EWS_Folder_Created&quot;, uniqueFolder)</stringProp>
-              </JSR223PreProcessor>
-              <hashTree/>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CreateFolder" enabled="true">
-                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                  <collectionProp name="Arguments.arguments">
-                    <elementProp name="" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
+            </JSR223PreProcessor>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CreateFolder" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
 &lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&#xd;
       xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&gt;&#xd;
   &lt;soap:Body&gt;&#xd;
@@ -308,53 +258,70 @@ vars.put(&quot;EWS_Folder_Created&quot;, uniqueFolder)</stringProp>
     &lt;/CreateFolder&gt;&#xd;
   &lt;/soap:Body&gt;&#xd;
 &lt;/soap:Envelope&gt;</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                </elementProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
-                <boolProp name="HTTPSampler.image_parser">false</boolProp>
-                <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
-                <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
-                <boolProp name="HTTPSampler.md5">false</boolProp>
-                <intProp name="HTTPSampler.ipSourceType">0</intProp>
-              </HTTPSamplerProxy>
-              <hashTree>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
-                  <stringProp name="XPathExtractor.default"></stringProp>
-                  <stringProp name="XPathExtractor.refname">FOLDERID</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//ns2:FolderId/@Id</stringProp>
-                  <boolProp name="XPathExtractor.validate">false</boolProp>
-                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
-                  <boolProp name="XPathExtractor.namespace">true</boolProp>
-                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                </XPathExtractor>
-                <hashTree/>
-              </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CreateItem" enabled="true">
-                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                  <collectionProp name="Arguments.arguments">
-                    <elementProp name="" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
-&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&#xd;
-  xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&gt;&#xd;
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <XPath2Extractor guiclass="XPath2ExtractorGui" testclass="XPath2Extractor" testname="XPath2 Extractor" enabled="true">
+                <stringProp name="XPathExtractor2.default">NOT_FOUND</stringProp>
+                <stringProp name="XPathExtractor2.refname">FOLDERID</stringProp>
+                <stringProp name="XPathExtractor2.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor2.xpathQuery">//ns2:FolderId/@Id</stringProp>
+                <stringProp name="XPathExtractor2.namespaces">ns2=http://schemas.microsoft.com/exchange/services/2006/types</stringProp>
+              </XPath2Extractor>
+              <hashTree/>
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Timer" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">Thread.sleep(3000)</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223PostProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">content-type</stringProp>
+                    <stringProp name="Header.value">application/soap+xml;text/xml</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CreateItem" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
+&lt;soap:Envelope&#xd;
+    xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&#xd;
+    xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&#xd;
+    xmlns:m=&quot;http://schemas.microsoft.com/exchange/services/2006/messages&quot;&gt;&#xd;
   &lt;soap:Body&gt;&#xd;
-    &lt;CreateItem MessageDisposition=&quot;SendAndSaveCopy&quot; xmlns=&quot;http://schemas.microsoft.com/exchange/services/2006/messages&quot;&gt;&#xd;
-      &lt;SavedItemFolderId&gt;&#xd;
-        &lt;t:DistinguishedFolderId Id=&quot;drafts&quot; /&gt;&#xd;
-      &lt;/SavedItemFolderId&gt;&#xd;
-      &lt;Items&gt;&#xd;
+    &lt;m:CreateItem MessageDisposition=&quot;SendAndSaveCopy&quot;&gt;&#xd;
+      &lt;m:SavedItemFolderId&gt;&#xd;
+        &lt;t:DistinguishedFolderId Id=&quot;sentitems&quot;/&gt;&#xd;
+      &lt;/m:SavedItemFolderId&gt;&#xd;
+      &lt;m:Items&gt;&#xd;
         &lt;t:Message&gt;&#xd;
           &lt;t:ItemClass&gt;IPM.Note&lt;/t:ItemClass&gt;&#xd;
-          &lt;t:Subject&gt;EWS Testing&lt;/t:Subject&gt;&#xd;
-          &lt;t:Body BodyType=&quot;Text&quot;&gt;Testing EWS jmeter testing&lt;/t:Body&gt;&#xd;
+          &lt;t:Subject&gt;EWS Mail Test&lt;/t:Subject&gt;&#xd;
+          &lt;t:Body BodyType=&quot;Text&quot;&gt;Basic EWS mail test&lt;/t:Body&gt;&#xd;
           &lt;t:ToRecipients&gt;&#xd;
             &lt;t:Mailbox&gt;&#xd;
               &lt;t:EmailAddress&gt;${USER}&lt;/t:EmailAddress&gt;&#xd;
@@ -362,45 +329,66 @@ vars.put(&quot;EWS_Folder_Created&quot;, uniqueFolder)</stringProp>
           &lt;/t:ToRecipients&gt;&#xd;
           &lt;t:IsRead&gt;false&lt;/t:IsRead&gt;&#xd;
         &lt;/t:Message&gt;&#xd;
-      &lt;/Items&gt;&#xd;
-    &lt;/CreateItem&gt;&#xd;
+      &lt;/m:Items&gt;&#xd;
+    &lt;/m:CreateItem&gt;&#xd;
   &lt;/soap:Body&gt;&#xd;
 &lt;/soap:Envelope&gt;</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                </elementProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
-                <boolProp name="HTTPSampler.image_parser">false</boolProp>
-                <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
-                <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
-                <boolProp name="HTTPSampler.md5">false</boolProp>
-                <intProp name="HTTPSampler.ipSourceType">0</intProp>
-              </HTTPSamplerProxy>
-              <hashTree>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
-                  <stringProp name="XPathExtractor.default"></stringProp>
-                  <stringProp name="XPathExtractor.refname">ITEMID</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//ns2:ItemId/@Id</stringProp>
-                  <boolProp name="XPathExtractor.validate">false</boolProp>
-                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
-                  <boolProp name="XPathExtractor.namespace">true</boolProp>
-                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                </XPathExtractor>
-                <hashTree/>
-              </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DeleteFolder" enabled="true">
-                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                  <collectionProp name="Arguments.arguments">
-                    <elementProp name="" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <XPath2Extractor guiclass="XPath2ExtractorGui" testclass="XPath2Extractor" testname="XPath2 Extractor" enabled="true">
+                <stringProp name="XPathExtractor2.default">NOT_FOUND</stringProp>
+                <stringProp name="XPathExtractor2.refname">ITEMID</stringProp>
+                <stringProp name="XPathExtractor2.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor2.xpathQuery">//ns2:Message/ns2:ItemId/@Id</stringProp>
+                <stringProp name="XPathExtractor2.namespaces">ns2=http://schemas.microsoft.com/exchange/services/2006/types</stringProp>
+              </XPath2Extractor>
+              <hashTree/>
+              <XPath2Assertion guiclass="XPath2AssertionGui" testclass="XPath2Assertion" testname="XPath2 Assertion" enabled="true">
+                <boolProp name="XPath.negate">false</boolProp>
+                <stringProp name="XPath.xpath">/</stringProp>
+                <stringProp name="XPath.namespaces">//m:ResponseCode[text()=&quot;NoError&quot;]</stringProp>
+              </XPath2Assertion>
+              <hashTree/>
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Timer" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">Thread.sleep(3000)</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223PostProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">content-type</stringProp>
+                    <stringProp name="Header.value">application/soap+xml;text/xml</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DeleteFolder" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
 &lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&#xd;
                xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&gt;&#xd;
   &lt;soap:Body&gt;&#xd;
@@ -413,117 +401,173 @@ vars.put(&quot;EWS_Folder_Created&quot;, uniqueFolder)</stringProp>
     &lt;/DeleteFolder&gt;&#xd;
   &lt;/soap:Body&gt;&#xd;
 &lt;/soap:Envelope&gt;</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                </elementProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
-                <boolProp name="HTTPSampler.image_parser">false</boolProp>
-                <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
-                <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
-                <boolProp name="HTTPSampler.md5">false</boolProp>
-                <intProp name="HTTPSampler.ipSourceType">0</intProp>
-              </HTTPSamplerProxy>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Timer" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">Thread.sleep(3000)</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223PostProcessor>
               <hashTree/>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="FindItem" enabled="true">
-                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                  <collectionProp name="Arguments.arguments">
-                    <elementProp name="" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
-&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&#xd;
-               xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&gt;&#xd;
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">content-type</stringProp>
+                    <stringProp name="Header.value">application/soap+xml;text/xml</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="FindItem_Inbox" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
+&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&gt;&#xd;
   &lt;soap:Body&gt;&#xd;
-    &lt;FindItem xmlns=&quot;http://schemas.microsoft.com/exchange/services/2006/messages&quot;&#xd;
-               xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&#xd;
-              Traversal=&quot;Shallow&quot;&gt;&#xd;
+    &lt;FindItem xmlns=&quot;http://schemas.microsoft.com/exchange/services/2006/messages&quot; Traversal=&quot;Shallow&quot;&gt;&#xd;
       &lt;ItemShape&gt;&#xd;
-        &lt;t:BaseShape&gt;Default&lt;/t:BaseShape&gt;&#xd;
+        &lt;t:BaseShape&gt;IdOnly&lt;/t:BaseShape&gt;&#xd;
       &lt;/ItemShape&gt;&#xd;
       &lt;ParentFolderIds&gt;&#xd;
-        &lt;t:DistinguishedFolderId Id=&quot;${FINDITEMTYPE}&quot;/&gt;&#xd;
+        &lt;t:DistinguishedFolderId Id=&quot;inbox&quot;/&gt;&#xd;
       &lt;/ParentFolderIds&gt;&#xd;
     &lt;/FindItem&gt;&#xd;
   &lt;/soap:Body&gt;&#xd;
 &lt;/soap:Envelope&gt;</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                </elementProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
-                <boolProp name="HTTPSampler.image_parser">false</boolProp>
-                <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
-                <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
-                <boolProp name="HTTPSampler.md5">false</boolProp>
-                <intProp name="HTTPSampler.ipSourceType">0</intProp>
-              </HTTPSamplerProxy>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <XPath2Assertion guiclass="XPath2AssertionGui" testclass="XPath2Assertion" testname="XPath2 Assertion" enabled="true">
+                <boolProp name="XPath.negate">false</boolProp>
+                <stringProp name="XPath.xpath">/</stringProp>
+                <stringProp name="XPath.namespaces">//m:ResponseCode[text()=&quot;NoError&quot;]</stringProp>
+              </XPath2Assertion>
               <hashTree/>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="FindFolder" enabled="true">
-                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                  <collectionProp name="Arguments.arguments">
-                    <elementProp name="" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
-&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&#xd;
-  xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&gt;&#xd;
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Timer" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">Thread.sleep(3000)</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223PostProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">content-type</stringProp>
+                    <stringProp name="Header.value">application/soap+xml;text/xml</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="FindItem_Contacts" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
+&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&gt;&#xd;
   &lt;soap:Body&gt;&#xd;
-    &lt;FindFolder Traversal=&quot;Shallow&quot; xmlns=&quot;http://schemas.microsoft.com/exchange/services/2006/messages&quot;&gt;&#xd;
-      &lt;FolderShape&gt;&#xd;
-        &lt;t:BaseShape&gt;Default&lt;/t:BaseShape&gt;&#xd;
-      &lt;/FolderShape&gt;&#xd;
+    &lt;FindItem xmlns=&quot;http://schemas.microsoft.com/exchange/services/2006/messages&quot; Traversal=&quot;Shallow&quot;&gt;&#xd;
+      &lt;ItemShape&gt;&#xd;
+        &lt;t:BaseShape&gt;IdOnly&lt;/t:BaseShape&gt;&#xd;
+      &lt;/ItemShape&gt;&#xd;
       &lt;ParentFolderIds&gt;&#xd;
-        &lt;t:DistinguishedFolderId Id=&quot;root&quot;/&gt;&#xd;
+        &lt;t:DistinguishedFolderId Id=&quot;contacts&quot;/&gt;&#xd;
       &lt;/ParentFolderIds&gt;&#xd;
-    &lt;/FindFolder&gt;&#xd;
+    &lt;/FindItem&gt;&#xd;
   &lt;/soap:Body&gt;&#xd;
 &lt;/soap:Envelope&gt;</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                </elementProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
-                <boolProp name="HTTPSampler.image_parser">false</boolProp>
-                <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
-                <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
-                <boolProp name="HTTPSampler.md5">false</boolProp>
-                <intProp name="HTTPSampler.ipSourceType">0</intProp>
-              </HTTPSamplerProxy>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <XPath2Assertion guiclass="XPath2AssertionGui" testclass="XPath2Assertion" testname="XPath2 Assertion" enabled="true">
+                <boolProp name="XPath.negate">false</boolProp>
+                <stringProp name="XPath.xpath">/</stringProp>
+                <stringProp name="XPath.namespaces">//m:ResponseCode[text()=&quot;NoError&quot;]</stringProp>
+              </XPath2Assertion>
               <hashTree/>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetItem" enabled="true">
-                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                  <collectionProp name="Arguments.arguments">
-                    <elementProp name="" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
-&lt;soap:Envelope&#xd;
-  xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xd;
-  xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&#xd;
-  xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&#xd;
-  xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&gt;&#xd;
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Timer" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">Thread.sleep(3000)</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223PostProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">content-type</stringProp>
+                    <stringProp name="Header.value">application/soap+xml;text/xml</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetItem" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
+&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&gt;&#xd;
   &lt;soap:Body&gt;&#xd;
-    &lt;GetItem&#xd;
-      xmlns=&quot;http://schemas.microsoft.com/exchange/services/2006/messages&quot;&#xd;
-      xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&gt;&#xd;
+    &lt;GetItem xmlns=&quot;http://schemas.microsoft.com/exchange/services/2006/messages&quot;&gt;&#xd;
       &lt;ItemShape&gt;&#xd;
-        &lt;t:BaseShape&gt;Default&lt;/t:BaseShape&gt;&#xd;
+        &lt;t:BaseShape&gt;AllProperties&lt;/t:BaseShape&gt;&#xd;
         &lt;t:IncludeMimeContent&gt;true&lt;/t:IncludeMimeContent&gt;&#xd;
       &lt;/ItemShape&gt;&#xd;
       &lt;ItemIds&gt;&#xd;
@@ -532,22 +576,483 @@ vars.put(&quot;EWS_Folder_Created&quot;, uniqueFolder)</stringProp>
     &lt;/GetItem&gt;&#xd;
   &lt;/soap:Body&gt;&#xd;
 &lt;/soap:Envelope&gt;</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                </elementProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
-                <boolProp name="HTTPSampler.image_parser">false</boolProp>
-                <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
-                <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
-                <boolProp name="HTTPSampler.md5">false</boolProp>
-                <intProp name="HTTPSampler.ipSourceType">0</intProp>
-              </HTTPSamplerProxy>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <XPath2Assertion guiclass="XPath2AssertionGui" testclass="XPath2Assertion" testname="XPath2 Assertion" enabled="true">
+                <boolProp name="XPath.negate">false</boolProp>
+                <stringProp name="XPath.xpath">/</stringProp>
+                <stringProp name="XPath.namespaces">//m:ResponseCode[text()=&quot;NoError&quot;]</stringProp>
+              </XPath2Assertion>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">content-type</stringProp>
+                    <stringProp name="Header.value">application/soap+xml;text/xml</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Sync Flow" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SyncFolderHierarchy" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
+&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;SyncFolderHierarchy xmlns=&quot;http://schemas.microsoft.com/exchange/services/2006/messages&quot;&gt;&#xd;
+      &lt;FolderShape&gt;&#xd;
+        &lt;t:BaseShape&gt;IdOnly&lt;/t:BaseShape&gt;&#xd;
+      &lt;/FolderShape&gt;&#xd;
+      &lt;SyncFolderId&gt;&#xd;
+        &lt;t:DistinguishedFolderId Id=&quot;msgfolderroot&quot;/&gt;&#xd;
+      &lt;/SyncFolderId&gt;&#xd;
+      &lt;SyncState&gt;&lt;/SyncState&gt;&#xd;
+    &lt;/SyncFolderHierarchy&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <XPath2Assertion guiclass="XPath2AssertionGui" testclass="XPath2Assertion" testname="XPath2 Assertion" enabled="true">
+                <boolProp name="XPath.negate">false</boolProp>
+                <stringProp name="XPath.xpath">/</stringProp>
+                <stringProp name="XPath.namespaces">//m:ResponseCode[text()=&quot;NoError&quot;]</stringProp>
+              </XPath2Assertion>
+              <hashTree/>
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Timer" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">Thread.sleep(3000)</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223PostProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">content-type</stringProp>
+                    <stringProp name="Header.value">application/soap+xml;text/xml</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SyncFolderItems" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
+&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;SyncFolderItems xmlns=&quot;http://schemas.microsoft.com/exchange/services/2006/messages&quot;&gt;&#xd;
+      &lt;ItemShape&gt;&#xd;
+        &lt;t:BaseShape&gt;IdOnly&lt;/t:BaseShape&gt;&#xd;
+      &lt;/ItemShape&gt;&#xd;
+      &lt;SyncFolderId&gt;&#xd;
+        &lt;t:DistinguishedFolderId Id=&quot;inbox&quot;/&gt;&#xd;
+      &lt;/SyncFolderId&gt;&#xd;
+      &lt;SyncState&gt;&lt;/SyncState&gt;&#xd;
+      &lt;MaxChangesReturned&gt;100&lt;/MaxChangesReturned&gt;&#xd;
+    &lt;/SyncFolderItems&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <XPath2Extractor guiclass="XPath2ExtractorGui" testclass="XPath2Extractor" testname="XPath2 Extractor" enabled="true">
+                <stringProp name="XPathExtractor2.default">NOT_FOUND</stringProp>
+                <stringProp name="XPathExtractor2.refname">SYNCSTATE_INBOX</stringProp>
+                <stringProp name="XPathExtractor2.matchNumber">1</stringProp>
+                <stringProp name="XPathExtractor2.xpathQuery">//m:SyncFolderItemsResponseMessage/m:SyncState/text()</stringProp>
+                <stringProp name="XPathExtractor2.namespaces">ns2=http://schemas.microsoft.com/exchange/services/2006/types</stringProp>
+              </XPath2Extractor>
+              <hashTree/>
+              <XPath2Assertion guiclass="XPath2AssertionGui" testclass="XPath2Assertion" testname="XPath2 Assertion" enabled="true">
+                <boolProp name="XPath.negate">false</boolProp>
+                <stringProp name="XPath.xpath">/</stringProp>
+                <stringProp name="XPath.namespaces">//m:ResponseCode[text()=&quot;NoError&quot;]</stringProp>
+              </XPath2Assertion>
+              <hashTree/>
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Timer" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">Thread.sleep(3000)</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223PostProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">content-type</stringProp>
+                    <stringProp name="Header.value">application/soap+xml;text/xml</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - 2" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${__P(LOAD.TPS_PERCENT.2)}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Single Meeting Flow" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CreateItem_SingleMeeting" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
+&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&#xd;
+               xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;CreateItem xmlns=&quot;http://schemas.microsoft.com/exchange/services/2006/messages&quot; SendMeetingInvitations=&quot;SendToAllAndSaveCopy&quot;&gt;&#xd;
+      &lt;SavedItemFolderId&gt;&#xd;
+        &lt;t:DistinguishedFolderId Id=&quot;calendar&quot;/&gt;&#xd;
+      &lt;/SavedItemFolderId&gt;&#xd;
+      &lt;Items&gt;&#xd;
+        &lt;t:CalendarItem&gt;&#xd;
+          &lt;t:Subject&gt;EWS Single Meeting&lt;/t:Subject&gt;&#xd;
+          &lt;t:Start&gt;${__timeShift(yyyy-MM-dd&apos;T&apos;HH:mm:ss,,${CAL_START_OFFSET_DAYS}d,)}&lt;/t:Start&gt;&#xd;
+          &lt;t:End&gt;${__timeShift(yyyy-MM-dd&apos;T&apos;HH:mm:ss,,${CAL_START_OFFSET_DAYS}d,3600000)}&lt;/t:End&gt;&#xd;
+          &lt;t:Location&gt;Conference Room&lt;/t:Location&gt;&#xd;
+          &lt;t:RequiredAttendees&gt;&#xd;
+            &lt;t:Attendee&gt;&#xd;
+              &lt;t:Mailbox&gt;&#xd;
+                &lt;t:EmailAddress&gt;${USER2}&lt;/t:EmailAddress&gt;&#xd;
+              &lt;/t:Mailbox&gt;&#xd;
+            &lt;/t:Attendee&gt;&#xd;
+          &lt;/t:RequiredAttendees&gt;&#xd;
+        &lt;/t:CalendarItem&gt;&#xd;
+      &lt;/Items&gt;&#xd;
+    &lt;/CreateItem&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <XPath2Extractor guiclass="XPath2ExtractorGui" testclass="XPath2Extractor" testname="XPath2 Extractor" enabled="true">
+                <stringProp name="XPathExtractor2.default">NOT_FOUND</stringProp>
+                <stringProp name="XPathExtractor2.refname">CAL_ITEMID</stringProp>
+                <stringProp name="XPathExtractor2.matchNumber">1</stringProp>
+                <stringProp name="XPathExtractor2.xpathQuery">//ns2:CalendarItem/ns2:ItemId/@Id</stringProp>
+                <stringProp name="XPathExtractor2.namespaces">ns2=http://schemas.microsoft.com/exchange/services/2006/types</stringProp>
+              </XPath2Extractor>
+              <hashTree/>
+              <XPath2Assertion guiclass="XPath2AssertionGui" testclass="XPath2Assertion" testname="XPath2 Assertion" enabled="true">
+                <boolProp name="XPath.negate">false</boolProp>
+                <stringProp name="XPath.xpath"></stringProp>
+                <stringProp name="XPath.namespaces">//m:ResponseCode[text()=&quot;NoError&quot;]</stringProp>
+              </XPath2Assertion>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">content-type</stringProp>
+                    <stringProp name="Header.value">application/soap+xml;text/xml</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - 3" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${__P(LOAD.TPS_PERCENT.3)}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="FindFolder" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="FindFolder" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
+&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;FindFolder xmlns=&quot;http://schemas.microsoft.com/exchange/services/2006/messages&quot; Traversal=&quot;Deep&quot;&gt;&#xd;
+      &lt;FolderShape&gt;&#xd;
+        &lt;t:BaseShape&gt;Default&lt;/t:BaseShape&gt;&#xd;
+      &lt;/FolderShape&gt;&#xd;
+      &lt;ParentFolderIds&gt;&#xd;
+        &lt;t:DistinguishedFolderId Id=&quot;inbox&quot;&gt;&#xd;
+          &lt;t:Mailbox&gt;&#xd;
+            &lt;t:EmailAddress&gt;${USER}&lt;/t:EmailAddress&gt;&#xd;
+          &lt;/t:Mailbox&gt;&#xd;
+        &lt;/t:DistinguishedFolderId&gt;&#xd;
+      &lt;/ParentFolderIds&gt;&#xd;
+    &lt;/FindFolder&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <XPath2Assertion guiclass="XPath2AssertionGui" testclass="XPath2Assertion" testname="XPath2 Assertion" enabled="true">
+                <boolProp name="XPath.negate">false</boolProp>
+                <stringProp name="XPath.xpath"></stringProp>
+                <stringProp name="XPath.namespaces">//m:ResponseCode[text()=&quot;NoError&quot;]</stringProp>
+              </XPath2Assertion>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">content-type</stringProp>
+                    <stringProp name="Header.value">application/soap+xml;text/xml</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller - 4" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${__P(LOAD.TPS_PERCENT.4)}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="GetUserAvailability" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetUserAvailability" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
+&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&#xd;
+               xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;GetUserAvailabilityRequest xmlns=&quot;http://schemas.microsoft.com/exchange/services/2006/messages&quot;&gt;&#xd;
+      &lt;t:TimeZone&gt;&#xd;
+        &lt;t:Bias&gt;0&lt;/t:Bias&gt;&#xd;
+        &lt;t:StandardTime&gt;&#xd;
+          &lt;t:Bias&gt;0&lt;/t:Bias&gt;&#xd;
+          &lt;t:Time&gt;00:00:00&lt;/t:Time&gt;&#xd;
+          &lt;t:DayOrder&gt;1&lt;/t:DayOrder&gt;&#xd;
+          &lt;t:Month&gt;1&lt;/t:Month&gt;&#xd;
+          &lt;t:DayOfWeek&gt;Sunday&lt;/t:DayOfWeek&gt;&#xd;
+        &lt;/t:StandardTime&gt;&#xd;
+        &lt;t:DaylightTime&gt;&#xd;
+          &lt;t:Bias&gt;0&lt;/t:Bias&gt;&#xd;
+          &lt;t:Time&gt;00:00:00&lt;/t:Time&gt;&#xd;
+          &lt;t:DayOrder&gt;1&lt;/t:DayOrder&gt;&#xd;
+          &lt;t:Month&gt;6&lt;/t:Month&gt;&#xd;
+          &lt;t:DayOfWeek&gt;Sunday&lt;/t:DayOfWeek&gt;&#xd;
+        &lt;/t:DaylightTime&gt;&#xd;
+      &lt;/t:TimeZone&gt;&#xd;
+      &lt;MailboxDataArray&gt;&#xd;
+        &lt;t:MailboxData&gt;&#xd;
+          &lt;t:Email&gt;&#xd;
+            &lt;t:Address&gt;${USER}&lt;/t:Address&gt;&#xd;
+          &lt;/t:Email&gt;&#xd;
+          &lt;t:AttendeeType&gt;Required&lt;/t:AttendeeType&gt;&#xd;
+          &lt;t:ExcludeConflicts&gt;false&lt;/t:ExcludeConflicts&gt;&#xd;
+        &lt;/t:MailboxData&gt;&#xd;
+      &lt;/MailboxDataArray&gt;&#xd;
+      &lt;t:FreeBusyViewOptions&gt;&#xd;
+        &lt;t:TimeWindow&gt;&#xd;
+          &lt;t:StartTime&gt;${__timeShift(yyyy-MM-dd&apos;T&apos;HH:mm:ss,0,,)}&lt;/t:StartTime&gt;&#xd;
+          &lt;t:EndTime&gt;${__timeShift(yyyy-MM-dd&apos;T&apos;HH:mm:ss,1,,)}&lt;/t:EndTime&gt;&#xd;
+        &lt;/t:TimeWindow&gt;&#xd;
+        &lt;t:MergedFreeBusyIntervalInMinutes&gt;60&lt;/t:MergedFreeBusyIntervalInMinutes&gt;&#xd;
+        &lt;t:RequestedView&gt;Detailed&lt;/t:RequestedView&gt;&#xd;
+      &lt;/t:FreeBusyViewOptions&gt;&#xd;
+    &lt;/GetUserAvailabilityRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <XPath2Assertion guiclass="XPath2AssertionGui" testclass="XPath2Assertion" testname="XPath2 Assertion" enabled="true">
+                <boolProp name="XPath.negate">false</boolProp>
+                <stringProp name="XPath.xpath"></stringProp>
+                <stringProp name="XPath.namespaces">//m:ResponseCode[text()=&quot;NoError&quot;]</stringProp>
+              </XPath2Assertion>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">content-type</stringProp>
+                    <stringProp name="Header.value">application/soap+xml;text/xml</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="GetUserConfiguration" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetUserConfiguration" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xd;
+&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&#xd;
+               xmlns:t=&quot;http://schemas.microsoft.com/exchange/services/2006/types&quot;&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+    &lt;GetUserConfiguration xmlns=&quot;http://schemas.microsoft.com/exchange/services/2006/messages&quot;&gt;&#xd;
+      &lt;UserConfigurationName Name=&quot;OWA.Config&quot;&gt;&#xd;
+        &lt;t:DistinguishedFolderId Id=&quot;inbox&quot;/&gt;&#xd;
+      &lt;/UserConfigurationName&gt;&#xd;
+      &lt;UserConfigurationProperties&gt;All&lt;/UserConfigurationProperties&gt;&#xd;
+    &lt;/GetUserConfiguration&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+              <boolProp name="HTTPSampler.image_parser">false</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <boolProp name="HTTPSampler.md5">false</boolProp>
+              <intProp name="HTTPSampler.ipSourceType">0</intProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <XPath2Assertion guiclass="XPath2AssertionGui" testclass="XPath2Assertion" testname="XPath2 Assertion" enabled="true">
+                <boolProp name="XPath.negate">false</boolProp>
+                <stringProp name="XPath.xpath"></stringProp>
+                <stringProp name="XPath.namespaces">//m:ResponseCode[text()=&quot;NoError&quot;]</stringProp>
+              </XPath2Assertion>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">content-type</stringProp>
+                    <stringProp name="Header.value">application/soap+xml;text/xml</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
               <hashTree/>
             </hashTree>
           </hashTree>
