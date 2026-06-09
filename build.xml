@@ -6,6 +6,7 @@
   <property name="jmeter.home" location="/opt/apache-jmeter-5.6.2"/>
   <property name="env" value="config/env.prop"/>
   <property name="users" location="config/users.csv"/>
+  <property name="content" location="config/Autocomplete/content.csv"/
   <property name="chat_users" location="config/chat_users.csv"/>
   <property name="message" location="config/message.csv"/>
   <property name="emoji" location="config/Chat/emoji.csv"/>
@@ -71,6 +72,7 @@
     <antcall target="generic-chat"/>
     <antcall target="generic-1-1-chat"/>
     <antcall target="generic-advanced-chat"/>
+    <antcall target="generic-autocomplete"/>
     <antcall target="generic-mail-recall"/>
   </target>
   <target name="CSP2">
@@ -269,6 +271,18 @@
               <jmeterarg value="-q${basedir}/tests/generic/Chat/load.prop"/>
             </jmeter>
          </target>
+	<target name="generic-autocomplete" depends="src,logs">
+            <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/generic/Autocomplete/Suggest_autocomplete.jmx"
+                    jmeterlogfile="${logs}/generic-autocomplete-jmeter.log"
+                    resultlog="${logs}/generic-autocomplete-requests.csv">
+              <property name="ACCOUNTS.csv" value="${users}"/>
+              <property name="CONTENT.csv" value="${content}"/>
+              <property name="user.classpath" value="${zjmeter}"/>
+              <jmeterarg value="-q${basedir}/${env}"/>
+              <jmeterarg value="-q${basedir}/tests/generic/Autocomplete/load.prop"/>
+            </jmeter>
+          </target>
          <target name="generic-mail-recall" depends="src,logs">
             <jmeter jmeterhome="${jmeter.home}"
                     testplan="${basedir}/tests/generic/mail_recall/mail_recall.jmx"
