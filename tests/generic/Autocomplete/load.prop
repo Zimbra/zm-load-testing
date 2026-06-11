@@ -1,0 +1,8 @@
+LOAD.duration=3600
+LOAD.delay=0
+LOAD.users=1
+LOAD.rampup=1
+LOAD.loopcount=-1
+LOAD.RPS.start=10
+LOAD.RPS.end=10
+LOAD.RPS.duration=3600
