@@ -212,7 +212,7 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
           <stringProp name="WhileController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
         </WhileController>
         <hashTree>
-          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Next_Command">
+          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Next_Command" enabled="true">
             <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Command;
 
 ArrayList commands = vars.getObject(&quot;COMMANDS&quot;);
@@ -238,7 +238,7 @@ if (commands.size() == 0) {
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
-            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Command Delay">
+            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Command Delay" enabled="true">
               <stringProp name="ConstantTimer.delay">${DELAY}</stringProp>
             </ConstantTimer>
             <hashTree/>
@@ -405,7 +405,7 @@ SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="COPY">
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="COPY" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
@@ -437,7 +437,7 @@ SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="CREATE">
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="CREATE" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
@@ -467,7 +467,7 @@ SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="DELETE">
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="DELETE" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
@@ -1365,7 +1365,7 @@ SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID COPY">
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID COPY" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
@@ -1696,7 +1696,7 @@ SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="XLIST">
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="XLIST" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1737,7 +1737,7 @@ String continue_flag = &quot;true&quot;;
 
 try {
   log.info(Thread.currentThread().getName()+&quot; MOVE&quot;);
-  ic.move(&quot;1&quot;,vars.get(&quot;imap_folder1&quot;));
+  ic.sendCommand(&quot;1&quot;,vars.get(&quot;imap_folder1&quot;));
   //log.info(&quot;Command response is: &quot; + ic.getReplyString());
 } catch (Exception e) {
   SampleResult.setSuccessful(false);

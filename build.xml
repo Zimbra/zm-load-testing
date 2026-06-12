@@ -150,7 +150,7 @@
   </target>
   <target name="generic-imap" depends="src,logs">
     <jmeter jmeterhome="${jmeter.home}"
-            testplan="${basedir}/tests/generic/imap/imap_trace.jmx"
+            testplan="${basedir}/tests/generic/imap/imap.jmx"
             jmeterlogfile="${logs}/generic-imap-jmeter.log"
             resultlog="${logs}/generic-imap-requests.log">
       <property name="ACCOUNTS.csv" value="${users}"/>
