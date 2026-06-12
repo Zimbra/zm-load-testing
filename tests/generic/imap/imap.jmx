@@ -1696,7 +1696,7 @@ SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="XLIST" enabled="true">
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="XLIST">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1728,7 +1728,7 @@ SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="MOVE">
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="MOVE" enabled="false">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
@@ -1760,10 +1760,39 @@ SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
               </BeanShellSampler>
               <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="MOVE">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+  log.info(Thread.currentThread().getName() + &quot; MOVE&quot;);
+  ic.sendCommand(&quot;MOVE&quot;, &quot;1:10 \&quot;&quot; + vars.get(&quot;imap_folder1&quot;) + &quot;\&quot;&quot;);
+  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+} catch (Exception e) {
+  SampleResult.setSuccessful(false);
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)) {
+    continue_flag = &quot;false&quot;;
+  }
+  IsSuccess = false;
+  log.info(Thread.currentThread().getName() + &quot; MOVE: &quot; + e);
+}
+
+if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString().contains(&quot;MOVE completed&quot;))) {
+  SampleResult.setSuccessful(false);
+  IsSuccess = false;
+  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+}
+
+vars.put(&quot;CONTINUE&quot;, continue_flag);
+SampleResult.setResponseData(ic.getReplyString());
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+              </BeanShellSampler>
+              <hashTree/>
             </hashTree>
           </hashTree>
         </hashTree>
-        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="END" enabled="true">
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="END">
           <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 
