@@ -1696,7 +1696,7 @@ SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="XLIST">
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="XLIST" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1767,8 +1767,14 @@ String continue_flag = &quot;true&quot;;
 
 try {
   log.info(Thread.currentThread().getName() + &quot; MOVE&quot;);
+
+  // Create the target folder first (ignores error if it already exists)
+  ic.sendCommand(&quot;CREATE&quot;, &quot;\&quot;&quot; + vars.get(&quot;imap_folder1&quot;) + &quot;\&quot;&quot;);
+  log.info(&quot;CREATE response: &quot; + ic.getReplyString());
+
+  // Now move messages
   ic.sendCommand(&quot;MOVE&quot;, &quot;1:10 \&quot;&quot; + vars.get(&quot;imap_folder1&quot;) + &quot;\&quot;&quot;);
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
   if (e.getMessage().contains(&quot;Connection closed without indication&quot;)) {
