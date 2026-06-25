@@ -1785,29 +1785,64 @@ String continue_flag = &quot;true&quot;;
 try {
     log.info(Thread.currentThread().getName() + &quot; MOVE&quot;);
 
-    // Read from JMeter variables first, then JMeter properties, then default
+    // Validate IMAP client object
+    if (ic == null) {
+        throw new Exception(&quot;IMAPCLIENT object is null. IMAP connection is not available.&quot;);
+    }
+
+    /*
+     * SOURCE_FOLDER validation
+     */
     String sourceFolder = vars.get(&quot;SOURCE_FOLDER&quot;);
-    if (sourceFolder == null || sourceFolder.trim().isEmpty()) {
+
+    if (sourceFolder != null &amp;&amp; !sourceFolder.trim().isEmpty()) {
+        log.info(&quot;SOURCE_FOLDER found in JMeter variables: &quot; + sourceFolder);
+    } else {
         sourceFolder = props.get(&quot;SOURCE_FOLDER&quot;);
-    }
-    if (sourceFolder == null || sourceFolder.trim().isEmpty()) {
-        sourceFolder = &quot;INBOX&quot;;
+
+        if (sourceFolder != null &amp;&amp; !sourceFolder.trim().isEmpty()) {
+            log.info(&quot;SOURCE_FOLDER found in JMeter properties: &quot; + sourceFolder);
+        } else {
+            throw new Exception(&quot;SOURCE_FOLDER exception: SOURCE_FOLDER is missing or empty. Please provide SOURCE_FOLDER in JMeter variables or properties.&quot;);
+        }
     }
 
+    /*
+     * DESTINATION_FOLDER validation
+     */
     String destinationFolder = vars.get(&quot;DESTINATION_FOLDER&quot;);
-    if (destinationFolder == null || destinationFolder.trim().isEmpty()) {
+
+    if (destinationFolder != null &amp;&amp; !destinationFolder.trim().isEmpty()) {
+        log.info(&quot;DESTINATION_FOLDER found in JMeter variables: &quot; + destinationFolder);
+    } else {
         destinationFolder = props.get(&quot;DESTINATION_FOLDER&quot;);
-    }
-    if (destinationFolder == null || destinationFolder.trim().isEmpty()) {
-        destinationFolder = &quot;Drafts&quot;;
+
+        if (destinationFolder != null &amp;&amp; !destinationFolder.trim().isEmpty()) {
+            log.info(&quot;DESTINATION_FOLDER found in JMeter properties: &quot; + destinationFolder);
+        } else {
+            throw new Exception(&quot;DESTINATION_FOLDER exception: DESTINATION_FOLDER is missing or empty. Please provide DESTINATION_FOLDER in JMeter variables or properties.&quot;);
+        }
     }
 
+    /*
+     * MESSAGE_RANGE validation
+     * 1. JMeter variable MESSAGE_RANGE
+     * 2. JMeter property MESSAGE_RANGE
+     */
     String messageRange = vars.get(&quot;MESSAGE_RANGE&quot;);
-    if (messageRange == null || messageRange.trim().isEmpty()) {
+
+    if (messageRange != null &amp;&amp; !messageRange.trim().isEmpty()) {
+        log.info(&quot;MESSAGE_RANGE found in JMeter variables: &quot; + messageRange);
+    } else {
         messageRange = props.get(&quot;MESSAGE_RANGE&quot;);
-    }
-    if (messageRange == null || messageRange.trim().isEmpty()) {
-        messageRange = &quot;1:1&quot;;
+
+        if (messageRange != null &amp;&amp; !messageRange.trim().isEmpty()) {
+            log.info(&quot;MESSAGE_RANGE found in JMeter properties: &quot; + messageRange);
+        } else {
+            throw new RuntimeException(&quot;MESSAGE_RANGE is not set in JMeter variables or properties. &quot;
+            + &quot;Please define it via -JMESSAGE_RANGE=1:1 or in User Defined Variables.&quot;);
+            
+        }
     }
 
     // Quote folders for IMAP safety
@@ -1823,12 +1858,17 @@ try {
     String selectReply = ic.getReplyString();
     log.info(&quot;SELECT &quot; + sourceFolder + &quot; response: &quot; + selectReply);
 
-    if (!selectReply.contains(&quot;OK&quot;)) {
+    if (selectReply.contains(&quot;OK&quot;)) {
+        log.info(&quot;SELECT &quot; + sourceFolder + &quot; successful.&quot;);
+    } else {
         SampleResult.setSuccessful(false);
         IsSuccess = false;
-        log.info(&quot;SELECT &quot; + sourceFolder + &quot; failed: &quot; + selectReply);
+
+        String errorMessage = &quot;SELECT exception: SELECT &quot; + sourceFolder + &quot; failed. Response: &quot; + selectReply;
+        log.info(errorMessage);
+
         vars.put(&quot;CONTINUE&quot;, continue_flag);
-        SampleResult.setResponseData(selectReply);
+        SampleResult.setResponseData(errorMessage);
         SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
         return;
     }
@@ -1842,27 +1882,46 @@ try {
         (moveReply.contains(&quot;MOVE completed&quot;) || moveReply.contains(&quot;completed&quot;))) {
 
         SampleResult.setSuccessful(true);
-        log.info(&quot;Moved message range &quot; + messageRange + &quot; from &quot;
-                + sourceFolder + &quot; to &quot; + destinationFolder);
+
+        log.info(&quot;MOVE successful. Moved message range &quot; + messageRange
+                + &quot; from &quot; + sourceFolder
+                + &quot; to &quot; + destinationFolder);
 
     } else {
         SampleResult.setSuccessful(false);
         IsSuccess = false;
-        log.info(&quot;MOVE failed. Command response is: &quot; + moveReply);
+
+        String errorMessage = &quot;MOVE exception: MOVE failed for message range &quot;
+                + messageRange
+                + &quot; from &quot; + sourceFolder
+                + &quot; to &quot; + destinationFolder
+                + &quot;. Response: &quot; + moveReply;
+
+        log.info(errorMessage);
     }
 
     SampleResult.setResponseData(moveReply);
 
 } catch (Exception e) {
     SampleResult.setSuccessful(false);
+    IsSuccess = false;
 
-    if (e.getMessage() != null &amp;&amp;
-        e.getMessage().contains(&quot;Connection closed without indication&quot;)) {
+    String exceptionMessage = e.getMessage();
+
+    if (exceptionMessage != null &amp;&amp;
+        exceptionMessage.contains(&quot;Connection closed without indication&quot;)) {
         continue_flag = &quot;false&quot;;
+    } else {
+        continue_flag = &quot;true&quot;;
     }
 
-    IsSuccess = false;
-    log.info(Thread.currentThread().getName() + &quot; MOVE: &quot; + e);
+    String errorMessage = Thread.currentThread().getName()
+            + &quot; MOVE exception: &quot;
+            + e.toString();
+
+    log.info(errorMessage);
+
+    SampleResult.setResponseData(errorMessage);
 }
 
 vars.put(&quot;CONTINUE&quot;, continue_flag);
@@ -1874,46 +1933,92 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 import java.util.ArrayList;
 
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+IMAPClient ic = (IMAPClient) vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
-int moveCount = 1;
 
 try {
     log.info(Thread.currentThread().getName() + &quot; UID MOVE iteration&quot;);
 
-    // Read SOURCE_FOLDER from JMeter variables first, then properties, then default
+    // Validate IMAP client object
+    if (ic == null) {
+        throw new Exception(&quot;IMAPCLIENT exception: IMAPCLIENT object is null. IMAP connection is not available.&quot;);
+    }
+
+    /*
+     * SOURCE_FOLDER validation
+     */
     String sourceFolder = vars.get(&quot;SOURCE_FOLDER&quot;);
-    if (sourceFolder == null || sourceFolder.trim().isEmpty()) {
+
+    if (sourceFolder != null &amp;&amp; sourceFolder.trim().length() &gt; 0) {
+        log.info(&quot;SOURCE_FOLDER found in JMeter variables: &quot; + sourceFolder);
+    } else {
         sourceFolder = props.get(&quot;SOURCE_FOLDER&quot;);
-    }
-    if (sourceFolder == null || sourceFolder.trim().isEmpty()) {
-        sourceFolder = &quot;INBOX&quot;;
-    }
 
-    // Read DESTINATION_FOLDER from JMeter variables first, then properties, then default
-    String destinationFolder = vars.get(&quot;DESTINATION_FOLDER&quot;);
-    if (destinationFolder == null || destinationFolder.trim().isEmpty()) {
-        destinationFolder = props.get(&quot;DESTINATION_FOLDER&quot;);
-    }
-    if (destinationFolder == null || destinationFolder.trim().isEmpty()) {
-        destinationFolder = &quot;Drafts&quot;;
-    }
-
-    // Read MOVE_COUNT from JMeter variables first, then properties, then default
-    String moveCountStr = vars.get(&quot;MOVE_COUNT&quot;);
-    if (moveCountStr == null || moveCountStr.trim().isEmpty()) {
-        moveCountStr = props.get(&quot;MOVE_COUNT&quot;);
-    }
-
-    if (moveCountStr != null &amp;&amp; !moveCountStr.trim().isEmpty()) {
-        try {
-            moveCount = Integer.parseInt(moveCountStr.trim());
-        } catch (NumberFormatException nfe) {
-            log.info(&quot;Invalid MOVE_COUNT value: &quot; + moveCountStr + &quot;. Using default: &quot; + moveCount);
+        if (sourceFolder != null &amp;&amp; sourceFolder.trim().length() &gt; 0) {
+            log.info(&quot;SOURCE_FOLDER found in JMeter properties: &quot; + sourceFolder);
+        } else {
+            throw new Exception(&quot;SOURCE_FOLDER exception: SOURCE_FOLDER is missing or empty. Please provide SOURCE_FOLDER in JMeter variables or properties.&quot;);
         }
     }
 
-    // Quote folder names safely for IMAP command
+    /*
+     * DESTINATION_FOLDER validation
+     */
+    String destinationFolder = vars.get(&quot;DESTINATION_FOLDER&quot;);
+
+    if (destinationFolder != null &amp;&amp; destinationFolder.trim().length() &gt; 0) {
+        log.info(&quot;DESTINATION_FOLDER found in JMeter variables: &quot; + destinationFolder);
+    } else {
+        destinationFolder = props.get(&quot;DESTINATION_FOLDER&quot;);
+
+        if (destinationFolder != null &amp;&amp; destinationFolder.trim().length() &gt; 0) {
+            log.info(&quot;DESTINATION_FOLDER found in JMeter properties: &quot; + destinationFolder);
+        } else {
+            throw new Exception(&quot;DESTINATION_FOLDER exception: DESTINATION_FOLDER is missing or empty. Please provide DESTINATION_FOLDER in JMeter variables or properties.&quot;);
+        }
+    }
+
+    /*
+     * MOVE_COUNT validation
+     */
+    String moveCountStr = vars.get(&quot;MOVE_COUNT&quot;);
+
+    if (moveCountStr != null &amp;&amp; moveCountStr.trim().length() &gt; 0) {
+        log.info(&quot;MOVE_COUNT found in JMeter variables: &quot; + moveCountStr);
+    } else {
+        moveCountStr = props.get(&quot;MOVE_COUNT&quot;);
+
+        if (moveCountStr != null &amp;&amp; moveCountStr.trim().length() &gt; 0) {
+            log.info(&quot;MOVE_COUNT found in JMeter properties: &quot; + moveCountStr);
+        } else {
+            throw new Exception(&quot;MOVE_COUNT exception: MOVE_COUNT is missing or empty. Please provide MOVE_COUNT in JMeter variables or properties.&quot;);
+        }
+    }
+
+    /*
+     * Parse MOVE_COUNT
+     * No default or random value is used.
+     * moveCount is assigned only after valid parsing.
+     */
+    int moveCount;
+
+    try {
+        moveCount = Integer.parseInt(moveCountStr.trim());
+    } catch (NumberFormatException nfe) {
+        throw new Exception(&quot;MOVE_COUNT exception: Invalid MOVE_COUNT value: &quot;
+                + moveCountStr
+                + &quot;. MOVE_COUNT must be a valid integer.&quot;);
+    }
+
+    if (moveCount &gt; 0) {
+        log.info(&quot;MOVE_COUNT validation successful: &quot; + moveCount);
+    } else {
+        throw new Exception(&quot;MOVE_COUNT exception: Invalid MOVE_COUNT value: &quot;
+                + moveCount
+                + &quot;. MOVE_COUNT must be greater than 0.&quot;);
+    }
+
+    // Quote folders for IMAP safety
     String quotedSourceFolder = &quot;\&quot;&quot; + sourceFolder.replace(&quot;\&quot;&quot;, &quot;\\\&quot;&quot;) + &quot;\&quot;&quot;;
     String quotedDestinationFolder = &quot;\&quot;&quot; + destinationFolder.replace(&quot;\&quot;&quot;, &quot;\\\&quot;&quot;) + &quot;\&quot;&quot;;
 
@@ -1922,35 +2027,45 @@ try {
     log.info(&quot;MOVE_COUNT value used: &quot; + moveCount);
 
     // Step 1: SELECT source folder
-    // Re-select each iteration to refresh state
     ic.sendCommand(&quot;SELECT&quot;, quotedSourceFolder);
     String selectReply = ic.getReplyString();
 
     log.info(&quot;SELECT &quot; + sourceFolder + &quot; response: &quot; + selectReply);
 
-    if (!(selectReply.contains(&quot;OK&quot;) &amp;&amp; selectReply.contains(&quot;SELECT completed&quot;))) {
+    if (selectReply.indexOf(&quot;OK&quot;) &gt;= 0) {
+        log.info(&quot;SELECT &quot; + sourceFolder + &quot; successful.&quot;);
+    } else {
         SampleResult.setSuccessful(false);
         IsSuccess = false;
-        log.info(&quot;SELECT &quot; + sourceFolder + &quot; failed: &quot; + selectReply);
+
+        String errorMessage = &quot;SELECT exception: SELECT &quot;
+                + sourceFolder
+                + &quot; failed. Response: &quot;
+                + selectReply;
+
+        log.info(errorMessage);
+
         vars.put(&quot;CONTINUE&quot;, continue_flag);
-        SampleResult.setResponseData(selectReply);
+        SampleResult.setResponseData(errorMessage);
         SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
         return;
     }
 
-    // Step 1b: Parse EXISTS count from SELECT response
+    // Step 2: Parse EXISTS count from SELECT response
     int existsCount = 0;
     String[] selectLines = selectReply.split(&quot;\\r?\\n&quot;);
 
-    for (String s : selectLines) {
-        if (s.contains(&quot;EXISTS&quot;)) {
+    for (int i = 0; i &lt; selectLines.length; i++) {
+        String s = selectLines[i];
+
+        if (s.indexOf(&quot;EXISTS&quot;) &gt;= 0) {
             String[] parts = s.trim().split(&quot;\\s+&quot;);
 
             if (parts.length &gt;= 2) {
                 try {
                     existsCount = Integer.parseInt(parts[1]);
                 } catch (NumberFormatException nfe) {
-                    log.info(&quot;Unable to parse EXISTS from line: &quot; + s);
+                    log.info(&quot;EXISTS exception: Unable to parse EXISTS from line: &quot; + s);
                 }
             }
         }
@@ -1958,66 +2073,77 @@ try {
 
     log.info(sourceFolder + &quot; has &quot; + existsCount + &quot; messages&quot;);
 
-    if (existsCount == 0) {
+    if (existsCount &gt; 0) {
+        log.info(&quot;EXISTS validation successful. Message count: &quot; + existsCount);
+    } else {
         SampleResult.setSuccessful(false);
         IsSuccess = false;
-        log.info(sourceFolder + &quot; is empty — nothing to move.&quot;);
+
+        String errorMessage = &quot;EXISTS exception: &quot;
+                + sourceFolder
+                + &quot; is empty, nothing to move. 0 EXISTS.&quot;;
+
+        log.info(errorMessage);
+
         vars.put(&quot;CONTINUE&quot;, &quot;false&quot;);
-        SampleResult.setResponseData(sourceFolder + &quot; is empty (0 EXISTS). Stopping.&quot;);
+        SampleResult.setResponseData(errorMessage);
         SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
         return;
     }
 
-    // Step 2: UID FETCH first N messages dynamically
-    // After each MOVE, sequence numbers reset, so &quot;1:N&quot; always refers
-    // to the CURRENT first N messages in the selected source folder
     int fetchCount = Math.min(moveCount, existsCount);
 
+    // Step 3: FETCH first N sequence messages and get their UIDs
     ic.sendCommand(&quot;FETCH&quot;, &quot;1:&quot; + fetchCount + &quot; (UID)&quot;);
     String fetchReply = ic.getReplyString();
 
     log.info(&quot;FETCH 1:&quot; + fetchCount + &quot; (UID) response: &quot; + fetchReply);
 
-    // Step 3: Parse UIDs from FETCH response
-    // Example:
-    // * 1 FETCH (UID 318)
-    // * 2 FETCH (UID 319)
     ArrayList uids = new ArrayList();
 
     String[] lines = fetchReply.split(&quot;\\r?\\n&quot;);
 
-    for (String s : lines) {
-        if (s.startsWith(&quot;* &quot;) &amp;&amp; s.contains(&quot;FETCH&quot;) &amp;&amp; s.contains(&quot;UID&quot;)) {
+    for (int i = 0; i &lt; lines.length; i++) {
+        String s = lines[i];
+
+        if (s.startsWith(&quot;* &quot;) &amp;&amp; s.indexOf(&quot;FETCH&quot;) &gt;= 0 &amp;&amp; s.indexOf(&quot;UID&quot;) &gt;= 0) {
             int uidStart = s.indexOf(&quot;UID &quot;) + 4;
             int uidEnd = s.indexOf(&quot;)&quot;, uidStart);
 
             if (uidStart &gt; 3 &amp;&amp; uidEnd &gt; uidStart) {
                 String uid = s.substring(uidStart, uidEnd).trim();
 
-                if (!uid.isEmpty()) {
+                if (uid.length() &gt; 0) {
                     uids.add(uid);
                 }
             }
         }
     }
 
-    if (uids.isEmpty()) {
+    if (!uids.isEmpty()) {
+        log.info(&quot;UID parsing successful. UID count: &quot; + uids.size());
+    } else {
         SampleResult.setSuccessful(false);
         IsSuccess = false;
-        log.info(&quot;No UIDs parsed from FETCH response: &quot; + fetchReply);
+
+        String errorMessage = &quot;FETCH exception: No UIDs parsed from FETCH response. Raw response: &quot;
+                + fetchReply;
+
+        log.info(errorMessage);
+
         vars.put(&quot;CONTINUE&quot;, continue_flag);
-        SampleResult.setResponseData(&quot;No UIDs parsed. Raw: &quot; + fetchReply);
+        SampleResult.setResponseData(errorMessage);
         SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
         return;
     }
 
-    // Step 4: Build comma-separated UID set
-    StringBuilder uidSet = new StringBuilder();
+    StringBuffer uidSet = new StringBuffer();
 
     for (int i = 0; i &lt; uids.size(); i++) {
         if (i &gt; 0) {
             uidSet.append(&quot;,&quot;);
         }
+
         uidSet.append(uids.get(i));
     }
 
@@ -2026,39 +2152,58 @@ try {
             + &quot; to &quot; + destinationFolder
             + &quot;, UIDs: &quot; + uidSet.toString());
 
-    // Step 5: UID MOVE to parameterized destination folder
+    // Step 4: UID MOVE
     ic.sendCommand(&quot;UID MOVE&quot;, uidSet.toString() + &quot; &quot; + quotedDestinationFolder);
     String moveReply = ic.getReplyString();
 
     log.info(&quot;UID MOVE response: &quot; + moveReply);
 
-    // Step 6: Validate UID MOVE response
-    if (moveReply.contains(&quot;OK&quot;) &amp;&amp;
-        (moveReply.contains(&quot;MOVE completed&quot;) ||
-         moveReply.contains(&quot;UID MOVE completed&quot;) ||
-         moveReply.contains(&quot;completed&quot;))) {
+    if (moveReply.indexOf(&quot;OK&quot;) &gt;= 0 &amp;&amp;
+        (moveReply.indexOf(&quot;MOVE completed&quot;) &gt;= 0 ||
+         moveReply.indexOf(&quot;UID MOVE completed&quot;) &gt;= 0 ||
+         moveReply.indexOf(&quot;completed&quot;) &gt;= 0)) {
 
         SampleResult.setSuccessful(true);
-        log.info(&quot;Moved &quot; + uids.size() + &quot; messages to &quot; + destinationFolder);
+
+        log.info(&quot;UID MOVE successful. Moved &quot; + uids.size()
+                + &quot; messages from &quot; + sourceFolder
+                + &quot; to &quot; + destinationFolder);
 
     } else {
         SampleResult.setSuccessful(false);
         IsSuccess = false;
-        log.info(&quot;UID MOVE failed: &quot; + moveReply);
+
+        String errorMessage = &quot;UID MOVE exception: UID MOVE failed for UIDs &quot;
+                + uidSet.toString()
+                + &quot; from &quot; + sourceFolder
+                + &quot; to &quot; + destinationFolder
+                + &quot;. Response: &quot; + moveReply;
+
+        log.info(errorMessage);
     }
 
     SampleResult.setResponseData(moveReply);
 
 } catch (Exception e) {
     SampleResult.setSuccessful(false);
+    IsSuccess = false;
 
-    if (e.getMessage() != null &amp;&amp;
-        e.getMessage().contains(&quot;Connection closed without indication&quot;)) {
+    String exceptionMessage = e.getMessage();
+
+    if (exceptionMessage != null &amp;&amp;
+        exceptionMessage.indexOf(&quot;Connection closed without indication&quot;) &gt;= 0) {
         continue_flag = &quot;false&quot;;
+    } else {
+        continue_flag = &quot;true&quot;;
     }
 
-    IsSuccess = false;
-    log.info(Thread.currentThread().getName() + &quot; UID MOVE: &quot; + e);
+    String errorMessage = Thread.currentThread().getName()
+            + &quot; UID MOVE exception: &quot;
+            + e.toString();
+
+    log.info(errorMessage);
+
+    SampleResult.setResponseData(errorMessage);
 }
 
 vars.put(&quot;CONTINUE&quot;, continue_flag);
