@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="3.2" jmeter="3.3 r1808647">
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.2">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
-      <stringProp name="TestPlan.comments"></stringProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
-      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">false</boolProp>
     </TestPlan>
     <hashTree>
       <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
@@ -146,18 +145,18 @@
       </CSVDataSet>
       <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="IMAP User" enabled="true">
-        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
-          <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">${__P(LOAD.IMAP.loopcount)}</stringProp>
-        </elementProp>
         <stringProp name="ThreadGroup.num_threads">${__P(LOAD.IMAP.users)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">$(__P(LOAD.IMAP.rampup)}</stringProp>
-        <longProp name="ThreadGroup.start_time">1497658914000</longProp>
-        <longProp name="ThreadGroup.end_time">1497658914000</longProp>
-        <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
         <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <stringProp name="LoopController.loops">${__P(LOAD.IMAP.loopcount)}</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+        <boolProp name="ThreadGroup.delayedStart">false</boolProp>
       </ThreadGroup>
       <hashTree>
         <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
@@ -207,8 +206,6 @@ log.info(Thread.currentThread().getName()+&quot; START&quot;);
 //Capture IMAP response and include as sampler Response
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-          <stringProp name="BeanShellSampler.filename"></stringProp>
-          <stringProp name="BeanShellSampler.parameters"></stringProp>
           <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
         </BeanShellSampler>
         <hashTree/>
@@ -236,8 +233,6 @@ if (commands.size() &gt; 0) {
 if (commands.size() == 0) {
   vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
 }</stringProp>
-            <stringProp name="BeanShellSampler.filename"></stringProp>
-            <stringProp name="BeanShellSampler.parameters"></stringProp>
             <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
           </BeanShellSampler>
           <hashTree/>
@@ -256,8 +251,6 @@ if (commands.size() == 0) {
             <hashTree>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="default" enabled="true">
                 <stringProp name="BeanShellSampler.query">log.info(Thread.currentThread().getName()+&quot; &quot;+vars.get(&quot;COMMAND&quot;)+&quot; not currently supported&quot;);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -291,8 +284,6 @@ if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString(
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -326,8 +317,6 @@ if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString(
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -360,8 +349,6 @@ vars.put(&quot;CONTINUE&quot;,continue_flag);
 //log.info(&quot;Continue variable value is: &quot; +vars.get(&quot;CONTINUE&quot;));
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -393,8 +380,6 @@ if (!ic.getReplyString().contains(&quot;OK CHECK completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -426,8 +411,6 @@ if (!ic.getReplyString().contains(&quot;OK CLOSE completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -461,8 +444,6 @@ if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString(
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -494,8 +475,6 @@ if (!ic.getReplyString().contains(&quot;OK CREATE completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -527,8 +506,6 @@ if (!ic.getReplyString().contains(&quot;OK DELETE completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -560,8 +537,6 @@ if (!(ic.getReplyString().contains(&quot;OK ENABLE completed&quot;))) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -593,8 +568,6 @@ if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString(
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -626,8 +599,6 @@ if (!ic.getReplyString().contains(&quot;OK EXPUNGE completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -670,8 +641,6 @@ if (!ic.getReplyString().contains(&quot;OK FETCH completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -703,8 +672,6 @@ if (!(ic.getReplyString().contains(&quot;OK GETACL completed&quot;))) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -736,8 +703,6 @@ if (!(ic.getReplyString().contains(&quot;OK GETACL completed&quot;))) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -769,8 +734,6 @@ if (!(ic.getReplyString().contains(&quot;OK GETQUOTAROOT completed&quot;))) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -802,8 +765,6 @@ if (!(ic.getReplyString().contains(&quot;OK GETQUOTAROOT completed&quot;))) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -835,8 +796,6 @@ if (!ic.getReplyString().contains(&quot;OK ID completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -871,8 +830,6 @@ if (!ic.getReplyString().contains(&quot;OK IDLE completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -921,8 +878,6 @@ if (!ic.getReplyString().contains(&quot;OK LIST completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -952,8 +907,6 @@ if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString(
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -991,8 +944,6 @@ if (logout_error == &quot;true&quot;){
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1024,8 +975,6 @@ if (!ic.getReplyString().contains(&quot;OK LSUB completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1057,8 +1006,6 @@ if (!(ic.getReplyString().contains(&quot;OK MYRIGHTS completed&quot;))) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1090,8 +1037,6 @@ if (!ic.getReplyString().contains(&quot;OK NAMESPACE completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1123,8 +1068,6 @@ if (!ic.getReplyString().contains(&quot;OK NOOP completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1156,8 +1099,6 @@ if (!ic.getReplyString().contains(&quot;OK RENAME completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1212,8 +1153,6 @@ if (!ic.getReplyString().contains(&quot;OK SEARCH completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1247,8 +1186,6 @@ if (!ic.getReplyString().contains(&quot;OK SEARCH completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1278,8 +1215,6 @@ if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString(
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1309,8 +1244,6 @@ if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString(
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1342,8 +1275,6 @@ if (!ic.getReplyString().contains(&quot;OK STATUS completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1375,8 +1306,6 @@ if (!ic.getReplyString().contains(&quot;OK STATUS completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1410,8 +1339,6 @@ if (!ic.getReplyString().contains(&quot;OK STORE completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1443,8 +1370,6 @@ if (!ic.getReplyString().contains(&quot;OK SUBSCRIBE completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1476,8 +1401,6 @@ if (!ic.getReplyString().contains(&quot;OK SUBSCRIBE completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1519,8 +1442,6 @@ if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString(
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1596,8 +1517,6 @@ if (!(expungeCmdResponse.contains(&quot;OK UID EXPUNGE completed&quot;) &amp;&am
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1640,8 +1559,6 @@ if (!ic.getReplyString().contains(&quot;OK UID FETCH completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1697,8 +1614,6 @@ if (!ic.getReplyString().contains(&quot;OK UID SEARCH completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1732,8 +1647,6 @@ if (!ic.getReplyString().contains(&quot;OK UID STORE completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1765,8 +1678,6 @@ if (!ic.getReplyString().contains(&quot;OK UNSELECT completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1798,8 +1709,6 @@ if (!ic.getReplyString().contains(&quot;OK UNSUBSCRIBE completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1831,8 +1740,6 @@ if (!ic.getReplyString().contains(&quot;OK UNSUBSCRIBE completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1866,8 +1773,441 @@ if (!ic.getReplyString().contains(&quot;OK XLIST completed&quot;)) {
 vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <stringProp name="BeanShellSampler.filename"></stringProp>
-                <stringProp name="BeanShellSampler.parameters"></stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="MOVE" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+    log.info(Thread.currentThread().getName() + &quot; MOVE&quot;);
+
+    // Validate IMAP client object
+    if (ic == null) {
+        throw new Exception(&quot;IMAPCLIENT object is null. IMAP connection is not available.&quot;);
+    }
+
+    /*
+     * SOURCE_FOLDER validation
+     */
+    String sourceFolder = vars.get(&quot;SOURCE_FOLDER&quot;);
+
+    if (sourceFolder != null &amp;&amp; !sourceFolder.trim().isEmpty()) {
+        log.info(&quot;SOURCE_FOLDER found in JMeter variables: &quot; + sourceFolder);
+    } else {
+        sourceFolder = props.get(&quot;SOURCE_FOLDER&quot;);
+
+        if (sourceFolder != null &amp;&amp; !sourceFolder.trim().isEmpty()) {
+            log.info(&quot;SOURCE_FOLDER found in JMeter properties: &quot; + sourceFolder);
+        } else {
+            throw new Exception(&quot;SOURCE_FOLDER exception: SOURCE_FOLDER is missing or empty. Please provide SOURCE_FOLDER in JMeter variables or properties.&quot;);
+        }
+    }
+
+    /*
+     * DESTINATION_FOLDER validation
+     */
+    String destinationFolder = vars.get(&quot;DESTINATION_FOLDER&quot;);
+
+    if (destinationFolder != null &amp;&amp; !destinationFolder.trim().isEmpty()) {
+        log.info(&quot;DESTINATION_FOLDER found in JMeter variables: &quot; + destinationFolder);
+    } else {
+        destinationFolder = props.get(&quot;DESTINATION_FOLDER&quot;);
+
+        if (destinationFolder != null &amp;&amp; !destinationFolder.trim().isEmpty()) {
+            log.info(&quot;DESTINATION_FOLDER found in JMeter properties: &quot; + destinationFolder);
+        } else {
+            throw new Exception(&quot;DESTINATION_FOLDER exception: DESTINATION_FOLDER is missing or empty. Please provide DESTINATION_FOLDER in JMeter variables or properties.&quot;);
+        }
+    }
+
+    /*
+     * MESSAGE_RANGE validation
+     * 1. JMeter variable MESSAGE_RANGE
+     * 2. JMeter property MESSAGE_RANGE
+     */
+    String messageRange = vars.get(&quot;MESSAGE_RANGE&quot;);
+
+    if (messageRange != null &amp;&amp; !messageRange.trim().isEmpty()) {
+        log.info(&quot;MESSAGE_RANGE found in JMeter variables: &quot; + messageRange);
+    } else {
+        messageRange = props.get(&quot;MESSAGE_RANGE&quot;);
+
+        if (messageRange != null &amp;&amp; !messageRange.trim().isEmpty()) {
+            log.info(&quot;MESSAGE_RANGE found in JMeter properties: &quot; + messageRange);
+        } else {
+            throw new RuntimeException(&quot;MESSAGE_RANGE is not set in JMeter variables or properties. &quot;
+            + &quot;Please define it via -JMESSAGE_RANGE=1:1 or in User Defined Variables.&quot;);
+            
+        }
+    }
+
+    // Quote folders for IMAP safety
+    String quotedSourceFolder = &quot;\&quot;&quot; + sourceFolder.replace(&quot;\&quot;&quot;, &quot;\\\&quot;&quot;) + &quot;\&quot;&quot;;
+    String quotedDestinationFolder = &quot;\&quot;&quot; + destinationFolder.replace(&quot;\&quot;&quot;, &quot;\\\&quot;&quot;) + &quot;\&quot;&quot;;
+
+    log.info(&quot;SOURCE_FOLDER value used: &quot; + sourceFolder);
+    log.info(&quot;DESTINATION_FOLDER value used: &quot; + destinationFolder);
+    log.info(&quot;MESSAGE_RANGE value used: &quot; + messageRange);
+
+    // Step 1: SELECT source folder
+    ic.sendCommand(&quot;SELECT&quot;, quotedSourceFolder);
+    String selectReply = ic.getReplyString();
+    log.info(&quot;SELECT &quot; + sourceFolder + &quot; response: &quot; + selectReply);
+
+    if (selectReply.contains(&quot;OK&quot;)) {
+        log.info(&quot;SELECT &quot; + sourceFolder + &quot; successful.&quot;);
+    } else {
+        SampleResult.setSuccessful(false);
+        IsSuccess = false;
+
+        String errorMessage = &quot;SELECT exception: SELECT &quot; + sourceFolder + &quot; failed. Response: &quot; + selectReply;
+        log.info(errorMessage);
+
+        vars.put(&quot;CONTINUE&quot;, continue_flag);
+        SampleResult.setResponseData(errorMessage);
+        SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
+        return;
+    }
+
+    // Step 2: MOVE message/range to destination folder
+    ic.sendCommand(&quot;MOVE&quot;, messageRange + &quot; &quot; + quotedDestinationFolder);
+    String moveReply = ic.getReplyString();
+    log.info(&quot;MOVE response: &quot; + moveReply);
+
+    if (moveReply.contains(&quot;OK&quot;) &amp;&amp;
+        (moveReply.contains(&quot;MOVE completed&quot;) || moveReply.contains(&quot;completed&quot;))) {
+
+        SampleResult.setSuccessful(true);
+
+        log.info(&quot;MOVE successful. Moved message range &quot; + messageRange
+                + &quot; from &quot; + sourceFolder
+                + &quot; to &quot; + destinationFolder);
+
+    } else {
+        SampleResult.setSuccessful(false);
+        IsSuccess = false;
+
+        String errorMessage = &quot;MOVE exception: MOVE failed for message range &quot;
+                + messageRange
+                + &quot; from &quot; + sourceFolder
+                + &quot; to &quot; + destinationFolder
+                + &quot;. Response: &quot; + moveReply;
+
+        log.info(errorMessage);
+    }
+
+    SampleResult.setResponseData(moveReply);
+
+} catch (Exception e) {
+    SampleResult.setSuccessful(false);
+    IsSuccess = false;
+
+    String exceptionMessage = e.getMessage();
+
+    if (exceptionMessage != null &amp;&amp;
+        exceptionMessage.contains(&quot;Connection closed without indication&quot;)) {
+        continue_flag = &quot;false&quot;;
+    } else {
+        continue_flag = &quot;true&quot;;
+    }
+
+    String errorMessage = Thread.currentThread().getName()
+            + &quot; MOVE exception: &quot;
+            + e.toString();
+
+    log.info(errorMessage);
+
+    SampleResult.setResponseData(errorMessage);
+}
+
+vars.put(&quot;CONTINUE&quot;, continue_flag);
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+              </BeanShellSampler>
+              <hashTree/>
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID MOVE" enabled="true">
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
+import java.util.ArrayList;
+
+IMAPClient ic = (IMAPClient) vars.getObject(&quot;IMAPCLIENT&quot;);
+String continue_flag = &quot;true&quot;;
+
+try {
+    log.info(Thread.currentThread().getName() + &quot; UID MOVE iteration&quot;);
+
+    // Validate IMAP client object
+    if (ic == null) {
+        throw new Exception(&quot;IMAPCLIENT exception: IMAPCLIENT object is null. IMAP connection is not available.&quot;);
+    }
+
+    /*
+     * SOURCE_FOLDER validation
+     */
+    String sourceFolder = vars.get(&quot;SOURCE_FOLDER&quot;);
+
+    if (sourceFolder != null &amp;&amp; sourceFolder.trim().length() &gt; 0) {
+        log.info(&quot;SOURCE_FOLDER found in JMeter variables: &quot; + sourceFolder);
+    } else {
+        sourceFolder = props.get(&quot;SOURCE_FOLDER&quot;);
+
+        if (sourceFolder != null &amp;&amp; sourceFolder.trim().length() &gt; 0) {
+            log.info(&quot;SOURCE_FOLDER found in JMeter properties: &quot; + sourceFolder);
+        } else {
+            throw new Exception(&quot;SOURCE_FOLDER exception: SOURCE_FOLDER is missing or empty. Please provide SOURCE_FOLDER in JMeter variables or properties.&quot;);
+        }
+    }
+
+    /*
+     * DESTINATION_FOLDER validation
+     */
+    String destinationFolder = vars.get(&quot;DESTINATION_FOLDER&quot;);
+
+    if (destinationFolder != null &amp;&amp; destinationFolder.trim().length() &gt; 0) {
+        log.info(&quot;DESTINATION_FOLDER found in JMeter variables: &quot; + destinationFolder);
+    } else {
+        destinationFolder = props.get(&quot;DESTINATION_FOLDER&quot;);
+
+        if (destinationFolder != null &amp;&amp; destinationFolder.trim().length() &gt; 0) {
+            log.info(&quot;DESTINATION_FOLDER found in JMeter properties: &quot; + destinationFolder);
+        } else {
+            throw new Exception(&quot;DESTINATION_FOLDER exception: DESTINATION_FOLDER is missing or empty. Please provide DESTINATION_FOLDER in JMeter variables or properties.&quot;);
+        }
+    }
+
+    /*
+     * MOVE_COUNT validation
+     */
+    String moveCountStr = vars.get(&quot;MOVE_COUNT&quot;);
+
+    if (moveCountStr != null &amp;&amp; moveCountStr.trim().length() &gt; 0) {
+        log.info(&quot;MOVE_COUNT found in JMeter variables: &quot; + moveCountStr);
+    } else {
+        moveCountStr = props.get(&quot;MOVE_COUNT&quot;);
+
+        if (moveCountStr != null &amp;&amp; moveCountStr.trim().length() &gt; 0) {
+            log.info(&quot;MOVE_COUNT found in JMeter properties: &quot; + moveCountStr);
+        } else {
+            throw new Exception(&quot;MOVE_COUNT exception: MOVE_COUNT is missing or empty. Please provide MOVE_COUNT in JMeter variables or properties.&quot;);
+        }
+    }
+
+    /*
+     * Parse MOVE_COUNT
+     * No default or random value is used.
+     * moveCount is assigned only after valid parsing.
+     */
+    int moveCount;
+
+    try {
+        moveCount = Integer.parseInt(moveCountStr.trim());
+    } catch (NumberFormatException nfe) {
+        throw new Exception(&quot;MOVE_COUNT exception: Invalid MOVE_COUNT value: &quot;
+                + moveCountStr
+                + &quot;. MOVE_COUNT must be a valid integer.&quot;);
+    }
+
+    if (moveCount &gt; 0) {
+        log.info(&quot;MOVE_COUNT validation successful: &quot; + moveCount);
+    } else {
+        throw new Exception(&quot;MOVE_COUNT exception: Invalid MOVE_COUNT value: &quot;
+                + moveCount
+                + &quot;. MOVE_COUNT must be greater than 0.&quot;);
+    }
+
+    // Quote folders for IMAP safety
+    String quotedSourceFolder = &quot;\&quot;&quot; + sourceFolder.replace(&quot;\&quot;&quot;, &quot;\\\&quot;&quot;) + &quot;\&quot;&quot;;
+    String quotedDestinationFolder = &quot;\&quot;&quot; + destinationFolder.replace(&quot;\&quot;&quot;, &quot;\\\&quot;&quot;) + &quot;\&quot;&quot;;
+
+    log.info(&quot;SOURCE_FOLDER value used: &quot; + sourceFolder);
+    log.info(&quot;DESTINATION_FOLDER value used: &quot; + destinationFolder);
+    log.info(&quot;MOVE_COUNT value used: &quot; + moveCount);
+
+    // Step 1: SELECT source folder
+    ic.sendCommand(&quot;SELECT&quot;, quotedSourceFolder);
+    String selectReply = ic.getReplyString();
+
+    log.info(&quot;SELECT &quot; + sourceFolder + &quot; response: &quot; + selectReply);
+
+    if (selectReply.indexOf(&quot;OK&quot;) &gt;= 0) {
+        log.info(&quot;SELECT &quot; + sourceFolder + &quot; successful.&quot;);
+    } else {
+        SampleResult.setSuccessful(false);
+        IsSuccess = false;
+
+        String errorMessage = &quot;SELECT exception: SELECT &quot;
+                + sourceFolder
+                + &quot; failed. Response: &quot;
+                + selectReply;
+
+        log.info(errorMessage);
+
+        vars.put(&quot;CONTINUE&quot;, continue_flag);
+        SampleResult.setResponseData(errorMessage);
+        SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
+        return;
+    }
+
+    // Step 2: Parse EXISTS count from SELECT response
+    int existsCount = 0;
+    String[] selectLines = selectReply.split(&quot;\\r?\\n&quot;);
+
+    for (int i = 0; i &lt; selectLines.length; i++) {
+        String s = selectLines[i];
+
+        if (s.indexOf(&quot;EXISTS&quot;) &gt;= 0) {
+            String[] parts = s.trim().split(&quot;\\s+&quot;);
+
+            if (parts.length &gt;= 2) {
+                try {
+                    existsCount = Integer.parseInt(parts[1]);
+                } catch (NumberFormatException nfe) {
+                    log.info(&quot;EXISTS exception: Unable to parse EXISTS from line: &quot; + s);
+                }
+            }
+        }
+    }
+
+    log.info(sourceFolder + &quot; has &quot; + existsCount + &quot; messages&quot;);
+
+    if (existsCount &gt; 0) {
+        log.info(&quot;EXISTS validation successful. Message count: &quot; + existsCount);
+    } else {
+        SampleResult.setSuccessful(false);
+        IsSuccess = false;
+
+        String errorMessage = &quot;EXISTS exception: &quot;
+                + sourceFolder
+                + &quot; is empty, nothing to move. 0 EXISTS.&quot;;
+
+        log.info(errorMessage);
+
+        vars.put(&quot;CONTINUE&quot;, &quot;false&quot;);
+        SampleResult.setResponseData(errorMessage);
+        SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
+        return;
+    }
+
+    int fetchCount = Math.min(moveCount, existsCount);
+
+    // Step 3: FETCH first N sequence messages and get their UIDs
+    ic.sendCommand(&quot;FETCH&quot;, &quot;1:&quot; + fetchCount + &quot; (UID)&quot;);
+    String fetchReply = ic.getReplyString();
+
+    log.info(&quot;FETCH 1:&quot; + fetchCount + &quot; (UID) response: &quot; + fetchReply);
+
+    ArrayList uids = new ArrayList();
+
+    String[] lines = fetchReply.split(&quot;\\r?\\n&quot;);
+
+    for (int i = 0; i &lt; lines.length; i++) {
+        String s = lines[i];
+
+        if (s.startsWith(&quot;* &quot;) &amp;&amp; s.indexOf(&quot;FETCH&quot;) &gt;= 0 &amp;&amp; s.indexOf(&quot;UID&quot;) &gt;= 0) {
+            int uidStart = s.indexOf(&quot;UID &quot;) + 4;
+            int uidEnd = s.indexOf(&quot;)&quot;, uidStart);
+
+            if (uidStart &gt; 3 &amp;&amp; uidEnd &gt; uidStart) {
+                String uid = s.substring(uidStart, uidEnd).trim();
+
+                if (uid.length() &gt; 0) {
+                    uids.add(uid);
+                }
+            }
+        }
+    }
+
+    if (!uids.isEmpty()) {
+        log.info(&quot;UID parsing successful. UID count: &quot; + uids.size());
+    } else {
+        SampleResult.setSuccessful(false);
+        IsSuccess = false;
+
+        String errorMessage = &quot;FETCH exception: No UIDs parsed from FETCH response. Raw response: &quot;
+                + fetchReply;
+
+        log.info(errorMessage);
+
+        vars.put(&quot;CONTINUE&quot;, continue_flag);
+        SampleResult.setResponseData(errorMessage);
+        SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
+        return;
+    }
+
+    StringBuffer uidSet = new StringBuffer();
+
+    for (int i = 0; i &lt; uids.size(); i++) {
+        if (i &gt; 0) {
+            uidSet.append(&quot;,&quot;);
+        }
+
+        uidSet.append(uids.get(i));
+    }
+
+    log.info(&quot;Moving &quot; + uids.size()
+            + &quot; messages from &quot; + sourceFolder
+            + &quot; to &quot; + destinationFolder
+            + &quot;, UIDs: &quot; + uidSet.toString());
+
+    // Step 4: UID MOVE
+    ic.sendCommand(&quot;UID MOVE&quot;, uidSet.toString() + &quot; &quot; + quotedDestinationFolder);
+    String moveReply = ic.getReplyString();
+
+    log.info(&quot;UID MOVE response: &quot; + moveReply);
+
+    if (moveReply.indexOf(&quot;OK&quot;) &gt;= 0 &amp;&amp;
+        (moveReply.indexOf(&quot;MOVE completed&quot;) &gt;= 0 ||
+         moveReply.indexOf(&quot;UID MOVE completed&quot;) &gt;= 0 ||
+         moveReply.indexOf(&quot;completed&quot;) &gt;= 0)) {
+
+        SampleResult.setSuccessful(true);
+
+        log.info(&quot;UID MOVE successful. Moved &quot; + uids.size()
+                + &quot; messages from &quot; + sourceFolder
+                + &quot; to &quot; + destinationFolder);
+
+    } else {
+        SampleResult.setSuccessful(false);
+        IsSuccess = false;
+
+        String errorMessage = &quot;UID MOVE exception: UID MOVE failed for UIDs &quot;
+                + uidSet.toString()
+                + &quot; from &quot; + sourceFolder
+                + &quot; to &quot; + destinationFolder
+                + &quot;. Response: &quot; + moveReply;
+
+        log.info(errorMessage);
+    }
+
+    SampleResult.setResponseData(moveReply);
+
+} catch (Exception e) {
+    SampleResult.setSuccessful(false);
+    IsSuccess = false;
+
+    String exceptionMessage = e.getMessage();
+
+    if (exceptionMessage != null &amp;&amp;
+        exceptionMessage.indexOf(&quot;Connection closed without indication&quot;) &gt;= 0) {
+        continue_flag = &quot;false&quot;;
+    } else {
+        continue_flag = &quot;true&quot;;
+    }
+
+    String errorMessage = Thread.currentThread().getName()
+            + &quot; UID MOVE exception: &quot;
+            + e.toString();
+
+    log.info(errorMessage);
+
+    SampleResult.setResponseData(errorMessage);
+}
+
+vars.put(&quot;CONTINUE&quot;, continue_flag);
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
@@ -1887,16 +2227,10 @@ try {
 
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-          <stringProp name="BeanShellSampler.filename"></stringProp>
-          <stringProp name="BeanShellSampler.parameters"></stringProp>
           <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
         </BeanShellSampler>
         <hashTree/>
       </hashTree>
     </hashTree>
-    <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
-      <boolProp name="WorkBench.save">true</boolProp>
-    </WorkBench>
-    <hashTree/>
   </hashTree>
 </jmeterTestPlan>
