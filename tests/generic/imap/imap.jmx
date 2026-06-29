@@ -1574,7 +1574,7 @@ SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID STORE" enabled="true">
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID STORE" enabled="false">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
@@ -1605,6 +1605,96 @@ vars.put(&quot;CONTINUE&quot;,continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
               </BeanShellSampler>
+              <hashTree/>
+              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="UID STORE" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">import org.apache.commons.net.imap.IMAPClient
+
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;) as IMAPClient
+boolean ok = true
+String cont = &quot;true&quot;
+StringBuilder out = new StringBuilder()
+String t = Thread.currentThread().name
+
+ArrayList msguid = vars.getObject(&quot;MSGUID&quot;) as ArrayList
+String uid = (msguid?.size() &gt; 0) ? msguid.get(new Random().nextInt(msguid.size())) : &quot;1&quot;
+log.info(t + &quot; Selected UID: &quot; + uid)
+
+if (ic == null) {
+    SampleResult.setSuccessful(false)
+    SampleResult.setResponseData(&quot;ERROR: IMAPClient is null&quot;, &quot;UTF-8&quot;)
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+    vars.put(&quot;CONTINUE&quot;, &quot;false&quot;)
+    return
+}
+
+// Helper — returns response on OK, null on failure
+def run = { String cmd, String args, String label -&gt;
+    if (cont != &quot;true&quot;) return null
+    try {
+        ic.uid(cmd, args)
+        String r = ic.getReplyString()
+        if (r?.contains(&quot;OK&quot;)) {
+            out.append(&quot;=== &quot; + label + &quot; ===\n&quot; + r + &quot;\n\n&quot;)
+            return r
+        }
+        out.append(&quot;=== &quot; + label + &quot; === [FAILED]\n&quot; + r + &quot;\n\n&quot;)
+        ok = false
+        return null
+    } catch (IOException e) {
+        log.error(t + &quot; &quot; + label + &quot; IOException: &quot; + e.getMessage())
+        if (e.getMessage()?.contains(&quot;Connection closed&quot;)) cont = &quot;false&quot;
+        ok = false; return null
+    } catch (Exception e) {
+        log.error(t + &quot; &quot; + label + &quot; Exception: &quot; + e.getMessage())
+        ok = false; return null
+    }
+}
+
+// STEP 1: Fetch current flags
+String flags = run(&quot;FETCH&quot;, uid + &quot; FLAGS&quot;, &quot;FETCH FLAGS&quot;)
+
+if (flags == null) {
+    SampleResult.setSuccessful(false)
+    vars.put(&quot;CONTINUE&quot;, cont)
+    out.append(&quot;=== SKIPPED ALL — FETCH failed ===\n&quot;)
+    SampleResult.setResponseData(out.toString(), &quot;UTF-8&quot;)
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+    return
+}
+
+vars.put(&quot;CURRENT_FLAGS&quot;, flags)
+String cf = vars.get(&quot;CUSTOM_FLAG&quot;)
+if (cf == null || cf.trim().isEmpty()) cf = &quot;CustomLabel&quot;
+
+// STEPS 2-4: Toggle \Seen, \Flagged, Custom — single loop
+def flagList = [
+    [&apos;\\Seen&apos;,    &quot;SEEN&quot;],
+    [&apos;\\Flagged&apos;, &quot;FLAGGED&quot;],
+    [cf,          &quot;CUSTOM&quot;]
+]
+
+for (entry in flagList) {
+    if (cont != &quot;true&quot;) {
+        vars.put(&quot;STORE_&quot; + entry[1] + &quot;_ACTION&quot;, &quot;SKIPPED_CONNECTION_LOST&quot;)
+        continue
+    }
+    boolean has = flags.contains(entry[0])
+    String op   = has ? &quot;-FLAGS&quot; : &quot;+FLAGS&quot;
+    String verb = has ? &quot;REMOVED&quot; : &quot;ADDED&quot;
+    String res  = run(&quot;STORE&quot;, uid + &quot; &quot; + op + &quot; (&quot; + entry[0] + &quot;)&quot;, &quot;STORE &quot; + entry[0] + &quot; -&gt; &quot; + verb)
+    vars.put(&quot;STORE_&quot; + entry[1] + &quot;_ACTION&quot;, res != null ? verb : &quot;FAILED&quot;)
+}
+
+// Final
+if (!ok) SampleResult.setSuccessful(false)
+vars.put(&quot;CONTINUE&quot;, cont)
+SampleResult.setResponseData(out.length() &gt; 0 ? out.toString() : &quot;All operations failed or skipped.&quot;, &quot;UTF-8&quot;)
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Sampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UNSELECT" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
