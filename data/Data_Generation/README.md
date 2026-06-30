@@ -212,3 +212,138 @@ The following briefcase types are in scope:
 ```
 python3 generate_briefcase_data.py
 ```
+# IMAP Bulk Upload Tool (`imap_bulk_upload.py`)
+
+Fast, parallel IMAP APPEND-based bulk `.eml` uploader for Zimbra — a Python replacement for `zm-load-testing/upload_unique_eml.sh` with **~276% faster** upload times.
+
+## Overview
+
+This script uploads `.eml` files into Zimbra mailboxes via non-SSL IMAP APPEND. It supports:
+
+- **Multi-user parallelism** — processes multiple users concurrently
+- **Multi-connection parallelism** — opens multiple IMAP connections per user
+- **Folder hierarchy preservation** — mirrors the on-disk directory structure as IMAP folders
+- **File preloading** — optionally reads all `.eml` files into memory before uploading to eliminate disk I/O bottlenecks
+- **Automatic reconnection** — retries on `IMAP4.abort` (connection drops)
+- **Detailed logging** — per-batch progress with real-time upload rate (msgs/sec)
+
+## Performance
+
+| Upload Method       | Data Size                          | Time Elapsed | Storage |
+|---------------------|------------------------------------|--------------|---------|
+| **IMAP APPEND (this tool)** | 20 GB — 5 GB × 4 accounts, 10 conn | **30 min**   | OCI S3  |
+| AddMessage (SOAP)   | 20 GB — 5 GB × 4 accounts          | 1 hr 53 min  | OCI S3      |
+
+> ~276% improvement over AddMessage-based upload.
+
+## Prerequisites
+
+- **Python 3.6+** (uses `concurrent.futures`, `imaplib`, standard library only — no pip dependencies)
+- Network access to the Zimbra IMAP proxy on port **143** (non-SSL)
+- Zimbra User accounts created and IMAP login enabled for target accounts
+- `.eml` files created using https://github.com/Zimbra/zm-load-testing/blob/master/data/Data_Generation/dynamic_data_generation_with_attachments.py with organized in a directory structure:
+  ```
+  <DATA_ROOT>/
+  ├── user1@domain.com/
+  │   ├── Inbox/
+  │   │   ├── msg001.eml
+  │   │   └── msg002.eml
+  │   ├── Sent/
+  │   │   └── msg003.eml
+  │   └── Drafts/
+  │       └── msg004.eml
+  └── user2@domain.com/
+      └── ...
+  ```
+
+## Configuration
+
+Edit the constants at the top of `imap_bulk_upload.py`:
+
+| Variable              | Default                                         | Description                                      |
+|-----------------------|-------------------------------------------------|--------------------------------------------------|
+| `HOST`                | `proxy.xyz.com`          | IMAP proxy hostname                              |
+| `PORT`                | `143`                                           | IMAP port (non-SSL)                              |
+| `PASSWORD`            | `password`                                    | Common password for all test accounts            |
+| `DOMAIN`              | `domain.xyz.com`          | Email domain for constructing user addresses     |
+| `DATA_ROOT`           | `/opt/zimbra/dataCreation`                 | Root directory containing per-user `.eml` folders |
+| `CONNECTIONS_PER_USER`| `10`                                            | Parallel IMAP connections per user               |
+| `MAX_USERS_PARALLEL`  | `4`                                             | Number of users processed concurrently           |
+| `PRELOAD_FILES`       | `True`                                          | Read all `.eml` files into memory before upload  |
+| `LOG_FILE`            | `/opt/zimbra/upload.log`                        | Path to the log file                             |
+
+
+
+## Usage
+
+```bash
+# Basic run
+python3 imap_bulk_upload.py
+
+# Run in background with nohup
+nohup python3 imap_bulk_upload.py &
+
+# Monitor progress
+tail -f /opt/zimbra/upload.log
+```
+
+## How It Works
+
+### Phase 1 — Folder Creation
+For each user, a single IMAP connection walks the user's data directory and creates all IMAP folders to mirror the on-disk hierarchy.
+
+### Phase 2 — Parallel Upload
+1. All `.eml` files are collected (and optionally preloaded into memory).
+2. Files are split into equal-sized batches — one batch per IMAP connection.
+3. Each batch is uploaded on its own dedicated IMAP connection using `IMAP APPEND`.
+4. If a connection drops (`IMAP4.abort`), the script reconnects and retries the current message.
+
+### Parallelism Model
+```
+Main Process
+├── User 1  (ThreadPoolExecutor: MAX_USERS_PARALLEL)
+│   ├── Connection 1  (ThreadPoolExecutor: CONNECTIONS_PER_USER)
+│   ├── Connection 2
+│   └── ... up to 10
+├── User 2
+│   ├── Connection 1
+│   └── ...
+└── ...
+```
+
+## Output
+
+The script logs real-time progress and prints a summary at the end:
+
+```
+[2026-06-29 09:00:00] === FAST IMAP Bulk Upload ===
+[2026-06-29 09:00:00] Host: proxy.xyz.com:143 | Connections/user: 10 | Preload: True
+[2026-06-29 09:00:00] Found 4 users: user1, user2, user3, user4
+...
+[2026-06-29 09:30:12] ============================================================
+[2026-06-29 09:30:12]   UPLOAD SUMMARY
+[2026-06-29 09:30:12] ============================================================
+[2026-06-29 09:30:12]   Users:       4
+[2026-06-29 09:30:12]   Uploaded:    82400 / 82400
+[2026-06-29 09:30:12]   Failed:      0
+[2026-06-29 09:30:12]   Total time:  1812.3 seconds
+[2026-06-29 09:30:12]   Overall rate: 45.5 msgs/sec
+[2026-06-29 09:30:12] ============================================================
+```
+
+Exit code is **1** if any uploads failed, **0** otherwise.
+
+## Troubleshooting
+
+| Problem | Cause | Fix |
+|---------|-------|-----|
+| `CONNECTION FAILED` | IMAP proxy unreachable | Verify `HOST`/`PORT`, check firewall, ensure `zmproxyctl` is running |
+| `LOGIN failed` | Wrong credentials or IMAP login disabled | Verify password; run `zmprov ma user@domain zimbraImapEnabled TRUE` |
+| `IMAP4.abort` during upload | Connection timeout or server-side limit | Reduce `CONNECTIONS_PER_USER`; check `zimbraImapMaxConnections` |
+| `MemoryError` with `PRELOAD_FILES=True` | Not enough RAM to hold all `.eml` data | Set `PRELOAD_FILES = False` |
+| Slow upload rate | Disk I/O bottleneck | Set `PRELOAD_FILES = True`; use SSD storage |
+
+## Related
+
+- **Jira:** [ZCS-19551](https://synacor.atlassian.net/browse/ZCS-19551)
+- **Shell equivalent:** `zm-load-testing/upload_unique_eml.sh`
