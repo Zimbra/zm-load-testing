@@ -1520,47 +1520,114 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID FETCH" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
-String continue_flag = &quot;true&quot;;
+              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="UID FETCH" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import org.apache.commons.net.imap.IMAPClient
+import java.util.concurrent.ThreadLocalRandom
 
-// use MSGUID from uid search if done
-ArrayList msguid = vars.getObject(&quot;MSGUID&quot;);
-String i = &quot;1&quot;;
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;)
+String continueFlag = &quot;true&quot;
+
+// Use MSGUID from UID SEARCH if available
+ArrayList msguid = vars.getObject(&quot;MSGUID&quot;)
+String uid = &quot;1&quot;
 if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
-  Random r = new Random();
-  Integer x = r.nextInt(msguid.size());
-  //log.info(&quot;Random Index: &quot;+x+&quot; Value: &quot;+msguid.get(x));
-  i = msguid.get(x);
+    int x = ThreadLocalRandom.current().nextInt(msguid.size())
+    uid = msguid.get(x)
 }
 
 try {
-  //log.info(&quot;MSGUID: &quot;+i);
-  log.info(Thread.currentThread().getName()+&quot; UID FETCH&quot;);
-  ic.uid(&quot;FETCH&quot;,i+&quot; BODY[TEXT]&quot;);
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+    // 1. UID FETCH — Headers (From, To, Subject, Date, Message-ID, CC, BCC, Reply-To)
+    log.info(&quot;${Thread.currentThread().getName()} UID FETCH HEADERS for UID: ${uid}&quot;)
+    ic.uid(&quot;FETCH&quot;, &quot;${uid} BODY[HEADER.FIELDS (FROM TO SUBJECT DATE MESSAGE-ID CC BCC REPLY-TO)]&quot;)
+    String headerResponse = ic.getReplyString()
+    log.info(&quot;${Thread.currentThread().getName()} HEADER Response: ${headerResponse}&quot;)
+
+    if (!headerResponse.contains(&quot;OK&quot;)) {
+        SampleResult.setSuccessful(false)
+        continueFlag = &quot;false&quot;
+        log.error(&quot;UID FETCH HEADERS failed: ${headerResponse}&quot;)
+    }
+    vars.put(&quot;FETCH_HEADERS&quot;, headerResponse)
+
+    // 2. UID FETCH — Flags (\Seen, \Flagged, \Answered, etc.)
+    if (&quot;true&quot;.equals(continueFlag)) {
+        log.info(&quot;${Thread.currentThread().getName()} UID FETCH FLAGS for UID: ${uid}&quot;)
+        ic.uid(&quot;FETCH&quot;, &quot;${uid} FLAGS&quot;)
+        String flagsResponse = ic.getReplyString()
+        log.info(&quot;${Thread.currentThread().getName()} FLAGS Response: ${flagsResponse}&quot;)
+
+        if (!flagsResponse.contains(&quot;OK&quot;)) {
+            SampleResult.setSuccessful(false)
+            continueFlag = &quot;false&quot;
+            log.error(&quot;UID FETCH FLAGS failed: ${flagsResponse}&quot;)
+        }
+        vars.put(&quot;FETCH_FLAGS&quot;, flagsResponse)
+    }
+
+    // 3. UID FETCH — Body Structure (MIME parts, content types, sizes)
+    if (&quot;true&quot;.equals(continueFlag)) {
+        log.info(&quot;${Thread.currentThread().getName()} UID FETCH BODYSTRUCTURE for UID: ${uid}&quot;)
+        ic.uid(&quot;FETCH&quot;, &quot;${uid} BODYSTRUCTURE&quot;)
+        String bodyStructResponse = ic.getReplyString()
+        log.info(&quot;${Thread.currentThread().getName()} BODYSTRUCTURE Response: ${bodyStructResponse}&quot;)
+
+        if (!bodyStructResponse.contains(&quot;OK&quot;)) {
+            SampleResult.setSuccessful(false)
+            continueFlag = &quot;false&quot;
+            log.error(&quot;UID FETCH BODYSTRUCTURE failed: ${bodyStructResponse}&quot;)
+        }
+        vars.put(&quot;FETCH_BODYSTRUCTURE&quot;, bodyStructResponse)
+    }
+
+    // 4. UID FETCH — Body Text
+    if (&quot;true&quot;.equals(continueFlag)) {
+        log.info(&quot;${Thread.currentThread().getName()} UID FETCH BODY[TEXT] for UID: ${uid}&quot;)
+        ic.uid(&quot;FETCH&quot;, &quot;${uid} BODY[TEXT]&quot;)
+        String bodyTextResponse = ic.getReplyString()
+        log.info(&quot;${Thread.currentThread().getName()} BODY[TEXT] Response: ${bodyTextResponse}&quot;)
+
+        if (!bodyTextResponse.contains(&quot;OK UID FETCH completed&quot;)) {
+            SampleResult.setSuccessful(false)
+            continueFlag = &quot;false&quot;
+            log.error(&quot;UID FETCH BODY[TEXT] failed: ${bodyTextResponse}&quot;)
+        }
+        vars.put(&quot;FETCH_BODY_TEXT&quot;, bodyTextResponse)
+    }
+
+    // Build combined response for SampleResult
+    String combinedResponse = &quot;&quot;&quot;\
+=== HEADERS ===
+${vars.get(&quot;FETCH_HEADERS&quot;) ?: &quot;SKIPPED&quot;}
+
+=== FLAGS ===
+${vars.get(&quot;FETCH_FLAGS&quot;) ?: &quot;SKIPPED&quot;}
+
+=== BODYSTRUCTURE ===
+${vars.get(&quot;FETCH_BODYSTRUCTURE&quot;) ?: &quot;SKIPPED&quot;}
+
+=== BODY[TEXT] ===
+${vars.get(&quot;FETCH_BODY_TEXT&quot;) ?: &quot;SKIPPED&quot;}
+&quot;&quot;&quot;
+
+    SampleResult.setResponseData(combinedResponse, &quot;UTF-8&quot;)
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+
 } catch (Exception e) {
-  SampleResult.setSuccessful(false);
-  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
-  continue_flag = &quot;false&quot;;
-  }
-  
-  IsSuccess=false;
-  log.info(Thread.currentThread().getName()+&quot; UID FETCH: &quot;+e);
+    SampleResult.setSuccessful(false)
+    if (e.getMessage()?.contains(&quot;Connection closed without indication&quot;)) {
+        continueFlag = &quot;false&quot;
+    }
+    log.error(&quot;${Thread.currentThread().getName()} UID FETCH Exception: ${e}&quot;)
+    SampleResult.setResponseData(&quot;UID FETCH failed: ${e.getMessage()}&quot;, &quot;UTF-8&quot;)
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
 }
 
-if (!ic.getReplyString().contains(&quot;OK UID FETCH completed&quot;)) {
-  SampleResult.setSuccessful(false);
-  IsSuccess=false;
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
-}
-
-vars.put(&quot;CONTINUE&quot;,continue_flag);
-SampleResult.setResponseData(ic.getReplyString());
-SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-              </BeanShellSampler>
+vars.put(&quot;CONTINUE&quot;, continueFlag)</stringProp>
+              </JSR223Sampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID SEARCH" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
@@ -1617,38 +1684,96 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID STORE" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
-String continue_flag = &quot;true&quot;;
+              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="UID STORE" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">import org.apache.commons.net.imap.IMAPClient
+import java.util.concurrent.ThreadLocalRandom
 
-// need to add support for situational uic copy of real things found
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;) as IMAPClient
+boolean ok = true
+String cont = &quot;true&quot;
+StringBuilder out = new StringBuilder()
+String t = Thread.currentThread().name
 
-try {
-  log.info(Thread.currentThread().getName()+&quot; UID STORE&quot;);
-  ic.uid(&quot;STORE&quot;,&quot;1 +FLAGS (\\Seen)&quot;);
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
-} catch (Exception e) {
-  SampleResult.setSuccessful(false);
-  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
-  continue_flag = &quot;false&quot;;
-  }
-  
-  IsSuccess=false;
-  log.info(Thread.currentThread().getName()+&quot; UID STORE: &quot;+e);
+ArrayList msguid = vars.getObject(&quot;MSGUID&quot;) as ArrayList
+String uid = (msguid?.size() &gt; 0) ? msguid.get(ThreadLocalRandom.current().nextInt(msguid.size())) : &quot;1&quot;
+log.info(t + &quot; Selected UID: &quot; + uid)
+
+if (ic == null) {
+    SampleResult.setSuccessful(false)
+    SampleResult.setResponseData(&quot;ERROR: IMAPClient is null&quot;, &quot;UTF-8&quot;)
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+    vars.put(&quot;CONTINUE&quot;, &quot;false&quot;)
+    return
 }
 
-if (!ic.getReplyString().contains(&quot;OK UID STORE completed&quot;)) {
-  SampleResult.setSuccessful(false);
-  IsSuccess=false;
-  log.info(&quot;Command response is: &quot; + ic.getReplyString()); 
+// Helper — returns response on OK, null on failure
+def run = { String cmd, String args, String label -&gt;
+    if (cont != &quot;true&quot;) return null
+    try {
+        ic.uid(cmd, args)
+        String r = ic.getReplyString()
+        if (r?.contains(&quot;OK&quot;)) {
+            out.append(&quot;=== &quot; + label + &quot; ===\n&quot; + r + &quot;\n\n&quot;)
+            return r
+        }
+        out.append(&quot;=== &quot; + label + &quot; === [FAILED]\n&quot; + r + &quot;\n\n&quot;)
+        ok = false
+        return null
+    } catch (IOException e) {
+        log.error(t + &quot; &quot; + label + &quot; IOException: &quot; + e.getMessage())
+        if (e.getMessage()?.contains(&quot;Connection closed&quot;)) cont = &quot;false&quot;
+        ok = false; return null
+    } catch (Exception e) {
+        log.error(t + &quot; &quot; + label + &quot; Exception: &quot; + e.getMessage())
+        ok = false; return null
+    }
 }
 
-vars.put(&quot;CONTINUE&quot;,continue_flag);
-SampleResult.setResponseData(ic.getReplyString());
-SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-              </BeanShellSampler>
+// STEP 1: Fetch current flags
+String flags = run(&quot;FETCH&quot;, uid + &quot; FLAGS&quot;, &quot;FETCH FLAGS&quot;)
+
+if (flags == null) {
+    SampleResult.setSuccessful(false)
+    vars.put(&quot;CONTINUE&quot;, cont)
+    out.append(&quot;=== SKIPPED ALL — FETCH failed ===\n&quot;)
+    SampleResult.setResponseData(out.toString(), &quot;UTF-8&quot;)
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+    return
+}
+
+vars.put(&quot;CURRENT_FLAGS&quot;, flags)
+String cf = vars.get(&quot;CUSTOM_FLAG&quot;)
+if (cf == null || cf.trim().isEmpty()) cf = &quot;CustomLabel&quot;
+
+// STEPS 2-4: Toggle \Seen, \Flagged, Custom — single loop
+def flagList = [
+    [&apos;\\Seen&apos;,    &quot;SEEN&quot;],
+    [&apos;\\Flagged&apos;, &quot;FLAGGED&quot;],
+    [cf,          &quot;CUSTOM&quot;]
+]
+
+for (entry in flagList) {
+    if (cont != &quot;true&quot;) {
+        vars.put(&quot;STORE_&quot; + entry[1] + &quot;_ACTION&quot;, &quot;SKIPPED_CONNECTION_LOST&quot;)
+        continue
+    }
+    boolean has = flags.contains(entry[0])
+    String op   = has ? &quot;-FLAGS&quot; : &quot;+FLAGS&quot;
+    String verb = has ? &quot;REMOVED&quot; : &quot;ADDED&quot;
+    String res  = run(&quot;STORE&quot;, uid + &quot; &quot; + op + &quot; (&quot; + entry[0] + &quot;)&quot;, &quot;STORE &quot; + entry[0] + &quot; -&gt; &quot; + verb)
+    vars.put(&quot;STORE_&quot; + entry[1] + &quot;_ACTION&quot;, res != null ? verb : &quot;FAILED&quot;)
+}
+
+// Final
+if (!ok) SampleResult.setSuccessful(false)
+vars.put(&quot;CONTINUE&quot;, cont)
+SampleResult.setResponseData(out.length() &gt; 0 ? out.toString() : &quot;All operations failed or skipped.&quot;, &quot;UTF-8&quot;)
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Sampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UNSELECT" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
