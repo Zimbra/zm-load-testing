@@ -1520,105 +1520,13 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID FETCH" enabled="false">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
-String continue_flag = &quot;true&quot;;
-
-// Use MSGUID from UID SEARCH if available
-ArrayList msguid = vars.getObject(&quot;MSGUID&quot;);
-String i = &quot;1&quot;;
-if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
-    Random r = new Random();
-    Integer x = r.nextInt(msguid.size());
-    i = msguid.get(x);
-}
-
-try {
-    // 1. UID FETCH — Headers (From, To, Subject, Date, Message-ID)
-    log.info(Thread.currentThread().getName() + &quot; UID FETCH HEADERS for UID: &quot; + i);
-    ic.uid(&quot;FETCH&quot;, i + &quot; BODY[HEADER.FIELDS (FROM TO SUBJECT DATE MESSAGE-ID CC BCC REPLY-TO)]&quot;);
-    String headerResponse = ic.getReplyString();
-    log.info(Thread.currentThread().getName() + &quot; HEADER Response: &quot; + headerResponse);
-
-    if (!headerResponse.contains(&quot;OK&quot;)) {
-        SampleResult.setSuccessful(false);
-        IsSuccess = false;
-        log.error(&quot;UID FETCH HEADERS failed: &quot; + headerResponse);
-    }
-    vars.put(&quot;FETCH_HEADERS&quot;, headerResponse);
-
-    // 2. UID FETCH — Flags (\Seen, \Flagged, \Answered, etc.)
-    log.info(Thread.currentThread().getName() + &quot; UID FETCH FLAGS for UID: &quot; + i);
-    ic.uid(&quot;FETCH&quot;, i + &quot; FLAGS&quot;);
-    String flagsResponse = ic.getReplyString();
-    log.info(Thread.currentThread().getName() + &quot; FLAGS Response: &quot; + flagsResponse);
-
-    if (!flagsResponse.contains(&quot;OK&quot;)) {
-        SampleResult.setSuccessful(false);
-        IsSuccess = false;
-        log.error(&quot;UID FETCH FLAGS failed: &quot; + flagsResponse);
-    }
-    vars.put(&quot;FETCH_FLAGS&quot;, flagsResponse);
-
-    // 3. UID FETCH — Body Structure (MIME parts, content types, sizes)
-    log.info(Thread.currentThread().getName() + &quot; UID FETCH BODYSTRUCTURE for UID: &quot; + i);
-    ic.uid(&quot;FETCH&quot;, i + &quot; BODYSTRUCTURE&quot;);
-    String bodyStructResponse = ic.getReplyString();
-    log.info(Thread.currentThread().getName() + &quot; BODYSTRUCTURE Response: &quot; + bodyStructResponse);
-
-    if (!bodyStructResponse.contains(&quot;OK&quot;)) {
-        SampleResult.setSuccessful(false);
-        IsSuccess = false;
-        log.error(&quot;UID FETCH BODYSTRUCTURE failed: &quot; + bodyStructResponse);
-    }
-    vars.put(&quot;FETCH_BODYSTRUCTURE&quot;, bodyStructResponse);
-
-    // 4. UID FETCH — Body Text (original functionality)
-    log.info(Thread.currentThread().getName() + &quot; UID FETCH BODY[TEXT] for UID: &quot; + i);
-    ic.uid(&quot;FETCH&quot;, i + &quot; BODY[TEXT]&quot;);
-    String bodyTextResponse = ic.getReplyString();
-    log.info(Thread.currentThread().getName() + &quot; BODY[TEXT] Response: &quot; + bodyTextResponse);
-
-    if (!bodyTextResponse.contains(&quot;OK UID FETCH completed&quot;)) {
-        SampleResult.setSuccessful(false);
-        IsSuccess = false;
-        log.error(&quot;UID FETCH BODY[TEXT] failed: &quot; + bodyTextResponse);
-    }
-    vars.put(&quot;FETCH_BODY_TEXT&quot;, bodyTextResponse);
-
-    // Build combined response for SampleResult
-    StringBuilder combinedResponse = new StringBuilder();
-    combinedResponse.append(&quot;=== HEADERS ===\n&quot;).append(headerResponse).append(&quot;\n\n&quot;);
-    combinedResponse.append(&quot;=== FLAGS ===\n&quot;).append(flagsResponse).append(&quot;\n\n&quot;);
-    combinedResponse.append(&quot;=== BODYSTRUCTURE ===\n&quot;).append(bodyStructResponse).append(&quot;\n\n&quot;);
-    combinedResponse.append(&quot;=== BODY[TEXT] ===\n&quot;).append(bodyTextResponse).append(&quot;\n&quot;);
-
-    SampleResult.setResponseData(combinedResponse.toString());
-    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
-
-} catch (Exception e) {
-    SampleResult.setSuccessful(false);
-    if (e.getMessage() != null &amp;&amp; e.getMessage().contains(&quot;Connection closed without indication&quot;)) {
-        continue_flag = &quot;false&quot;;
-    }
-    IsSuccess = false;
-    log.error(Thread.currentThread().getName() + &quot; UID FETCH Exception: &quot; + e);
-    SampleResult.setResponseData(&quot;UID FETCH failed: &quot; + e.getMessage());
-    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
-}
-
-vars.put(&quot;CONTINUE&quot;, continue_flag);</stringProp>
-                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-              </BeanShellSampler>
-              <hashTree/>
               <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="UID FETCH" enabled="true">
                 <stringProp name="scriptLanguage">groovy</stringProp>
                 <stringProp name="parameters"></stringProp>
                 <stringProp name="filename"></stringProp>
                 <stringProp name="cacheKey">true</stringProp>
                 <stringProp name="script">import org.apache.commons.net.imap.IMAPClient
+import java.util.concurrent.ThreadLocalRandom
 
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;)
 String continueFlag = &quot;true&quot;
@@ -1627,8 +1535,7 @@ String continueFlag = &quot;true&quot;
 ArrayList msguid = vars.getObject(&quot;MSGUID&quot;)
 String uid = &quot;1&quot;
 if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
-    Random r = new Random()
-    int x = r.nextInt(msguid.size())
+    int x = ThreadLocalRandom.current().nextInt(msguid.size())
     uid = msguid.get(x)
 }
 
@@ -1641,7 +1548,6 @@ try {
 
     if (!headerResponse.contains(&quot;OK&quot;)) {
         SampleResult.setSuccessful(false)
-        IsSuccess = false
         continueFlag = &quot;false&quot;
         log.error(&quot;UID FETCH HEADERS failed: ${headerResponse}&quot;)
     }
@@ -1656,7 +1562,6 @@ try {
 
         if (!flagsResponse.contains(&quot;OK&quot;)) {
             SampleResult.setSuccessful(false)
-            IsSuccess = false
             continueFlag = &quot;false&quot;
             log.error(&quot;UID FETCH FLAGS failed: ${flagsResponse}&quot;)
         }
@@ -1672,7 +1577,6 @@ try {
 
         if (!bodyStructResponse.contains(&quot;OK&quot;)) {
             SampleResult.setSuccessful(false)
-            IsSuccess = false
             continueFlag = &quot;false&quot;
             log.error(&quot;UID FETCH BODYSTRUCTURE failed: ${bodyStructResponse}&quot;)
         }
@@ -1688,7 +1592,6 @@ try {
 
         if (!bodyTextResponse.contains(&quot;OK UID FETCH completed&quot;)) {
             SampleResult.setSuccessful(false)
-            IsSuccess = false
             continueFlag = &quot;false&quot;
             log.error(&quot;UID FETCH BODY[TEXT] failed: ${bodyTextResponse}&quot;)
         }
@@ -1718,7 +1621,6 @@ ${vars.get(&quot;FETCH_BODY_TEXT&quot;) ?: &quot;SKIPPED&quot;}
     if (e.getMessage()?.contains(&quot;Connection closed without indication&quot;)) {
         continueFlag = &quot;false&quot;
     }
-    IsSuccess = false
     log.error(&quot;${Thread.currentThread().getName()} UID FETCH Exception: ${e}&quot;)
     SampleResult.setResponseData(&quot;UID FETCH failed: ${e.getMessage()}&quot;, &quot;UTF-8&quot;)
     SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
@@ -1782,375 +1684,12 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID STORE" enabled="false">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-import java.io.IOException;
-
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
-String continue_flag = &quot;true&quot;;
-boolean overallSuccess = true;
-StringBuilder combinedResponse = new StringBuilder();
-
-// Use MSGUID from UID SEARCH if available
-ArrayList msguid = vars.getObject(&quot;MSGUID&quot;);
-String i = &quot;1&quot;;
-if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
-    Random r = new Random();
-    Integer x = r.nextInt(msguid.size());
-    i = msguid.get(x);
-    log.info(Thread.currentThread().getName() + &quot; Selected UID: &quot; + i + &quot; from pool of &quot; + msguid.size());
-} else {
-    log.warn(Thread.currentThread().getName() + &quot; MSGUID list is null or empty, defaulting to UID: 1&quot;);
-}
-
-// Validate IMAP client connection
-if (ic == null) {
-    log.error(Thread.currentThread().getName() + &quot; IMAPClient is null — connection not established&quot;);
-    SampleResult.setSuccessful(false);
-    SampleResult.setResponseData(&quot;ERROR: IMAPClient is null. Connection was not established.&quot;);
-    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
-    vars.put(&quot;CONTINUE&quot;, &quot;false&quot;);
-    return;
-}
-
-// ---------------------------------------------------------------
-// STEP 1: UID FETCH — Get current FLAGS for the message
-// ---------------------------------------------------------------
-String currentFlags = &quot;&quot;;
-
-try {
-    log.info(Thread.currentThread().getName() + &quot; STEP 1: UID FETCH FLAGS for UID: &quot; + i);
-    ic.uid(&quot;FETCH&quot;, i + &quot; FLAGS&quot;);
-    String fetchResponse = ic.getReplyString();
-
-    if (fetchResponse != null &amp;&amp; fetchResponse.contains(&quot;OK&quot;)) {
-        log.info(Thread.currentThread().getName() + &quot; FLAGS fetch succeeded: &quot; + fetchResponse);
-        currentFlags = fetchResponse;
-        vars.put(&quot;CURRENT_FLAGS&quot;, currentFlags);
-        combinedResponse.append(&quot;=== STEP 1: FETCH FLAGS ===\n&quot;).append(fetchResponse).append(&quot;\n\n&quot;);
-    } else if (fetchResponse != null &amp;&amp; fetchResponse.contains(&quot;NO&quot;)) {
-        log.warn(Thread.currentThread().getName() + &quot; FLAGS fetch rejected: &quot; + fetchResponse);
-        vars.put(&quot;CURRENT_FLAGS&quot;, &quot;NO_RESPONSE&quot;);
-        combinedResponse.append(&quot;=== STEP 1: FETCH FLAGS === [SERVER REJECTED]\n&quot;).append(fetchResponse).append(&quot;\n\n&quot;);
-        overallSuccess = false;
-    } else if (fetchResponse != null &amp;&amp; fetchResponse.contains(&quot;BAD&quot;)) {
-        log.error(Thread.currentThread().getName() + &quot; FLAGS fetch — BAD command: &quot; + fetchResponse);
-        vars.put(&quot;CURRENT_FLAGS&quot;, &quot;BAD_COMMAND&quot;);
-        combinedResponse.append(&quot;=== STEP 1: FETCH FLAGS === [BAD COMMAND]\n&quot;).append(fetchResponse).append(&quot;\n\n&quot;);
-        overallSuccess = false;
-    } else {
-        log.error(Thread.currentThread().getName() + &quot; FLAGS fetch — unexpected: &quot; + fetchResponse);
-        vars.put(&quot;CURRENT_FLAGS&quot;, &quot;UNEXPECTED&quot;);
-        combinedResponse.append(&quot;=== STEP 1: FETCH FLAGS === [UNEXPECTED]\n&quot;).append(fetchResponse).append(&quot;\n\n&quot;);
-        overallSuccess = false;
-    }
-} catch (IOException ioe) {
-    log.error(Thread.currentThread().getName() + &quot; FLAGS fetch IOException: &quot; + ioe.getMessage());
-    vars.put(&quot;CURRENT_FLAGS&quot;, &quot;IO_ERROR&quot;);
-    overallSuccess = false;
-    if (ioe.getMessage() != null &amp;&amp; ioe.getMessage().contains(&quot;Connection closed without indication&quot;)) {
-        continue_flag = &quot;false&quot;;
-    }
-} catch (Exception e) {
-    log.error(Thread.currentThread().getName() + &quot; FLAGS fetch Exception: &quot; + e.getMessage());
-    vars.put(&quot;CURRENT_FLAGS&quot;, &quot;ERROR&quot;);
-    overallSuccess = false;
-}
-
-// ---------------------------------------------------------------
-// STEP 2: Check flag states and determine STORE actions
-// ---------------------------------------------------------------
-if (&quot;true&quot;.equals(continue_flag) &amp;&amp; overallSuccess) {
-
-    // Parse which flags are currently set
-    boolean hasSeen = currentFlags.contains(&quot;\\Seen&quot;);
-    boolean hasFlagged = currentFlags.contains(&quot;\\Flagged&quot;);
-    boolean hasAnswered = currentFlags.contains(&quot;\\Answered&quot;);
-    boolean hasDeleted = currentFlags.contains(&quot;\\Deleted&quot;);
-    boolean hasDraft = currentFlags.contains(&quot;\\Draft&quot;);
-
-    // Check for custom flag (configurable via JMeter variable)
-    String customFlag = vars.get(&quot;CUSTOM_FLAG&quot;);
-    if (customFlag == null || customFlag.trim().isEmpty()) {
-        customFlag = &quot;CustomLabel&quot;;
-    }
-    boolean hasCustomFlag = currentFlags.contains(customFlag);
-
-    log.info(Thread.currentThread().getName() + &quot; Flag Status — Seen:&quot; + hasSeen
-        + &quot; Flagged:&quot; + hasFlagged + &quot; Answered:&quot; + hasAnswered
-        + &quot; Deleted:&quot; + hasDeleted + &quot; Draft:&quot; + hasDraft
-        + &quot; Custom(&quot; + customFlag + &quot;):&quot; + hasCustomFlag);
-
-    combinedResponse.append(&quot;=== STEP 2: FLAG STATUS ===\n&quot;);
-    combinedResponse.append(&quot;\\Seen     = &quot;).append(hasSeen).append(&quot;\n&quot;);
-    combinedResponse.append(&quot;\\Flagged  = &quot;).append(hasFlagged).append(&quot;\n&quot;);
-    combinedResponse.append(&quot;\\Answered = &quot;).append(hasAnswered).append(&quot;\n&quot;);
-    combinedResponse.append(&quot;\\Deleted  = &quot;).append(hasDeleted).append(&quot;\n&quot;);
-    combinedResponse.append(&quot;\\Draft    = &quot;).append(hasDraft).append(&quot;\n&quot;);
-    combinedResponse.append(customFlag).append(&quot;   = &quot;).append(hasCustomFlag).append(&quot;\n\n&quot;);
-
-    vars.put(&quot;FLAG_SEEN&quot;, String.valueOf(hasSeen));
-    vars.put(&quot;FLAG_FLAGGED&quot;, String.valueOf(hasFlagged));
-    vars.put(&quot;FLAG_ANSWERED&quot;, String.valueOf(hasAnswered));
-    vars.put(&quot;FLAG_DELETED&quot;, String.valueOf(hasDeleted));
-    vars.put(&quot;FLAG_DRAFT&quot;, String.valueOf(hasDraft));
-    vars.put(&quot;FLAG_CUSTOM&quot;, String.valueOf(hasCustomFlag));
-
-    // ---------------------------------------------------------------
-    // STEP 3: Conditional STORE — Toggle \Seen (Seen → Unseen)
-    // ---------------------------------------------------------------
-    if (&quot;true&quot;.equals(continue_flag)) {
-        try {
-            if (hasSeen) {
-                // Message is Seen → remove \Seen to mark as Unseen
-                log.info(Thread.currentThread().getName() + &quot; STEP 3a: UID STORE — Removing \\Seen (marking Unseen) for UID: &quot; + i);
-                ic.uid(&quot;STORE&quot;, i + &quot; -FLAGS (\\Seen)&quot;);
-                String storeResponse = ic.getReplyString();
-
-                if (storeResponse != null &amp;&amp; storeResponse.contains(&quot;OK&quot;)) {
-                    log.info(Thread.currentThread().getName() + &quot; \\Seen removed successfully&quot;);
-                    vars.put(&quot;STORE_SEEN_ACTION&quot;, &quot;REMOVED&quot;);
-                    combinedResponse.append(&quot;=== STEP 3a: STORE \\Seen ===\n&quot;);
-                    combinedResponse.append(&quot;Action: REMOVED \\Seen (was Seen → now Unseen)\n&quot;);
-                    combinedResponse.append(storeResponse).append(&quot;\n\n&quot;);
-                } else if (storeResponse != null &amp;&amp; storeResponse.contains(&quot;NO&quot;)) {
-                    log.warn(Thread.currentThread().getName() + &quot; STORE -\\Seen rejected: &quot; + storeResponse);
-                    vars.put(&quot;STORE_SEEN_ACTION&quot;, &quot;REJECTED&quot;);
-                    combinedResponse.append(&quot;=== STEP 3a: STORE \\Seen === [REJECTED]\n&quot;).append(storeResponse).append(&quot;\n\n&quot;);
-                    overallSuccess = false;
-                } else if (storeResponse != null &amp;&amp; storeResponse.contains(&quot;BAD&quot;)) {
-                    log.error(Thread.currentThread().getName() + &quot; STORE -\\Seen BAD: &quot; + storeResponse);
-                    vars.put(&quot;STORE_SEEN_ACTION&quot;, &quot;BAD_COMMAND&quot;);
-                    combinedResponse.append(&quot;=== STEP 3a: STORE \\Seen === [BAD]\n&quot;).append(storeResponse).append(&quot;\n\n&quot;);
-                    overallSuccess = false;
-                } else {
-                    log.error(Thread.currentThread().getName() + &quot; STORE -\\Seen unexpected: &quot; + storeResponse);
-                    vars.put(&quot;STORE_SEEN_ACTION&quot;, &quot;UNEXPECTED&quot;);
-                    combinedResponse.append(&quot;=== STEP 3a: STORE \\Seen === [UNEXPECTED]\n&quot;).append(storeResponse).append(&quot;\n\n&quot;);
-                    overallSuccess = false;
-                }
-            } else {
-                // Message is Unseen → add \Seen to mark as Seen
-                log.info(Thread.currentThread().getName() + &quot; STEP 3a: UID STORE — Adding \\Seen (marking Seen) for UID: &quot; + i);
-                ic.uid(&quot;STORE&quot;, i + &quot; +FLAGS (\\Seen)&quot;);
-                String storeResponse = ic.getReplyString();
-
-                if (storeResponse != null &amp;&amp; storeResponse.contains(&quot;OK&quot;)) {
-                    log.info(Thread.currentThread().getName() + &quot; \\Seen added successfully&quot;);
-                    vars.put(&quot;STORE_SEEN_ACTION&quot;, &quot;ADDED&quot;);
-                    combinedResponse.append(&quot;=== STEP 3a: STORE \\Seen ===\n&quot;);
-                    combinedResponse.append(&quot;Action: ADDED \\Seen (was Unseen → now Seen)\n&quot;);
-                    combinedResponse.append(storeResponse).append(&quot;\n\n&quot;);
-                } else if (storeResponse != null &amp;&amp; storeResponse.contains(&quot;NO&quot;)) {
-                    log.warn(Thread.currentThread().getName() + &quot; STORE +\\Seen rejected: &quot; + storeResponse);
-                    vars.put(&quot;STORE_SEEN_ACTION&quot;, &quot;REJECTED&quot;);
-                    combinedResponse.append(&quot;=== STEP 3a: STORE \\Seen === [REJECTED]\n&quot;).append(storeResponse).append(&quot;\n\n&quot;);
-                    overallSuccess = false;
-                } else if (storeResponse != null &amp;&amp; storeResponse.contains(&quot;BAD&quot;)) {
-                    log.error(Thread.currentThread().getName() + &quot; STORE +\\Seen BAD: &quot; + storeResponse);
-                    vars.put(&quot;STORE_SEEN_ACTION&quot;, &quot;BAD_COMMAND&quot;);
-                    combinedResponse.append(&quot;=== STEP 3a: STORE \\Seen === [BAD]\n&quot;).append(storeResponse).append(&quot;\n\n&quot;);
-                    overallSuccess = false;
-                } else {
-                    log.error(Thread.currentThread().getName() + &quot; STORE +\\Seen unexpected: &quot; + storeResponse);
-                    vars.put(&quot;STORE_SEEN_ACTION&quot;, &quot;UNEXPECTED&quot;);
-                    combinedResponse.append(&quot;=== STEP 3a: STORE \\Seen === [UNEXPECTED]\n&quot;).append(storeResponse).append(&quot;\n\n&quot;);
-                    overallSuccess = false;
-                }
-            }
-        } catch (IOException ioe) {
-            log.error(Thread.currentThread().getName() + &quot; STORE \\Seen IOException: &quot; + ioe.getMessage());
-            vars.put(&quot;STORE_SEEN_ACTION&quot;, &quot;IO_ERROR&quot;);
-            overallSuccess = false;
-            if (ioe.getMessage() != null &amp;&amp; ioe.getMessage().contains(&quot;Connection closed without indication&quot;)) {
-                continue_flag = &quot;false&quot;;
-            }
-        } catch (Exception e) {
-            log.error(Thread.currentThread().getName() + &quot; STORE \\Seen Exception: &quot; + e.getMessage());
-            vars.put(&quot;STORE_SEEN_ACTION&quot;, &quot;ERROR&quot;);
-            overallSuccess = false;
-        }
-    }
-
-    // ---------------------------------------------------------------
-    // STEP 4: Conditional STORE — Toggle \Flagged
-    // ---------------------------------------------------------------
-    if (&quot;true&quot;.equals(continue_flag)) {
-        try {
-            if (hasFlagged) {
-                log.info(Thread.currentThread().getName() + &quot; STEP 3b: UID STORE — Removing \\Flagged for UID: &quot; + i);
-                ic.uid(&quot;STORE&quot;, i + &quot; -FLAGS (\\Flagged)&quot;);
-                String storeResponse = ic.getReplyString();
-
-                if (storeResponse != null &amp;&amp; storeResponse.contains(&quot;OK&quot;)) {
-                    log.info(Thread.currentThread().getName() + &quot; \\Flagged removed successfully&quot;);
-                    vars.put(&quot;STORE_FLAGGED_ACTION&quot;, &quot;REMOVED&quot;);
-                    combinedResponse.append(&quot;=== STEP 3b: STORE \\Flagged ===\n&quot;);
-                    combinedResponse.append(&quot;Action: REMOVED \\Flagged\n&quot;);
-                    combinedResponse.append(storeResponse).append(&quot;\n\n&quot;);
-                } else {
-                    log.error(Thread.currentThread().getName() + &quot; STORE -\\Flagged failed: &quot; + storeResponse);
-                    vars.put(&quot;STORE_FLAGGED_ACTION&quot;, &quot;FAILED&quot;);
-                    combinedResponse.append(&quot;=== STEP 3b: STORE \\Flagged === [FAILED]\n&quot;).append(storeResponse).append(&quot;\n\n&quot;);
-                    overallSuccess = false;
-                }
-            } else {
-                log.info(Thread.currentThread().getName() + &quot; STEP 3b: UID STORE — Adding \\Flagged for UID: &quot; + i);
-                ic.uid(&quot;STORE&quot;, i + &quot; +FLAGS (\\Flagged)&quot;);
-                String storeResponse = ic.getReplyString();
-
-                if (storeResponse != null &amp;&amp; storeResponse.contains(&quot;OK&quot;)) {
-                    log.info(Thread.currentThread().getName() + &quot; \\Flagged added successfully&quot;);
-                    vars.put(&quot;STORE_FLAGGED_ACTION&quot;, &quot;ADDED&quot;);
-                    combinedResponse.append(&quot;=== STEP 3b: STORE \\Flagged ===\n&quot;);
-                    combinedResponse.append(&quot;Action: ADDED \\Flagged\n&quot;);
-                    combinedResponse.append(storeResponse).append(&quot;\n\n&quot;);
-                } else {
-                    log.error(Thread.currentThread().getName() + &quot; STORE +\\Flagged failed: &quot; + storeResponse);
-                    vars.put(&quot;STORE_FLAGGED_ACTION&quot;, &quot;FAILED&quot;);
-                    combinedResponse.append(&quot;=== STEP 3b: STORE \\Flagged === [FAILED]\n&quot;).append(storeResponse).append(&quot;\n\n&quot;);
-                    overallSuccess = false;
-                }
-            }
-        } catch (IOException ioe) {
-            log.error(Thread.currentThread().getName() + &quot; STORE \\Flagged IOException: &quot; + ioe.getMessage());
-            vars.put(&quot;STORE_FLAGGED_ACTION&quot;, &quot;IO_ERROR&quot;);
-            overallSuccess = false;
-            if (ioe.getMessage() != null &amp;&amp; ioe.getMessage().contains(&quot;Connection closed without indication&quot;)) {
-                continue_flag = &quot;false&quot;;
-            }
-        } catch (Exception e) {
-            log.error(Thread.currentThread().getName() + &quot; STORE \\Flagged Exception: &quot; + e.getMessage());
-            vars.put(&quot;STORE_FLAGGED_ACTION&quot;, &quot;ERROR&quot;);
-            overallSuccess = false;
-        }
-    } else {
-        log.warn(Thread.currentThread().getName() + &quot; Skipping \\Flagged STORE — connection lost&quot;);
-        vars.put(&quot;STORE_FLAGGED_ACTION&quot;, &quot;SKIPPED_CONNECTION_LOST&quot;);
-    }
-
-    // ---------------------------------------------------------------
-    // STEP 5: Conditional STORE — Toggle Custom Flag
-    // ---------------------------------------------------------------
-    if (&quot;true&quot;.equals(continue_flag)) {
-        try {
-            if (hasCustomFlag) {
-                log.info(Thread.currentThread().getName() + &quot; STEP 3c: UID STORE — Removing &quot; + customFlag + &quot; for UID: &quot; + i);
-                ic.uid(&quot;STORE&quot;, i + &quot; -FLAGS (&quot; + customFlag + &quot;)&quot;);
-                String storeResponse = ic.getReplyString();
-
-                if (storeResponse != null &amp;&amp; storeResponse.contains(&quot;OK&quot;)) {
-                    log.info(Thread.currentThread().getName() + &quot; &quot; + customFlag + &quot; removed successfully&quot;);
-                    vars.put(&quot;STORE_CUSTOM_ACTION&quot;, &quot;REMOVED&quot;);
-                    combinedResponse.append(&quot;=== STEP 3c: STORE &quot;).append(customFlag).append(&quot; ===\n&quot;);
-                    combinedResponse.append(&quot;Action: REMOVED &quot;).append(customFlag).append(&quot;\n&quot;);
-                    combinedResponse.append(storeResponse).append(&quot;\n\n&quot;);
-                } else {
-                    log.error(Thread.currentThread().getName() + &quot; STORE -&quot; + customFlag + &quot; failed: &quot; + storeResponse);
-                    vars.put(&quot;STORE_CUSTOM_ACTION&quot;, &quot;FAILED&quot;);
-                    combinedResponse.append(&quot;=== STEP 3c: STORE &quot;).append(customFlag).append(&quot; === [FAILED]\n&quot;).append(storeResponse).append(&quot;\n\n&quot;);
-                    overallSuccess = false;
-                }
-            } else {
-                log.info(Thread.currentThread().getName() + &quot; STEP 3c: UID STORE — Adding &quot; + customFlag + &quot; for UID: &quot; + i);
-                ic.uid(&quot;STORE&quot;, i + &quot; +FLAGS (&quot; + customFlag + &quot;)&quot;);
-                String storeResponse = ic.getReplyString();
-
-                if (storeResponse != null &amp;&amp; storeResponse.contains(&quot;OK&quot;)) {
-                    log.info(Thread.currentThread().getName() + &quot; &quot; + customFlag + &quot; added successfully&quot;);
-                    vars.put(&quot;STORE_CUSTOM_ACTION&quot;, &quot;ADDED&quot;);
-                    combinedResponse.append(&quot;=== STEP 3c: STORE &quot;).append(customFlag).append(&quot; ===\n&quot;);
-                    combinedResponse.append(&quot;Action: ADDED &quot;).append(customFlag).append(&quot;\n&quot;);
-                    combinedResponse.append(storeResponse).append(&quot;\n\n&quot;);
-                } else {
-                    log.error(Thread.currentThread().getName() + &quot; STORE +&quot; + customFlag + &quot; failed: &quot; + storeResponse);
-                    vars.put(&quot;STORE_CUSTOM_ACTION&quot;, &quot;FAILED&quot;);
-                    combinedResponse.append(&quot;=== STEP 3c: STORE &quot;).append(customFlag).append(&quot; === [FAILED]\n&quot;).append(storeResponse).append(&quot;\n\n&quot;);
-                    overallSuccess = false;
-                }
-            }
-        } catch (IOException ioe) {
-            log.error(Thread.currentThread().getName() + &quot; STORE &quot; + customFlag + &quot; IOException: &quot; + ioe.getMessage());
-            vars.put(&quot;STORE_CUSTOM_ACTION&quot;, &quot;IO_ERROR&quot;);
-            overallSuccess = false;
-            if (ioe.getMessage() != null &amp;&amp; ioe.getMessage().contains(&quot;Connection closed without indication&quot;)) {
-                continue_flag = &quot;false&quot;;
-            }
-        } catch (Exception e) {
-            log.error(Thread.currentThread().getName() + &quot; STORE &quot; + customFlag + &quot; Exception: &quot; + e.getMessage());
-            vars.put(&quot;STORE_CUSTOM_ACTION&quot;, &quot;ERROR&quot;);
-            overallSuccess = false;
-        }
-    } else {
-        log.warn(Thread.currentThread().getName() + &quot; Skipping Custom flag STORE — connection lost&quot;);
-        vars.put(&quot;STORE_CUSTOM_ACTION&quot;, &quot;SKIPPED_CONNECTION_LOST&quot;);
-    }
-
-    // ---------------------------------------------------------------
-    // STEP 6: Verification — Re-FETCH flags to confirm changes
-    // ---------------------------------------------------------------
-    if (&quot;true&quot;.equals(continue_flag)) {
-        try {
-            log.info(Thread.currentThread().getName() + &quot; STEP 4: Verification — UID FETCH FLAGS for UID: &quot; + i);
-            ic.uid(&quot;FETCH&quot;, i + &quot; FLAGS&quot;);
-            String verifyResponse = ic.getReplyString();
-
-            if (verifyResponse != null &amp;&amp; verifyResponse.contains(&quot;OK&quot;)) {
-                log.info(Thread.currentThread().getName() + &quot; Verification FLAGS: &quot; + verifyResponse);
-                vars.put(&quot;VERIFIED_FLAGS&quot;, verifyResponse);
-                combinedResponse.append(&quot;=== STEP 4: VERIFICATION FETCH FLAGS ===\n&quot;).append(verifyResponse).append(&quot;\n&quot;);
-            } else {
-                log.error(Thread.currentThread().getName() + &quot; Verification fetch failed: &quot; + verifyResponse);
-                vars.put(&quot;VERIFIED_FLAGS&quot;, &quot;FAILED&quot;);
-                combinedResponse.append(&quot;=== STEP 4: VERIFICATION === [FAILED]\n&quot;).append(verifyResponse).append(&quot;\n&quot;);
-                overallSuccess = false;
-            }
-        } catch (IOException ioe) {
-            log.error(Thread.currentThread().getName() + &quot; Verification IOException: &quot; + ioe.getMessage());
-            vars.put(&quot;VERIFIED_FLAGS&quot;, &quot;IO_ERROR&quot;);
-            overallSuccess = false;
-            if (ioe.getMessage() != null &amp;&amp; ioe.getMessage().contains(&quot;Connection closed without indication&quot;)) {
-                continue_flag = &quot;false&quot;;
-            }
-        } catch (Exception e) {
-            log.error(Thread.currentThread().getName() + &quot; Verification Exception: &quot; + e.getMessage());
-            vars.put(&quot;VERIFIED_FLAGS&quot;, &quot;ERROR&quot;);
-            overallSuccess = false;
-        }
-    } else {
-        log.warn(Thread.currentThread().getName() + &quot; Skipping verification — connection lost&quot;);
-        vars.put(&quot;VERIFIED_FLAGS&quot;, &quot;SKIPPED_CONNECTION_LOST&quot;);
-    }
-
-} else {
-    log.error(Thread.currentThread().getName() + &quot; Skipping all STORE operations — initial FLAGS fetch failed&quot;);
-    combinedResponse.append(&quot;=== SKIPPED ALL STORE OPERATIONS — FLAGS fetch failed ===\n&quot;);
-}
-
-// ---------------------------------------------------------------
-// Final result
-// ---------------------------------------------------------------
-if (!overallSuccess) {
-    SampleResult.setSuccessful(false);
-    IsSuccess = false;
-}
-
-vars.put(&quot;CONTINUE&quot;, continue_flag);
-
-if (combinedResponse.length() &gt; 0) {
-    SampleResult.setResponseData(combinedResponse.toString());
-} else {
-    SampleResult.setResponseData(&quot;All UID STORE operations failed or were skipped.&quot;);
-}
-SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-              </BeanShellSampler>
-              <hashTree/>
               <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="UID STORE" enabled="true">
                 <stringProp name="cacheKey">true</stringProp>
                 <stringProp name="filename"></stringProp>
                 <stringProp name="parameters"></stringProp>
                 <stringProp name="script">import org.apache.commons.net.imap.IMAPClient
+import java.util.concurrent.ThreadLocalRandom
 
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;) as IMAPClient
 boolean ok = true
@@ -2159,7 +1698,7 @@ StringBuilder out = new StringBuilder()
 String t = Thread.currentThread().name
 
 ArrayList msguid = vars.getObject(&quot;MSGUID&quot;) as ArrayList
-String uid = (msguid?.size() &gt; 0) ? msguid.get(new Random().nextInt(msguid.size())) : &quot;1&quot;
+String uid = (msguid?.size() &gt; 0) ? msguid.get(ThreadLocalRandom.current().nextInt(msguid.size())) : &quot;1&quot;
 log.info(t + &quot; Selected UID: &quot; + uid)
 
 if (ic == null) {
