@@ -1520,7 +1520,7 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID FETCH" enabled="true">
+              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID FETCH" enabled="false">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
@@ -1612,6 +1612,120 @@ try {
 vars.put(&quot;CONTINUE&quot;, continue_flag);</stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
+              <hashTree/>
+              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="UID FETCH" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import org.apache.commons.net.imap.IMAPClient
+
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;)
+String continueFlag = &quot;true&quot;
+
+// Use MSGUID from UID SEARCH if available
+ArrayList msguid = vars.getObject(&quot;MSGUID&quot;)
+String uid = &quot;1&quot;
+if (msguid != null &amp;&amp; msguid.size() &gt; 0) {
+    Random r = new Random()
+    int x = r.nextInt(msguid.size())
+    uid = msguid.get(x)
+}
+
+try {
+    // 1. UID FETCH — Headers (From, To, Subject, Date, Message-ID, CC, BCC, Reply-To)
+    log.info(&quot;${Thread.currentThread().getName()} UID FETCH HEADERS for UID: ${uid}&quot;)
+    ic.uid(&quot;FETCH&quot;, &quot;${uid} BODY[HEADER.FIELDS (FROM TO SUBJECT DATE MESSAGE-ID CC BCC REPLY-TO)]&quot;)
+    String headerResponse = ic.getReplyString()
+    log.info(&quot;${Thread.currentThread().getName()} HEADER Response: ${headerResponse}&quot;)
+
+    if (!headerResponse.contains(&quot;OK&quot;)) {
+        SampleResult.setSuccessful(false)
+        IsSuccess = false
+        continueFlag = &quot;false&quot;
+        log.error(&quot;UID FETCH HEADERS failed: ${headerResponse}&quot;)
+    }
+    vars.put(&quot;FETCH_HEADERS&quot;, headerResponse)
+
+    // 2. UID FETCH — Flags (\Seen, \Flagged, \Answered, etc.)
+    if (&quot;true&quot;.equals(continueFlag)) {
+        log.info(&quot;${Thread.currentThread().getName()} UID FETCH FLAGS for UID: ${uid}&quot;)
+        ic.uid(&quot;FETCH&quot;, &quot;${uid} FLAGS&quot;)
+        String flagsResponse = ic.getReplyString()
+        log.info(&quot;${Thread.currentThread().getName()} FLAGS Response: ${flagsResponse}&quot;)
+
+        if (!flagsResponse.contains(&quot;OK&quot;)) {
+            SampleResult.setSuccessful(false)
+            IsSuccess = false
+            continueFlag = &quot;false&quot;
+            log.error(&quot;UID FETCH FLAGS failed: ${flagsResponse}&quot;)
+        }
+        vars.put(&quot;FETCH_FLAGS&quot;, flagsResponse)
+    }
+
+    // 3. UID FETCH — Body Structure (MIME parts, content types, sizes)
+    if (&quot;true&quot;.equals(continueFlag)) {
+        log.info(&quot;${Thread.currentThread().getName()} UID FETCH BODYSTRUCTURE for UID: ${uid}&quot;)
+        ic.uid(&quot;FETCH&quot;, &quot;${uid} BODYSTRUCTURE&quot;)
+        String bodyStructResponse = ic.getReplyString()
+        log.info(&quot;${Thread.currentThread().getName()} BODYSTRUCTURE Response: ${bodyStructResponse}&quot;)
+
+        if (!bodyStructResponse.contains(&quot;OK&quot;)) {
+            SampleResult.setSuccessful(false)
+            IsSuccess = false
+            continueFlag = &quot;false&quot;
+            log.error(&quot;UID FETCH BODYSTRUCTURE failed: ${bodyStructResponse}&quot;)
+        }
+        vars.put(&quot;FETCH_BODYSTRUCTURE&quot;, bodyStructResponse)
+    }
+
+    // 4. UID FETCH — Body Text
+    if (&quot;true&quot;.equals(continueFlag)) {
+        log.info(&quot;${Thread.currentThread().getName()} UID FETCH BODY[TEXT] for UID: ${uid}&quot;)
+        ic.uid(&quot;FETCH&quot;, &quot;${uid} BODY[TEXT]&quot;)
+        String bodyTextResponse = ic.getReplyString()
+        log.info(&quot;${Thread.currentThread().getName()} BODY[TEXT] Response: ${bodyTextResponse}&quot;)
+
+        if (!bodyTextResponse.contains(&quot;OK UID FETCH completed&quot;)) {
+            SampleResult.setSuccessful(false)
+            IsSuccess = false
+            continueFlag = &quot;false&quot;
+            log.error(&quot;UID FETCH BODY[TEXT] failed: ${bodyTextResponse}&quot;)
+        }
+        vars.put(&quot;FETCH_BODY_TEXT&quot;, bodyTextResponse)
+    }
+
+    // Build combined response for SampleResult
+    String combinedResponse = &quot;&quot;&quot;\
+=== HEADERS ===
+${vars.get(&quot;FETCH_HEADERS&quot;) ?: &quot;SKIPPED&quot;}
+
+=== FLAGS ===
+${vars.get(&quot;FETCH_FLAGS&quot;) ?: &quot;SKIPPED&quot;}
+
+=== BODYSTRUCTURE ===
+${vars.get(&quot;FETCH_BODYSTRUCTURE&quot;) ?: &quot;SKIPPED&quot;}
+
+=== BODY[TEXT] ===
+${vars.get(&quot;FETCH_BODY_TEXT&quot;) ?: &quot;SKIPPED&quot;}
+&quot;&quot;&quot;
+
+    SampleResult.setResponseData(combinedResponse, &quot;UTF-8&quot;)
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+
+} catch (Exception e) {
+    SampleResult.setSuccessful(false)
+    if (e.getMessage()?.contains(&quot;Connection closed without indication&quot;)) {
+        continueFlag = &quot;false&quot;
+    }
+    IsSuccess = false
+    log.error(&quot;${Thread.currentThread().getName()} UID FETCH Exception: ${e}&quot;)
+    SampleResult.setResponseData(&quot;UID FETCH failed: ${e.getMessage()}&quot;, &quot;UTF-8&quot;)
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+}
+
+vars.put(&quot;CONTINUE&quot;, continueFlag)</stringProp>
+              </JSR223Sampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID SEARCH" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
