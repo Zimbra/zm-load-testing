@@ -754,26 +754,56 @@ IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; ID&quot;);
-  ic.sendCommand(&quot;ID&quot;,&quot;(\&quot;JMeter\&quot; \&quot;BeanShell\&quot; \&quot;Commons-Net\&quot; \&quot;Testing\&quot;)&quot;);
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+  log.info(Thread.currentThread().getName() + &quot; ID&quot;);
+
+  // Step 1: Send ID NIL to get server identity
+  ic.sendCommand(&quot;ID&quot;, &quot;NIL&quot;);
+  String serverReply = ic.getReplyString();
+  log.info(Thread.currentThread().getName() + &quot; Server ID response: &quot; + serverReply);
+
+  // Step 2: Parse server response using regex to extract key-value pairs
+  String idVersion = &quot;&quot;;
+  String idRelease = &quot;&quot;;
+  String idServer  = &quot;&quot;;
+
+  java.util.regex.Pattern p = java.util.regex.Pattern.compile(&quot;\&quot;([^\&quot;]+)\&quot;\\s+\&quot;([^\&quot;]+)\&quot;&quot;);
+  java.util.regex.Matcher m = p.matcher(serverReply);
+
+  while (m.find()) {
+    String key   = m.group(1);
+    String value = m.group(2);
+    if (key.equals(&quot;VERSION&quot;)) idVersion = value;
+    if (key.equals(&quot;RELEASE&quot;)) idRelease = value;
+    if (key.equals(&quot;SERVER&quot;))  idServer  = value;
+  }
+
+  // Step 3: USER from CSV variable (full email address)
+  String idUser = vars.get(&quot;USER&quot;);
+
+  // Step 4: Send the real ID command with correlated values
+  String idString = &quot;(\&quot;NAME\&quot; \&quot;Zimbra\&quot;&quot;
+      + &quot; \&quot;VERSION\&quot; \&quot;&quot; + idVersion + &quot;\&quot;&quot;
+      + &quot; \&quot;RELEASE\&quot; \&quot;&quot; + idRelease + &quot;\&quot;&quot;
+      + &quot; \&quot;USER\&quot; \&quot;&quot; + idUser + &quot;\&quot;&quot;
+      + &quot; \&quot;SERVER\&quot; \&quot;&quot; + idServer + &quot;\&quot;)&quot;;
+
+  log.info(Thread.currentThread().getName() + &quot; ID command: &quot; + idString);
+  ic.sendCommand(&quot;ID&quot;, idString);
+
 } catch (Exception e) {
   SampleResult.setSuccessful(false);
-  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
-  continue_flag = &quot;false&quot;;
+  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)) {
+      continue_flag = &quot;false&quot;;
   }
-  
-  IsSuccess=false; 
-  log.info(Thread.currentThread().getName()+&quot; ID: &quot;+e);
+  log.info(Thread.currentThread().getName() + &quot; ID: &quot; + e);
 }
 
 if (!ic.getReplyString().contains(&quot;OK ID completed&quot;)) {
   SampleResult.setSuccessful(false);
-  IsSuccess=false;
   log.info(&quot;Command response is: &quot; + ic.getReplyString());
 }
 
-vars.put(&quot;CONTINUE&quot;,continue_flag);
+vars.put(&quot;CONTINUE&quot;, continue_flag);
 SampleResult.setResponseData(ic.getReplyString());
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
               </BeanShellSampler>
@@ -815,46 +845,51 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
 String continue_flag = &quot;true&quot;;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; LIST&quot;);
-  ic.list(&quot;\&quot;\&quot;&quot;,&quot;\&quot;*\&quot;&quot;);
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+    log.info(Thread.currentThread().getName() + &quot; LIST&quot;);
+    ic.list(&quot;\&quot;\&quot;&quot;, &quot;\&quot;*\&quot;&quot;);
 } catch (Exception e) {
-  SampleResult.setSuccessful(false);
-  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
-  continue_flag = &quot;false&quot;;
-  }
-  
-  IsSuccess=false;
-  log.info(Thread.currentThread().getName()+&quot; LIST: &quot;+e);
+    SampleResult.setSuccessful(false);
+    if (e.getMessage().contains(&quot;Connection closed without indication&quot;)) {
+        continue_flag = &quot;false&quot;;
+    }
+    log.info(Thread.currentThread().getName() + &quot; LIST: &quot; + e);
 }
 
-// store the response mailboxes for posible use in other commands
-// available in the jmeter variable MAILBOXES
-//ArrayList mailboxes = new ArrayList();
-//String[] lines = icw.toString().split(&quot;\\r?\\n&quot;);
-//for (String s: lines) {
-//	// * LIST (\HasNoChildren \Drafts) &quot;/&quot; &quot;Drafts&quot;
-//	Pattern p = Pattern.compile(&quot;\\* LIST \\(([^\\)]+)\\) \&quot;([^\&quot;]+)\&quot; \&quot;([^\&quot;]+)\&quot;&quot;);
-//	Matcher m = p.matcher(s);
-//     while (m.find()) {
-//	  //log.info(m.group(2)+m.group(3));
-//	  mailboxes.add(m.group(2)+m.group(3));
-//     }
-//}
-//vars.putObject(&quot;MAILBOXES&quot;,mailboxes);
+String replyString = ic.getReplyString();
 
-if (!ic.getReplyString().contains(&quot;OK LIST completed&quot;)) {
-  SampleResult.setSuccessful(false);
-  IsSuccess=false;
-  log.info(&quot;Command response is: &quot; + ic.getReplyString()); 
+// --- Parse the LIST response and extract folder names dynamically ---
+ArrayList mailboxes = new ArrayList();
+String[] lines = replyString.split(&quot;\\r?\\n&quot;);
+
+for (String s : lines) {
+    Pattern p = Pattern.compile(&quot;\\* LIST \\([^)]*\\) \&quot;/\&quot; \&quot;?([^\&quot;\\r\\n]+)\&quot;?&quot;);
+    Matcher m = p.matcher(s);
+    while (m.find()) {
+        String folderName = m.group(1).trim();
+        mailboxes.add(folderName);
+        log.info(Thread.currentThread().getName() + &quot; LIST folder found: &quot; + folderName);
+    }
 }
 
-vars.put(&quot;CONTINUE&quot;,continue_flag);
-SampleResult.setResponseData(ic.getReplyString());
+// Store mailboxes list for dynamic use in other samplers
+vars.putObject(&quot;MAILBOXES&quot;, mailboxes);
+vars.put(&quot;MAILBOXES_COUNT&quot;, String.valueOf(mailboxes.size()));
+
+log.info(Thread.currentThread().getName() + &quot; LIST total folders: &quot; + mailboxes.size());
+
+// --- Validate response ---
+if (!replyString.contains(&quot;OK LIST completed&quot;)) {
+    SampleResult.setSuccessful(false);
+    log.info(&quot;LIST command failed. Response: &quot; + replyString);
+}
+
+vars.put(&quot;CONTINUE&quot;, continue_flag);
+SampleResult.setResponseData(replyString);
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
               </BeanShellSampler>
               <hashTree/>
