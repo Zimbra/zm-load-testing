@@ -806,7 +806,8 @@ try {
     log.debug(Thread.currentThread().getName() + &quot; Server ID response: &quot; + serverReply)
 
     // Step 1b: Validate that ID NIL succeeded
-    if (serverReply == null || !serverReply.contains(&quot;OK&quot;)) {
+    // Match &quot;OK ID&quot; for the actual IMAP tagged response (e.g., &quot;AAAB OK ID completed&quot;)
+    if (serverReply == null || !serverReply.contains(&quot;OK ID&quot;)) {
         SampleResult.setSuccessful(false)
         SampleResult.setResponseData(&quot;ID NIL failed or returned partial response: &quot; + serverReply, &quot;UTF-8&quot;)
         SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
@@ -845,7 +846,6 @@ try {
     }
 
     // Step 4: Build ID command — NAME is always &quot;Zimbra&quot;, rest are dynamic from server
-    // Output format: ID (&quot;NAME&quot; &quot;Zimbra&quot; &quot;VERSION&quot; &quot;10.1.17_GA_4874&quot; &quot;RELEASE&quot; &quot;20260428082610&quot; &quot;USER&quot; &quot;user@host&quot; &quot;SERVER&quot; &quot;uuid&quot;)
     String idString = &quot;(\&quot;NAME\&quot; \&quot;&quot; + ID_NAME + &quot;\&quot;&quot; +
         &quot; \&quot;VERSION\&quot; \&quot;&quot; + idVersion + &quot;\&quot;&quot; +
         &quot; \&quot;RELEASE\&quot; \&quot;&quot; + idRelease + &quot;\&quot;&quot; +
@@ -859,7 +859,8 @@ try {
     fullResponse = fullResponse + &quot;\n---CLIENT ID---\n&quot; + clientIdReply
 
     // Step 5: Validate client ID response
-    if (clientIdReply == null || !clientIdReply.contains(&quot;OK&quot;)) {
+    // Match &quot;OK ID&quot; for the actual IMAP tagged response pattern
+    if (clientIdReply == null || !clientIdReply.contains(&quot;OK ID&quot;)) {
         SampleResult.setSuccessful(false)
         log.info(Thread.currentThread().getName() + &quot; ID command failed. Response: &quot; + clientIdReply)
     } else {
