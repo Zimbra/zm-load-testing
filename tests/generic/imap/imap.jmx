@@ -971,6 +971,20 @@ if (continueFlag.equals(&quot;true&quot;) &amp;&amp; listStatus.equals(&quot;SUC
 
     String replyString = ic.getReplyString()
 
+    // FIX #1: NPE guard — handle null replyString (race/timeout edge case)
+    if (replyString == null) {
+        SampleResult.setSuccessful(false)
+        listStatus = &quot;FAILED&quot;
+        vars.putObject(&quot;MAILBOXES&quot;, new ArrayList&lt;String&gt;())
+        vars.put(&quot;MAILBOXES_COUNT&quot;, &quot;0&quot;)
+        vars.put(&quot;LIST_STATUS&quot;, listStatus)
+        vars.put(&quot;CONTINUE&quot;, continueFlag)
+        SampleResult.setResponseData(&quot;LIST replyString is null - possible race/timeout&quot;, &quot;UTF-8&quot;)
+        SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+        log.info(Thread.currentThread().getName() + &quot; LIST Output =&gt; FOLDERS: 0 | STATUS: FAILED (null reply)&quot;)
+        return
+    }
+
     // Pattern compiled ONCE outside the loop
     Pattern p = Pattern.compile(&quot;\\* LIST \\([^)]*\\) \&quot;/\&quot; \&quot;?([^\&quot;\\r\\n]+)\&quot;?&quot;)
 
@@ -999,9 +1013,11 @@ if (continueFlag.equals(&quot;true&quot;) &amp;&amp; listStatus.equals(&quot;SUC
         log.info(Thread.currentThread().getName() + &quot; LIST total folders: &quot; + mailboxes.size())
     }
 
-    // Print output format to log for verification
+    // FIX #2: Full folder names at DEBUG only — prevents log flooding at scale
+    log.debug(Thread.currentThread().getName() + &quot; LIST folder names: &quot; + mailboxes.toString())
+
+    // Summary at INFO — count + status only (safe for hundreds of threads)
     log.info(Thread.currentThread().getName() + &quot; LIST Output =&gt; FOLDERS: &quot; + mailboxes.size() +
-        &quot; | NAMES: &quot; + mailboxes.toString() +
         &quot; | STATUS: &quot; + listStatus)
 
     SampleResult.setResponseData(replyString, &quot;UTF-8&quot;)
@@ -1014,7 +1030,7 @@ if (continueFlag.equals(&quot;true&quot;) &amp;&amp; listStatus.equals(&quot;SUC
     SampleResult.setResponseData(&quot;LIST command skipped or failed&quot;, &quot;UTF-8&quot;)
     SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
 
-    log.info(Thread.currentThread().getName() + &quot; LIST Output =&gt; FOLDERS: 0 | NAMES: [] | STATUS: &quot; + listStatus)
+    log.info(Thread.currentThread().getName() + &quot; LIST Output =&gt; FOLDERS: 0 | STATUS: &quot; + listStatus)
 }
 
 vars.put(&quot;LIST_STATUS&quot;, listStatus)
