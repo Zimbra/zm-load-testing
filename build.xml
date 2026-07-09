@@ -644,7 +644,7 @@
           </target>
 	  <target name="admin">
                <antcall target="admin-zsoap"/>
-          </target>
+      </target>
           <target name="admin-zsoap" depends="src,logs">
             <jmeter jmeterhome="${jmeter.home}"
                     testplan="${basedir}/tests/admin/zsoap/zsoap.jmx"
