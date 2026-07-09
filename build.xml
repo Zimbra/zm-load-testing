@@ -55,6 +55,7 @@
   <target name="tests">
     <antcall target="generic"/>
     <antcall target="fixed"/>
+    <antcall target="admin"/>
   </target>
   <target name="generic">
     <antcall target="generic-caldav"/>
@@ -639,6 +640,21 @@
               <jmeterarg value="-q${basedir}/${env}"/>
               <jmeterarg value="-q${basedir}/tests/CSP2/LMTP/load.prop"/>
               <jmeterarg value="-q${basedir}/tests/CSP2/LMTP/profiles/basic.prop"/>
+            </jmeter>
+          </target>
+	  <target name="admin">
+               <antcall target="admin-zsoap"/>
+      </target>
+          <target name="admin-zsoap" depends="src,logs">
+            <jmeter jmeterhome="${jmeter.home}"
+                    testplan="${basedir}/tests/admin/zsoap/zsoap.jmx"
+                    jmeterlogfile="${logs}/admin-zsoap-jmeter.log"
+                    resultlog="${logs}/admin-zsoap-requests.csv">
+              <property name="ACCOUNTS.csv" value="${users}"/>
+              <property name="user.classpath" value="${zjmeter}"/>
+              <jmeterarg value="-q${basedir}/${env}"/>
+              <jmeterarg value="-q${basedir}/tests/admin/zsoap/load.prop"/>
+              <jmeterarg value="-q${basedir}/tests/admin/zsoap/profiles/admin.prop"/>
             </jmeter>
           </target>
 	  <target name="genUsers" depends="logs">
