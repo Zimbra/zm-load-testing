@@ -768,36 +768,133 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="ID" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
-String continue_flag = &quot;true&quot;;
+              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="ID" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import org.apache.commons.net.imap.IMAPClient
+import java.util.regex.Pattern
+import java.util.regex.Matcher
+
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;) as IMAPClient
+String continueFlag = vars.get(&quot;CONTINUE&quot;) ?: &quot;true&quot;
+String idStatus = &quot;FAILED&quot;
+
+// Hardcoded constant — same value every iteration
+final String ID_NAME = &quot;Zimbra&quot;
+
+// Guard: Skip if previous sampler already set CONTINUE=false
+if (!continueFlag.equals(&quot;true&quot;)) {
+    SampleResult.setSuccessful(false)
+    SampleResult.setResponseData(&quot;Skipped - CONTINUE is false from prior step&quot;, &quot;UTF-8&quot;)
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+    vars.put(&quot;CONTINUE&quot;, &quot;false&quot;)
+    vars.put(&quot;ID_STATUS&quot;, idStatus)
+    return
+}
+
+String fullResponse = &quot;&quot;
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; ID&quot;);
-  ic.sendCommand(&quot;ID&quot;,&quot;(\&quot;JMeter\&quot; \&quot;BeanShell\&quot; \&quot;Commons-Net\&quot; \&quot;Testing\&quot;)&quot;);
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+    log.info(Thread.currentThread().getName() + &quot; ID&quot;)
+
+    // Step 1: Send ID NIL to get server identity
+    ic.sendCommand(&quot;ID&quot;, &quot;NIL&quot;)
+    String serverReply = ic.getReplyString()
+    fullResponse = serverReply ?: &quot;&quot;
+    log.debug(Thread.currentThread().getName() + &quot; Server ID response: &quot; + serverReply)
+
+    // Step 1b: Validate that ID NIL succeeded
+    // Match &quot;OK ID&quot; for the actual IMAP tagged response (e.g., &quot;AAAB OK ID completed&quot;)
+    if (serverReply == null || !serverReply.contains(&quot;OK ID&quot;)) {
+        SampleResult.setSuccessful(false)
+        SampleResult.setResponseData(&quot;ID NIL failed or returned partial response: &quot; + serverReply, &quot;UTF-8&quot;)
+        SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+        vars.put(&quot;CONTINUE&quot;, &quot;false&quot;)
+        vars.put(&quot;ID_STATUS&quot;, idStatus)
+        return
+    }
+
+    // Step 2: Parse server response — Pattern compiled ONCE
+    String idVersion = &quot;&quot;
+    String idRelease = &quot;&quot;
+    String idServer  = &quot;&quot;
+
+    Pattern p = Pattern.compile(&quot;\&quot;([^\&quot;]+)\&quot;\\s+\&quot;([^\&quot;]+)\&quot;&quot;)
+    Matcher m = p.matcher(serverReply)
+
+    while (m.find()) {
+        String key   = m.group(1)
+        String value = m.group(2)
+        switch (key) {
+            case &quot;VERSION&quot;: idVersion = value; break
+            case &quot;RELEASE&quot;: idRelease = value; break
+            case &quot;SERVER&quot;:  idServer  = value; break
+        }
+    }
+
+    // Step 3: USER from CSV variable — with null check
+    String idUser = vars.get(&quot;USER&quot;)
+    if (idUser == null || idUser.trim().isEmpty()) {
+        SampleResult.setSuccessful(false)
+        SampleResult.setResponseData(&quot;USER variable is null or empty - check CSV Data Set Config.&quot;, &quot;UTF-8&quot;)
+        SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+        vars.put(&quot;CONTINUE&quot;, &quot;false&quot;)
+        vars.put(&quot;ID_STATUS&quot;, idStatus)
+        return
+    }
+
+    // Step 4: Build ID command — NAME is always &quot;Zimbra&quot;, rest are dynamic from server
+    String idString = &quot;(\&quot;NAME\&quot; \&quot;&quot; + ID_NAME + &quot;\&quot;&quot; +
+        &quot; \&quot;VERSION\&quot; \&quot;&quot; + idVersion + &quot;\&quot;&quot; +
+        &quot; \&quot;RELEASE\&quot; \&quot;&quot; + idRelease + &quot;\&quot;&quot; +
+        &quot; \&quot;USER\&quot; \&quot;&quot; + idUser + &quot;\&quot;&quot; +
+        &quot; \&quot;SERVER\&quot; \&quot;&quot; + idServer + &quot;\&quot;)&quot;
+
+    log.debug(Thread.currentThread().getName() + &quot; ID command: ID &quot; + idString)
+    ic.sendCommand(&quot;ID&quot;, idString)
+
+    String clientIdReply = ic.getReplyString()
+    fullResponse = fullResponse + &quot;\n---CLIENT ID---\n&quot; + clientIdReply
+
+    // Step 5: Validate client ID response
+    // Match &quot;OK ID&quot; for the actual IMAP tagged response pattern
+    if (clientIdReply == null || !clientIdReply.contains(&quot;OK ID&quot;)) {
+        SampleResult.setSuccessful(false)
+        log.info(Thread.currentThread().getName() + &quot; ID command failed. Response: &quot; + clientIdReply)
+    } else {
+        idStatus = &quot;SUCCESS&quot;
+        log.info(Thread.currentThread().getName() + &quot; ID completed successfully&quot;)
+    }
+
+    // Store parsed server values for downstream samplers
+    vars.put(&quot;SERVER_VERSION&quot;, idVersion)
+    vars.put(&quot;SERVER_RELEASE&quot;, idRelease)
+    vars.put(&quot;SERVER_ID&quot;, idServer)
+
+    // Print output format to log for verification
+    log.info(Thread.currentThread().getName() + &quot; ID Output =&gt; NAME: &quot; + ID_NAME +
+        &quot; | VERSION: &quot; + idVersion +
+        &quot; | RELEASE: &quot; + idRelease +
+        &quot; | USER: &quot; + idUser +
+        &quot; | SERVER: &quot; + idServer +
+        &quot; | STATUS: &quot; + idStatus)
+
 } catch (Exception e) {
-  SampleResult.setSuccessful(false);
-  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
-  continue_flag = &quot;false&quot;;
-  }
-  
-  IsSuccess=false; 
-  log.info(Thread.currentThread().getName()+&quot; ID: &quot;+e);
+    SampleResult.setSuccessful(false)
+    if (e.getMessage() != null &amp;&amp; e.getMessage().contains(&quot;Connection closed without indication&quot;)) {
+        continueFlag = &quot;false&quot;
+    }
+    log.info(Thread.currentThread().getName() + &quot; ID Exception: &quot; + e.getMessage())
+    fullResponse = fullResponse + &quot;\nEXCEPTION: &quot; + e.getMessage()
 }
 
-if (!ic.getReplyString().contains(&quot;OK ID completed&quot;)) {
-  SampleResult.setSuccessful(false);
-  IsSuccess=false;
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
-}
-
-vars.put(&quot;CONTINUE&quot;,continue_flag);
-SampleResult.setResponseData(ic.getReplyString());
-SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-              </BeanShellSampler>
+vars.put(&quot;CONTINUE&quot;, continueFlag)
+vars.put(&quot;ID_STATUS&quot;, idStatus)
+SampleResult.setResponseData(fullResponse, &quot;UTF-8&quot;)
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)</stringProp>
+              </JSR223Sampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="IDLE" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
@@ -833,53 +930,113 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="LIST" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
-String continue_flag = &quot;true&quot;;
+              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="LIST" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import org.apache.commons.net.imap.IMAPClient
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;) as IMAPClient
+String continueFlag = vars.get(&quot;CONTINUE&quot;) ?: &quot;true&quot;
+String listStatus = &quot;FAILED&quot;
+
+// Guard: Skip if previous sampler already set CONTINUE=false
+if (!continueFlag.equals(&quot;true&quot;)) {
+    SampleResult.setSuccessful(false)
+    SampleResult.setResponseData(&quot;Skipped - CONTINUE is false from prior step&quot;, &quot;UTF-8&quot;)
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+    vars.put(&quot;CONTINUE&quot;, &quot;false&quot;)
+    vars.put(&quot;LIST_STATUS&quot;, listStatus)
+    vars.putObject(&quot;MAILBOXES&quot;, new ArrayList&lt;String&gt;())
+    vars.put(&quot;MAILBOXES_COUNT&quot;, &quot;0&quot;)
+    return
+}
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; LIST&quot;);
-  ic.list(&quot;\&quot;\&quot;&quot;,&quot;\&quot;*\&quot;&quot;);
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+    log.info(Thread.currentThread().getName() + &quot; LIST&quot;)
+    ic.list(&quot;\&quot;\&quot;&quot;, &quot;\&quot;*\&quot;&quot;)
+    listStatus = &quot;SUCCESS&quot;
 } catch (Exception e) {
-  SampleResult.setSuccessful(false);
-  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
-  continue_flag = &quot;false&quot;;
-  }
-  
-  IsSuccess=false;
-  log.info(Thread.currentThread().getName()+&quot; LIST: &quot;+e);
+    SampleResult.setSuccessful(false)
+    if (e.getMessage() != null &amp;&amp; e.getMessage().contains(&quot;Connection closed without indication&quot;)) {
+        continueFlag = &quot;false&quot;
+    }
+    log.info(Thread.currentThread().getName() + &quot; LIST Exception: &quot; + e.getMessage())
 }
 
-// store the response mailboxes for posible use in other commands
-// available in the jmeter variable MAILBOXES
-//ArrayList mailboxes = new ArrayList();
-//String[] lines = icw.toString().split(&quot;\\r?\\n&quot;);
-//for (String s: lines) {
-//	// * LIST (\HasNoChildren \Drafts) &quot;/&quot; &quot;Drafts&quot;
-//	Pattern p = Pattern.compile(&quot;\\* LIST \\(([^\\)]+)\\) \&quot;([^\&quot;]+)\&quot; \&quot;([^\&quot;]+)\&quot;&quot;);
-//	Matcher m = p.matcher(s);
-//     while (m.find()) {
-//	  //log.info(m.group(2)+m.group(3));
-//	  mailboxes.add(m.group(2)+m.group(3));
-//     }
-//}
-//vars.putObject(&quot;MAILBOXES&quot;,mailboxes);
+// Only parse if LIST command succeeded
+if (continueFlag.equals(&quot;true&quot;) &amp;&amp; listStatus.equals(&quot;SUCCESS&quot;)) {
 
-if (!ic.getReplyString().contains(&quot;OK LIST completed&quot;)) {
-  SampleResult.setSuccessful(false);
-  IsSuccess=false;
-  log.info(&quot;Command response is: &quot; + ic.getReplyString()); 
+    String replyString = ic.getReplyString()
+
+    // FIX #1: NPE guard — handle null replyString (race/timeout edge case)
+    if (replyString == null) {
+        SampleResult.setSuccessful(false)
+        listStatus = &quot;FAILED&quot;
+        vars.putObject(&quot;MAILBOXES&quot;, new ArrayList&lt;String&gt;())
+        vars.put(&quot;MAILBOXES_COUNT&quot;, &quot;0&quot;)
+        vars.put(&quot;LIST_STATUS&quot;, listStatus)
+        vars.put(&quot;CONTINUE&quot;, continueFlag)
+        SampleResult.setResponseData(&quot;LIST replyString is null - possible race/timeout&quot;, &quot;UTF-8&quot;)
+        SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+        log.info(Thread.currentThread().getName() + &quot; LIST Output =&gt; FOLDERS: 0 | STATUS: FAILED (null reply)&quot;)
+        return
+    }
+
+    // Pattern compiled ONCE outside the loop
+    Pattern p = Pattern.compile(&quot;\\* LIST \\([^)]*\\) \&quot;/\&quot; \&quot;?([^\&quot;\\r\\n]+)\&quot;?&quot;)
+
+    ArrayList&lt;String&gt; mailboxes = new ArrayList&lt;String&gt;()
+    String[] lines = replyString.split(&quot;\\r?\\n&quot;)
+
+    for (String s : lines) {
+        Matcher m = p.matcher(s)
+        while (m.find()) {
+            String folderName = m.group(1).trim()
+            mailboxes.add(folderName)
+            log.debug(Thread.currentThread().getName() + &quot; LIST folder found: &quot; + folderName)
+        }
+    }
+
+    // Store mailboxes list for dynamic use in other samplers
+    vars.putObject(&quot;MAILBOXES&quot;, mailboxes)
+    vars.put(&quot;MAILBOXES_COUNT&quot;, String.valueOf(mailboxes.size()))
+
+    // Validate response
+    if (!replyString.contains(&quot;OK LIST completed&quot;)) {
+        SampleResult.setSuccessful(false)
+        listStatus = &quot;FAILED&quot;
+        log.info(Thread.currentThread().getName() + &quot; LIST command failed. Response: &quot; + replyString)
+    } else {
+        log.info(Thread.currentThread().getName() + &quot; LIST total folders: &quot; + mailboxes.size())
+    }
+
+    // FIX #2: Full folder names at DEBUG only — prevents log flooding at scale
+    log.debug(Thread.currentThread().getName() + &quot; LIST folder names: &quot; + mailboxes.toString())
+
+    // Summary at INFO — count + status only (safe for hundreds of threads)
+    log.info(Thread.currentThread().getName() + &quot; LIST Output =&gt; FOLDERS: &quot; + mailboxes.size() +
+        &quot; | STATUS: &quot; + listStatus)
+
+    SampleResult.setResponseData(replyString, &quot;UTF-8&quot;)
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+
+} else {
+    // When LIST fails, store empty list and mark status explicitly
+    vars.putObject(&quot;MAILBOXES&quot;, new ArrayList&lt;String&gt;())
+    vars.put(&quot;MAILBOXES_COUNT&quot;, &quot;0&quot;)
+    SampleResult.setResponseData(&quot;LIST command skipped or failed&quot;, &quot;UTF-8&quot;)
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+
+    log.info(Thread.currentThread().getName() + &quot; LIST Output =&gt; FOLDERS: 0 | STATUS: &quot; + listStatus)
 }
 
-vars.put(&quot;CONTINUE&quot;,continue_flag);
-SampleResult.setResponseData(ic.getReplyString());
-SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-              </BeanShellSampler>
+vars.put(&quot;LIST_STATUS&quot;, listStatus)
+vars.put(&quot;CONTINUE&quot;, continueFlag)</stringProp>
+              </JSR223Sampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="LOGIN" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
