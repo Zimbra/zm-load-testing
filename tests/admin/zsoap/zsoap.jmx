@@ -166,31 +166,32 @@
         <stringProp name="HTTPSampler.implementation">Java</stringProp>
       </ConfigTestElement>
       <hashTree/>
-      <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="ZSOAP Setup" enabled="true">
+      <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="ZSOAP Setup" enabled="true">
+        <stringProp name="cacheKey">true</stringProp>
         <stringProp name="filename"></stringProp>
         <stringProp name="parameters"></stringProp>
-        <boolProp name="resetInterpreter">false</boolProp>
         <stringProp name="script">import com.zimbra.jmeter.Zimbra;
-//debug();
-Zimbra soap = new Zimbra(props,&quot;ZSOAP&quot;);
-vars.putObject(&quot;ZSOAP&quot;,soap);
 
-String url = &quot;https://&quot;+props.get(&quot;HTTP.server&quot;);
-String admin = url+&quot;:&quot;+ props.get(&quot;HTTP.admin.port&quot;)+&quot;/service/admin/soap&quot;;
-vars.put(&quot;ADMIN&quot;,admin);
-if (!props.get(&quot;HTTP.port&quot;).equals(&quot;&quot;) ) {
-  url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;); 
+Zimbra soap = new Zimbra(props, &quot;ZSOAP&quot;);
+vars.putObject(&quot;ZSOAP&quot;, soap);
+
+String url = &quot;https://&quot; + props.get(&quot;HTTP.server&quot;);
+String admin = url + &quot;:&quot; + props.get(&quot;HTTP.admin.port&quot;) + &quot;/service/admin/soap&quot;;
+vars.put(&quot;ADMIN&quot;, admin);
+
+if (!props.get(&quot;HTTP.port&quot;).equals(&quot;&quot;)) {
+    url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;);
 }
-url = url+&quot;/service/soap&quot;;
-//log.info(url);
-vars.put(&quot;URL&quot;,url);
+url = url + &quot;/service/soap&quot;;
+vars.put(&quot;URL&quot;, url);
 
 long startEpoch = ${__timeShift(,,-P5D,,)}L;
 long endEpoch = ${__timeShift(,,P14D,,)}L;
 
-vars.put(&quot;searchStartEpochTime&quot;, startEpoch.toString());
-vars.put(&quot;searchEndEpochTime&quot;, endEpoch.toString());</stringProp>
-      </BeanShellPreProcessor>
+vars.put(&quot;searchStartEpochTime&quot;, String.valueOf(startEpoch));
+vars.put(&quot;searchEndEpochTime&quot;, String.valueOf(endEpoch));</stringProp>
+        <stringProp name="scriptLanguage">groovy</stringProp>
+      </JSR223PreProcessor>
       <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="ZSOAP User" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -209,7 +210,7 @@ vars.put(&quot;searchEndEpochTime&quot;, endEpoch.toString());</stringProp>
         <boolProp name="ThreadGroup.delayedStart">false</boolProp>
       </ThreadGroup>
       <hashTree>
-        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="randomVariableNameGenerator" enabled="true">
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="randomVariableNameGenerator" enabled="false">
           <stringProp name="BeanShellSampler.query">import java.text.SimpleDateFormat;
 
 vars.put(&quot;soaptest_folderName&quot;,&quot;soaptest_${__Random(1,10000000)}&quot;);
@@ -225,7 +226,31 @@ vars.put(&quot;soaptest_signName&quot;, &quot;soaptest_sign_${__Random(1,1000000
           <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
         </BeanShellSampler>
         <hashTree/>
-        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="randomVariableNameGenerator" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">import java.text.SimpleDateFormat;
+import java.util.concurrent.ThreadLocalRandom;
+
+int rand() { ThreadLocalRandom.current().nextInt(1, 10000001) }
+
+vars.put(&quot;soaptest_folderName&quot;, &quot;soaptest_&quot; + rand());
+vars.put(&quot;soaptest_tagName&quot;, &quot;soaptag_&quot; + rand());
+vars.put(&quot;soaptest_SearchFolderName&quot;, &quot;soapsearchtest_&quot; + rand());
+
+Date now = new Date();
+Date nowPlus30Minutes = new Date(now.getTime() + 30 * 60 * 1000);
+SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyyMMdd&apos;T&apos;HHmmss&quot;);
+vars.put(&quot;endDate&quot;, sdf.format(nowPlus30Minutes));
+
+vars.put(&quot;soaptest_folderNameRenamed&quot;, &quot;soaptest_renamed_&quot; + rand());
+vars.put(&quot;soaptest_tagNameRenamed&quot;, &quot;soaptag_renamed_&quot; + rand());
+vars.put(&quot;soaptest_signName&quot;, &quot;soaptest_sign_&quot; + rand());</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="false">
           <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Zimbra;
 import com.zimbra.jmeter.Command;
 //debug();
@@ -259,11 +284,50 @@ if (commands.size() &gt; 0) {
           <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
         </BeanShellSampler>
         <hashTree/>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="START" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">import com.zimbra.jmeter.Zimbra;
+import com.zimbra.jmeter.Command;
+
+String url = &quot;https://&quot; + props.get(&quot;HTTP.server&quot;);
+String admin = url + &quot;:7071/service/admin/soap&quot;;
+vars.put(&quot;ADMIN&quot;, admin);
+
+if (!props.get(&quot;HTTP.port&quot;).equals(&quot;&quot;)) {
+    url = url + &quot;:&quot; + props.get(&quot;HTTP.port&quot;);
+}
+url = url + &quot;/service/soap&quot;;
+log.info(url);
+vars.put(&quot;URL&quot;, url);
+
+Zimbra soap = new Zimbra(props, &quot;ZSOAP&quot;);
+ArrayList commands = soap.getcommands();
+vars.putObject(&quot;COMMANDS&quot;, commands);
+
+// generate command DELAY
+if (props.get(&quot;LOAD.ZSOAP.userduration&quot;) == null || commands.size() == 0) {
+    vars.put(&quot;DELAY&quot;, &quot;0&quot;);
+} else {
+    int delay = Integer.parseInt(props.get(&quot;LOAD.ZSOAP.userduration&quot;)) * 1000 / commands.size();
+    vars.put(&quot;DELAY&quot;, String.valueOf(delay));
+}
+
+// initialize CONTINUE
+if (commands.size() &gt; 0) {
+    vars.put(&quot;CONTINUE&quot;, &quot;true&quot;);
+} else {
+    vars.put(&quot;CONTINUE&quot;, &quot;false&quot;);
+}</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
         <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Run_Commands" enabled="true">
           <stringProp name="WhileController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
         </WhileController>
         <hashTree>
-          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Next_Command" enabled="true">
+          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Next_Command" enabled="false">
             <stringProp name="BeanShellSampler.query">import com.zimbra.jmeter.Command;
 
 ArrayList commands = vars.getObject(&quot;COMMANDS&quot;);
@@ -312,6 +376,59 @@ if (commands.size() == 0) {
 }</stringProp>
             <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
           </BeanShellSampler>
+          <hashTree/>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Next_Command" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import com.zimbra.jmeter.Command;
+
+ArrayList commands = vars.getObject(&quot;COMMANDS&quot;);
+if (commands.size() &gt; 0) {
+  //log.info(&quot;Testing: &quot;+commands);
+  Command c = commands.remove(0);
+  vars.put(&quot;COMMAND&quot;,c.getName());
+  for (Map.Entry a: c.argsSet()) {
+  	vars.put(a.getKey(),a.getValue());
+  }
+  //Should find better home and approach for this but for now default types
+  if (c.getName().equals(&quot;FolderActionRequest&quot;)) {
+    if (c.getArg(&quot;FOLDERACTIONTYPE&quot;) == null) {
+    	 vars.put(&quot;FOLDERACTIONTYPE&quot;,&quot;read&quot;);
+    }
+  }
+  if (c.getName().equals(&quot;GetFolderRequest&quot;)) {
+    if (c.getArg(&quot;PATH&quot;) == null) {
+      vars.put(&quot;PATH&quot;,&quot;inbox&quot;);
+    }
+  }
+  if (c.getName().equals(&quot;TagActionRequest&quot;)) {
+    if (c.getArg(&quot;TAGACTIONTYPE&quot;) == null) {
+      vars.put(&quot;TAGACTIONTYPE&quot;,&quot;read&quot;);
+    }
+  }
+  if (c.getName().equals(&quot;MsgActionRequest&quot;)) {
+    if (c.getArg(&quot;MSGACTIONTYPE&quot;) == null) {
+      vars.put(&quot;MSGACTIONTYPE&quot;,&quot;read&quot;);
+    }
+  }
+  if (c.getName().equals(&quot;ConvActionRequest&quot;)) {
+    if (c.getArg(&quot;CONVACTIONTYPE&quot;) == null) {
+      vars.put(&quot;CONVACTIONTYPE&quot;,&quot;read&quot;);
+    }
+  }
+  if (c.getName().equals(&quot;SearchRequest&quot;)) {
+    if (c.getArg(&quot;SEARCHTYPE&quot;) == null) {
+      vars.put(&quot;SEARCHTYPE&quot;,&quot;message&quot;);
+    }
+  }
+  //log.info(vars.get(&quot;COMMAND&quot;));
+}
+if (commands.size() == 0) {
+  vars.put(&quot;CONTINUE&quot;,&quot;false&quot;);
+}</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
           <hashTree/>
           <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Command_Execution" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
