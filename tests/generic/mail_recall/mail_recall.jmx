@@ -2913,7 +2913,7 @@
                 <collectionProp name="Asserion.test_strings">
                   <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
                 </collectionProp>
-                <stringProp name="Assertion.custom_message">send message 20 users failed</stringProp>
+                <stringProp name="Assertion.custom_message">send message 6 users failed</stringProp>
                 <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
                 <boolProp name="Assertion.assume_success">false</boolProp>
                 <intProp name="Assertion.test_type">2</intProp>
@@ -2997,7 +2997,7 @@
                 <collectionProp name="Asserion.test_strings">
                   <stringProp name="-1606201635">HTTP/1.1 200 OK</stringProp>
                 </collectionProp>
-                <stringProp name="Assertion.custom_message">mail recall for 10 users failed</stringProp>
+                <stringProp name="Assertion.custom_message">mail recall for 6 users failed</stringProp>
                 <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
                 <boolProp name="Assertion.assume_success">false</boolProp>
                 <intProp name="Assertion.test_type">2</intProp>
