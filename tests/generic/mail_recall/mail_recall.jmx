@@ -118,7 +118,7 @@
           <stringProp name="delimiter">,</stringProp>
           <stringProp name="variableNames">sUser1,sUser2,sUser3,sUser4,sUser5,sUser6,sUser7</stringProp>
           <boolProp name="randomOrder">true</boolProp>
-          <boolProp name="ignoreFirstLine">false</boolProp>
+          <boolProp name="ignoreFirstLine">true</boolProp>
           <boolProp name="rewindOnTheEndOfList">true</boolProp>
           <boolProp name="independentListPerThread">true</boolProp>
         </com.blazemeter.jmeter.RandomCSVDataSetConfig>
@@ -863,10 +863,6 @@
                     <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
                     <stringProp name="Header.value">${csrfToken}</stringProp>
                   </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">referer</stringProp>
-                    <stringProp name="Header.value">https://${__P(HTTP.server)}/modern/email/Sent/message/${Mail_Item_Id1}</stringProp>
-                  </elementProp>
                 </collectionProp>
               </HeaderManager>
               <hashTree/>
@@ -1297,10 +1293,6 @@
                   <elementProp name="" elementType="Header">
                     <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
                     <stringProp name="Header.value">${csrfToken}</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">referer</stringProp>
-                    <stringProp name="Header.value">https://${__P(HTTP.server)}/modern/email/Sent/message/${Mail_Item_Id1}</stringProp>
                   </elementProp>
                 </collectionProp>
               </HeaderManager>
@@ -1852,10 +1844,6 @@
                   <elementProp name="" elementType="Header">
                     <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
                     <stringProp name="Header.value">${csrfToken}</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">referer</stringProp>
-                    <stringProp name="Header.value">https://${__P(HTTP.server)}/modern/email/Sent/message/${Mail_Item_Id1}</stringProp>
                   </elementProp>
                 </collectionProp>
               </HeaderManager>
@@ -2608,10 +2596,6 @@
                     <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
                     <stringProp name="Header.value">${csrfToken}</stringProp>
                   </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">referer</stringProp>
-                    <stringProp name="Header.value">https://${__P(HTTP.server)}/modern/email/Sent/message/${Mail_Item_Id1}</stringProp>
-                  </elementProp>
                 </collectionProp>
               </HeaderManager>
               <hashTree/>
@@ -2985,10 +2969,6 @@
                   <elementProp name="" elementType="Header">
                     <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
                     <stringProp name="Header.value">${csrfToken}</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">referer</stringProp>
-                    <stringProp name="Header.value">https://${__P(HTTP.server)}/modern/email/Sent/message/${Mail_Item_Id1}</stringProp>
                   </elementProp>
                 </collectionProp>
               </HeaderManager>
