@@ -275,12 +275,28 @@ if (!user || user.trim().isEmpty()) {
     return
 }
 
-// ── Parameterized folder list ────────────────────────────────────────────────
-// Set APPEND_FOLDERS in User Defined Variables, e.g. &quot;INBOX,Sent,Drafts&quot;
-String foldersRaw  = vars.get(&quot;APPEND_FOLDERS&quot;) ?: &quot;INBOX,Sent,Drafts&quot;
+// ── Read APPEND_FOLDERS from imap_append.properties ─────────────────────────
+String propsFilePath = props.get(&quot;user.dir&quot;) + &quot;/tests/generic/imap/imap_append.properties&quot;
+Properties imapProps = new Properties()
+try {
+    File propsFile = new File(propsFilePath)
+    if (propsFile.exists()) {
+        imapProps.load(new FileInputStream(propsFile))
+        log.debug(&quot;Loaded imap_append.properties from: &quot; + propsFilePath)
+    } else {
+        log.warn(&quot;imap_append.properties not found at: &quot; + propsFilePath + &quot; — using defaults from prop file missing&quot;)
+    }
+} catch (Exception e) {
+    log.warn(&quot;Failed to load imap_append.properties: &quot; + e.getMessage())
+}
+
+// APPEND_FOLDERS must be defined in imap_append.properties.
+// Default fallback is only a safety net — users should always set this in the prop file.
+String foldersRaw = imapProps.getProperty(&quot;APPEND_FOLDERS&quot;, &quot;INBOX&quot;)
 List&lt;String&gt; folderList = foldersRaw.split(&quot;,&quot;).collect { it.trim() }.findAll { it }
 String targetFolder = folderList.get(new Random().nextInt(folderList.size()))
 vars.put(&quot;APPEND_TARGET_FOLDER&quot;, targetFolder)
+log.debug(&quot;APPEND_FOLDERS loaded: ${foldersRaw} → selected: ${targetFolder}&quot;)
 
 // ── Build RFC 2822-compliant message (CRLF line endings) ────────────────────
 String messageBody =
@@ -292,9 +308,7 @@ String messageBody =
 // ── Execute APPEND ───────────────────────────────────────────────────────────
 try {
     log.debug(Thread.currentThread().getName() + &quot; APPEND → folder: ${targetFolder}&quot;)
-
     ic.append(targetFolder, null, null, messageBody)
-
 } catch (Exception e) {
     SampleResult.setSuccessful(false)
     if (e.getMessage()?.contains(&quot;Connection closed without indication&quot;)) {
@@ -305,7 +319,6 @@ try {
 
 // ── Validate server response ─────────────────────────────────────────────────
 String reply = ic.getReplyString() ?: &quot;&quot;
-
 if (reply.contains(&quot;OK&quot;) &amp;&amp; reply.contains(&quot;APPEND completed&quot;)) {
     log.debug(Thread.currentThread().getName() + &quot; APPEND [${targetFolder}] OK&quot;)
 } else {
