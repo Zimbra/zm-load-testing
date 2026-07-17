@@ -7,7 +7,7 @@ calendar invites, and configurable mailbox size.
 
 Usage example:
   python3 dynamic_data_generation_with_attachments.py --users 10 --size 100MB --attachment-percent 5 \
-    --attachment-type-dist "pdf=20,jpg=10,png=10,docx=20,txt=40" --calendar-percent 2 \/Users/murali.chunduri/Desktop/Screenshots/Screenshot 2026-04-03 at 11.49.43 AM.png
+    --attachment-type-dist "pdf=20,jpg=10,png=10,docx=20,txt=40" --calendar-percent 2 \
     --avg-msg-size 60 --output-base ./eml_testdata --clean
 """
 

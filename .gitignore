@@ -1,2 +1,4 @@
 logs
 src/build
+.DS_Store
+*.swp
