@@ -254,38 +254,126 @@ if (commands.size() == 0) {
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="APPEND" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
-String continue_flag = &quot;true&quot;;
+              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="APPEND" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import org.apache.commons.net.imap.IMAPClient
+import java.util.concurrent.ThreadLocalRandom
 
+// ── Retrieve shared IMAP client ──────────────────────────────────────────────
+// IMAPCLIENT is set by the LOGIN sampler. If LOGIN failed or was skipped,
+// ic will be null — guard here to avoid NullPointerException downstream.
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;)
+String continueFlagKey = &quot;CONTINUE&quot;
+String continueFlag    = &quot;true&quot;
+
+if (ic == null) {
+    log.warn(Thread.currentThread().getName() + &quot; APPEND: IMAPCLIENT is null — LOGIN may have failed or connection was not established. Skipping sampler.&quot;)
+    SampleResult.setSuccessful(false)
+    vars.put(continueFlagKey, &quot;false&quot;)
+    return
+}
+
+// ── Null-safe USER variable ──────────────────────────────────────────────────
+String user = vars.get(&quot;USER&quot;)
+if (!user || user.trim().isEmpty()) {
+    log.warn(Thread.currentThread().getName() + &quot; APPEND: USER variable is null/empty — skipping sampler&quot;)
+    SampleResult.setSuccessful(false)
+    vars.put(continueFlagKey, &quot;false&quot;)
+    return
+}
+
+// ── Read APPEND_FOLDERS (load once from imap-test.prop, cache in props) ──────
+// IMAP_APPEND_FOLDERS: cached key to avoid re-reading the file on every iteration
+String APPEND_FOLDERS_KEY = &quot;IMAP_APPEND_FOLDERS&quot;
+String foldersRaw = props.getProperty(APPEND_FOLDERS_KEY)
+
+if (foldersRaw == null) {
+    // IMAP_APPEND_TEST_PROP_PATH must be declared in imap-path.prop or load.prop — no path is hardcoded here.
+    // Required entry in imap-path.prop:  IMAP_APPEND_TEST_PROP_PATH=tests/generic/imap/imap-test.prop
+    String relPath = props.getProperty(&quot;IMAP_APPEND_TEST_PROP_PATH&quot;)
+    if (!relPath || relPath.trim().isEmpty()) {
+        log.error(Thread.currentThread().getName() + &quot; APPEND: IMAP_APPEND_TEST_PROP_PATH is not set — aborting&quot;)
+        SampleResult.setSuccessful(false)
+        vars.put(continueFlagKey, &quot;false&quot;)
+        return
+    }
+
+    String propsFilePath = props.get(&quot;user.dir&quot;) + &quot;/&quot; + relPath.trim()
+    Properties imapProps = new Properties()
+    try {
+        File propsFile = new File(propsFilePath)
+        if (propsFile.exists()) {
+            // withCloseable ensures FileInputStream is always closed (no resource leak)
+            new FileInputStream(propsFile).withCloseable { fis -&gt;
+                imapProps.load(fis)
+            }
+            log.info(Thread.currentThread().getName() + &quot; Loaded and cached imap-test.prop from: &quot; + propsFilePath)
+        } else {
+            log.error(Thread.currentThread().getName() + &quot; APPEND: imap-test.prop not found at: &quot; + propsFilePath + &quot; — check IMAP_APPEND_TEST_PROP_PATH in imap-path.prop&quot;)
+            SampleResult.setSuccessful(false)
+            vars.put(continueFlagKey, &quot;false&quot;)
+            return
+        }
+    } catch (Exception e) {
+        log.error(Thread.currentThread().getName() + &quot; APPEND: Failed to load imap-test.prop: &quot; + e.getMessage())
+        SampleResult.setSuccessful(false)
+        vars.put(continueFlagKey, &quot;false&quot;)
+        return
+    }
+
+    // APPEND_FOLDERS: comma-separated list of target folders (e.g. INBOX,Sent,Drafts).
+    // Configured in imap-test.prop. Default fallback is INBOX — set this explicitly in imap-test.prop.
+    foldersRaw = imapProps.getProperty(&quot;APPEND_FOLDERS&quot;, &quot;INBOX&quot;)
+    props.setProperty(APPEND_FOLDERS_KEY, foldersRaw)
+}
+
+// Parse folder list; randomly pick one target per iteration to distribute APPEND load
+List&lt;String&gt; folderList = foldersRaw.split(&quot;,&quot;).collect { it.trim() }.findAll { it }
+// ThreadLocalRandom: no shared state, no contention — safe under high concurrency
+String targetFolder = folderList.get(ThreadLocalRandom.current().nextInt(folderList.size()))
+vars.put(&quot;APPEND_TARGET_FOLDER&quot;, targetFolder)
+log.debug(&quot;APPEND_FOLDERS: ${foldersRaw} → selected: ${targetFolder}&quot;)
+
+// ── Build RFC 2822-compliant message (CRLF line endings required by IMAP spec) ──
+String messageBody =
+    &quot;From: ${user}\r\n&quot; +
+    &quot;To: ${user}\r\n&quot;   +
+    &quot;Subject: Testing\r\n\r\n&quot; +
+    &quot;This is a test of IMAP append.\r\n&quot;
+
+// ── Execute IMAP APPEND ───────────────────────────────────────────────────────
+// ic.append(folder, flags, date, messageBody) — flags and date are null (server defaults)
 try {
-  log.info(Thread.currentThread().getName()+&quot; APPEND&quot;);
-  ic.append(&quot;INBOX&quot;,null,null,&quot;From: &quot;+vars.get(&quot;USER&quot;)+
-                              &quot;\nTo: &quot;+vars.get(&quot;USER&quot;)+
-                              &quot;\nSubject: Testing\n\nThis is a test of IMAP append.\n&quot;);
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());                            
+    log.debug(Thread.currentThread().getName() + &quot; APPEND → folder: ${targetFolder}&quot;)
+    ic.append(targetFolder, null, null, messageBody)
 } catch (Exception e) {
-  SampleResult.setSuccessful(false);
-  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
-  continue_flag = &quot;false&quot;;
-  }
-
-  IsSuccess=false; 
-  log.info(Thread.currentThread().getName()+&quot; APPEND: &quot;+e);
+    SampleResult.setSuccessful(false)
+    // If the connection dropped, stop further IMAP commands in this iteration
+    if (e.getMessage()?.contains(&quot;Connection closed without indication&quot;)) {
+        continueFlag = &quot;false&quot;
+    }
+    log.info(Thread.currentThread().getName() + &quot; APPEND [${targetFolder}] EXCEPTION: ${e.getMessage()}&quot;)
 }
 
-if (!(ic.getReplyString().contains(&quot;OK&quot;) &amp;&amp; ic.getReplyString().contains(&quot;APPEND completed&quot;))) {
-  SampleResult.setSuccessful(false);
-  IsSuccess=false; 
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+// ── Validate server response ──────────────────────────────────────────────────
+// A successful APPEND returns a tagged OK response containing &quot;APPEND completed&quot;
+String reply = ic.getReplyString() ?: &quot;&quot;
+if (reply.contains(&quot;OK&quot;) &amp;&amp; reply.contains(&quot;APPEND completed&quot;)) {
+    log.debug(Thread.currentThread().getName() + &quot; APPEND [${targetFolder}] OK&quot;)
+} else {
+    SampleResult.setSuccessful(false)
+    log.info(Thread.currentThread().getName() + &quot; APPEND [${targetFolder}] FAILED response: ${reply}&quot;)
 }
 
-vars.put(&quot;CONTINUE&quot;,continue_flag);
-SampleResult.setResponseData(ic.getReplyString());
-SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-              </BeanShellSampler>
+// ── Propagate state ───────────────────────────────────────────────────────────
+// CONTINUE flag controls whether subsequent IMAP samplers in this thread should proceed
+vars.put(continueFlagKey, continueFlag)
+SampleResult.setResponseData(reply, &quot;UTF-8&quot;)
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)</stringProp>
+              </JSR223Sampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="APPEND_FOLDER" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
