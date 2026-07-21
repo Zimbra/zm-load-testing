@@ -263,9 +263,18 @@ if (commands.size() == 0) {
 import java.util.concurrent.ThreadLocalRandom
 
 // ── Retrieve shared IMAP client ──────────────────────────────────────────────
+// IMAPCLIENT is set by the LOGIN sampler. If LOGIN failed or was skipped,
+// ic will be null — guard here to avoid NullPointerException downstream.
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;)
 String continueFlagKey = &quot;CONTINUE&quot;
 String continueFlag    = &quot;true&quot;
+
+if (ic == null) {
+    log.warn(Thread.currentThread().getName() + &quot; APPEND: IMAPCLIENT is null — LOGIN may have failed or connection was not established. Skipping sampler.&quot;)
+    SampleResult.setSuccessful(false)
+    vars.put(continueFlagKey, &quot;false&quot;)
+    return
+}
 
 // ── Null-safe USER variable ──────────────────────────────────────────────────
 String user = vars.get(&quot;USER&quot;)
@@ -282,11 +291,11 @@ String APPEND_FOLDERS_KEY = &quot;IMAP_APPEND_FOLDERS&quot;
 String foldersRaw = props.getProperty(APPEND_FOLDERS_KEY)
 
 if (foldersRaw == null) {
-    // IMAP_TEST_PROP_PATH must be declared in env.prop — no path is hardcoded here.
-    // Required entry in env.prop.
-    String relPath = props.getProperty(&quot;IMAP_TEST_PROP_PATH&quot;)
+    // IMAP_APPEND_TEST_PROP_PATH must be declared in imap-path.prop or load.prop — no path is hardcoded here.
+    // Required entry in imap-path.prop:  IMAP_APPEND_TEST_PROP_PATH=tests/generic/imap/imap-test.prop
+    String relPath = props.getProperty(&quot;IMAP_APPEND_TEST_PROP_PATH&quot;)
     if (!relPath || relPath.trim().isEmpty()) {
-        log.error(Thread.currentThread().getName() + &quot; APPEND: IMAP_TEST_PROP_PATH is not set in env.prop — aborting&quot;)
+        log.error(Thread.currentThread().getName() + &quot; APPEND: IMAP_APPEND_TEST_PROP_PATH is not set — aborting&quot;)
         SampleResult.setSuccessful(false)
         vars.put(continueFlagKey, &quot;false&quot;)
         return
@@ -303,7 +312,7 @@ if (foldersRaw == null) {
             }
             log.info(Thread.currentThread().getName() + &quot; Loaded and cached imap-test.prop from: &quot; + propsFilePath)
         } else {
-            log.error(Thread.currentThread().getName() + &quot; APPEND: imap-test.prop not found at: &quot; + propsFilePath + &quot; — check IMAP_TEST_PROP_PATH in env.prop&quot;)
+            log.error(Thread.currentThread().getName() + &quot; APPEND: imap-test.prop not found at: &quot; + propsFilePath + &quot; — check IMAP_APPEND_TEST_PROP_PATH in imap-path.prop&quot;)
             SampleResult.setSuccessful(false)
             vars.put(continueFlagKey, &quot;false&quot;)
             return
