@@ -1,9 +1,9 @@
-<project name="zm-load-testing" default="all" xmlns:ivy="antlib:org.apache.ivy.ant">
+?<project name="zm-load-testing" default="all" xmlns:ivy="antlib:org.apache.ivy.ant">
   <import file="ant-global.xml"/>
 
   <property name="build.dir" location="${basedir}/build"/>
   <property name="build.jar.dir" location="${basedir}/build/dist"/>
-  <property name="jmeter.home" location="/opt/apache-jmeter-5.6.2"/>
+  <property name="jmeter.home" location="//customPath//apache-jmeter-5.6.3"/>
   <property name="env" value="config/env.prop"/>
   <property name="users" location="config/users.csv"/>
   <property name="content" location="config/Autocomplete/content.csv"/
@@ -160,7 +160,7 @@
       <property name="user.classpath" value="${zjmeter}"/>
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/generic/imap/load.prop"/>
-      <jmeterarg value="-q${basedir}/tests/generic/imap/profiles/test.prop"/>
+      <jmeterarg value="-q${basedir}/tests/generic/imap/profiles/test_1.prop"/>
     </jmeter>
   </target>
  <target name="generic-imaps" depends="src,logs">
@@ -215,7 +215,7 @@
 	  </target>
 	  <target name="generic-zsoap" depends="src,logs">
 	    <jmeter jmeterhome="${jmeter.home}"
-		    testplan="${basedir}/tests/generic/zsoap/zsoap_trace.jmx"
+		    testplan="${basedir}/tests/generic/zsoap/zsoap.jmx"
 		    jmeterlogfile="${logs}/generic-zsoap-jmeter.log"
 		    resultlog="${logs}/generic-zsoap-requests.csv"> 
 	      <property name="ACCOUNTS.csv" value="${users}"/>
@@ -594,7 +594,7 @@
 	  </target>
 	 <target name="CSP2-zsoap" depends="src,logs">
             <jmeter jmeterhome="${jmeter.home}"
-                    testplan="${basedir}/tests/CSP2/SOAP/zsoap.jmx"
+                    testplan="${basedir}/tests/CSP2/SOAP/zsoap_trace.jmx"
                     jmeterlogfile="${logs}/CSP2-zsoap-jmeter.log"
                     resultlog="${logs}/CSP2-zsoap-requests.log">
               <property name="ACCOUNTS.csv" value="${users}"/>
