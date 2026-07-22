@@ -1,3 +1,9 @@
 # IMAP APPEND Command
 # Leverage APPEND_FOLDERS variable to parse folder names comma separated to extend the scope
 APPEND_FOLDERS=INBOX,Sent,Drafts
+
+# IMAP CAPABILITY Command
+# Comma-separated list of IMAP extensions to check (format: EXTENSION:VAR_KEY)
+# Add or remove extensions as per your Zimbra server's advertised capabilities
+# Example extensions: IDLE, CONDSTORE, QRESYNC, LITERAL+, NAMESPACE, UIDPLUS, MOVE, ID
+imap.capability.extensions=IDLE:IDLE,CONDSTORE:CONDSTORE,QRESYNC:QRESYNC,LITERAL+:LITERAL_PLUS,NAMESPACE:NAMESPACE,UIDPLUS:UIDPLUS,MOVE:MOVE,ID:ID

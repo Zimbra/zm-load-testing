@@ -419,8 +419,6 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;)
 
 // ─── 2. Null-safety + connection-state check ───
-// Guards against: null client (LOGIN failed), stale socket (ConcurrentModificationException
-// from ehcache/concurrent sessions), or dropped connection after license errors
 if (ic == null) {
     SampleResult.setSuccessful(false)
     SampleResult.setResponseCode(&quot;599&quot;)
@@ -433,8 +431,6 @@ if (ic == null) {
     return
 }
 
-// Guard against stale/closed socket — seen when concurrent sessions
-// or license refresh errors (Code:-4303, Code:-1100) drop the connection
 if (!ic.isConnected()) {
     SampleResult.setSuccessful(false)
     SampleResult.setResponseCode(&quot;598&quot;)
@@ -448,9 +444,17 @@ if (!ic.isConnected()) {
 }
 
 // ─── 3. Clear stale CAP_ flags from previous iteration ───
-// Prevents false positives when re-running same thread
-[&quot;IDLE&quot;, &quot;CONDSTORE&quot;, &quot;QRESYNC&quot;, &quot;LITERAL_PLUS&quot;, &quot;NAMESPACE&quot;, &quot;UIDPLUS&quot;, &quot;MOVE&quot;, &quot;ID&quot;].each { key -&gt;
-    vars.put(&quot;CAP_${key}&quot;, &quot;false&quot;)
+// Driven by property file — no hardcoded keys
+String extPropRaw = props.get(&quot;imap.capability.extensions&quot;) ?: &quot;&quot;
+if (!extPropRaw.trim().isEmpty()) {
+    extPropRaw.split(&quot;,&quot;).each { entry -&gt;
+        String[] parts = entry.trim().split(&quot;:&quot;, 2)
+        if (parts.length == 2) {
+            vars.put(&quot;CAP_${parts[1].trim()}&quot;, &quot;false&quot;)
+        }
+    }
+} else {
+    log.warn(&quot;${Thread.currentThread().name} CAPABILITY: imap.capability.extensions not defined in property file&quot;)
 }
 
 // ─── 4. Execute CAPABILITY command with nano-timing ───
@@ -467,7 +471,6 @@ try {
     reply = ic.getReplyString()?.trim()
 
     if (!sent) {
-        // ic.capability() returned false — command was rejected at protocol level
         SampleResult.setSuccessful(false)
         SampleResult.setResponseCode(&quot;503&quot;)
         SampleResult.setResponseMessage(&quot;CAPABILITY command rejected by server (returned false)&quot;)
@@ -492,7 +495,6 @@ try {
     vars.put(&quot;CAPABILITY_LATENCY_NS&quot;, String.valueOf(elapsedNano))
     vars.put(&quot;CAPABILITY_LATENCY_MS&quot;, String.valueOf(elapsedNano / 1_000_000))
 
-    // Connection-closed — stop all downstream samplers
     if (errMsg?.contains(&quot;Connection closed without indication&quot;) ||
         errMsg?.contains(&quot;Connection reset&quot;) ||
         errMsg?.contains(&quot;Broken pipe&quot;) ||
@@ -500,7 +502,6 @@ try {
         vars.put(&quot;CONTINUE&quot;, &quot;false&quot;)
         log.warn(&quot;${Thread.currentThread().name} CAPABILITY: Connection dropped — stopping flow. Error: ${errMsg}&quot;)
     } else {
-        // Non-fatal exception — log but allow flow to continue
         vars.put(&quot;CONTINUE&quot;, &quot;true&quot;)
         log.warn(&quot;${Thread.currentThread().name} CAPABILITY exception (non-fatal): ${errMsg}&quot;)
     }
@@ -508,36 +509,56 @@ try {
 }
 
 // ─── 5. Validate response ───
-// Zimbra returns: &quot;* CAPABILITY IMAP4rev1 ... \r\nXXX OK CAPABILITY completed&quot;
-// OR simply:      &quot;XXX OK CAPABILITY&quot;
-// Both are valid — check for &quot;OK CAPABILITY&quot; to cover all Zimbra versions
 if (reply?.toUpperCase()?.contains(&quot;OK CAPABILITY&quot;)) {
     SampleResult.setSuccessful(true)
     SampleResult.setResponseCode(&quot;200&quot;)
     SampleResult.setResponseMessage(&quot;CAPABILITY completed successfully&quot;)
 
     // ─── 6. Parse and store CAPABILITY extensions for downstream samplers ───
-    String replyUpper = reply.toUpperCase()
-    [
-        &quot;IDLE&quot;       : &quot;IDLE&quot;,
-        &quot;CONDSTORE&quot;  : &quot;CONDSTORE&quot;,
-        &quot;QRESYNC&quot;    : &quot;QRESYNC&quot;,
-        &quot;LITERAL+&quot;   : &quot;LITERAL_PLUS&quot;,
-        &quot;NAMESPACE&quot;  : &quot;NAMESPACE&quot;,
-        &quot;UIDPLUS&quot;    : &quot;UIDPLUS&quot;,
-        &quot;MOVE&quot;       : &quot;MOVE&quot;,
-        &quot;ID&quot;         : &quot;ID&quot;
-    ].each { ext, varKey -&gt;
-        boolean supported = replyUpper.contains(ext)
-        vars.put(&quot;CAP_${varKey}&quot;, supported ? &quot;true&quot; : &quot;false&quot;)
-        if (supported) log.debug(&quot;${Thread.currentThread().name} Server supports: ${ext}&quot;)
+    // Extensions are read from imap.capability.extensions in imap-test.prop
+    // Format: EXTENSION:VAR_KEY,EXTENSION:VAR_KEY,...
+    // TOKEN-SET approach: split the capability line into whitespace-delimited tokens
+    // and check for exact token membership. This prevents substring false-positives
+    // where &quot;ID&quot; would match inside &quot;IDLE&quot; or &quot;UIDPLUS&quot; with a simple contains() check.
+    // e.g., &quot;* CAPABILITY IMAP4rev1 IDLE UIDPLUS MOVE&quot; → tokens = [IMAP4REV1, IDLE, UIDPLUS, MOVE]
+    //       contains(&quot;ID&quot;) → TRUE (wrong) | tokenSet.contains(&quot;ID&quot;) → FALSE (correct)
+
+    String extProp = props.get(&quot;imap.capability.extensions&quot;) ?: &quot;&quot;
+
+    if (extProp.trim().isEmpty()) {
+        log.warn(&quot;${Thread.currentThread().name} imap.capability.extensions not defined — skipping capability parsing&quot;)
+    } else {
+        // Build token set from the untagged CAPABILITY line only
+        // e.g., &quot;* CAPABILITY IMAP4rev1 IDLE UIDPLUS ID MOVE\r\nAAA1 OK CAPABILITY completed&quot;
+        // Extract the untagged line starting with &quot;* CAPABILITY&quot;
+        String capLine = reply.toUpperCase()
+                              .split(&quot;\r\n|\n&quot;)
+                              .find { it.startsWith(&quot;* CAPABILITY&quot;) } ?: &quot;&quot;
+
+        // Split into whitespace-delimited tokens and load into a Set for O(1) exact lookup
+        Set&lt;String&gt; tokenSet = capLine.trim().split(&quot;\\s+&quot;).toList().toSet()
+
+        extProp.split(&quot;,&quot;).each { entry -&gt;
+            String[] parts = entry.trim().split(&quot;:&quot;, 2)
+            if (parts.length == 2) {
+                String ext    = parts[0].trim().toUpperCase()
+                String varKey = parts[1].trim()
+
+                // Exact token match — avoids &quot;ID&quot; matching inside &quot;IDLE&quot; or &quot;UIDPLUS&quot;
+                boolean supported = tokenSet.contains(ext)
+                vars.put(&quot;CAP_${varKey}&quot;, supported ? &quot;true&quot; : &quot;false&quot;)
+                if (supported) log.debug(&quot;${Thread.currentThread().name} Server supports: ${ext}&quot;)
+            } else {
+                log.warn(&quot;${Thread.currentThread().name} Skipping malformed capability entry: &apos;${entry}&apos; — expected format EXTENSION:VAR_KEY&quot;)
+            }
+        }
     }
 
 } else {
     SampleResult.setSuccessful(false)
     SampleResult.setResponseCode(&quot;400&quot;)
     SampleResult.setResponseMessage(&quot;CAPABILITY unexpected reply&quot;)
-    vars.put(&quot;CONTINUE&quot;, &quot;false&quot;)  // Unexpected reply — safer to stop flow
+    vars.put(&quot;CONTINUE&quot;, &quot;false&quot;)
     log.warn(&quot;${Thread.currentThread().name} CAPABILITY unexpected reply: ${reply}&quot;)
 }
 
