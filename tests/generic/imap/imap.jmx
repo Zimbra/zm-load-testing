@@ -409,34 +409,140 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
               </BeanShellSampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="CAPABILITY" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
-String continue_flag = &quot;true&quot;;
+                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient
+
+// ─── 1. Retrieve IMAP client from JMeter variables ───
+IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;)
+
+// ─── 2. Null-safety + connection-state check ───
+// Guards against: null client (LOGIN failed), stale socket (ConcurrentModificationException
+// from ehcache/concurrent sessions), or dropped connection after license errors
+if (ic == null) {
+    SampleResult.setSuccessful(false)
+    SampleResult.setResponseCode(&quot;599&quot;)
+    SampleResult.setResponseMessage(&quot;IMAPCLIENT is null — LOGIN may have failed&quot;)
+    SampleResult.setResponseData(&quot;ERROR: IMAPCLIENT not available&quot;, &quot;UTF-8&quot;)
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+    vars.put(&quot;CONTINUE&quot;, &quot;false&quot;)
+    vars.put(&quot;CAPABILITY_LATENCY_NS&quot;, &quot;0&quot;)
+    vars.put(&quot;CAPABILITY_LATENCY_MS&quot;, &quot;0&quot;)
+    return
+}
+
+// Guard against stale/closed socket — seen when concurrent sessions
+// or license refresh errors (Code:-4303, Code:-1100) drop the connection
+if (!ic.isConnected()) {
+    SampleResult.setSuccessful(false)
+    SampleResult.setResponseCode(&quot;598&quot;)
+    SampleResult.setResponseMessage(&quot;IMAPCLIENT socket is not connected — session may have been dropped&quot;)
+    SampleResult.setResponseData(&quot;ERROR: Socket closed or not connected&quot;, &quot;UTF-8&quot;)
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+    vars.put(&quot;CONTINUE&quot;, &quot;false&quot;)
+    vars.put(&quot;CAPABILITY_LATENCY_NS&quot;, &quot;0&quot;)
+    vars.put(&quot;CAPABILITY_LATENCY_MS&quot;, &quot;0&quot;)
+    return
+}
+
+// ─── 3. Clear stale CAP_ flags from previous iteration ───
+// Prevents false positives when re-running same thread
+[&quot;IDLE&quot;, &quot;CONDSTORE&quot;, &quot;QRESYNC&quot;, &quot;LITERAL_PLUS&quot;, &quot;NAMESPACE&quot;, &quot;UIDPLUS&quot;, &quot;MOVE&quot;, &quot;ID&quot;].each { key -&gt;
+    vars.put(&quot;CAP_${key}&quot;, &quot;false&quot;)
+}
+
+// ─── 4. Execute CAPABILITY command with nano-timing ───
+long startNano = System.nanoTime()
+long elapsedNano = 0L
+String reply = null
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; CAPABILITY&quot;);
-  ic.capability();
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+    log.debug(&quot;${Thread.currentThread().name} CAPABILITY - executing&quot;)
+    boolean sent = ic.capability()
+    elapsedNano = System.nanoTime() - startNano  // Stop timer immediately after command
+
+    // Fetch reply string after timing to avoid including network read in latency
+    reply = ic.getReplyString()?.trim()
+
+    if (!sent) {
+        // ic.capability() returned false — command was rejected at protocol level
+        SampleResult.setSuccessful(false)
+        SampleResult.setResponseCode(&quot;503&quot;)
+        SampleResult.setResponseMessage(&quot;CAPABILITY command rejected by server (returned false)&quot;)
+        SampleResult.setResponseData(reply ?: &quot;no reply&quot;, &quot;UTF-8&quot;)
+        SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+        vars.put(&quot;CONTINUE&quot;, &quot;false&quot;)
+        vars.put(&quot;CAPABILITY_LATENCY_NS&quot;, String.valueOf(elapsedNano))
+        vars.put(&quot;CAPABILITY_LATENCY_MS&quot;, String.valueOf(elapsedNano / 1_000_000))
+        log.warn(&quot;${Thread.currentThread().name} CAPABILITY rejected — reply: ${reply}&quot;)
+        return
+    }
+
 } catch (Exception e) {
-  SampleResult.setSuccessful(false);
-  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
-  continue_flag = &quot;false&quot;;
-  }
-  
-  IsSuccess=false; 
-  log.info(Thread.currentThread().getName()+&quot; CAPABILITY: &quot;+e);
+    elapsedNano = System.nanoTime() - startNano
+    String errMsg = e.message ?: e.getClass().simpleName
+
+    SampleResult.setSuccessful(false)
+    SampleResult.setResponseCode(&quot;500&quot;)
+    SampleResult.setResponseMessage(&quot;CAPABILITY exception: ${errMsg}&quot;)
+    SampleResult.setResponseData(&quot;Exception: ${e.toString()}&quot;, &quot;UTF-8&quot;)
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)
+    vars.put(&quot;CAPABILITY_LATENCY_NS&quot;, String.valueOf(elapsedNano))
+    vars.put(&quot;CAPABILITY_LATENCY_MS&quot;, String.valueOf(elapsedNano / 1_000_000))
+
+    // Connection-closed — stop all downstream samplers
+    if (errMsg?.contains(&quot;Connection closed without indication&quot;) ||
+        errMsg?.contains(&quot;Connection reset&quot;) ||
+        errMsg?.contains(&quot;Broken pipe&quot;) ||
+        errMsg?.contains(&quot;Socket closed&quot;)) {
+        vars.put(&quot;CONTINUE&quot;, &quot;false&quot;)
+        log.warn(&quot;${Thread.currentThread().name} CAPABILITY: Connection dropped — stopping flow. Error: ${errMsg}&quot;)
+    } else {
+        // Non-fatal exception — log but allow flow to continue
+        vars.put(&quot;CONTINUE&quot;, &quot;true&quot;)
+        log.warn(&quot;${Thread.currentThread().name} CAPABILITY exception (non-fatal): ${errMsg}&quot;)
+    }
+    return
 }
 
-if (!ic.getReplyString().contains(&quot;OK CAPABILITY completed&quot;)) {
-  SampleResult.setSuccessful(false);
-  IsSuccess=false; 
-  log.info(&quot;Command response is: &quot; + ic.getReplyString());
+// ─── 5. Validate response ───
+// Zimbra returns: &quot;* CAPABILITY IMAP4rev1 ... \r\nXXX OK CAPABILITY completed&quot;
+// OR simply:      &quot;XXX OK CAPABILITY&quot;
+// Both are valid — check for &quot;OK CAPABILITY&quot; to cover all Zimbra versions
+if (reply?.toUpperCase()?.contains(&quot;OK CAPABILITY&quot;)) {
+    SampleResult.setSuccessful(true)
+    SampleResult.setResponseCode(&quot;200&quot;)
+    SampleResult.setResponseMessage(&quot;CAPABILITY completed successfully&quot;)
+
+    // ─── 6. Parse and store CAPABILITY extensions for downstream samplers ───
+    String replyUpper = reply.toUpperCase()
+    [
+        &quot;IDLE&quot;       : &quot;IDLE&quot;,
+        &quot;CONDSTORE&quot;  : &quot;CONDSTORE&quot;,
+        &quot;QRESYNC&quot;    : &quot;QRESYNC&quot;,
+        &quot;LITERAL+&quot;   : &quot;LITERAL_PLUS&quot;,
+        &quot;NAMESPACE&quot;  : &quot;NAMESPACE&quot;,
+        &quot;UIDPLUS&quot;    : &quot;UIDPLUS&quot;,
+        &quot;MOVE&quot;       : &quot;MOVE&quot;,
+        &quot;ID&quot;         : &quot;ID&quot;
+    ].each { ext, varKey -&gt;
+        boolean supported = replyUpper.contains(ext)
+        vars.put(&quot;CAP_${varKey}&quot;, supported ? &quot;true&quot; : &quot;false&quot;)
+        if (supported) log.debug(&quot;${Thread.currentThread().name} Server supports: ${ext}&quot;)
+    }
+
+} else {
+    SampleResult.setSuccessful(false)
+    SampleResult.setResponseCode(&quot;400&quot;)
+    SampleResult.setResponseMessage(&quot;CAPABILITY unexpected reply&quot;)
+    vars.put(&quot;CONTINUE&quot;, &quot;false&quot;)  // Unexpected reply — safer to stop flow
+    log.warn(&quot;${Thread.currentThread().name} CAPABILITY unexpected reply: ${reply}&quot;)
 }
 
-vars.put(&quot;CONTINUE&quot;,continue_flag);
-//log.info(&quot;Continue variable value is: &quot; +vars.get(&quot;CONTINUE&quot;));
-SampleResult.setResponseData(ic.getReplyString());
-SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
+// ─── 7. Store latency and response data ───
+vars.put(&quot;CONTINUE&quot;, vars.get(&quot;CONTINUE&quot;) ?: &quot;true&quot;)
+vars.put(&quot;CAPABILITY_LATENCY_NS&quot;, String.valueOf(elapsedNano))
+vars.put(&quot;CAPABILITY_LATENCY_MS&quot;, String.valueOf(elapsedNano / 1_000_000))
+SampleResult.setResponseData(reply ?: &quot;null response&quot;, &quot;UTF-8&quot;)
+SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)</stringProp>
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
