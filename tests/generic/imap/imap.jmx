@@ -408,8 +408,12 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="CAPABILITY" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient
+              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="CAPABILITY" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import org.apache.commons.net.imap.IMAPClient
 
 // ─── 1. Retrieve IMAP client from JMeter variables ───
 IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;)
@@ -543,8 +547,7 @@ vars.put(&quot;CAPABILITY_LATENCY_NS&quot;, String.valueOf(elapsedNano))
 vars.put(&quot;CAPABILITY_LATENCY_MS&quot;, String.valueOf(elapsedNano / 1_000_000))
 SampleResult.setResponseData(reply ?: &quot;null response&quot;, &quot;UTF-8&quot;)
 SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT)</stringProp>
-                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-              </BeanShellSampler>
+              </JSR223Sampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="CHECK" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
