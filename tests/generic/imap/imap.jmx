@@ -1748,36 +1748,97 @@ SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringP
                 <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
               </BeanShellSampler>
               <hashTree/>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="SUBSCRIBE_FOLDER" enabled="true">
-                <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
-IMAPClient ic = vars.getObject(&quot;IMAPCLIENT&quot;);
+              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="SUBSCRIBE_FOLDER" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import org.apache.commons.net.imap.IMAPClient;
+
+// Declare IsSuccess at top
+boolean IsSuccess = true;
+
+// Read SUBSCRIBE_FOLDER from props — loaded from profiles/test.prop
+// profiles/test.prop must contain: SUBSCRIBE_FOLDER=Folder_Shared_1
+String folderName = props.get(&quot;SUBSCRIBE_FOLDER&quot;);
+
+// Strict null/empty check — no fallback, must come from prop file
+if (folderName == null || folderName.trim().isEmpty()) {
+    log.error(Thread.currentThread().getName() + &quot; SUBSCRIBE: SUBSCRIBE_FOLDER is null or empty. Add SUBSCRIBE_FOLDER=Folder_Shared_1 to profiles/test.prop&quot;);
+    SampleResult.setSuccessful(false);
+    SampleResult.setResponseData(&quot;SUBSCRIBE_FOLDER not found in profiles/test.prop&quot;, &quot;UTF-8&quot;);
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
+    IsSuccess = false;
+    vars.put(&quot;CONTINUE&quot;, &quot;false&quot;);
+    return;
+}
+
+folderName = folderName.trim();
+log.info(Thread.currentThread().getName() + &quot; SUBSCRIBE: folder resolved from props: &quot; + folderName);
+
+// IMAPCLIENT null guard
+IMAPClient ic = (IMAPClient) vars.getObject(&quot;IMAPCLIENT&quot;);
+if (ic == null) {
+    log.error(Thread.currentThread().getName() + &quot; SUBSCRIBE: IMAPCLIENT is null — connection not established&quot;);
+    SampleResult.setSuccessful(false);
+    SampleResult.setResponseData(&quot;IMAPCLIENT is null — connection not established&quot;, &quot;UTF-8&quot;);
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
+    IsSuccess = false;
+    vars.put(&quot;CONTINUE&quot;, &quot;false&quot;);
+    return;
+}
+
 String continue_flag = &quot;true&quot;;
+boolean commandSent = false;
+
+// Latency capture
+long startTime = System.currentTimeMillis();
 
 try {
-  log.info(Thread.currentThread().getName()+&quot; SUBSCRIBE&quot;);
-  ic.subscribe(&quot;${__evalVar(FOLDER)}&quot;);
-  //log.info(&quot;Command response is: &quot; + ic.getReplyString());
+    log.info(Thread.currentThread().getName() + &quot; SUBSCRIBE folder: &quot; + folderName);
+    ic.subscribe(folderName);
+    commandSent = true;
+    vars.put(&quot;LAST_SUBSCRIBED_FOLDER&quot;, folderName);
+
 } catch (Exception e) {
-  SampleResult.setSuccessful(false);
-  if (e.getMessage().contains(&quot;Connection closed without indication&quot;)){
-  continue_flag = &quot;false&quot;;
-  }
-  
-  IsSuccess=false;
-  log.info(Thread.currentThread().getName()+&quot; SUBSCRIBE: &quot;+e);
+    SampleResult.setSuccessful(false);
+    IsSuccess = false;
+    String errMsg = (e.getMessage() != null) ? e.getMessage() : e.getClass().getName();
+    if (errMsg.contains(&quot;Connection closed without indication&quot;)) {
+        continue_flag = &quot;false&quot;;
+    }
+    log.error(Thread.currentThread().getName() + &quot; SUBSCRIBE: &quot; + errMsg);
 }
 
-if (!ic.getReplyString().contains(&quot;OK SUBSCRIBE completed&quot;)) {
-  SampleResult.setSuccessful(false);
-  IsSuccess=false;
-  log.info(&quot;Command response is: &quot; + ic.getReplyString()); 
+// Record latency
+long latency = System.currentTimeMillis() - startTime;
+SampleResult.setLatency(latency);
+
+// Reply string handling
+if (commandSent) {
+    String replyString = ic.getReplyString();
+
+    if (replyString == null || replyString.trim().isEmpty()) {
+        log.warn(Thread.currentThread().getName() + &quot; SUBSCRIBE: reply is null or empty&quot;);
+        SampleResult.setSuccessful(false);
+        IsSuccess = false;
+    } else if (!replyString.contains(&quot;OK SUBSCRIBE completed&quot;)) {
+        SampleResult.setSuccessful(false);
+        IsSuccess = false;
+        log.info(Thread.currentThread().getName() + &quot; SUBSCRIBE reply: &quot; + replyString);
+    } else {
+        log.info(Thread.currentThread().getName() + &quot; SUBSCRIBE completed successfully for: &quot; + folderName);
+    }
+
+    SampleResult.setResponseData(replyString != null ? replyString : &quot;&quot;, &quot;UTF-8&quot;);
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
+} else {
+    SampleResult.setResponseData(&quot;Command not sent — check IMAPCLIENT or SUBSCRIBE_FOLDER&quot;, &quot;UTF-8&quot;);
+    SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);
 }
 
-vars.put(&quot;CONTINUE&quot;,continue_flag);
-SampleResult.setResponseData(ic.getReplyString());
-SampleResult.setDataType(org.apache.jmeter.samplers.SampleResult.TEXT);</stringProp>
-                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-              </BeanShellSampler>
+vars.put(&quot;CONTINUE&quot;, continue_flag);</stringProp>
+              </JSR223Sampler>
               <hashTree/>
               <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="UID COPY" enabled="true">
                 <stringProp name="BeanShellSampler.query">import org.apache.commons.net.imap.IMAPClient;
