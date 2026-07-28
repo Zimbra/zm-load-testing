@@ -2,3 +2,8 @@ PROFILE.ZSOAP.type=sequence
 PROFILE.ZSOAP.sequence.1=AuthRequest(AUTHTYPE=admin)
 PROFILE.ZSOAP.sequence.2=GetInfoRequest
 PROFILE.ZSOAP.sequence.3=GetAdminExtensionZimletsRequest
+PROFILE.ZSOAP.sequence.4=GetEffectiveRightsRequest
+PROFILE.ZSOAP.sequence.5=GetAccountMembershipRequest
+PROFILE.ZSOAP.sequence.6=GetGrantsRequest
+PROFILE.ZSOAP.sequence.7=GetAllEffectiveRightsRequest
+
