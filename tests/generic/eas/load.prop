@@ -1,6 +1,9 @@
-LOAD.duration=3600
+LOAD.duration=7200
 LOAD.delay=0
-LOAD.EAS.users=250
+LOAD.EAS.users=300
 LOAD.EAS.userduration=10
-LOAD.EAS.rampup=600
+LOAD.EAS.rampup=10
 LOAD.EAS.loopcount=-1
+LOAD.RPS.start=1
+LOAD.RPS.end=1
+LOAD.RPS.duration=3600
