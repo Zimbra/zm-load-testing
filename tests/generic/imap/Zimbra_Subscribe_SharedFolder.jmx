@@ -27,7 +27,7 @@
         <boolProp name="CacheManager.controlledByThread">false</boolProp>
       </CacheManager>
       <hashTree/>
-      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager">
+      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="false">
         <collectionProp name="CookieManager.cookies">
           <elementProp name="ZM_TEST" elementType="Cookie" testname="ZM_TEST">
             <stringProp name="Cookie.value">true</stringProp>
@@ -175,7 +175,7 @@
     &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
       &lt;authToken&gt;${ZM_AUTH_TOKEN}&lt;/authToken&gt;&#xd;
       &lt;authTokenControl voidOnExpired=&quot;true&quot;/&gt;&#xd;
-      &lt;userAgent name=&quot;ZimbraModernWebClient - FF103 (Mac)&quot; version=&quot;10.1.21_GA_2227&quot;/&gt;&#xd;
+      &lt;userAgent name=&quot;ZimbraModernWebClient - FF103 (Mac)&quot; version=&quot;${__P(ZIMBRA_VERSION,)}&quot;/&gt;&#xd;
     &lt;/context&gt;&#xd;
   &lt;/soapenv:Header&gt;&#xd;
   &lt;soapenv:Body&gt;&#xd;
@@ -204,7 +204,7 @@
               <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
             </XPathExtractor>
             <hashTree/>
-            <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="csrf">
+            <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="csrf" enabled="true">
               <stringProp name="XPathExtractor.default"></stringProp>
               <stringProp name="XPathExtractor.refname">csrfToken</stringProp>
               <stringProp name="XPathExtractor.xpathQuery">//csrfToken</stringProp>
@@ -275,10 +275,6 @@
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
-                  </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
                     <stringProp name="Header.value">https://${P_URL}</stringProp>
@@ -294,14 +290,6 @@
                   <elementProp name="Content-Type" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">text/plain;charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
                   </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -325,7 +313,7 @@
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;GetInfoRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraAccount&quot;,&quot;sections&quot;:&quot;dsrcs&quot;}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;10.1.21_GA_2227&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125097&quot;,&quot;_content&quot;:&quot;125097&quot;}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;GetInfoRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraAccount&quot;,&quot;sections&quot;:&quot;dsrcs&quot;}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;${__P(ZIMBRA_VERSION,)}&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125097&quot;,&quot;_content&quot;:&quot;125097&quot;}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -346,10 +334,6 @@
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
-                  </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
                     <stringProp name="Header.value">https://${P_URL}</stringProp>
@@ -365,14 +349,6 @@
                   <elementProp name="Content-Type" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">text/plain;charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
                   </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -396,7 +372,7 @@
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;FolderActionRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;action&quot;:{&quot;id&quot;:&quot;${folder_id}&quot;,&quot;op&quot;:&quot;grant&quot;,&quot;grant&quot;:[{&quot;d&quot;:&quot;${recipient_username}&quot;,&quot;gt&quot;:&quot;usr&quot;,&quot;key&quot;:null,&quot;pw&quot;:null,&quot;perm&quot;:&quot;r&quot;,&quot;zid&quot;:null}]}}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;10.1.21_GA_2227&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125097&quot;,&quot;_content&quot;:&quot;125097&quot;}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;FolderActionRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;action&quot;:{&quot;id&quot;:&quot;${folder_id}&quot;,&quot;op&quot;:&quot;grant&quot;,&quot;grant&quot;:[{&quot;d&quot;:&quot;${recipient_username}&quot;,&quot;gt&quot;:&quot;usr&quot;,&quot;key&quot;:null,&quot;pw&quot;:null,&quot;perm&quot;:&quot;r&quot;,&quot;zid&quot;:null}]}}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;${__P(ZIMBRA_VERSION,)}&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125097&quot;,&quot;_content&quot;:&quot;125097&quot;}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -417,10 +393,6 @@
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
-                  </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
                     <stringProp name="Header.value">https://${P_URL}</stringProp>
@@ -437,14 +409,6 @@
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">text/plain;charset=UTF-8</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
-                  </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
                     <stringProp name="Header.value">empty</stringProp>
@@ -454,7 +418,6 @@
               <hashTree/>
             </hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/service/soap/FolderActionRequest">
-              <stringProp name="TestPlan.comments">fceaf843-2fa2-43d2-9134-883b6763d074</stringProp>
               <stringProp name="HTTPSampler.domain">${P_URL}</stringProp>
               <stringProp name="HTTPSampler.port">${__P(HTTP.port)}</stringProp>
               <stringProp name="HTTPSampler.protocol">https</stringProp>
@@ -468,14 +431,14 @@
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;FolderActionRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;action&quot;:{&quot;id&quot;:&quot;${folder_id}&quot;,&quot;op&quot;:&quot;!grant&quot;,&quot;zid&quot;:&quot;${owner_zid}&quot;}}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;10.1.21_GA_2227&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125097&quot;,&quot;_content&quot;:&quot;125097&quot;}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;FolderActionRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;action&quot;:{&quot;id&quot;:&quot;${folder_id}&quot;,&quot;op&quot;:&quot;!grant&quot;,&quot;zid&quot;:&quot;${owner_zid}&quot;}}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;${__P(ZIMBRA_VERSION,)}&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125097&quot;,&quot;_content&quot;:&quot;125097&quot;}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -488,10 +451,6 @@
                   <elementProp name="Sec-Fetch-Site" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
                   </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
@@ -508,14 +467,6 @@
                   <elementProp name="Content-Type" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">text/plain;charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
                   </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -539,14 +490,14 @@
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;SendShareNotificationRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;item&quot;:{&quot;id&quot;:&quot;${folder_id}&quot;},&quot;e&quot;:{&quot;a&quot;:&quot;${recipient_username}&quot;}}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;10.1.21_GA_2227&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125097&quot;,&quot;_content&quot;:&quot;125097&quot;},&quot;notify&quot;:{&quot;seq&quot;:2}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;SendShareNotificationRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;item&quot;:{&quot;id&quot;:&quot;${folder_id}&quot;},&quot;e&quot;:{&quot;a&quot;:&quot;${recipient_username}&quot;}}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;${__P(ZIMBRA_VERSION,)}&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125097&quot;,&quot;_content&quot;:&quot;125097&quot;},&quot;notify&quot;:{&quot;seq&quot;:2}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -559,10 +510,6 @@
                   <elementProp name="Sec-Fetch-Site" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
                   </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
@@ -580,14 +527,6 @@
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">text/plain;charset=UTF-8</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
-                  </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
                     <stringProp name="Header.value">empty</stringProp>
@@ -602,7 +541,7 @@
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T05_Logout/public/blank.html-312" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T05_Logout/public/blank.html-312">
               <stringProp name="HTTPSampler.domain">${P_URL}</stringProp>
               <stringProp name="HTTPSampler.port">${__P(HTTP.port)}</stringProp>
               <stringProp name="HTTPSampler.protocol">https</stringProp>
@@ -616,7 +555,7 @@
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -630,10 +569,6 @@
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
-                  </elementProp>
                   <elementProp name="Pragma" elementType="Header">
                     <stringProp name="Header.name">Pragma</stringProp>
                     <stringProp name="Header.value">no-cache</stringProp>
@@ -646,14 +581,6 @@
                     <stringProp name="Header.name">Cache-Control</stringProp>
                     <stringProp name="Header.value">no-cache</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
-                  </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
                     <stringProp name="Header.value">empty</stringProp>
@@ -662,7 +589,7 @@
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T05_Logout/-314" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T05_Logout/-314">
               <stringProp name="HTTPSampler.domain">${P_URL}</stringProp>
               <stringProp name="HTTPSampler.port">${__P(HTTP.port)}</stringProp>
               <stringProp name="HTTPSampler.protocol">https</stringProp>
@@ -677,7 +604,7 @@
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -691,10 +618,6 @@
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
-                  </elementProp>
                   <elementProp name="Sec-Fetch-User" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-User</stringProp>
                     <stringProp name="Header.value">?1</stringProp>
@@ -706,14 +629,6 @@
                   <elementProp name="Upgrade-Insecure-Requests" elementType="Header">
                     <stringProp name="Header.name">Upgrade-Insecure-Requests</stringProp>
                     <stringProp name="Header.value">1</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
                   </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -734,7 +649,7 @@
 // Purpose: Give Sender thread enough time to complete SETACL
 // before Recipient attempts CreateMountpoint / Accept Share
 
-int waitTime = 5000  // 5 seconds — increase to 10000 for 750 users
+int waitTime = props.get(&quot;SHARE_WAIT_TIME&quot;, &quot;5000&quot;).toInteger() // 5 seconds — increase to 10000 for 750 users
 
 log.info(&quot;[RECIPIENT - Wait_For_Sender] Thread: ${ctx.getThreadNum()} | Waiting ${waitTime}ms...&quot;)
 
@@ -801,7 +716,7 @@ SampleResult.setLatency(waitTime)</stringProp>
               <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
             </XPathExtractor>
             <hashTree/>
-            <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="csrf">
+            <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="csrf" enabled="true">
               <stringProp name="XPathExtractor.default"></stringProp>
               <stringProp name="XPathExtractor.refname">csrfToken</stringProp>
               <stringProp name="XPathExtractor.xpathQuery">//csrfToken</stringProp>
@@ -833,14 +748,14 @@ SampleResult.setLatency(waitTime)</stringProp>
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;GetWhiteBlackListRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraAccount&quot;}],&quot;GetFolderRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;view&quot;:null,&quot;tr&quot;:true,&quot;local&quot;:false}],&quot;GetFilterRulesRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;10.1.21_GA_2227&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;GetWhiteBlackListRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraAccount&quot;}],&quot;GetFolderRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;view&quot;:null,&quot;tr&quot;:true,&quot;local&quot;:false}],&quot;GetFilterRulesRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;${__P(ZIMBRA_VERSION,)}&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -853,10 +768,6 @@ SampleResult.setLatency(waitTime)</stringProp>
                   <elementProp name="Sec-Fetch-Site" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
                   </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
@@ -873,14 +784,6 @@ SampleResult.setLatency(waitTime)</stringProp>
                   <elementProp name="Content-Type" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">text/plain;charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
                   </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -910,7 +813,7 @@ SampleResult.setLatency(waitTime)</stringProp>
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;GetFolderRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;view&quot;:null,&quot;tr&quot;:true,&quot;local&quot;:false}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;10.1.21_GA_2227&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;GetFolderRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;view&quot;:null,&quot;tr&quot;:true,&quot;local&quot;:false}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;${__P(ZIMBRA_VERSION,)}&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -937,10 +840,6 @@ SampleResult.setLatency(waitTime)</stringProp>
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
-                  </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
                     <stringProp name="Header.value">https://${P_URL}</stringProp>
@@ -956,14 +855,6 @@ SampleResult.setLatency(waitTime)</stringProp>
                   <elementProp name="Content-Type" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">text/plain;charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
                   </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -993,7 +884,7 @@ SampleResult.setLatency(waitTime)</stringProp>
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;GetInfoRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraAccount&quot;,&quot;sections&quot;:&quot;dsrcs&quot;}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;10.1.21_GA_2227&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;GetInfoRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraAccount&quot;,&quot;sections&quot;:&quot;dsrcs&quot;}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;${__P(ZIMBRA_VERSION,)}&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1014,10 +905,6 @@ SampleResult.setLatency(waitTime)</stringProp>
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
-                  </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
                     <stringProp name="Header.value">https://${P_URL}</stringProp>
@@ -1033,14 +920,6 @@ SampleResult.setLatency(waitTime)</stringProp>
                   <elementProp name="Content-Type" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">text/plain;charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
                   </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -1064,7 +943,7 @@ SampleResult.setLatency(waitTime)</stringProp>
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;AutoCompleteGalRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraAccount&quot;,&quot;limit&quot;:20,&quot;name&quot;:&quot;${sender_username}&quot;,&quot;needExp&quot;:true}],&quot;AutoCompleteRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;name&quot;:&quot;${sender_username}&quot;}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;10.1.21_GA_2227&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;AutoCompleteGalRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraAccount&quot;,&quot;limit&quot;:20,&quot;name&quot;:&quot;${sender_username}&quot;,&quot;needExp&quot;:true}],&quot;AutoCompleteRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;name&quot;:&quot;${sender_username}&quot;}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;${__P(ZIMBRA_VERSION,)}&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1085,10 +964,6 @@ SampleResult.setLatency(waitTime)</stringProp>
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
-                  </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
                     <stringProp name="Header.value">https://${P_URL}</stringProp>
@@ -1104,14 +979,6 @@ SampleResult.setLatency(waitTime)</stringProp>
                   <elementProp name="Content-Type" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">text/plain;charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
                   </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -1135,14 +1002,14 @@ SampleResult.setLatency(waitTime)</stringProp>
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;GetShareInfoRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraAccount&quot;,&quot;includeSelf&quot;:false,&quot;owner&quot;:{&quot;by&quot;:&quot;name&quot;,&quot;_content&quot;:&quot;${sender_username}&quot;}}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;10.1.21_GA_2227&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;GetShareInfoRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraAccount&quot;,&quot;includeSelf&quot;:false,&quot;owner&quot;:{&quot;by&quot;:&quot;name&quot;,&quot;_content&quot;:&quot;${sender_username}&quot;}}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;${__P(ZIMBRA_VERSION,)}&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -1155,10 +1022,6 @@ SampleResult.setLatency(waitTime)</stringProp>
                   <elementProp name="Sec-Fetch-Site" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
                   </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
@@ -1175,14 +1038,6 @@ SampleResult.setLatency(waitTime)</stringProp>
                   <elementProp name="Content-Type" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">text/plain;charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
                   </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -1220,7 +1075,7 @@ SampleResult.setLatency(waitTime)</stringProp>
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;CreateMountpointRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;link&quot;:{&quot;name&quot;:&quot;${mount_name}&quot;,&quot;owner&quot;:&quot;${sender_username}&quot;,&quot;view&quot;:&quot;message&quot;,&quot;zid&quot;:&quot;${owner_zid}&quot;,&quot;rid&quot;:&quot;${owner_rid}&quot;,&quot;color&quot;:1,&quot;reminder&quot;:false,&quot;l&quot;:&quot;1&quot;}}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;10.1.21_GA_2227&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;CreateMountpointRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;link&quot;:{&quot;name&quot;:&quot;${mount_name}&quot;,&quot;owner&quot;:&quot;${sender_username}&quot;,&quot;view&quot;:&quot;message&quot;,&quot;zid&quot;:&quot;${owner_zid}&quot;,&quot;rid&quot;:&quot;${owner_rid}&quot;,&quot;color&quot;:1,&quot;reminder&quot;:false,&quot;l&quot;:&quot;1&quot;}}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;${__P(ZIMBRA_VERSION,)}&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1241,10 +1096,6 @@ SampleResult.setLatency(waitTime)</stringProp>
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
-                  </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
                     <stringProp name="Header.value">https://${P_URL}</stringProp>
@@ -1260,14 +1111,6 @@ SampleResult.setLatency(waitTime)</stringProp>
                   <elementProp name="Content-Type" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">text/plain;charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
                   </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -1311,7 +1154,7 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;GetFolderRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;view&quot;:null,&quot;tr&quot;:true,&quot;local&quot;:false}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;10.1.21_GA_2227&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;},&quot;notify&quot;:{&quot;seq&quot;:1}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;GetFolderRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;view&quot;:null,&quot;tr&quot;:true,&quot;local&quot;:false}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;${__P(ZIMBRA_VERSION,)}&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;},&quot;notify&quot;:{&quot;seq&quot;:1}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1332,10 +1175,6 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
-                  </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
                     <stringProp name="Header.value">https://${P_URL}</stringProp>
@@ -1351,14 +1190,6 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
                   <elementProp name="Content-Type" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">text/plain;charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
                   </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -1382,7 +1213,7 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;GetShareInfoRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraAccount&quot;,&quot;includeSelf&quot;:false,&quot;owner&quot;:{&quot;by&quot;:&quot;name&quot;,&quot;_content&quot;:&quot;${sender_username}&quot;}}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;10.1.21_GA_2227&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;},&quot;notify&quot;:{&quot;seq&quot;:1}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;GetShareInfoRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraAccount&quot;,&quot;includeSelf&quot;:false,&quot;owner&quot;:{&quot;by&quot;:&quot;name&quot;,&quot;_content&quot;:&quot;${sender_username}&quot;}}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;${__P(ZIMBRA_VERSION,)}&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;},&quot;notify&quot;:{&quot;seq&quot;:1}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1403,10 +1234,6 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
-                  </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
                     <stringProp name="Header.value">https://${P_URL}</stringProp>
@@ -1422,14 +1249,6 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
                   <elementProp name="Content-Type" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">text/plain;charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
                   </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -1459,14 +1278,14 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;GetFolderRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;view&quot;:null,&quot;tr&quot;:true,&quot;local&quot;:false}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;10.1.21_GA_2227&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;},&quot;notify&quot;:{&quot;seq&quot;:1}}}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Body&quot;:{&quot;BatchRequest&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;GetFolderRequest&quot;:[{&quot;_jsns&quot;:&quot;urn:zimbraMail&quot;,&quot;view&quot;:null,&quot;tr&quot;:true,&quot;local&quot;:false}]}},&quot;Header&quot;:{&quot;context&quot;:{&quot;_jsns&quot;:&quot;urn:zimbra&quot;,&quot;authTokenControl&quot;:{&quot;voidOnExpired&quot;:true},&quot;userAgent&quot;:{&quot;name&quot;:&quot;ZimbraModernWebClient - FF103 (Mac)&quot;,&quot;version&quot;:&quot;${__P(ZIMBRA_VERSION,)}&quot;},&quot;session&quot;:{&quot;id&quot;:&quot;125098&quot;,&quot;_content&quot;:&quot;125098&quot;},&quot;notify&quot;:{&quot;seq&quot;:1}}}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -1479,10 +1298,6 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
                   <elementProp name="Sec-Fetch-Site" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
                   </elementProp>
                   <elementProp name="Origin" elementType="Header">
                     <stringProp name="Header.name">Origin</stringProp>
@@ -1499,14 +1314,6 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
                   <elementProp name="Content-Type" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">text/plain;charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
                   </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
@@ -1536,7 +1343,7 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -1550,10 +1357,6 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
-                  </elementProp>
                   <elementProp name="Pragma" elementType="Header">
                     <stringProp name="Header.name">Pragma</stringProp>
                     <stringProp name="Header.value">no-cache</stringProp>
@@ -1566,14 +1369,6 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
                     <stringProp name="Header.name">Cache-Control</stringProp>
                     <stringProp name="Header.value">no-cache</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
-                  </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
                     <stringProp name="Header.value">empty</stringProp>
@@ -1582,7 +1377,7 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T05_Logout/-314" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T05_Logout/-314">
               <stringProp name="HTTPSampler.domain">${P_URL}</stringProp>
               <stringProp name="HTTPSampler.port">${__P(HTTP.port)}</stringProp>
               <stringProp name="HTTPSampler.protocol">https</stringProp>
@@ -1597,7 +1392,7 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Sec-Fetch-Mode" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
@@ -1611,10 +1406,6 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
                     <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
                     <stringProp name="Header.value">same-origin</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
-                  </elementProp>
                   <elementProp name="Sec-Fetch-User" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-User</stringProp>
                     <stringProp name="Header.value">?1</stringProp>
@@ -1627,14 +1418,6 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
                     <stringProp name="Header.name">Upgrade-Insecure-Requests</stringProp>
                     <stringProp name="Header.value">1</stringProp>
                   </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0</stringProp>
-                  </elementProp>
                   <elementProp name="Sec-Fetch-Dest" elementType="Header">
                     <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
                     <stringProp name="Header.value">document</stringProp>
@@ -1645,7 +1428,7 @@ log.info(&quot;[PreProcessor] sender_username=&quot; + senderFull
             </hashTree>
           </hashTree>
         </hashTree>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="false">
           <boolProp name="displayJMeterProperties">false</boolProp>
           <boolProp name="displayJMeterVariables">true</boolProp>
           <boolProp name="displaySystemProperties">false</boolProp>
