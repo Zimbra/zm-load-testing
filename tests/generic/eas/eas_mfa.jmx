@@ -1,0 +1,3472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.2">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="EAS MFA Plan" enabled="true">
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">false</boolProp>
+    </TestPlan>
+    <hashTree>
+      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>false</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>false</threadName>
+            <dataType>false</dataType>
+            <encoding>false</encoding>
+            <assertions>false</assertions>
+            <subresults>false</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <url>true</url>
+          </value>
+        </objProp>
+        <objProp>
+          <name></name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>false</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>false</threadName>
+            <dataType>false</dataType>
+            <encoding>false</encoding>
+            <assertions>false</assertions>
+            <subresults>false</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename">${__P(jmetercsv,${__P(REQUEST.log)})}</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <objProp>
+          <name></name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Accounts" enabled="true">
+        <stringProp name="filename">${__P(ACCOUNTS.csv)}</stringProp>
+        <stringProp name="fileEncoding"></stringProp>
+        <stringProp name="variableNames">USER,PASS</stringProp>
+        <stringProp name="delimiter">,</stringProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="ignoreFirstLine">false</boolProp>
+      </CSVDataSet>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="S1: Cold Auth Sanity" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">stoptest</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <stringProp name="LoopController.loops">${__P(LOAD.EAS.loopcount)}</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.EAS.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.EAS.rampup)}</stringProp>
+        <boolProp name="ThreadGroup.delayedStart">false</boolProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="MFA-Cold-Auth-Flow" enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">false</boolProp>
+        </TransactionController>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="START" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import com.zimbra.jmeter.Zimbra
+import com.zimbra.jmeter.Command
+
+// ── Build EAS URL ──────────────────────────────────────────────────────────────
+String protocol = props.get(&quot;HTTP.protocol&quot;)
+String server   = props.get(&quot;HTTP.server&quot;)
+String port     = props.get(&quot;HTTP.port&quot;)
+
+String url = &quot;${protocol}://${server}&quot;
+if (port != null &amp;&amp; !port.trim().isEmpty()) {
+    url = &quot;${url}:${port}&quot;
+}
+url = &quot;${url}/Microsoft-Server-ActiveSync&quot;
+vars.put(&quot;URL&quot;, url)
+// log.info(&quot;EAS URL: ${url}&quot;)
+
+// ── Initialize EAS object and store in vars ────────────────────────────────────
+Zimbra eas = new Zimbra(props, &quot;EAS&quot;)
+vars.putObject(&quot;EAS&quot;, eas)
+
+// ── Retrieve commands list ─────────────────────────────────────────────────────
+ArrayList commands = eas.getcommands()
+vars.putObject(&quot;COMMANDS&quot;, commands)
+
+// ── Calculate per-command DELAY ────────────────────────────────────────────────
+String userDuration = props.get(&quot;LOAD.EAS.userduration&quot;)
+if (userDuration == null || commands.size() == 0) {
+    vars.putObject(&quot;DELAY&quot;, &quot;0&quot;)
+} else {
+    int delay = (Integer.parseInt(userDuration) * 1000) / commands.size()
+    vars.putObject(&quot;DELAY&quot;, delay.toString())
+}
+
+// ── Initialize CONTINUE flag ───────────────────────────────────────────────────
+vars.put(&quot;CONTINUE&quot;, commands.size() &gt; 0 ? &quot;true&quot; : &quot;false&quot;)
+
+// ── Initialize sync keys and folder name ──────────────────────────────────────
+vars.put(&quot;FOLDERSYNCKEY&quot;, &quot;0&quot;)
+vars.put(&quot;SYNCSYNCKEY&quot;,   &quot;0&quot;)
+vars.put(&quot;FOLDERNAME&quot;,    &quot;TestDir${org.apache.commons.lang3.RandomUtils.nextInt(1, 10001)}&quot;)
+vars.put(&quot;MOREAVAILABLE&quot;, &quot;true&quot;)</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Run_Commands" enabled="true">
+            <stringProp name="WhileController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+          </WhileController>
+          <hashTree>
+            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Next_Command" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import com.zimbra.jmeter.Command
+
+// ── Retrieve commands list from vars ──────────────────────────────────────────
+ArrayList commands = vars.getObject(&quot;COMMANDS&quot;)
+
+// ── Process next command if available ─────────────────────────────────────────
+if (commands.size() &gt; 0) {
+    // log.info(&quot;Testing: ${commands}&quot;)
+
+    Command c = commands.remove(0)
+    vars.put(&quot;COMMAND&quot;, c.getName())
+
+    // ── Map command arguments into JMeter vars ─────────────────────────────────
+    for (Map.Entry entry : c.argsSet()) {
+        vars.put(entry.getKey(), entry.getValue())
+    }
+
+    // log.info(&quot;COMMAND: ${vars.get(&apos;COMMAND&apos;)}&quot;)
+}
+
+// ── Update CONTINUE flag ───────────────────────────────────────────────────────
+if (commands.size() == 0) {
+    vars.put(&quot;CONTINUE&quot;, &quot;false&quot;)
+}</stringProp>
+            </JSR223Sampler>
+            <hashTree/>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Command_Execution" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
+            </TransactionController>
+            <hashTree>
+              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Command Delay" enabled="true">
+                <stringProp name="ConstantTimer.delay">${DELAY}</stringProp>
+              </ConstantTimer>
+              <hashTree/>
+              <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="Commands" enabled="true">
+                <stringProp name="SwitchController.value">${COMMAND}</stringProp>
+              </SwitchController>
+              <hashTree>
+                <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="default" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">log.info(&quot;${Thread.currentThread().getName()} ${vars.get(&apos;COMMAND&apos;)} not currently supported&quot;)</stringProp>
+                </JSR223Sampler>
+                <hashTree/>
+                <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Options" enabled="true">
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpOptions
+import org.apache.http.HttpResponse
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.commons.codec.binary.Base64
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Setup HTTP OPTIONS Request ────────────────────────────────────────
+    HttpOptions ho = new HttpOptions(vars.get(&quot;URL&quot;))
+
+    String auth        = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    ho.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    ho.setHeader(&quot;User-Agent&quot;, &quot;Apple-iPhone9C1/1604.1&quot;)
+    ho.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+    // ── SSL ───────────────────────────────────────────────────────────────
+    SSLContextBuilder builder = new SSLContextBuilder()
+    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    // ── Execute ───────────────────────────────────────────────────────────
+    HttpResponse hr        = dhc.execute(ho)
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    // ── Capture EAS capability headers ────────────────────────────────────
+    String cmds     = &quot;&quot;
+    String versions = &quot;&quot;
+    for (org.apache.http.Header h : hr.getAllHeaders()) {
+        if (&quot;MS-ASProtocolCommands&quot; == h.getName()) cmds     = h.getValue()
+        if (&quot;MS-ASProtocolVersions&quot; == h.getName()) versions = h.getValue()
+    }
+
+    // ── Store in vars (thread-local) + props (namespaced + global) ────────
+    // vars  → downstream samplers in this thread/iteration
+    // props namespaced → per-user capability reads in other thread groups
+    // props global     → EAS.version negotiation consumed by all samplers
+    vars.put(&quot;EAS_SUPPORTED_COMMANDS&quot;, cmds)
+    vars.put(&quot;EAS_SUPPORTED_VERSIONS&quot;, versions)
+    props.put(&quot;EAS_SUPPORTED_COMMANDS.${userKey}&quot;, cmds)
+    props.put(&quot;EAS_SUPPORTED_VERSIONS.${userKey}&quot;, versions)
+
+    // ── Negotiate EAS version: prefer 16.1, fall back to 14.1, else 12.1 ─
+    // Writes props[&quot;EAS.version&quot;] — consumed by all samplers via
+    // props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;) with no further changes needed
+    if (versions.contains(&quot;16.1&quot;)) {
+        props.put(&quot;EAS.version&quot;, &quot;16.1&quot;)
+    } else if (versions.contains(&quot;14.1&quot;)) {
+        props.put(&quot;EAS.version&quot;, &quot;14.1&quot;)
+    } else {
+        props.put(&quot;EAS.version&quot;, &quot;12.1&quot;)
+    }
+
+    // ── Validate 16.1 is advertised ───────────────────────────────────────
+    if (!versions.contains(&quot;16.1&quot;)) {
+        log.warn(&quot;S1-OPTIONS: server does not advertise EAS 16.1 | Versions=${versions} | User=${userKey}&quot;)
+        SampleResult.setSuccessful(false)
+        SampleResult.setResponseMessage(&quot;EAS 16.1 not advertised by server&quot;)
+    } else {
+        SampleResult.setSuccessful(true)
+    }
+
+    dhc.close()
+    SampleResult.setResponseData(&quot;Commands: ${cmds}\nVersions: ${versions}&quot;, &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-S1-OPTIONS&quot;)
+
+    log.info(&quot;S1-OPTIONS: HTTP=${responseCode} | Versions=${versions} | NegotiatedVersion=${props.getProperty(&apos;EAS.version&apos;)} | Commands=${cmds} | User=${userKey}&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;S1-OPTIONS: ${e.toString()}&quot;)
+}</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Sampler>
+                <hashTree/>
+                <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Provision" enabled="true">
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Shared auth + config (reused across Phase 1 + Phase 2) ───────────
+    String auth        = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    String authHeader  = &quot;Basic ${new String(encodedAuth)}&quot;
+    String easVersion  = props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;)
+    String baseUrl     = &quot;${vars.get(&apos;URL&apos;)}?Cmd=Provision&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;
+
+    // ── SSL client (shared across Phase 1 + Phase 2) ──────────────────────
+    SSLContextBuilder sslBuilder = new SSLContextBuilder()
+    sslBuilder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        sslBuilder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Phase 1: Get Policy
+    // ════════════════════════════════════════════════════════════════════════
+    HttpPost hp = new HttpPost(baseUrl)
+    hp.setHeader(HttpHeaders.AUTHORIZATION, authHeader)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, easVersion)
+
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_PROVISION)
+      bs.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICIES)
+        bs.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICY)
+          bs.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                         BinarySerializer.PROVISION_POLICYTYPE,
+                         &quot;MS-EAS-Provisioning-WBXML&quot;)
+        bs.closeTag()
+      bs.closeTag()
+    bs.closeTag()
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    // Track MFA latency — this request triggers the MFA flow server-side
+    long mfaStart  = System.currentTimeMillis()
+    HttpResponse hr = dhc.execute(hp)
+    long mfaPhase1 = System.currentTimeMillis() - mfaStart
+
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    // ── Parse WBXML — extract PolicyKey + Status ──────────────────────────
+    String policyKey      = &quot;&quot;
+    String status         = &quot;&quot;
+    StringBuilder result  = new StringBuilder()
+    byte[] respBytes      = EntityUtils.toByteArray(hr.getEntity())
+
+    if (responseCode == 200 &amp;&amp; respBytes.length &gt; 0) {
+        try {
+            BinaryParser bp     = new BinaryParser(new ByteArrayInputStream(respBytes), false)
+            boolean inPolicyKey = false
+            boolean inStatus    = false
+            while (bp.next() != null) {
+                switch (bp.getEventType()) {
+                    case BinaryParser.START_TAG:
+                        result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                        if (&quot;PolicyKey&quot; == bp.getName()) inPolicyKey = true
+                        if (&quot;Status&quot;    == bp.getName()) inStatus    = true
+                        break
+                    case BinaryParser.END_TAG:
+                        result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                        if (&quot;PolicyKey&quot; == bp.getName()) inPolicyKey = false
+                        if (&quot;Status&quot;    == bp.getName()) inStatus    = false
+                        break
+                    case BinaryParser.TEXT:
+                        String text = bp.getText() ?: &quot;&quot;
+                        result.append(text)
+                        if (inPolicyKey) policyKey = text
+                        if (inStatus)    status    = text
+                        break
+                }
+            }
+        } catch (IOException e) {
+            if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+        }
+    } else {
+        result.append(new String(respBytes, StandardCharsets.UTF_8))
+    }
+
+    vars.put(&quot;PROVISION_POLICY_KEY&quot;,  policyKey)
+    vars.put(&quot;PROVISION_STATUS&quot;,      status)
+    vars.put(&quot;MFA_LATENCY_PHASE1_MS&quot;, String.valueOf(mfaPhase1))
+
+    log.info(&quot;S1-Provision Phase1: HTTP=${responseCode} | PolicyKey=${policyKey} | Status=${status} | MFA_Phase1=${mfaPhase1}ms | User=${userKey}&quot;)
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Phase 2: Accept Policy (only if Phase 1 succeeded)
+    // ════════════════════════════════════════════════════════════════════════
+    if (policyKey &amp;&amp; &quot;1&quot; == status) {
+
+        HttpPost hp2 = new HttpPost(baseUrl)
+        hp2.setHeader(HttpHeaders.AUTHORIZATION, authHeader)
+        hp2.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+        hp2.setHeader(&quot;MS-ASProtocolVersion&quot;, easVersion)
+
+        ByteArrayOutputStream bao2 = new ByteArrayOutputStream()
+        BinarySerializer bs2 = new BinarySerializer(bao2, false)
+        bs2.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_PROVISION)
+          bs2.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICIES)
+            bs2.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICY)
+              bs2.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                              BinarySerializer.PROVISION_POLICYTYPE,
+                              &quot;MS-EAS-Provisioning-WBXML&quot;)
+              bs2.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                              BinarySerializer.PROVISION_POLICYKEY,
+                              policyKey)
+              bs2.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                              BinarySerializer.PROVISION_STATUS,
+                              &quot;1&quot;)
+            bs2.closeTag()
+          bs2.closeTag()
+        bs2.closeTag()
+        hp2.setEntity(new ByteArrayEntity(bao2.toByteArray()))
+
+        HttpResponse hr2  = dhc.execute(hp2)
+        long mfaTotal     = System.currentTimeMillis() - mfaStart
+        int responseCode2 = hr2.getStatusLine().getStatusCode()
+        byte[] resp2      = EntityUtils.toByteArray(hr2.getEntity())
+        String finalPolicyKey = &quot;&quot;
+
+        if (responseCode2 == 200 &amp;&amp; resp2.length &gt; 0) {
+            try {
+                BinaryParser bp2 = new BinaryParser(new ByteArrayInputStream(resp2), false)
+                boolean inPK     = false
+                while (bp2.next() != null) {
+                    switch (bp2.getEventType()) {
+                        case BinaryParser.START_TAG:
+                            result.append(&quot;&lt;${bp2.getName()}&gt;&quot;)
+                            if (&quot;PolicyKey&quot; == bp2.getName()) inPK = true
+                            break
+                        case BinaryParser.END_TAG:
+                            result.append(&quot;&lt;/${bp2.getName()}&gt;&quot;)
+                            if (&quot;PolicyKey&quot; == bp2.getName()) inPK = false
+                            break
+                        case BinaryParser.TEXT:
+                            String text2 = bp2.getText() ?: &quot;&quot;
+                            result.append(text2)
+                            if (inPK) finalPolicyKey = text2
+                            break
+                    }
+                }
+            } catch (IOException e) {
+                if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+            }
+        }
+
+        // ── Store in props (namespaced, cross-iteration) + vars (thread-local) ──
+        if (finalPolicyKey) {
+            props.put(&quot;FINAL_POLICY_KEY.${userKey}&quot;, finalPolicyKey)
+            vars.put(&quot;FINAL_POLICY_KEY&quot;, finalPolicyKey)
+            log.info(&quot;S1-Provision Phase2: HTTP=${responseCode2} | FinalPolicyKey=${finalPolicyKey} | MFA_Total=${mfaTotal}ms | User=${userKey}&quot;)
+        } else {
+            log.warn(&quot;S1-Provision Phase2: FinalPolicyKey not found | HTTP=${responseCode2} | User=${userKey}&quot;)
+        }
+
+        vars.put(&quot;MFA_LATENCY_TOTAL_MS&quot;, String.valueOf(mfaTotal))
+
+    } else {
+        log.warn(&quot;S1-Provision: skipping Phase2 | policyKey=&apos;${policyKey}&apos; | status=&apos;${status}&apos; | User=${userKey}&quot;)
+    }
+
+    dhc.close()
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-S1-Provision&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;S1-Provision: ${e.toString()}&quot;)
+}</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Sampler>
+                <hashTree/>
+                <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="FolderSync" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.HttpEntity
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Setup HTTP Request ────────────────────────────────────────────────
+    HttpPost hp = new HttpPost(&quot;${vars.get(&apos;URL&apos;)}?Cmd=FolderSync&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;)
+
+    String auth = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    hp.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+    // ── PolicyKey from props (cross-thread safe) ──────────────────────────
+    String policyKey = props.getProperty(&quot;FINAL_POLICY_KEY.${userKey}&quot;, &quot;0&quot;)
+    hp.setHeader(&quot;X-MS-PolicyKey&quot;, policyKey)
+
+    // ── FolderSyncKey from props (cross-thread safe) ──────────────────────
+    String folderSyncKey = props.getProperty(&quot;FOLDERSYNCKEY.${userKey}&quot;, &quot;0&quot;)
+    if (!folderSyncKey) folderSyncKey = &quot;0&quot;
+    log.info(&quot;FolderSync: using SyncKey=${folderSyncKey} | PolicyKey=${policyKey} | User=${userKey}&quot;)
+
+    // ── Generate WBXML Request Body ───────────────────────────────────────
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,
+               BinarySerializer.FOLDERHIERARCHY_FOLDERSYNC)
+      bs.textElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,
+                     BinarySerializer.FOLDERHIERARCHY_SYNCKEY,
+                     folderSyncKey)
+    bs.closeTag()
+
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    // ── SSL + Execute ─────────────────────────────────────────────────────
+    SSLContextBuilder builder = new SSLContextBuilder()
+    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    HttpResponse hr = dhc.execute(hp)
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    // ── Parse WBXML + Extract Next FolderSyncKey ──────────────────────────
+    StringBuilder result = new StringBuilder()
+    String nextSyncKey   = &quot;&quot;
+    boolean inSyncKey    = false
+
+    try {
+        BinaryParser bp = new BinaryParser(
+            new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())), false)
+
+        while (bp.next() != null) {
+            switch (bp.getEventType()) {
+                case BinaryParser.START_DOCUMENT:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.END_DOCUMENT:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.START_TAG:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = true
+                    break
+                case BinaryParser.END_TAG:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = false
+                    break
+                case BinaryParser.TEXT:
+                    String text = bp.getText()
+                    result.append(text)
+                    if (inSyncKey &amp;&amp; text?.trim()) {
+                        nextSyncKey = text.trim()
+                    }
+                    break
+            }
+        }
+    } catch (IOException e) {
+        if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+    }
+
+    // ── Write next FolderSyncKey to props (cross-thread safe) ─────────────
+    if (nextSyncKey) {
+        props.put(&quot;FOLDERSYNCKEY.${userKey}&quot;, nextSyncKey)
+        vars.put(&quot;FOLDERSYNCKEY&quot;, nextSyncKey)
+        log.info(&quot;FolderSync: next SyncKey=${nextSyncKey} | HTTP=${responseCode} | User=${userKey}&quot;)
+    } else if (responseCode != 200) {
+        log.warn(&quot;FolderSync: no SyncKey in response | HTTP=${responseCode} | PolicyKey sent=${policyKey} | User=${userKey}&quot;)
+    }
+
+    dhc.close()
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-FolderSync&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;FolderSync: ${e.toString()}&quot;)
+}</stringProp>
+                </JSR223Sampler>
+                <hashTree>
+                  <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+                    <stringProp name="XPathExtractor.default">${FOLDERSYNCKEY}</stringProp>
+                    <stringProp name="XPathExtractor.refname">FOLDERSYNCKEY</stringProp>
+                    <stringProp name="XPathExtractor.xpathQuery">//SyncKey</stringProp>
+                    <boolProp name="XPathExtractor.validate">false</boolProp>
+                    <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                    <boolProp name="XPathExtractor.namespace">false</boolProp>
+                    <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  </XPathExtractor>
+                  <hashTree/>
+                </hashTree>
+                <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="InitialSync" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.HttpEntity
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import org.apache.commons.lang3.StringEscapeUtils
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Setup HTTP Request ────────────────────────────────────────────────
+    HttpPost hp = new HttpPost(&quot;${vars.get(&apos;URL&apos;)}?Cmd=Sync&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;)
+
+    String auth = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    hp.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+    // ── PolicyKey from props (cross-thread safe) ──────────────────────────
+    String policyKey = props.getProperty(&quot;FINAL_POLICY_KEY.${userKey}&quot;, &quot;0&quot;)
+    hp.setHeader(&quot;X-MS-PolicyKey&quot;, policyKey)
+
+    // ── InitialSync always sends SyncKey=&quot;0&quot; ──────────────────────────────
+    // Contract: InitialSync resets the collection sync chain.
+    // Do NOT read SYNCSYNCKEY here — &quot;0&quot; is the only correct value for
+    // the first Sync request on a collection.
+    String syncKey = &quot;0&quot;
+    log.info(&quot;InitialSync: SyncKey=${syncKey} | PolicyKey=${policyKey} | User=${userKey}&quot;)
+
+    // ── Generate WBXML Request Body ───────────────────────────────────────
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_SYNC)
+      bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_COLLECTIONS)
+        bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_COLLECTION)
+          bs.textElement(BinarySerializer.NAMESPACE_AIRSYNC,
+                         BinarySerializer.AIRSYNC_SYNCKEY, syncKey)
+          bs.integerElement(BinarySerializer.NAMESPACE_AIRSYNC,
+                            BinarySerializer.AIRSYNC_COLLECTIONID, 2)
+        bs.closeTag()
+      bs.closeTag()
+    bs.closeTag()
+
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    // ── SSL + Execute ─────────────────────────────────────────────────────
+    SSLContextBuilder builder = new SSLContextBuilder()
+    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    HttpResponse hr = dhc.execute(hp)
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    // ── Parse WBXML + Extract Next SyncKey ───────────────────────────────
+    StringBuilder result = new StringBuilder()
+    String nextSyncKey   = &quot;&quot;
+    boolean inSyncKey    = false
+
+    try {
+        BinaryParser bp = new BinaryParser(
+            new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())), false)
+
+        while (bp.next() != null) {
+            switch (bp.getEventType()) {
+                case BinaryParser.START_DOCUMENT:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.END_DOCUMENT:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.START_TAG:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = true
+                    break
+                case BinaryParser.END_TAG:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = false
+                    break
+                case BinaryParser.TEXT:
+                    String text = bp.getText()
+                    // Preserve control-char sanitisation + XML escape
+                    text = text.replaceAll(&quot;\\p{Cntrl}&quot;, &quot;&quot;)
+                    result.append(StringEscapeUtils.escapeXml(text))
+                    if (inSyncKey &amp;&amp; text?.trim()) {
+                        nextSyncKey = text.trim()
+                    }
+                    break
+            }
+        }
+    } catch (IOException e) {
+        if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+    }
+
+    // ── Write SYNCSYNCKEY to props (cross-thread safe) ────────────────────
+    // SYNCSYNCKEY is the InitialSync baseline — written here, read by
+    // DeltaSync1. Never overwritten by DeltaSync (uses DELTASYNCSYNCKEY).
+    if (nextSyncKey) {
+        props.put(&quot;SYNCSYNCKEY.${userKey}&quot;, nextSyncKey)
+        vars.put(&quot;SYNCSYNCKEY&quot;, nextSyncKey)
+        log.info(&quot;InitialSync: next SyncKey=${nextSyncKey} | HTTP=${responseCode} | User=${userKey}&quot;)
+    } else {
+        log.warn(&quot;InitialSync: no SyncKey in response | HTTP=${responseCode} | PolicyKey sent=${policyKey} | User=${userKey}&quot;)
+    }
+
+    dhc.close()
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-InitialSync&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;InitialSync: ${e.toString()}&quot;)
+}</stringProp>
+                </JSR223Sampler>
+                <hashTree>
+                  <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+                    <stringProp name="XPathExtractor.default">${SYNCSYNCKEY}</stringProp>
+                    <stringProp name="XPathExtractor.refname">SYNCSYNCKEY</stringProp>
+                    <stringProp name="XPathExtractor.xpathQuery">//SyncKey</stringProp>
+                    <boolProp name="XPathExtractor.validate">false</boolProp>
+                    <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                    <boolProp name="XPathExtractor.namespace">false</boolProp>
+                    <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  </XPathExtractor>
+                  <hashTree/>
+                </hashTree>
+                <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="DeltaSync_Operation" enabled="true">
+                  <stringProp name="WhileController.condition">${__BeanShell(&quot;${MOREAVAILABLE}&quot;.equals(&quot;true&quot;))}</stringProp>
+                </WhileController>
+                <hashTree>
+                  <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="DeltaSync" enabled="true">
+                    <stringProp name="scriptLanguage">groovy</stringProp>
+                    <stringProp name="parameters"></stringProp>
+                    <stringProp name="filename"></stringProp>
+                    <stringProp name="cacheKey">true</stringProp>
+                    <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.HttpEntity
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import org.apache.commons.lang3.StringEscapeUtils
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Setup HTTP Request ────────────────────────────────────────────────
+    HttpPost hp = new HttpPost(&quot;${vars.get(&apos;URL&apos;)}?Cmd=Sync&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;)
+
+    String auth = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    hp.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+    // ── PolicyKey from props (cross-thread safe) ──────────────────────────
+    String policyKey = props.getProperty(&quot;FINAL_POLICY_KEY.${userKey}&quot;, &quot;0&quot;)
+    hp.setHeader(&quot;X-MS-PolicyKey&quot;, policyKey)
+
+    // ── DeltaSync1 reads SYNCSYNCKEY ({uuid}1 from InitialSync) ──────────
+    String currentSyncKey = props.getProperty(&quot;SYNCSYNCKEY.${userKey}&quot;, &quot;0&quot;)
+    if (!currentSyncKey) currentSyncKey = &quot;0&quot;
+    log.info(&quot;DeltaSync1: SyncKey=${currentSyncKey} | PolicyKey=${policyKey} | User=${userKey}&quot;)
+
+    // ── Generate WBXML Request Body ───────────────────────────────────────
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_SYNC)
+      bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_COLLECTIONS)
+        bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_COLLECTION)
+          bs.textElement(BinarySerializer.NAMESPACE_AIRSYNC,
+                         BinarySerializer.AIRSYNC_SYNCKEY, currentSyncKey)
+          bs.integerElement(BinarySerializer.NAMESPACE_AIRSYNC,
+                            BinarySerializer.AIRSYNC_COLLECTIONID, 2)
+        bs.closeTag()
+      bs.closeTag()
+    bs.closeTag()
+
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    // ── SSL + Execute ─────────────────────────────────────────────────────
+    SSLContextBuilder builder = new SSLContextBuilder()
+    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    HttpResponse hr = dhc.execute(hp)
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    // ── Parse WBXML + Extract Next SyncKey ───────────────────────────────
+    StringBuilder result = new StringBuilder()
+    String nextSyncKey   = &quot;&quot;
+    boolean inSyncKey    = false
+
+    try {
+        BinaryParser bp = new BinaryParser(
+            new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())), false)
+
+        while (bp.next() != null) {
+            switch (bp.getEventType()) {
+                case BinaryParser.START_DOCUMENT:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.END_DOCUMENT:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.START_TAG:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = true
+                    break
+                case BinaryParser.END_TAG:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = false
+                    break
+                case BinaryParser.TEXT:
+                    String text = bp.getText()
+                    text = text.replaceAll(&quot;\\p{Cntrl}&quot;, &quot;&quot;)
+                    result.append(StringEscapeUtils.escapeXml(text))
+                    if (inSyncKey &amp;&amp; text?.trim()) {
+                        nextSyncKey = text.trim()
+                    }
+                    break
+            }
+        }
+    } catch (IOException e) {
+        if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+    }
+
+    // ── Write DELTASYNCSYNCKEY to props ───────────────────────────────────
+    // DeltaSync1 writes DELTASYNCSYNCKEY ({uuid}2), preserving SYNCSYNCKEY
+    // ({uuid}1) as the immutable InitialSync baseline for scenario restarts.
+    if (nextSyncKey) {
+        props.put(&quot;DELTASYNCSYNCKEY.${userKey}&quot;, nextSyncKey)
+        vars.put(&quot;DELTASYNCSYNCKEY&quot;, nextSyncKey)
+        log.info(&quot;DeltaSync1: next SyncKey=${nextSyncKey} | HTTP=${responseCode} | User=${userKey}&quot;)
+    } else {
+        log.warn(&quot;DeltaSync1: no SyncKey in response | HTTP=${responseCode} | sent=${currentSyncKey} | User=${userKey}&quot;)
+    }
+
+    dhc.close()
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-DeltaSync1&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;DeltaSync1: ${e.toString()}&quot;)
+}</stringProp>
+                  </JSR223Sampler>
+                  <hashTree>
+                    <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+                      <stringProp name="XPathExtractor.default"></stringProp>
+                      <stringProp name="XPathExtractor.refname">MOREAVAILABLE</stringProp>
+                      <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                      <stringProp name="XPathExtractor.xpathQuery">boolean(//MoreAvailable)</stringProp>
+                      <boolProp name="XPathExtractor.validate">false</boolProp>
+                      <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                      <boolProp name="XPathExtractor.namespace">false</boolProp>
+                    </XPathExtractor>
+                    <hashTree/>
+                    <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+                      <stringProp name="XPathExtractor.default">${SYNCSYNCKEY}</stringProp>
+                      <stringProp name="XPathExtractor.refname">SYNCSYNCKEY</stringProp>
+                      <stringProp name="XPathExtractor.xpathQuery">//SyncKey</stringProp>
+                      <boolProp name="XPathExtractor.validate">false</boolProp>
+                      <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                      <boolProp name="XPathExtractor.namespace">false</boolProp>
+                      <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                    </XPathExtractor>
+                    <hashTree/>
+                  </hashTree>
+                </hashTree>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="S2: Cached Auth Sanity" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">stoptest</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <stringProp name="LoopController.loops">${__P(LOAD.EAS.loopcount)}</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.EAS.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.EAS.rampup)}</stringProp>
+        <boolProp name="ThreadGroup.delayedStart">false</boolProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Cached-Auth-Sanity" enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">false</boolProp>
+        </TransactionController>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="START" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import com.zimbra.jmeter.Zimbra
+import com.zimbra.jmeter.Command
+
+// ── Build EAS URL ──────────────────────────────────────────────────────────────
+String protocol = props.get(&quot;HTTP.protocol&quot;)
+String server   = props.get(&quot;HTTP.server&quot;)
+String port     = props.get(&quot;HTTP.port&quot;)
+
+String url = &quot;${protocol}://${server}&quot;
+if (port != null &amp;&amp; !port.trim().isEmpty()) {
+    url = &quot;${url}:${port}&quot;
+}
+url = &quot;${url}/Microsoft-Server-ActiveSync&quot;
+vars.put(&quot;URL&quot;, url)
+// log.info(&quot;EAS URL: ${url}&quot;)
+
+// ── Initialize EAS object and store in vars ────────────────────────────────────
+Zimbra eas = new Zimbra(props, &quot;EAS&quot;)
+vars.putObject(&quot;EAS&quot;, eas)
+
+// ── Retrieve commands list ─────────────────────────────────────────────────────
+ArrayList commands = eas.getcommands()
+vars.putObject(&quot;COMMANDS&quot;, commands)
+
+// ── Calculate per-command DELAY ────────────────────────────────────────────────
+String userDuration = props.get(&quot;LOAD.EAS.userduration&quot;)
+if (userDuration == null || commands.size() == 0) {
+    vars.putObject(&quot;DELAY&quot;, &quot;0&quot;)
+} else {
+    int delay = (Integer.parseInt(userDuration) * 1000) / commands.size()
+    vars.putObject(&quot;DELAY&quot;, delay.toString())
+}
+
+// ── Initialize CONTINUE flag ───────────────────────────────────────────────────
+vars.put(&quot;CONTINUE&quot;, commands.size() &gt; 0 ? &quot;true&quot; : &quot;false&quot;)
+
+// ── Initialize sync keys and folder name ──────────────────────────────────────
+vars.put(&quot;FOLDERSYNCKEY&quot;, &quot;0&quot;)
+vars.put(&quot;SYNCSYNCKEY&quot;,   &quot;0&quot;)
+vars.put(&quot;FOLDERNAME&quot;,    &quot;TestDir${org.apache.commons.lang3.RandomUtils.nextInt(1, 10001)}&quot;)
+vars.put(&quot;MOREAVAILABLE&quot;, &quot;true&quot;)</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Run_Commands" enabled="true">
+            <stringProp name="WhileController.condition">${__BeanShell(&quot;${CONTINUE}&quot;.equals(&quot;true&quot;))}</stringProp>
+          </WhileController>
+          <hashTree>
+            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Next_Command" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import com.zimbra.jmeter.Command
+
+// ── Retrieve commands list from vars ──────────────────────────────────────────
+ArrayList commands = vars.getObject(&quot;COMMANDS&quot;)
+
+// ── Process next command if available ─────────────────────────────────────────
+if (commands.size() &gt; 0) {
+    // log.info(&quot;Testing: ${commands}&quot;)
+
+    Command c = commands.remove(0)
+    vars.put(&quot;COMMAND&quot;, c.getName())
+
+    // ── Map command arguments into JMeter vars ─────────────────────────────────
+    for (Map.Entry entry : c.argsSet()) {
+        vars.put(entry.getKey(), entry.getValue())
+    }
+
+    // log.info(&quot;COMMAND: ${vars.get(&apos;COMMAND&apos;)}&quot;)
+}
+
+// ── Update CONTINUE flag ───────────────────────────────────────────────────────
+if (commands.size() == 0) {
+    vars.put(&quot;CONTINUE&quot;, &quot;false&quot;)
+}</stringProp>
+            </JSR223Sampler>
+            <hashTree/>
+          </hashTree>
+          <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="Commands" enabled="true">
+            <stringProp name="SwitchController.value">${COMMAND}</stringProp>
+          </SwitchController>
+          <hashTree>
+            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Command Delay" enabled="true">
+              <stringProp name="ConstantTimer.delay">${DELAY}</stringProp>
+            </ConstantTimer>
+            <hashTree/>
+          </hashTree>
+          <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Once Only Controller" enabled="true"/>
+          <hashTree>
+            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Options" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpOptions
+import org.apache.http.HttpResponse
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.commons.codec.binary.Base64
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Setup HTTP OPTIONS Request ────────────────────────────────────────
+    HttpOptions ho = new HttpOptions(vars.get(&quot;URL&quot;))
+
+    String auth        = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    ho.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    ho.setHeader(&quot;User-Agent&quot;, &quot;Apple-iPhone9C1/1604.1&quot;)
+    ho.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+    // ── SSL ───────────────────────────────────────────────────────────────
+    SSLContextBuilder builder = new SSLContextBuilder()
+    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    // ── Execute ───────────────────────────────────────────────────────────
+    HttpResponse hr        = dhc.execute(ho)
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    // ── Capture EAS capability headers ────────────────────────────────────
+    String cmds     = &quot;&quot;
+    String versions = &quot;&quot;
+    for (org.apache.http.Header h : hr.getAllHeaders()) {
+        if (&quot;MS-ASProtocolCommands&quot; == h.getName()) cmds     = h.getValue()
+        if (&quot;MS-ASProtocolVersions&quot; == h.getName()) versions = h.getValue()
+    }
+
+    // ── Store in vars (thread-local) + props (namespaced + global) ────────
+    // vars  → downstream samplers in this thread/iteration
+    // props namespaced → per-user capability reads across thread groups
+    // props global     → EAS.version negotiation consumed by all samplers
+    vars.put(&quot;EAS_SUPPORTED_COMMANDS&quot;, cmds)
+    vars.put(&quot;EAS_SUPPORTED_VERSIONS&quot;, versions)
+    props.put(&quot;EAS_SUPPORTED_COMMANDS.${userKey}&quot;, cmds)
+    props.put(&quot;EAS_SUPPORTED_VERSIONS.${userKey}&quot;, versions)
+
+    // ── Negotiate EAS version: prefer 16.1, fall back to 14.1, else 12.1 ─
+    // Writes props[&quot;EAS.version&quot;] — consumed by all samplers via
+    // props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;) with no further changes needed
+    if (versions.contains(&quot;16.1&quot;)) {
+        props.put(&quot;EAS.version&quot;, &quot;16.1&quot;)
+    } else if (versions.contains(&quot;14.1&quot;)) {
+        props.put(&quot;EAS.version&quot;, &quot;14.1&quot;)
+    } else {
+        props.put(&quot;EAS.version&quot;, &quot;12.1&quot;)
+    }
+
+    // ── Validate 16.1 is advertised ───────────────────────────────────────
+    if (!versions.contains(&quot;16.1&quot;)) {
+        log.warn(&quot;S2-OPTIONS: server does not advertise EAS 16.1 | Versions=${versions} | User=${userKey}&quot;)
+        SampleResult.setSuccessful(false)
+        SampleResult.setResponseMessage(&quot;EAS 16.1 not advertised by server&quot;)
+    } else {
+        SampleResult.setSuccessful(true)
+    }
+
+    dhc.close()
+    SampleResult.setResponseData(&quot;Commands: ${cmds}\nVersions: ${versions}&quot;, &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-S2-OPTIONS&quot;)
+
+    log.info(&quot;S2-OPTIONS: HTTP=${responseCode} | Versions=${versions} | NegotiatedVersion=${props.getProperty(&apos;EAS.version&apos;)} | Commands=${cmds} | User=${userKey}&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;S2-OPTIONS: ${e.toString()}&quot;)
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223Sampler>
+            <hashTree/>
+            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Provision" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Shared auth + config (reused across Phase 1 + Phase 2) ───────────
+    String auth        = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    String authHeader  = &quot;Basic ${new String(encodedAuth)}&quot;
+    String easVersion  = props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;)
+    String baseUrl     = &quot;${vars.get(&apos;URL&apos;)}?Cmd=Provision&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;
+
+    // ── SSL client (shared across Phase 1 + Phase 2) ──────────────────────
+    SSLContextBuilder sslBuilder = new SSLContextBuilder()
+    sslBuilder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        sslBuilder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Phase 1: Get Policy
+    // ════════════════════════════════════════════════════════════════════════
+    HttpPost hp = new HttpPost(baseUrl)
+    hp.setHeader(HttpHeaders.AUTHORIZATION, authHeader)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, easVersion)
+
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_PROVISION)
+      bs.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICIES)
+        bs.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICY)
+          bs.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                         BinarySerializer.PROVISION_POLICYTYPE,
+                         &quot;MS-EAS-Provisioning-WBXML&quot;)
+        bs.closeTag()
+      bs.closeTag()
+    bs.closeTag()
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    // Track MFA latency — this request triggers the MFA flow server-side
+    long mfaStart  = System.currentTimeMillis()
+    HttpResponse hr = dhc.execute(hp)
+    long mfaPhase1 = System.currentTimeMillis() - mfaStart
+
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    String policyKey     = &quot;&quot;
+    String status        = &quot;&quot;
+    StringBuilder result = new StringBuilder()
+    byte[] respBytes     = EntityUtils.toByteArray(hr.getEntity())
+
+    if (responseCode == 200 &amp;&amp; respBytes.length &gt; 0) {
+        try {
+            BinaryParser bp     = new BinaryParser(new ByteArrayInputStream(respBytes), false)
+            boolean inPolicyKey = false
+            boolean inStatus    = false
+            while (bp.next() != null) {
+                switch (bp.getEventType()) {
+                    case BinaryParser.START_TAG:
+                        result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                        if (&quot;PolicyKey&quot; == bp.getName()) inPolicyKey = true
+                        if (&quot;Status&quot;    == bp.getName()) inStatus    = true
+                        break
+                    case BinaryParser.END_TAG:
+                        result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                        if (&quot;PolicyKey&quot; == bp.getName()) inPolicyKey = false
+                        if (&quot;Status&quot;    == bp.getName()) inStatus    = false
+                        break
+                    case BinaryParser.TEXT:
+                        String text = bp.getText()
+                        result.append(text)
+                        if (inPolicyKey) policyKey = text
+                        if (inStatus)    status    = text
+                        break
+                }
+            }
+        } catch (IOException e) {
+            if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+        }
+    } else {
+        result.append(new String(respBytes, StandardCharsets.UTF_8))
+    }
+
+    vars.put(&quot;PROVISION_POLICY_KEY&quot;,  policyKey)
+    vars.put(&quot;PROVISION_STATUS&quot;,      status)
+    vars.put(&quot;MFA_LATENCY_PHASE1_MS&quot;, String.valueOf(mfaPhase1))
+
+    log.info(&quot;S2-Provision Phase1: HTTP=${responseCode} | PolicyKey=${policyKey} | Status=${status} | MFA_Phase1=${mfaPhase1}ms | User=${userKey}&quot;)
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Phase 2: Accept Policy (only if Phase 1 succeeded)
+    // ════════════════════════════════════════════════════════════════════════
+    if (policyKey &amp;&amp; &quot;1&quot; == status) {
+
+        HttpPost hp2 = new HttpPost(baseUrl)
+        hp2.setHeader(HttpHeaders.AUTHORIZATION, authHeader)
+        hp2.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+        hp2.setHeader(&quot;MS-ASProtocolVersion&quot;, easVersion)
+
+        ByteArrayOutputStream bao2 = new ByteArrayOutputStream()
+        BinarySerializer bs2 = new BinarySerializer(bao2, false)
+        bs2.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_PROVISION)
+          bs2.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICIES)
+            bs2.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICY)
+              bs2.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                              BinarySerializer.PROVISION_POLICYTYPE,
+                              &quot;MS-EAS-Provisioning-WBXML&quot;)
+              bs2.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                              BinarySerializer.PROVISION_POLICYKEY,
+                              policyKey)
+              bs2.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                              BinarySerializer.PROVISION_STATUS,
+                              &quot;1&quot;)
+            bs2.closeTag()
+          bs2.closeTag()
+        bs2.closeTag()
+        hp2.setEntity(new ByteArrayEntity(bao2.toByteArray()))
+
+        HttpResponse hr2  = dhc.execute(hp2)
+        long mfaTotal     = System.currentTimeMillis() - mfaStart
+        int responseCode2 = hr2.getStatusLine().getStatusCode()
+        byte[] resp2      = EntityUtils.toByteArray(hr2.getEntity())
+        String finalPolicyKey = &quot;&quot;
+
+        if (responseCode2 == 200 &amp;&amp; resp2.length &gt; 0) {
+            try {
+                BinaryParser bp2 = new BinaryParser(new ByteArrayInputStream(resp2), false)
+                boolean inPK     = false
+                while (bp2.next() != null) {
+                    switch (bp2.getEventType()) {
+                        case BinaryParser.START_TAG:
+                            result.append(&quot;&lt;${bp2.getName()}&gt;&quot;)
+                            if (&quot;PolicyKey&quot; == bp2.getName()) inPK = true
+                            break
+                        case BinaryParser.END_TAG:
+                            result.append(&quot;&lt;/${bp2.getName()}&gt;&quot;)
+                            if (&quot;PolicyKey&quot; == bp2.getName()) inPK = false
+                            break
+                        case BinaryParser.TEXT:
+                            String text2 = bp2.getText()
+                            result.append(text2)
+                            if (inPK) finalPolicyKey = text2
+                            break
+                    }
+                }
+            } catch (IOException e) {
+                if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+            }
+        }
+
+        // ── Store in props (namespaced) + vars (thread-local) ─────────────
+        // props persists across iterations for LoopController(10) downstream
+        // vars serves same-iteration FolderSync/InitialSync in same thread
+        if (finalPolicyKey) {
+            props.put(&quot;FINAL_POLICY_KEY.${userKey}&quot;, finalPolicyKey)
+            vars.put(&quot;FINAL_POLICY_KEY&quot;, finalPolicyKey)
+            log.info(&quot;S2-Provision Phase2: HTTP=${responseCode2} | FinalPolicyKey=${finalPolicyKey} | MFA_Total=${mfaTotal}ms | User=${userKey}&quot;)
+        } else {
+            log.warn(&quot;S2-Provision Phase2: FinalPolicyKey not found in response | HTTP=${responseCode2} | User=${userKey}&quot;)
+        }
+
+        vars.put(&quot;MFA_LATENCY_TOTAL_MS&quot;, String.valueOf(mfaTotal))
+
+    } else {
+        log.warn(&quot;S2-Provision: skipping Phase2 | policyKey=&apos;${policyKey}&apos; | status=&apos;${status}&apos; | User=${userKey}&quot;)
+    }
+
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-S2-Provision&quot;)
+    dhc.close()
+
+} catch (Exception e) {
+    log.error(&quot;S2-Provision: ${e.toString()}&quot;)
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223Sampler>
+            <hashTree/>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Cached auth - no MFA" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+              <intProp name="LoopController.loops">-1</intProp>
+            </LoopController>
+            <hashTree>
+              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="default" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">log.info(&quot;${Thread.currentThread().getName()} ${vars.get(&apos;COMMAND&apos;)} not currently supported&quot;)</stringProp>
+              </JSR223Sampler>
+              <hashTree/>
+              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="FolderSync" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.HttpEntity
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Setup HTTP Request ────────────────────────────────────────────────
+    HttpPost hp = new HttpPost(&quot;${vars.get(&apos;URL&apos;)}?Cmd=${vars.get(&apos;COMMAND&apos;)}&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;)
+
+    String auth = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    hp.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+    // ── Generate WBXML Request Body ───────────────────────────────────────
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,
+               BinarySerializer.FOLDERHIERARCHY_FOLDERSYNC)
+      bs.textElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,
+                     BinarySerializer.FOLDERHIERARCHY_SYNCKEY,
+                     vars.get(&quot;FOLDERSYNCKEY&quot;))
+    bs.closeTag()
+
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    // ── SSL + Execute ─────────────────────────────────────────────────────
+    SSLContextBuilder builder = new SSLContextBuilder()
+    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    HttpResponse hr = dhc.execute(hp)
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    // ── Parse WBXML + Convert to readable form for JMeter ─────────────────
+    StringBuilder result = new StringBuilder()
+    boolean inSyncKey    = false
+
+    try {
+        BinaryParser bp = new BinaryParser(
+            new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())), false)
+
+        while (bp.next() != null) {
+            switch (bp.getEventType()) {
+                case BinaryParser.START_DOCUMENT:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.END_DOCUMENT:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.START_TAG:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = true
+                    break
+                case BinaryParser.END_TAG:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = false
+                    break
+                case BinaryParser.TEXT:
+                    String text = bp.getText()
+                    result.append(text)
+                    if (inSyncKey &amp;&amp; text?.trim()) {
+                        vars.put(&quot;FOLDERSYNCKEY&quot;, text.trim())
+                        log.info(&quot;FolderSync: next SyncKey=${text.trim()} | HTTP=${responseCode} | User=${userKey}&quot;)
+                    }
+                    break
+            }
+        }
+    } catch (IOException e) {
+        if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+    }
+
+    dhc.close()
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-FolderSync&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;FolderSync: ${e.toString()}&quot;)
+}</stringProp>
+              </JSR223Sampler>
+              <hashTree>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+                  <stringProp name="XPathExtractor.default">${FOLDERSYNCKEY}</stringProp>
+                  <stringProp name="XPathExtractor.refname">FOLDERSYNCKEY</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//SyncKey</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                </XPathExtractor>
+                <hashTree/>
+              </hashTree>
+              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="InitialSync" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.HttpEntity
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import org.apache.commons.lang3.StringEscapeUtils
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+import org.apache.http.Header
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Setup HTTP Request ────────────────────────────────────────────────
+    HttpPost hp = new HttpPost(&quot;${vars.get(&apos;URL&apos;)}?Cmd=Sync&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;)
+
+    String auth = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    hp.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;12.1&quot;))
+
+    // ── Generate WBXML Request Body ───────────────────────────────────────
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_SYNC)
+      bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_COLLECTIONS)
+        bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_COLLECTION)
+          bs.textElement(BinarySerializer.NAMESPACE_AIRSYNC,
+                         BinarySerializer.AIRSYNC_SYNCKEY,
+                         vars.get(&quot;SYNCSYNCKEY&quot;))
+          bs.integerElement(BinarySerializer.NAMESPACE_AIRSYNC,
+                            BinarySerializer.AIRSYNC_COLLECTIONID, 2)
+        bs.closeTag()
+      bs.closeTag()
+    bs.closeTag()
+
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    // ── SSL + Execute ─────────────────────────────────────────────────────
+    SSLContextBuilder builder = new SSLContextBuilder()
+    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    HttpResponse hr = dhc.execute(hp)
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    // ── Debug: log response headers (uncomment to enable) ─────────────────
+    // hr.getAllHeaders().each { Header h -&gt;
+    //     log.info(&quot;Header: ${h.getName()}=${h.getValue()}&quot;)
+    // }
+
+    // ── Parse WBXML + Convert to readable form for JMeter ─────────────────
+    StringBuilder result = new StringBuilder()
+    boolean inSyncKey    = false
+
+    try {
+        BinaryParser bp = new BinaryParser(
+            new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())), false)
+
+        while (bp.next() != null) {
+            switch (bp.getEventType()) {
+                case BinaryParser.START_DOCUMENT:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.END_DOCUMENT:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.START_TAG:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = true
+                    break
+                case BinaryParser.END_TAG:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = false
+                    break
+                case BinaryParser.TEXT:
+                    String text = bp.getText()
+                    // Preserve control-char sanitisation + XML escape
+                    text = text.replaceAll(&quot;\\p{Cntrl}&quot;, &quot;&quot;)
+                    result.append(StringEscapeUtils.escapeXml(text))
+                    if (inSyncKey &amp;&amp; text?.trim()) {
+                        vars.put(&quot;SYNCSYNCKEY&quot;, text.trim())
+                        log.info(&quot;Sync: next SyncKey=${text.trim()} | HTTP=${responseCode} | User=${userKey}&quot;)
+                    }
+                    break
+            }
+        }
+    } catch (IOException e) {
+        if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+    }
+
+    dhc.close()
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-Sync&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;Sync: ${e.toString()}&quot;)
+}</stringProp>
+              </JSR223Sampler>
+              <hashTree>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+                  <stringProp name="XPathExtractor.default">${SYNCSYNCKEY}</stringProp>
+                  <stringProp name="XPathExtractor.refname">SYNCSYNCKEY</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//SyncKey</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                </XPathExtractor>
+                <hashTree/>
+              </hashTree>
+              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+                <stringProp name="ConstantTimer.delay">${__P(LOAD.delay)}</stringProp>
+              </ConstantTimer>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="S3: Mixed Load" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">stoptest</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <stringProp name="LoopController.loops">${__P(LOAD.EAS.loopcount)}</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.EAS.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.EAS.rampup)}</stringProp>
+        <boolProp name="ThreadGroup.delayedStart">false</boolProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.delay)}</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="START" enabled="true">
+          <stringProp name="scriptLanguage">groovy</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="script">import com.zimbra.jmeter.Zimbra
+import com.zimbra.jmeter.Command
+
+// ── Build EAS URL ──────────────────────────────────────────────────────────────
+String protocol = props.get(&quot;HTTP.protocol&quot;)
+String server   = props.get(&quot;HTTP.server&quot;)
+String port     = props.get(&quot;HTTP.port&quot;)
+
+String url = &quot;${protocol}://${server}&quot;
+if (port != null &amp;&amp; !port.trim().isEmpty()) {
+    url = &quot;${url}:${port}&quot;
+}
+url = &quot;${url}/Microsoft-Server-ActiveSync&quot;
+vars.put(&quot;URL&quot;, url)
+// log.info(&quot;EAS URL: ${url}&quot;)
+
+// ── Initialize EAS object and store in vars ────────────────────────────────────
+Zimbra eas = new Zimbra(props, &quot;EAS&quot;)
+vars.putObject(&quot;EAS&quot;, eas)
+
+// ── Retrieve commands list ─────────────────────────────────────────────────────
+ArrayList commands = eas.getcommands()
+vars.putObject(&quot;COMMANDS&quot;, commands)
+
+// ── Calculate per-command DELAY ────────────────────────────────────────────────
+String userDuration = props.get(&quot;LOAD.EAS.userduration&quot;)
+if (userDuration == null || commands.size() == 0) {
+    vars.putObject(&quot;DELAY&quot;, &quot;0&quot;)
+} else {
+    int delay = (Integer.parseInt(userDuration) * 1000) / commands.size()
+    vars.putObject(&quot;DELAY&quot;, delay.toString())
+}
+
+// ── Initialize CONTINUE flag ───────────────────────────────────────────────────
+vars.put(&quot;CONTINUE&quot;, commands.size() &gt; 0 ? &quot;true&quot; : &quot;false&quot;)
+
+// ── Initialize sync keys and folder name ──────────────────────────────────────
+vars.put(&quot;FOLDERSYNCKEY&quot;, &quot;0&quot;)
+vars.put(&quot;SYNCSYNCKEY&quot;,   &quot;0&quot;)
+vars.put(&quot;FOLDERNAME&quot;,    &quot;TestDir${org.apache.commons.lang3.RandomUtils.nextInt(1, 10001)}&quot;)
+vars.put(&quot;MOREAVAILABLE&quot;, &quot;true&quot;)</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+        <kg.apc.jmeter.timers.VariableThroughputTimer guiclass="kg.apc.jmeter.timers.VariableThroughputTimerGui" testclass="kg.apc.jmeter.timers.VariableThroughputTimer" testname="Throughput Shaping Timer" enabled="true">
+          <collectionProp name="load_profile">
+            <collectionProp name="41275712">
+              <stringProp name="1669959236">${__P(LOAD.RPS.start)}</stringProp>
+              <stringProp name="1244494845">${__P(LOAD.RPS.end)}</stringProp>
+              <stringProp name="-291202470">${__P(LOAD.RPS.duration)}</stringProp>
+            </collectionProp>
+          </collectionProp>
+        </kg.apc.jmeter.timers.VariableThroughputTimer>
+        <hashTree/>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="10% — Cold Auth" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <FloatProperty>
+            <name>ThroughputController.percentThroughput</name>
+            <value>10.0</value>
+            <savedValue>0.0</savedValue>
+          </FloatProperty>
+        </ThroughputController>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="ColdAuth_Options" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpOptions
+import org.apache.http.HttpResponse
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.commons.codec.binary.Base64
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Setup HTTP OPTIONS Request ────────────────────────────────────────
+    HttpOptions ho = new HttpOptions(vars.get(&quot;URL&quot;))
+
+    String auth        = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    ho.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    ho.setHeader(&quot;User-Agent&quot;, &quot;Apple-iPhone9C1/1604.1&quot;)
+
+    // ── SSL ───────────────────────────────────────────────────────────────
+    SSLContextBuilder builder = new SSLContextBuilder()
+    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    // ── Execute ───────────────────────────────────────────────────────────
+    HttpResponse hr        = dhc.execute(ho)
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    // ── Capture EAS capability headers ───────────────────────────────────
+    String cmds     = &quot;&quot;
+    String versions = &quot;&quot;
+    for (org.apache.http.Header h : hr.getAllHeaders()) {
+        if (&quot;MS-ASProtocolCommands&quot; == h.getName()) cmds     = h.getValue()
+        if (&quot;MS-ASProtocolVersions&quot; == h.getName()) versions = h.getValue()
+    }
+
+    // ── Store in vars (thread-local) + props (cross-thread) ──────────────
+    // props allows downstream samplers in other threads to read EAS version
+    // without re-issuing OPTIONS; vars serves same-thread downstream use.
+    vars.put(&quot;EAS_SUPPORTED_COMMANDS&quot;, cmds)
+    vars.put(&quot;EAS_SUPPORTED_VERSIONS&quot;, versions)
+    props.put(&quot;EAS_SUPPORTED_COMMANDS.${userKey}&quot;, cmds)
+    props.put(&quot;EAS_SUPPORTED_VERSIONS.${userKey}&quot;, versions)
+
+    // ── Negotiate EAS version: prefer 16.1, fall back to 14.1, else 12.1 ─
+    // Writes to props[&quot;EAS.version&quot;] so all samplers pick it up via
+    // props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;) without any change to them.
+    if (versions.contains(&quot;16.1&quot;)) {
+        props.put(&quot;EAS.version&quot;, &quot;16.1&quot;)
+    } else if (versions.contains(&quot;14.1&quot;)) {
+        props.put(&quot;EAS.version&quot;, &quot;14.1&quot;)
+    } else {
+        props.put(&quot;EAS.version&quot;, &quot;12.1&quot;)
+    }
+
+    log.info(&quot;OPTIONS: HTTP=${responseCode} | Versions=${versions} | NegotiatedVersion=${props.getProperty(&apos;EAS.version&apos;)} | User=${userKey}&quot;)
+
+    dhc.close()
+    SampleResult.setResponseData(&quot;Commands: ${cmds}\nVersions: ${versions}&quot;, &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-OPTIONS&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;OPTIONS: ${e.toString()}&quot;)
+}</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="ColdAuth_Provision" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Phase 1: Get Policy ───────────────────────────────────────────────
+    HttpPost hp = new HttpPost(&quot;${vars.get(&apos;URL&apos;)}?Cmd=Provision&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;)
+
+    String auth        = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    hp.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_PROVISION)
+      bs.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICIES)
+        bs.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICY)
+          bs.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                         BinarySerializer.PROVISION_POLICYTYPE,
+                         &quot;MS-EAS-Provisioning-WBXML&quot;)
+        bs.closeTag()
+      bs.closeTag()
+    bs.closeTag()
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    SSLContextBuilder sslBuilder = new SSLContextBuilder()
+    sslBuilder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        sslBuilder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    // Track MFA latency — this request triggers the MFA flow server-side
+    long mfaStart  = System.currentTimeMillis()
+    HttpResponse hr = dhc.execute(hp)
+    long mfaPhase1 = System.currentTimeMillis() - mfaStart
+
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    String policyKey     = &quot;&quot;
+    String status        = &quot;&quot;
+    StringBuilder result = new StringBuilder()
+    byte[] respBytes     = EntityUtils.toByteArray(hr.getEntity())
+
+    if (responseCode == 200 &amp;&amp; respBytes.length &gt; 0) {
+        try {
+            BinaryParser bp     = new BinaryParser(new ByteArrayInputStream(respBytes), false)
+            boolean inPolicyKey = false
+            boolean inStatus    = false
+            while (bp.next() != null) {
+                switch (bp.getEventType()) {
+                    case BinaryParser.START_TAG:
+                        result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                        if (&quot;PolicyKey&quot; == bp.getName()) inPolicyKey = true
+                        if (&quot;Status&quot;    == bp.getName()) inStatus    = true
+                        break
+                    case BinaryParser.END_TAG:
+                        result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                        if (&quot;PolicyKey&quot; == bp.getName()) inPolicyKey = false
+                        if (&quot;Status&quot;    == bp.getName()) inStatus    = false
+                        break
+                    case BinaryParser.TEXT:
+                        String text = bp.getText()
+                        result.append(text)
+                        if (inPolicyKey) policyKey = text
+                        if (inStatus)    status    = text
+                        break
+                }
+            }
+        } catch (IOException e) {
+            if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+        }
+    } else {
+        result.append(new String(respBytes, StandardCharsets.UTF_8))
+    }
+
+    vars.put(&quot;PROVISION_POLICY_KEY&quot;, policyKey)
+    vars.put(&quot;PROVISION_STATUS&quot;, status)
+    vars.put(&quot;MFA_LATENCY_PHASE1_MS&quot;, String.valueOf(mfaPhase1))
+
+    log.info(&quot;Provision Phase1: HTTP=${responseCode} | PolicyKey=${policyKey} | Status=${status} | MFA_Phase1=${mfaPhase1}ms | User=${userKey}&quot;)
+
+    // ── Phase 2: Accept Policy (only if Phase 1 succeeded) ───────────────
+    if (policyKey &amp;&amp; &quot;1&quot; == status) {
+        HttpPost hp2 = new HttpPost(&quot;${vars.get(&apos;URL&apos;)}?Cmd=Provision&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;)
+        hp2.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+        hp2.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+        hp2.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+        ByteArrayOutputStream bao2 = new ByteArrayOutputStream()
+        BinarySerializer bs2 = new BinarySerializer(bao2, false)
+        bs2.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_PROVISION)
+          bs2.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICIES)
+            bs2.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICY)
+              bs2.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                              BinarySerializer.PROVISION_POLICYTYPE,
+                              &quot;MS-EAS-Provisioning-WBXML&quot;)
+              bs2.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                              BinarySerializer.PROVISION_POLICYKEY,
+                              policyKey)
+              bs2.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                              BinarySerializer.PROVISION_STATUS,
+                              &quot;1&quot;)
+            bs2.closeTag()
+          bs2.closeTag()
+        bs2.closeTag()
+        hp2.setEntity(new ByteArrayEntity(bao2.toByteArray()))
+
+        HttpResponse hr2  = dhc.execute(hp2)
+        long mfaTotal     = System.currentTimeMillis() - mfaStart
+        int responseCode2 = hr2.getStatusLine().getStatusCode()
+        byte[] resp2      = EntityUtils.toByteArray(hr2.getEntity())
+        String finalPolicyKey = &quot;&quot;
+
+        if (responseCode2 == 200 &amp;&amp; resp2.length &gt; 0) {
+            try {
+                BinaryParser bp2 = new BinaryParser(new ByteArrayInputStream(resp2), false)
+                boolean inPK     = false
+                while (bp2.next() != null) {
+                    switch (bp2.getEventType()) {
+                        case BinaryParser.START_TAG:
+                            result.append(&quot;&lt;${bp2.getName()}&gt;&quot;)
+                            if (&quot;PolicyKey&quot; == bp2.getName()) inPK = true
+                            break
+                        case BinaryParser.END_TAG:
+                            result.append(&quot;&lt;/${bp2.getName()}&gt;&quot;)
+                            if (&quot;PolicyKey&quot; == bp2.getName()) inPK = false
+                            break
+                        case BinaryParser.TEXT:
+                            String text2 = bp2.getText()
+                            result.append(text2)
+                            if (inPK) finalPolicyKey = text2
+                            break
+                    }
+                }
+            } catch (IOException e) {
+                if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+            }
+        }
+
+        // ── Store in props (namespaced) for cross-thread reads ────────────
+        // Store in vars (thread-local) for same-thread downstream samplers
+        if (finalPolicyKey) {
+            props.put(&quot;FINAL_POLICY_KEY.${userKey}&quot;, finalPolicyKey)
+            vars.put(&quot;FINAL_POLICY_KEY&quot;, finalPolicyKey)
+            log.info(&quot;Provision Phase2: HTTP=${responseCode2} | FinalPolicyKey=${finalPolicyKey} | MFA_Total=${mfaTotal}ms | User=${userKey}&quot;)
+        } else {
+            log.warn(&quot;Provision Phase2: FinalPolicyKey not found in response | HTTP=${responseCode2} | User=${userKey}&quot;)
+        }
+
+        vars.put(&quot;MFA_LATENCY_TOTAL_MS&quot;, String.valueOf(mfaTotal))
+    } else {
+        log.warn(&quot;Provision Phase2 skipped: policyKey=&apos;${policyKey}&apos; | status=&apos;${status}&apos; | User=${userKey}&quot;)
+    }
+
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-RefreshToken-Provision&quot;)
+    dhc.close()
+
+} catch (Exception e) {
+    log.error(&quot;Provision: ${e.toString()}&quot;)
+}</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="ColdAuth_InitialSync" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.HttpEntity
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import org.apache.commons.lang3.StringEscapeUtils
+import java.nio.charset.StandardCharsets
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+import org.apache.http.HttpHeaders
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Setup HTTP Request ────────────────────────────────────────────────
+    HttpPost hp = new HttpPost(&quot;${vars.get(&apos;URL&apos;)}?Cmd=Sync&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;)
+
+    String auth        = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    hp.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+    // ── PolicyKey: props-first read (persists across iterations) ─────────
+    // props written by Provision sampler; vars fallback for same-iteration use
+    String policyKey = props.getProperty(&quot;FINAL_POLICY_KEY.${userKey}&quot;, vars.get(&quot;FINAL_POLICY_KEY&quot;) ?: &quot;0&quot;) ?: &quot;0&quot;
+    hp.setHeader(&quot;X-MS-PolicyKey&quot;, policyKey)
+    log.info(&quot;S-InitialSync: using PolicyKey=${policyKey} | SyncKey=0 (cold start) | User=${userKey}&quot;)
+
+    // ── Generate WBXML Request Body ───────────────────────────────────────
+    // InitialSync always starts with SyncKey=0
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_SYNC)
+      bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_COLLECTIONS)
+        bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_COLLECTION)
+          bs.textElement(BinarySerializer.NAMESPACE_AIRSYNC,
+                         BinarySerializer.AIRSYNC_SYNCKEY, &quot;0&quot;)
+          bs.integerElement(BinarySerializer.NAMESPACE_AIRSYNC,
+                            BinarySerializer.AIRSYNC_COLLECTIONID, 2)
+        bs.closeTag()
+      bs.closeTag()
+    bs.closeTag()
+
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    // ── SSL + Execute ─────────────────────────────────────────────────────
+    SSLContextBuilder builder = new SSLContextBuilder()
+    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    HttpResponse hr        = dhc.execute(hp)
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    // ── Parse WBXML Response ──────────────────────────────────────────────
+    StringBuilder result = new StringBuilder()
+    boolean inSyncKey    = false
+    String nextSyncKey   = &quot;&quot;
+
+    try {
+        BinaryParser bp = new BinaryParser(
+            new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())), false)
+
+        while (bp.next() != null) {
+            switch (bp.getEventType()) {
+                case BinaryParser.START_DOCUMENT:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.END_DOCUMENT:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.START_TAG:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = true
+                    break
+                case BinaryParser.END_TAG:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = false
+                    break
+                case BinaryParser.TEXT:
+                    String text = bp.getText()?.replaceAll(&quot;\\p{Cntrl}&quot;, &quot;&quot;) ?: &quot;&quot;
+                    result.append(StringEscapeUtils.escapeXml(text))
+                    if (inSyncKey &amp;&amp; text?.trim()) {
+                        nextSyncKey = text.trim()
+                    }
+                    break
+            }
+        }
+    } catch (IOException e) {
+        if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+    }
+
+    // ── Fallback: regex extract SyncKey if BinaryParser missed it ─────────
+    if (!nextSyncKey) {
+        Matcher m = Pattern.compile(&quot;&lt;SyncKey&gt;([^&lt;]+)&lt;/SyncKey&gt;&quot;).matcher(result.toString())
+        if (m.find()) {
+            nextSyncKey = m.group(1).trim()
+            log.info(&quot;S-InitialSync: SyncKey extracted via regex fallback | SyncKey=${nextSyncKey} | User=${userKey}&quot;)
+        }
+    }
+
+    // ── Store SyncKey in props (cross-iteration) + vars (same-iteration) ──
+    // props write is critical: CachedAuth_DeltaSync reads SYNCSYNCKEY.${userKey}
+    // from props — if only written to vars, DeltaSync chain cannot advance
+    if (nextSyncKey) {
+        props.put(&quot;SYNCSYNCKEY.${userKey}&quot;, nextSyncKey)
+        vars.put(&quot;SYNCSYNCKEY&quot;, nextSyncKey)
+        log.info(&quot;S-InitialSync: stored SYNCSYNCKEY=${nextSyncKey} | HTTP=${responseCode} | PolicyKey=${policyKey} | User=${userKey}&quot;)
+    } else {
+        log.warn(&quot;S-InitialSync: no SyncKey found in response | HTTP=${responseCode} | PolicyKey=${policyKey} | result=${result.toString().take(200)} | User=${userKey}&quot;)
+    }
+
+    dhc.close()
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-S3-ColdAuth-InitialSync&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;S-InitialSync: ${e.toString()}&quot;)
+}</stringProp>
+          </JSR223Sampler>
+          <hashTree>
+            <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+              <stringProp name="XPathExtractor.default">${SYNCSYNCKEY}</stringProp>
+              <stringProp name="XPathExtractor.refname">SYNCSYNCKEY</stringProp>
+              <stringProp name="XPathExtractor.xpathQuery">//SyncKey</stringProp>
+              <boolProp name="XPathExtractor.validate">false</boolProp>
+              <boolProp name="XPathExtractor.tolerant">false</boolProp>
+              <boolProp name="XPathExtractor.namespace">false</boolProp>
+              <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+            </XPathExtractor>
+            <hashTree/>
+          </hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="ColdAuth_FolderSync" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.HttpEntity
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Setup HTTP Request ────────────────────────────────────────────────
+    HttpPost hp = new HttpPost(&quot;${vars.get(&apos;URL&apos;)}?Cmd=FolderSync&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;)
+
+    String auth        = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    hp.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+    // ── PolicyKey + FolderSyncKey: per-user namespaced reads ──────────────
+    // PolicyKey: props first (cross-thread written by Provision), vars fallback
+    // FolderSyncKey: props first (persists across iterations), &quot;0&quot; fallback
+    String policyKey     = props.getProperty(&quot;FINAL_POLICY_KEY.${userKey}&quot;, vars.get(&quot;FINAL_POLICY_KEY&quot;) ?: &quot;0&quot;) ?: &quot;0&quot;
+    String folderSyncKey = props.getProperty(&quot;FOLDERSYNCKEY.${userKey}&quot;, vars.get(&quot;FOLDERSYNCKEY&quot;) ?: &quot;0&quot;) ?: &quot;0&quot;
+
+    hp.setHeader(&quot;X-MS-PolicyKey&quot;, policyKey)
+    log.info(&quot;S1-FolderSync: using FolderSyncKey=${folderSyncKey} | PolicyKey=${policyKey} | User=${userKey}&quot;)
+
+    // ── Generate WBXML Request Body ───────────────────────────────────────
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,
+               BinarySerializer.FOLDERHIERARCHY_FOLDERSYNC)
+      bs.textElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,
+                     BinarySerializer.FOLDERHIERARCHY_SYNCKEY,
+                     folderSyncKey)
+    bs.closeTag()
+
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    // ── SSL + Execute ─────────────────────────────────────────────────────
+    SSLContextBuilder builder = new SSLContextBuilder()
+    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    HttpResponse hr        = dhc.execute(hp)
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    // ── Parse WBXML Response + Extract FolderSyncKey ─────────────────────
+    StringBuilder result = new StringBuilder()
+    String nextSyncKey   = &quot;&quot;
+    boolean inSyncKey    = false
+
+    try {
+        BinaryParser bp = new BinaryParser(
+            new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())), false)
+
+        while (bp.next() != null) {
+            switch (bp.getEventType()) {
+                case BinaryParser.START_DOCUMENT:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.END_DOCUMENT:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.START_TAG:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = true
+                    break
+                case BinaryParser.END_TAG:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = false
+                    break
+                case BinaryParser.TEXT:
+                    String text = bp.getText()
+                    result.append(text)
+                    if (inSyncKey &amp;&amp; text?.trim()) {
+                        nextSyncKey = text.trim()
+                    }
+                    break
+            }
+        }
+    } catch (IOException e) {
+        if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+    }
+
+    // ── Store FolderSyncKey for next iteration ────────────────────────────
+    if (nextSyncKey) {
+        props.put(&quot;FOLDERSYNCKEY.${userKey}&quot;, nextSyncKey)
+        vars.put(&quot;FOLDERSYNCKEY&quot;, nextSyncKey)
+        log.info(&quot;S1-FolderSync: next SyncKey=${nextSyncKey} | HTTP=${responseCode} | User=${userKey}&quot;)
+    } else if (responseCode == 200) {
+        log.warn(&quot;S1-FolderSync: HTTP=200 but no SyncKey extracted (malformed response?) | PolicyKey=${policyKey} | User=${userKey}&quot;)
+    } else {
+        log.warn(&quot;S1-FolderSync: HTTP=${responseCode} ${responseMessage} | PolicyKey sent=${policyKey} | FolderSyncKey sent=${folderSyncKey} | User=${userKey}&quot;)
+    }
+
+    dhc.close()
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-S1-FolderSync&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;S1-FolderSync: ${e.toString()}&quot;)
+}</stringProp>
+          </JSR223Sampler>
+          <hashTree>
+            <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+              <stringProp name="XPathExtractor.default">${FOLDERSYNCKEY}</stringProp>
+              <stringProp name="XPathExtractor.refname">FOLDERSYNCKEY</stringProp>
+              <stringProp name="XPathExtractor.xpathQuery">//SyncKey</stringProp>
+              <boolProp name="XPathExtractor.validate">false</boolProp>
+              <boolProp name="XPathExtractor.tolerant">false</boolProp>
+              <boolProp name="XPathExtractor.namespace">false</boolProp>
+              <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+            </XPathExtractor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="60% — Cached Auth" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <FloatProperty>
+            <name>ThroughputController.percentThroughput</name>
+            <value>60.0</value>
+            <savedValue>0.0</savedValue>
+          </FloatProperty>
+        </ThroughputController>
+        <hashTree>
+          <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Once Only Controller" enabled="true"/>
+          <hashTree>
+            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="CachedAuth_Provision" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Phase 1: Get Policy ───────────────────────────────────────────────
+    HttpPost hp = new HttpPost(&quot;${vars.get(&apos;URL&apos;)}?Cmd=Provision&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;)
+
+    String auth        = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    hp.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_PROVISION)
+      bs.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICIES)
+        bs.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICY)
+          bs.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                         BinarySerializer.PROVISION_POLICYTYPE,
+                         &quot;MS-EAS-Provisioning-WBXML&quot;)
+        bs.closeTag()
+      bs.closeTag()
+    bs.closeTag()
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    SSLContextBuilder sslBuilder = new SSLContextBuilder()
+    sslBuilder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        sslBuilder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    long mfaStart  = System.currentTimeMillis()
+    HttpResponse hr = dhc.execute(hp)
+    long mfaPhase1 = System.currentTimeMillis() - mfaStart
+
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    String policyKey = &quot;&quot;
+    String status    = &quot;&quot;
+    StringBuilder result = new StringBuilder()
+    byte[] respBytes = EntityUtils.toByteArray(hr.getEntity())
+
+    if (responseCode == 200 &amp;&amp; respBytes.length &gt; 0) {
+        try {
+            BinaryParser bp = new BinaryParser(new ByteArrayInputStream(respBytes), false)
+            boolean inPolicyKey = false
+            boolean inStatus    = false
+            while (bp.next() != null) {
+                switch (bp.getEventType()) {
+                    case BinaryParser.START_TAG:
+                        result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                        if (&quot;PolicyKey&quot; == bp.getName()) inPolicyKey = true
+                        if (&quot;Status&quot;    == bp.getName()) inStatus    = true
+                        break
+                    case BinaryParser.END_TAG:
+                        result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                        if (&quot;PolicyKey&quot; == bp.getName()) inPolicyKey = false
+                        if (&quot;Status&quot;    == bp.getName()) inStatus    = false
+                        break
+                    case BinaryParser.TEXT:
+                        String text = bp.getText()
+                        result.append(text)
+                        if (inPolicyKey) policyKey = text
+                        if (inStatus)    status    = text
+                        break
+                }
+            }
+        } catch (IOException e) {
+            if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+        }
+    } else {
+        result.append(new String(respBytes, StandardCharsets.UTF_8))
+    }
+
+    // Keep vars for thread-local use; props for cross-thread sharing
+    vars.put(&quot;PROVISION_POLICY_KEY&quot;, policyKey)
+    vars.put(&quot;PROVISION_STATUS&quot;, status)
+    vars.put(&quot;MFA_LATENCY_PHASE1_MS&quot;, String.valueOf(mfaPhase1))
+
+    log.info(&quot;Provision Phase1: HTTP=${responseCode} | PolicyKey=${policyKey} | Status=${status} | MFA_Phase1=${mfaPhase1}ms | User=${userKey}&quot;)
+
+    // ── Phase 2: Accept Policy ────────────────────────────────────────────
+    if (policyKey &amp;&amp; &quot;1&quot; == status) {
+        HttpPost hp2 = new HttpPost(&quot;${vars.get(&apos;URL&apos;)}?Cmd=Provision&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;)
+        hp2.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+        hp2.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+        hp2.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+        ByteArrayOutputStream bao2 = new ByteArrayOutputStream()
+        BinarySerializer bs2 = new BinarySerializer(bao2, false)
+        bs2.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_PROVISION)
+          bs2.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICIES)
+            bs2.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICY)
+              bs2.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                              BinarySerializer.PROVISION_POLICYTYPE,
+                              &quot;MS-EAS-Provisioning-WBXML&quot;)
+              bs2.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                              BinarySerializer.PROVISION_POLICYKEY,
+                              policyKey)
+              bs2.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                              BinarySerializer.PROVISION_STATUS,
+                              &quot;1&quot;)
+            bs2.closeTag()
+          bs2.closeTag()
+        bs2.closeTag()
+        hp2.setEntity(new ByteArrayEntity(bao2.toByteArray()))
+
+        HttpResponse hr2   = dhc.execute(hp2)
+        long mfaTotal      = System.currentTimeMillis() - mfaStart
+        int responseCode2  = hr2.getStatusLine().getStatusCode()
+        byte[] resp2       = EntityUtils.toByteArray(hr2.getEntity())
+        String finalPolicyKey = &quot;&quot;
+
+        if (responseCode2 == 200 &amp;&amp; resp2.length &gt; 0) {
+            try {
+                BinaryParser bp2 = new BinaryParser(new ByteArrayInputStream(resp2), false)
+                boolean inPK = false
+                while (bp2.next() != null) {
+                    switch (bp2.getEventType()) {
+                        case BinaryParser.START_TAG:
+                            result.append(&quot;&lt;${bp2.getName()}&gt;&quot;)
+                            if (&quot;PolicyKey&quot; == bp2.getName()) inPK = true
+                            break
+                        case BinaryParser.END_TAG:
+                            result.append(&quot;&lt;/${bp2.getName()}&gt;&quot;)
+                            if (&quot;PolicyKey&quot; == bp2.getName()) inPK = false
+                            break
+                        case BinaryParser.TEXT:
+                            String text2 = bp2.getText()
+                            result.append(text2)
+                            if (inPK) finalPolicyKey = text2
+                            break
+                    }
+                }
+            } catch (IOException e) {
+                if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+            }
+        }
+
+        // ── Store in props (namespaced) for cross-thread reads ────────────
+        // Store in vars (thread-local) for same-thread downstream samplers
+        if (finalPolicyKey) {
+            props.put(&quot;FINAL_POLICY_KEY.${userKey}&quot;, finalPolicyKey)
+            vars.put(&quot;FINAL_POLICY_KEY&quot;, finalPolicyKey)
+            log.info(&quot;Provision Phase2: HTTP=${responseCode2} | FinalPolicyKey=${finalPolicyKey} | MFA_Total=${mfaTotal}ms | User=${userKey}&quot;)
+        } else {
+            log.warn(&quot;Provision Phase2: FinalPolicyKey not found in response | HTTP=${responseCode2} | User=${userKey}&quot;)
+        }
+
+        vars.put(&quot;MFA_LATENCY_TOTAL_MS&quot;, String.valueOf(mfaTotal))
+    } else {
+        log.warn(&quot;Provision Phase2 skipped: policyKey=&apos;${policyKey}&apos; | status=&apos;${status}&apos; | User=${userKey}&quot;)
+    }
+
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    dhc.close()
+
+} catch (Exception e) {
+    log.error(&quot;Provision: ${e.toString()}&quot;)
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223Sampler>
+            <hashTree/>
+          </hashTree>
+          <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+            <intProp name="LoopController.loops">-1</intProp>
+          </LoopController>
+          <hashTree>
+            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="CachedAuth_FolderSync" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.HttpEntity
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Setup HTTP Request ────────────────────────────────────────────────
+    HttpPost hp = new HttpPost(&quot;${vars.get(&apos;URL&apos;)}?Cmd=FolderSync&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;)
+
+    String auth        = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    hp.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+    // ── PolicyKey + FolderSyncKey: per-user namespaced reads ──────────────
+    // FolderSync starts with SyncKey=0 on first call (props key absent);
+    // subsequent calls use the key stored by the previous FolderSync response.
+    String policyKey     = props.getProperty(&quot;FINAL_POLICY_KEY.${userKey}&quot;, &quot;0&quot;) ?: &quot;0&quot;
+    String folderSyncKey = props.getProperty(&quot;FOLDERSYNCKEY.${userKey}&quot;, &quot;0&quot;) ?: &quot;0&quot;
+
+    hp.setHeader(&quot;X-MS-PolicyKey&quot;, policyKey)
+    log.info(&quot;FolderSync: using SyncKey=${folderSyncKey} | PolicyKey=${policyKey} | User=${userKey}&quot;)
+
+    // ── Generate WBXML Request Body ───────────────────────────────────────
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,
+               BinarySerializer.FOLDERHIERARCHY_FOLDERSYNC)
+      bs.textElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,
+                     BinarySerializer.FOLDERHIERARCHY_SYNCKEY,
+                     folderSyncKey)
+    bs.closeTag()
+
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    // ── SSL + Execute ─────────────────────────────────────────────────────
+    SSLContextBuilder builder = new SSLContextBuilder()
+    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    HttpResponse hr        = dhc.execute(hp)
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    // ── Parse WBXML Response + Extract FolderSyncKey ─────────────────────
+    StringBuilder result = new StringBuilder()
+    String nextSyncKey   = &quot;&quot;
+    boolean inSyncKey    = false
+
+    try {
+        BinaryParser bp = new BinaryParser(
+            new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())), false)
+
+        while (bp.next() != null) {
+            switch (bp.getEventType()) {
+                case BinaryParser.START_DOCUMENT:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.END_DOCUMENT:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.START_TAG:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = true
+                    break
+                case BinaryParser.END_TAG:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = false
+                    break
+                case BinaryParser.TEXT:
+                    String text = bp.getText()
+                    result.append(text)
+                    if (inSyncKey &amp;&amp; text?.trim()) {
+                        nextSyncKey = text.trim()
+                    }
+                    break
+            }
+        }
+    } catch (IOException e) {
+        if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+    }
+
+    // ── Store FolderSyncKey for next FolderSync call ──────────────────────
+    if (nextSyncKey) {
+        props.put(&quot;FOLDERSYNCKEY.${userKey}&quot;, nextSyncKey)
+        vars.put(&quot;FOLDERSYNCKEY&quot;, nextSyncKey)
+        log.info(&quot;FolderSync: next SyncKey=${nextSyncKey} | HTTP=${responseCode} | User=${userKey}&quot;)
+    } else if (responseCode == 200) {
+        log.warn(&quot;FolderSync: HTTP=200 but no SyncKey extracted (malformed response?) | PolicyKey=${policyKey} | User=${userKey}&quot;)
+    } else {
+        log.warn(&quot;FolderSync: HTTP=${responseCode} ${responseMessage} | PolicyKey sent=${policyKey} | FolderSyncKey sent=${folderSyncKey} | User=${userKey}&quot;)
+    }
+
+    dhc.close()
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC04-FolderSync&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;FolderSync: ${e.toString()}&quot;)
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223Sampler>
+            <hashTree>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+                <stringProp name="XPathExtractor.default">${FOLDERSYNCKEY}</stringProp>
+                <stringProp name="XPathExtractor.refname">FOLDERSYNCKEY</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//SyncKey</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+              </XPathExtractor>
+              <hashTree/>
+            </hashTree>
+            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="CachedAuth_DeltaSync" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.HttpEntity
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import org.apache.commons.lang3.StringEscapeUtils
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Setup HTTP Request ────────────────────────────────────────────────
+    HttpPost hp = new HttpPost(&quot;${vars.get(&apos;URL&apos;)}?Cmd=Sync&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;)
+
+    String auth        = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    hp.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+    // ── PolicyKey + SyncKey: per-user namespaced reads ────────────────────
+    // SYNCSYNCKEY written by InitialSync — never overwritten by DeltaSync.
+    // DELTASYNCSYNCKEY advances on every DeltaSync iteration.
+    // Priority: DELTASYNCSYNCKEY → SYNCSYNCKEY → &quot;0&quot;
+    String policyKey      = props.getProperty(&quot;FINAL_POLICY_KEY.${userKey}&quot;, &quot;0&quot;) ?: &quot;0&quot;
+    String currentSyncKey = props.getProperty(&quot;DELTASYNCSYNCKEY.${userKey}&quot;, &quot;&quot;) ?: &quot;&quot;
+    if (!currentSyncKey) currentSyncKey = props.getProperty(&quot;SYNCSYNCKEY.${userKey}&quot;, &quot;0&quot;) ?: &quot;0&quot;
+    if (!currentSyncKey) currentSyncKey = &quot;0&quot;
+
+    hp.setHeader(&quot;X-MS-PolicyKey&quot;, policyKey)
+    log.info(&quot;DeltaSync1: using SyncKey=${currentSyncKey} | PolicyKey=${policyKey} | User=${userKey}&quot;)
+
+    // ── Generate WBXML Request Body ───────────────────────────────────────
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_SYNC)
+      bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_COLLECTIONS)
+        bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_COLLECTION)
+          bs.textElement(BinarySerializer.NAMESPACE_AIRSYNC,
+                         BinarySerializer.AIRSYNC_SYNCKEY, currentSyncKey)
+          bs.integerElement(BinarySerializer.NAMESPACE_AIRSYNC,
+                            BinarySerializer.AIRSYNC_COLLECTIONID, 2)
+        bs.closeTag()
+      bs.closeTag()
+    bs.closeTag()
+
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    // ── SSL + Execute ─────────────────────────────────────────────────────
+    SSLContextBuilder builder = new SSLContextBuilder()
+    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    HttpResponse hr        = dhc.execute(hp)
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    // ── Parse WBXML Response + Extract Next SyncKey ───────────────────────
+    StringBuilder result = new StringBuilder()
+    String nextSyncKey   = &quot;&quot;
+    boolean inSyncKey    = false
+
+    try {
+        BinaryParser bp = new BinaryParser(
+            new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())), false)
+
+        while (bp.next() != null) {
+            switch (bp.getEventType()) {
+                case BinaryParser.START_DOCUMENT:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.END_DOCUMENT:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.START_TAG:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = true
+                    break
+                case BinaryParser.END_TAG:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = false
+                    break
+                case BinaryParser.TEXT:
+                    String text = bp.getText()
+                    text = text.replaceAll(&quot;\\p{Cntrl}&quot;, &quot;&quot;)
+                    result.append(StringEscapeUtils.escapeXml(text))
+                    if (inSyncKey &amp;&amp; text?.trim()) {
+                        nextSyncKey = text.trim()
+                    }
+                    break
+            }
+        }
+    } catch (IOException e) {
+        if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+    }
+
+    // ── Store next SyncKey in props for next DeltaSync iteration ─────────
+    // Never overwrites SYNCSYNCKEY — InitialSync baseline preserved
+    // for scenario restarts and SyncKey=0 fallback.
+    if (nextSyncKey) {
+        props.put(&quot;DELTASYNCSYNCKEY.${userKey}&quot;, nextSyncKey)
+        vars.put(&quot;DELTASYNCSYNCKEY&quot;, nextSyncKey)
+        log.info(&quot;DeltaSync1: next SyncKey=${nextSyncKey} | HTTP=${responseCode} | User=${userKey}&quot;)
+    } else {
+        log.warn(&quot;DeltaSync1: no SyncKey in response | HTTP=${responseCode} | sent=${currentSyncKey} | User=${userKey}&quot;)
+    }
+
+    dhc.close()
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC04-DeltaSync1&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;DeltaSync1: ${e.toString()}&quot;)
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223Sampler>
+            <hashTree>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+                <stringProp name="XPathExtractor.default">${SYNCSYNCKEY}</stringProp>
+                <stringProp name="XPathExtractor.refname">SYNCSYNCKEY</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//SyncKey</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+                <stringProp name="XPathExtractor.default"></stringProp>
+                <stringProp name="XPathExtractor.refname">MOREAVAILABLE</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">boolean(//MoreAvailable)</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">false</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+            </hashTree>
+            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+              <stringProp name="ConstantTimer.delay">${__P(LOAD.delay)}</stringProp>
+            </ConstantTimer>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="20% — Refresh Token" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <FloatProperty>
+            <name>ThroughputController.percentThroughput</name>
+            <value>20.0</value>
+            <savedValue>0.0</savedValue>
+          </FloatProperty>
+        </ThroughputController>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="RefreshToken-Provision" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Shared auth header (reused across Phase 1 + Phase 2) ─────────────
+    String auth        = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    String authHeader  = &quot;Basic ${new String(encodedAuth)}&quot;
+    String easVersion  = props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;)
+    String baseUrl     = &quot;${vars.get(&apos;URL&apos;)}?Cmd=Provision&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;
+
+    // ── SSL client (shared across Phase 1 + Phase 2) ──────────────────────
+    SSLContextBuilder sslBuilder = new SSLContextBuilder()
+    sslBuilder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        sslBuilder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Phase 1: Get Policy
+    // ════════════════════════════════════════════════════════════════════════
+    HttpPost hp = new HttpPost(baseUrl)
+    hp.setHeader(HttpHeaders.AUTHORIZATION, authHeader)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, easVersion)
+
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_PROVISION)
+      bs.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICIES)
+        bs.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICY)
+          bs.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                         BinarySerializer.PROVISION_POLICYTYPE,
+                         &quot;MS-EAS-Provisioning-WBXML&quot;)
+        bs.closeTag()
+      bs.closeTag()
+    bs.closeTag()
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    long mfaStart  = System.currentTimeMillis()
+    HttpResponse hr = dhc.execute(hp)
+    long mfaPhase1 = System.currentTimeMillis() - mfaStart
+
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    String policyKey     = &quot;&quot;
+    String status        = &quot;&quot;
+    StringBuilder result = new StringBuilder()
+    byte[] respBytes     = EntityUtils.toByteArray(hr.getEntity())
+
+    if (responseCode == 200 &amp;&amp; respBytes.length &gt; 0) {
+        try {
+            BinaryParser bp     = new BinaryParser(new ByteArrayInputStream(respBytes), false)
+            boolean inPolicyKey = false
+            boolean inStatus    = false
+
+            while (bp.next() != null) {
+                switch (bp.getEventType()) {
+                    case BinaryParser.START_TAG:
+                        result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                        if (&quot;PolicyKey&quot; == bp.getName()) inPolicyKey = true
+                        if (&quot;Status&quot;    == bp.getName()) inStatus    = true
+                        break
+                    case BinaryParser.END_TAG:
+                        result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                        if (&quot;PolicyKey&quot; == bp.getName()) inPolicyKey = false
+                        if (&quot;Status&quot;    == bp.getName()) inStatus    = false
+                        break
+                    case BinaryParser.TEXT:
+                        String text = bp.getText()
+                        result.append(text)
+                        if (inPolicyKey) policyKey = text
+                        if (inStatus)    status    = text
+                        break
+                }
+            }
+        } catch (IOException e) {
+            if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+        }
+    } else {
+        result.append(new String(respBytes, StandardCharsets.UTF_8))
+    }
+
+    vars.put(&quot;PROVISION_POLICY_KEY&quot;,  policyKey)
+    vars.put(&quot;PROVISION_STATUS&quot;,      status)
+    vars.put(&quot;MFA_LATENCY_PHASE1_MS&quot;, String.valueOf(mfaPhase1))
+
+    log.info(&quot;RefreshToken-Provision Phase1: HTTP=${responseCode} | PolicyKey=${policyKey} | Status=${status} | MFA_Phase1=${mfaPhase1}ms | User=${userKey}&quot;)
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Phase 2: Accept Policy (only if Phase 1 succeeded)
+    // ════════════════════════════════════════════════════════════════════════
+    if (policyKey &amp;&amp; &quot;1&quot; == status) {
+
+        HttpPost hp2 = new HttpPost(baseUrl)
+        hp2.setHeader(HttpHeaders.AUTHORIZATION, authHeader)
+        hp2.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+        hp2.setHeader(&quot;MS-ASProtocolVersion&quot;, easVersion)
+
+        ByteArrayOutputStream bao2 = new ByteArrayOutputStream()
+        BinarySerializer bs2 = new BinarySerializer(bao2, false)
+        bs2.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_PROVISION)
+          bs2.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICIES)
+            bs2.openTag(BinarySerializer.NAMESPACE_PROVISION, BinarySerializer.PROVISION_POLICY)
+              bs2.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                              BinarySerializer.PROVISION_POLICYTYPE,
+                              &quot;MS-EAS-Provisioning-WBXML&quot;)
+              bs2.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                              BinarySerializer.PROVISION_POLICYKEY,
+                              policyKey)
+              bs2.textElement(BinarySerializer.NAMESPACE_PROVISION,
+                              BinarySerializer.PROVISION_STATUS,
+                              &quot;1&quot;)
+            bs2.closeTag()
+          bs2.closeTag()
+        bs2.closeTag()
+        hp2.setEntity(new ByteArrayEntity(bao2.toByteArray()))
+
+        HttpResponse hr2  = dhc.execute(hp2)
+        long mfaTotal     = System.currentTimeMillis() - mfaStart
+        int responseCode2 = hr2.getStatusLine().getStatusCode()
+        byte[] resp2      = EntityUtils.toByteArray(hr2.getEntity())
+        String finalPolicyKey = &quot;&quot;
+
+        if (responseCode2 == 200 &amp;&amp; resp2.length &gt; 0) {
+            try {
+                BinaryParser bp2 = new BinaryParser(new ByteArrayInputStream(resp2), false)
+                boolean inPK     = false
+
+                while (bp2.next() != null) {
+                    switch (bp2.getEventType()) {
+                        case BinaryParser.START_TAG:
+                            result.append(&quot;&lt;${bp2.getName()}&gt;&quot;)
+                            if (&quot;PolicyKey&quot; == bp2.getName()) inPK = true
+                            break
+                        case BinaryParser.END_TAG:
+                            result.append(&quot;&lt;/${bp2.getName()}&gt;&quot;)
+                            if (&quot;PolicyKey&quot; == bp2.getName()) inPK = false
+                            break
+                        case BinaryParser.TEXT:
+                            String text2 = bp2.getText()
+                            result.append(text2)
+                            if (inPK) finalPolicyKey = text2
+                            break
+                    }
+                }
+            } catch (IOException e) {
+                if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+            }
+        }
+
+        // ── Store in props (namespaced) + vars (thread-local) ─────────────
+        // props.put uses userKey namespace — safe under 300 concurrent users
+        // vars.put serves same-thread downstream samplers in this iteration
+        if (finalPolicyKey) {
+            props.put(&quot;FINAL_POLICY_KEY.${userKey}&quot;, finalPolicyKey)
+            vars.put(&quot;FINAL_POLICY_KEY&quot;, finalPolicyKey)
+            log.info(&quot;RefreshToken-Provision Phase2: HTTP=${responseCode2} | FinalPolicyKey=${finalPolicyKey} | MFA_Total=${mfaTotal}ms | User=${userKey}&quot;)
+        } else {
+            log.warn(&quot;RefreshToken-Provision Phase2: FinalPolicyKey not found in response | HTTP=${responseCode2} | User=${userKey}&quot;)
+        }
+
+        vars.put(&quot;MFA_LATENCY_TOTAL_MS&quot;, String.valueOf(mfaTotal))
+
+    } else {
+        log.warn(&quot;RefreshToken-Provision: skipping Phase2 | policyKey=&apos;${policyKey}&apos; | status=&apos;${status}&apos; | User=${userKey}&quot;)
+    }
+
+    // ── Reset SyncKey state so downstream DeltaSync picks up fresh chain ──
+    // Namespaced removes — only clears THIS user&apos;s state, not all 300 users
+    props.remove(&quot;SYNCSYNCKEY.${userKey}&quot;)
+    props.remove(&quot;DELTASYNCSYNCKEY.${userKey}&quot;)
+    props.remove(&quot;FOLDERSYNCKEY.${userKey}&quot;)
+    log.info(&quot;RefreshToken-Provision: cleared SyncKey state for fresh chain | User=${userKey}&quot;)
+
+    dhc.close()
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-RefreshToken-Provision&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;RefreshToken-Provision: ${e.toString()}&quot;)
+}</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="RefreshToken-FolderSync" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.HttpEntity
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Setup HTTP Request ────────────────────────────────────────────────
+    HttpPost hp = new HttpPost(&quot;${vars.get(&apos;URL&apos;)}?Cmd=FolderSync&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;)
+
+    String auth        = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    hp.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+    // ── PolicyKey + FolderSyncKey: per-user namespaced reads ──────────────
+    // After RefreshToken-Provision clears FOLDERSYNCKEY, this defaults to &quot;0&quot;
+    // so the device re-syncs folder hierarchy from scratch after token refresh.
+    String policyKey     = props.getProperty(&quot;FINAL_POLICY_KEY.${userKey}&quot;, &quot;0&quot;) ?: &quot;0&quot;
+    String folderSyncKey = props.getProperty(&quot;FOLDERSYNCKEY.${userKey}&quot;, &quot;0&quot;) ?: &quot;0&quot;
+
+    hp.setHeader(&quot;X-MS-PolicyKey&quot;, policyKey)
+    log.info(&quot;RefreshToken-FolderSync: using PolicyKey=${policyKey} | FolderSyncKey=${folderSyncKey} | User=${userKey}&quot;)
+
+    // ── Generate WBXML Request Body ───────────────────────────────────────
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,
+               BinarySerializer.FOLDERHIERARCHY_FOLDERSYNC)
+      bs.textElement(BinarySerializer.NAMESPACE_FOLDERHIERARCHY,
+                     BinarySerializer.FOLDERHIERARCHY_SYNCKEY,
+                     folderSyncKey)
+    bs.closeTag()
+
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    // ── SSL + Execute ─────────────────────────────────────────────────────
+    SSLContextBuilder builder = new SSLContextBuilder()
+    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    HttpResponse hr        = dhc.execute(hp)
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    // ── Parse WBXML Response + Extract FolderSyncKey ─────────────────────
+    StringBuilder result = new StringBuilder()
+    String nextSyncKey   = &quot;&quot;
+    boolean inSyncKey    = false
+
+    try {
+        BinaryParser bp = new BinaryParser(
+            new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())), false)
+
+        while (bp.next() != null) {
+            switch (bp.getEventType()) {
+                case BinaryParser.START_DOCUMENT:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.END_DOCUMENT:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.START_TAG:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = true
+                    break
+                case BinaryParser.END_TAG:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = false
+                    break
+                case BinaryParser.TEXT:
+                    String text = bp.getText()
+                    result.append(text)
+                    if (inSyncKey &amp;&amp; text?.trim()) {
+                        nextSyncKey = text.trim()
+                    }
+                    break
+            }
+        }
+    } catch (IOException e) {
+        if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+    }
+
+    // ── Store refreshed FolderSyncKey in props for next call ──────────────
+    if (nextSyncKey) {
+        props.put(&quot;FOLDERSYNCKEY.${userKey}&quot;, nextSyncKey)
+        vars.put(&quot;FOLDERSYNCKEY&quot;, nextSyncKey)
+        log.info(&quot;RefreshToken-FolderSync: next SyncKey=${nextSyncKey} | HTTP=${responseCode} | User=${userKey}&quot;)
+    } else if (responseCode == 200) {
+        log.warn(&quot;RefreshToken-FolderSync: HTTP=200 but no SyncKey extracted (malformed response?) | PolicyKey=${policyKey} | User=${userKey}&quot;)
+    } else {
+        log.warn(&quot;RefreshToken-FolderSync: HTTP=${responseCode} ${responseMessage} | PolicyKey sent=${policyKey} | FolderSyncKey sent=${folderSyncKey} | User=${userKey}&quot;)
+    }
+
+    dhc.close()
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-RefreshToken-FolderSync&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;RefreshToken-FolderSync: ${e.toString()}&quot;)
+}</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree>
+            <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+              <stringProp name="XPathExtractor.default">${FOLDERSYNCKEY}</stringProp>
+              <stringProp name="XPathExtractor.refname">FOLDERSYNCKEY</stringProp>
+              <stringProp name="XPathExtractor.xpathQuery">//SyncKey</stringProp>
+              <boolProp name="XPathExtractor.validate">false</boolProp>
+              <boolProp name="XPathExtractor.tolerant">false</boolProp>
+              <boolProp name="XPathExtractor.namespace">false</boolProp>
+              <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+            </XPathExtractor>
+            <hashTree/>
+          </hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="RefreshToken_DeltaSync" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.HttpEntity
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import org.apache.commons.lang3.StringEscapeUtils
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+import org.apache.http.Header
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Setup HTTP Request ────────────────────────────────────────────────
+    HttpPost hp = new HttpPost(&quot;${vars.get(&apos;URL&apos;)}?Cmd=Sync&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;)
+
+    String auth        = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    hp.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+    // ── PolicyKey + SyncKey: per-user namespaced reads ────────────────────
+    // Priority: DELTASYNCSYNCKEY → SYNCSYNCKEY → &quot;0&quot;
+    // SYNCSYNCKEY (InitialSync baseline) is never overwritten — preserved
+    // for scenario restarts and SyncKey=0 fallback.
+    String policyKey      = props.getProperty(&quot;FINAL_POLICY_KEY.${userKey}&quot;, &quot;0&quot;) ?: &quot;0&quot;
+    String currentSyncKey = props.getProperty(&quot;DELTASYNCSYNCKEY.${userKey}&quot;, &quot;&quot;) ?: &quot;&quot;
+    if (!currentSyncKey) currentSyncKey = props.getProperty(&quot;SYNCSYNCKEY.${userKey}&quot;, &quot;0&quot;) ?: &quot;0&quot;
+    if (!currentSyncKey) currentSyncKey = &quot;0&quot;
+
+    hp.setHeader(&quot;X-MS-PolicyKey&quot;, policyKey)
+
+    log.info(&quot;TC-RefreshToken-DeltaSync: using SyncKey=${currentSyncKey} | PolicyKey=${policyKey} | User=${userKey}&quot;)
+
+    // ── Generate WBXML Request Body ───────────────────────────────────────
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_SYNC)
+      bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_COLLECTIONS)
+        bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_COLLECTION)
+          bs.textElement(BinarySerializer.NAMESPACE_AIRSYNC,
+                         BinarySerializer.AIRSYNC_SYNCKEY, currentSyncKey)
+          bs.integerElement(BinarySerializer.NAMESPACE_AIRSYNC,
+                            BinarySerializer.AIRSYNC_COLLECTIONID, 2)
+        bs.closeTag()
+      bs.closeTag()
+    bs.closeTag()
+
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    // ── SSL + Execute ─────────────────────────────────────────────────────
+    SSLContextBuilder builder = new SSLContextBuilder()
+    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    HttpResponse hr        = dhc.execute(hp)
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    // ── Parse WBXML Response + Extract Next SyncKey ───────────────────────
+    StringBuilder result = new StringBuilder()
+    String nextSyncKey   = &quot;&quot;
+    boolean inSyncKey    = false
+
+    try {
+        BinaryParser bp = new BinaryParser(
+            new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())), false)
+
+        while (bp.next() != null) {
+            switch (bp.getEventType()) {
+                case BinaryParser.START_DOCUMENT:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.END_DOCUMENT:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.START_TAG:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = true
+                    break
+                case BinaryParser.END_TAG:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = false
+                    break
+                case BinaryParser.TEXT:
+                    String text = bp.getText()?.replaceAll(&quot;\\p{Cntrl}&quot;, &quot;&quot;) ?: &quot;&quot;
+                    result.append(StringEscapeUtils.escapeXml(text))
+                    if (inSyncKey &amp;&amp; text?.trim()) {
+                        nextSyncKey = text.trim()
+                    }
+                    break
+            }
+        }
+    } catch (IOException e) {
+        if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+    }
+
+    // ── Overwrite DELTASYNCSYNCKEY so next iteration advances ─────────────
+    // Never overwrites SYNCSYNCKEY — InitialSync baseline is preserved
+    // for scenario restarts and SyncKey=0 fallback.
+    if (nextSyncKey) {
+        props.put(&quot;DELTASYNCSYNCKEY.${userKey}&quot;, nextSyncKey)
+        vars.put(&quot;DELTASYNCSYNCKEY&quot;, nextSyncKey)
+        log.info(&quot;TC-RefreshToken-DeltaSync: next SyncKey=${nextSyncKey} | HTTP=${responseCode} | User=${userKey}&quot;)
+    } else {
+        log.warn(&quot;TC-RefreshToken-DeltaSync: no SyncKey in response | HTTP=${responseCode} | sent=${currentSyncKey} | User=${userKey}&quot;)
+    }
+
+    dhc.close()
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-RefreshToken-DeltaSync&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;TC-RefreshToken-DeltaSync: ${e.toString()}&quot;)
+}</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree>
+            <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+              <stringProp name="XPathExtractor.default">${SYNCSYNCKEY}</stringProp>
+              <stringProp name="XPathExtractor.refname">SYNCSYNCKEY</stringProp>
+              <stringProp name="XPathExtractor.xpathQuery">//SyncKey</stringProp>
+              <boolProp name="XPathExtractor.validate">false</boolProp>
+              <boolProp name="XPathExtractor.tolerant">false</boolProp>
+              <boolProp name="XPathExtractor.namespace">false</boolProp>
+              <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+            </XPathExtractor>
+            <hashTree/>
+            <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+              <stringProp name="XPathExtractor.default"></stringProp>
+              <stringProp name="XPathExtractor.refname">MOREAVAILABLE</stringProp>
+              <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+              <stringProp name="XPathExtractor.xpathQuery">boolean(//MoreAvailable)</stringProp>
+              <boolProp name="XPathExtractor.validate">false</boolProp>
+              <boolProp name="XPathExtractor.tolerant">false</boolProp>
+              <boolProp name="XPathExtractor.namespace">false</boolProp>
+            </XPathExtractor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="10% — Steady Sync" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <FloatProperty>
+            <name>ThroughputController.percentThroughput</name>
+            <value>10.0</value>
+            <savedValue>0.0</savedValue>
+          </FloatProperty>
+        </ThroughputController>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="SteadySync_DeltaSync" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import org.apache.http.impl.client.HttpClients
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.HttpResponse
+import org.apache.http.HttpEntity
+import org.apache.http.entity.ByteArrayEntity
+import org.apache.http.conn.ssl.SSLContextBuilder
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory
+import org.apache.http.util.EntityUtils
+import org.apache.commons.codec.binary.Base64
+import org.apache.commons.lang3.StringEscapeUtils
+import java.nio.charset.StandardCharsets
+import org.apache.http.HttpHeaders
+import org.apache.http.Header
+import com.zimbra.zimbrasync.wbxml.BinarySerializer
+import com.zimbra.zimbrasync.wbxml.BinaryParser
+
+try {
+    // ── Per-user key for props namespacing (multi-user safe) ──────────────
+    String userKey = vars.get(&quot;USER&quot;)
+
+    // ── Setup HTTP Request ────────────────────────────────────────────────
+    HttpPost hp = new HttpPost(&quot;${vars.get(&apos;URL&apos;)}?Cmd=Sync&amp;User=${userKey}&amp;DeviceId=testing&amp;DeviceType=jmeter&quot;)
+
+    String auth        = &quot;${userKey}:${vars.get(&apos;PASS&apos;)}&quot;
+    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1))
+    hp.setHeader(HttpHeaders.AUTHORIZATION, &quot;Basic ${new String(encodedAuth)}&quot;)
+    hp.setHeader(&quot;Content-Type&quot;, &quot;application/vnd.ms-sync.wbxml&quot;)
+    hp.setHeader(&quot;MS-ASProtocolVersion&quot;, props.getProperty(&quot;EAS.version&quot;, &quot;16.1&quot;))
+
+    // ── PolicyKey + SyncKey: per-user namespaced reads ────────────────────
+    // Priority: DELTASYNCSYNCKEY → SYNCSYNCKEY → &quot;0&quot;
+    // SYNCSYNCKEY (InitialSync baseline) is never overwritten — preserved
+    // for scenario restarts and SyncKey=0 fallback.
+    String policyKey      = props.getProperty(&quot;FINAL_POLICY_KEY.${userKey}&quot;, &quot;0&quot;) ?: &quot;0&quot;
+    String currentSyncKey = props.getProperty(&quot;DELTASYNCSYNCKEY.${userKey}&quot;, &quot;&quot;) ?: &quot;&quot;
+    if (!currentSyncKey) currentSyncKey = props.getProperty(&quot;SYNCSYNCKEY.${userKey}&quot;, &quot;0&quot;) ?: &quot;0&quot;
+    if (!currentSyncKey) currentSyncKey = &quot;0&quot;
+
+    hp.setHeader(&quot;X-MS-PolicyKey&quot;, policyKey)
+
+    log.info(&quot;SteadySync-DeltaSync: using SyncKey=${currentSyncKey} | PolicyKey=${policyKey} | User=${userKey}&quot;)
+
+    // ── Generate WBXML Request Body ───────────────────────────────────────
+    ByteArrayOutputStream bao = new ByteArrayOutputStream()
+    BinarySerializer bs = new BinarySerializer(bao, false)
+    bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_SYNC)
+      bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_COLLECTIONS)
+        bs.openTag(BinarySerializer.NAMESPACE_AIRSYNC, BinarySerializer.AIRSYNC_COLLECTION)
+          bs.textElement(BinarySerializer.NAMESPACE_AIRSYNC,
+                         BinarySerializer.AIRSYNC_SYNCKEY, currentSyncKey)
+          bs.integerElement(BinarySerializer.NAMESPACE_AIRSYNC,
+                            BinarySerializer.AIRSYNC_COLLECTIONID, 2)
+        bs.closeTag()
+      bs.closeTag()
+    bs.closeTag()
+
+    hp.setEntity(new ByteArrayEntity(bao.toByteArray()))
+
+    // ── SSL + Execute ─────────────────────────────────────────────────────
+    SSLContextBuilder builder = new SSLContextBuilder()
+    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy())
+    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+        builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+    CloseableHttpClient dhc = HttpClients.custom().setSSLSocketFactory(sslsf).build()
+
+    HttpResponse hr        = dhc.execute(hp)
+    int responseCode       = hr.getStatusLine().getStatusCode()
+    String responseMessage = hr.getStatusLine().getReasonPhrase()
+
+    // ── Parse WBXML Response + Extract Next SyncKey ───────────────────────
+    StringBuilder result = new StringBuilder()
+    String nextSyncKey   = &quot;&quot;
+    boolean inSyncKey    = false
+
+    try {
+        BinaryParser bp = new BinaryParser(
+            new ByteArrayInputStream(EntityUtils.toByteArray(hr.getEntity())), false)
+
+        while (bp.next() != null) {
+            switch (bp.getEventType()) {
+                case BinaryParser.START_DOCUMENT:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.END_DOCUMENT:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    break
+                case BinaryParser.START_TAG:
+                    result.append(&quot;&lt;${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = true
+                    break
+                case BinaryParser.END_TAG:
+                    result.append(&quot;&lt;/${bp.getName()}&gt;&quot;)
+                    if (&quot;SyncKey&quot; == bp.getName()) inSyncKey = false
+                    break
+                case BinaryParser.TEXT:
+                    String text = bp.getText()
+                    text = text.replaceAll(&quot;\\p{Cntrl}&quot;, &quot;&quot;)
+                    result.append(StringEscapeUtils.escapeXml(text))
+                    if (inSyncKey &amp;&amp; text?.trim()) {
+                        nextSyncKey = text.trim()
+                    }
+                    break
+            }
+        }
+    } catch (IOException e) {
+        if (e.getMessage() != &quot;Unexpected EOF&quot;) throw e
+    }
+
+    // ── Overwrite DELTASYNCSYNCKEY so next iteration advances ─────────────
+    // Never overwrites SYNCSYNCKEY — InitialSync baseline is preserved
+    // for scenario restarts and SyncKey=0 fallback.
+    if (nextSyncKey) {
+        props.put(&quot;DELTASYNCSYNCKEY.${userKey}&quot;, nextSyncKey)
+        vars.put(&quot;DELTASYNCSYNCKEY&quot;, nextSyncKey)
+        log.info(&quot;SteadySync-DeltaSync: next SyncKey=${nextSyncKey} | HTTP=${responseCode} | User=${userKey}&quot;)
+    } else {
+        log.warn(&quot;SteadySync-DeltaSync: no SyncKey in response | HTTP=${responseCode} | sent=${currentSyncKey} | User=${userKey}&quot;)
+    }
+
+    dhc.close()
+    SampleResult.setResponseData(result.toString(), &quot;UTF-8&quot;)
+    SampleResult.setSampleLabel(&quot;TC-SteadySync-DeltaSync&quot;)
+
+} catch (Exception e) {
+    log.error(&quot;SteadySync-DeltaSync: ${e.toString()}&quot;)
+}</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree>
+            <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+              <stringProp name="XPathExtractor.default">${SYNCSYNCKEY}</stringProp>
+              <stringProp name="XPathExtractor.refname">SYNCSYNCKEY</stringProp>
+              <stringProp name="XPathExtractor.xpathQuery">//SyncKey</stringProp>
+              <boolProp name="XPathExtractor.validate">false</boolProp>
+              <boolProp name="XPathExtractor.tolerant">false</boolProp>
+              <boolProp name="XPathExtractor.namespace">false</boolProp>
+              <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+            </XPathExtractor>
+            <hashTree/>
+            <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+              <stringProp name="XPathExtractor.default"></stringProp>
+              <stringProp name="XPathExtractor.refname">MOREAVAILABLE</stringProp>
+              <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+              <stringProp name="XPathExtractor.xpathQuery">boolean(//MoreAvailable)</stringProp>
+              <boolProp name="XPathExtractor.validate">false</boolProp>
+              <boolProp name="XPathExtractor.tolerant">false</boolProp>
+              <boolProp name="XPathExtractor.namespace">false</boolProp>
+            </XPathExtractor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
