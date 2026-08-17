@@ -1,0 +1,41 @@
+{
+  "error": "mfa_required",
+  "error_description": "Multifactor authentication required",
+  "mfa_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.mfa-token-simulated",
+  "_embedded": {
+    "factors": [
+      {
+        "id": "opf1234567890abcdef",
+        "factorType": "push",
+        "provider": "OKTA",
+        "vendorName": "OKTA",
+        "profile": {
+          "credentialId": "user@domain.com",
+          "deviceType": "SmartPhone_IPhone",
+          "name": "iPhone",
+          "platform": "IOS"
+        },
+        "_links": {
+          "verify": {
+            "href": "/api/v1/authn/factors/opf1234567890abcdef/verify",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "cancel": {
+      "href": "/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}

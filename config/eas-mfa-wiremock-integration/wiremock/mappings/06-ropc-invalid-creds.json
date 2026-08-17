@@ -1,0 +1,26 @@
+{
+  "priority": 5,
+  "request": {
+    "method": "POST",
+    "urlPathPattern": "/oauth2/v1/token",
+    "bodyPatterns": [
+      {
+        "contains": "grant_type=password"
+      },
+      {
+        "contains": "username=invalid"
+      }
+    ]
+  },
+  "response": {
+    "status": 401,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "error": "invalid_grant",
+      "error_description": "The credentials provided were invalid."
+    },
+    "fixedDelayMilliseconds": 30
+  }
+}
