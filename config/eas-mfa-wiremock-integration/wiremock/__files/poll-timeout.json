@@ -1,0 +1,13 @@
+{
+  "stateToken": "00pstate-token-simulated-xyz",
+  "expiresAt": "2026-08-04T12:30:00.000Z",
+  "status": "MFA_CHALLENGE",
+  "factorResult": "TIMEOUT",
+  "_embedded": {
+    "factor": {
+      "id": "opf1234567890abcdef",
+      "factorType": "push",
+      "provider": "OKTA"
+    }
+  }
+}

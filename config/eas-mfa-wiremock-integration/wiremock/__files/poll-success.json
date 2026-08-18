@@ -1,0 +1,21 @@
+{
+  "expiresAt": "2026-08-04T12:30:00.000Z",
+  "status": "SUCCESS",
+  "factorResult": "SUCCESS",
+  "sessionToken": "20111sTOKEN-simulated-abc123xyz",
+  "_embedded": {
+    "user": {
+      "id": "00u1234567890abcdef",
+      "profile": {
+        "login": "user@domain.com",
+        "firstName": "Test",
+        "lastName": "User"
+      }
+    }
+  },
+  "token_type": "Bearer",
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.simulated-access-token",
+  "refresh_token": "simulated-refresh-token-for-caching",
+  "expires_in": 3600,
+  "scope": "openid offline_access"
+}

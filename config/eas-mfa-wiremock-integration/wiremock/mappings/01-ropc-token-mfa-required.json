@@ -1,0 +1,22 @@
+{
+  "scenarioName": "MFA-Push-Flow",
+  "requiredScenarioState": "Started",
+  "newScenarioState": "ROPC-Done",
+  "request": {
+    "method": "POST",
+    "urlPathPattern": "/oauth2/v1/token",
+    "bodyPatterns": [
+      {
+        "contains": "grant_type=password"
+      }
+    ]
+  },
+  "response": {
+    "status": 403,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "ropc-mfa-required.json",
+    "fixedDelayMilliseconds": 50
+  }
+}

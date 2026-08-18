@@ -1,0 +1,24 @@
+{
+  "stateToken": "00pstate-token-simulated-xyz",
+  "expiresAt": "2026-08-04T12:30:00.000Z",
+  "status": "MFA_CHALLENGE",
+  "factorResult": "WAITING",
+  "_embedded": {
+    "factor": {
+      "id": "opf1234567890abcdef",
+      "factorType": "push",
+      "provider": "OKTA"
+    }
+  },
+  "_links": {
+    "next": {
+      "name": "poll",
+      "href": "/api/v1/authn/factors/opf1234567890abcdef/transactions/txn-simulated-001",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    }
+  }
+}

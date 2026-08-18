@@ -1,0 +1,17 @@
+{
+  "scenarioName": "Push-Poll-Flow",
+  "requiredScenarioState": "Poll-2-Done",
+  "newScenarioState": "Started",
+  "request": {
+    "method": "GET",
+    "urlPathPattern": "/api/v1/authn/factors/.*/transactions/.*"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "poll-success.json",
+    "fixedDelayMilliseconds": 100
+  }
+}
