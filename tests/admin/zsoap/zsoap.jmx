@@ -343,10 +343,13 @@ if (commands.size() == 0) {
               <stringProp name="SwitchController.value">${COMMAND}</stringProp>
             </SwitchController>
             <hashTree>
-              <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="default" enabled="true">
-                <stringProp name="BeanShellSampler.query">log.info(Thread.currentThread().getName()+&quot; &quot;+vars.get(&quot;COMMAND&quot;)+&quot; not currently supported&quot;);</stringProp>
-                <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-              </BeanShellSampler>
+              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="default" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">log.info(Thread.currentThread().getName() + &quot; &quot; + vars.get(&quot;COMMAND&quot;) + &quot; not currently supported&quot;)</stringProp>
+              </JSR223Sampler>
               <hashTree/>
               <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="AuthRequest" enabled="true">
                 <stringProp name="SwitchController.value">${AUTHTYPE}</stringProp>
@@ -850,6 +853,62 @@ if (commands.size() == 0) {
                     <stringProp name="1477249802">200 OK</stringProp>
                   </collectionProp>
                   <stringProp name="Assertion.custom_message">Response Assertion failed for GetAllEffectiveRightsRequest</stringProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">2</intProp>
+                </ResponseAssertion>
+                <hashTree/>
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetAdminConsoleUICompRequest" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+      &lt;authToken&gt;${ADMINAUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;nosession/&gt;&#xd;
+      &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+	&lt;GetAdminConsoleUICompRequest xmlns=&quot;urn:zimbraAdmin&quot;/&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.path">${ADMIN}</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+                <boolProp name="HTTPSampler.image_parser">false</boolProp>
+                <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+                <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+                <boolProp name="HTTPSampler.md5">false</boolProp>
+                <intProp name="HTTPSampler.ipSourceType">0</intProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">X-Zimbra-Csrf-Token</stringProp>
+                      <stringProp name="Header.value">${csrfAdmin}</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="1477249802">200 OK</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.custom_message">Response Assertion failed for admin GetAdminConsoleUICompRequest</stringProp>
                   <stringProp name="Assertion.test_field">Assertion.response_headers</stringProp>
                   <boolProp name="Assertion.assume_success">false</boolProp>
                   <intProp name="Assertion.test_type">2</intProp>
