@@ -1,0 +1,7 @@
+PROFILE.LDAP.type=sequence
+PROFILE.LDAP.sequence.1=AuthRequest(AUTHTYPE=admin)
+PROFILE.LDAP.sequence.2=GetInfoRequest
+PROFILE.LDAP.sequence.3=GetAccountMembershipRequest
+PROFILE.LDAP.sequence.4=SearchDirectoryRequest
+PROFILE.LDAP.sequence.5=GetDistributionListRequest
+PROFILE.LDAP.sequence.6=GetDistributionListMembershipRequest
