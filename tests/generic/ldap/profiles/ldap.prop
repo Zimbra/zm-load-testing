@@ -5,3 +5,13 @@ PROFILE.LDAP.sequence.3=GetAccountMembershipRequest
 PROFILE.LDAP.sequence.4=SearchDirectoryRequest
 PROFILE.LDAP.sequence.5=GetDistributionListRequest
 PROFILE.LDAP.sequence.6=GetDistributionListMembershipRequest
+PROFILE.LDAP.sequence.7=AutoCompleteGalRequest
+PROFILE.LDAP.sequence.8=AuthRequest(AUTHTYPE=user)
+PROFILE.LDAP.sequence.9=GetAccountInfoRequest
+PROFILE.LDAP.sequence.10=GetRightsRequest
+PROFILE.LDAP.sequence.11=GetShareInfoRequest
+PROFILE.LDAP.sequence.12=GetCosRequest
+PROFILE.LDAP.sequence.13=SearchRequest(SEARCHTYPE=message,SEARCH=test)
+PROFILE.LDAP.sequence.14=SyncGalRequest
+PROFILE.LDAP.sequence.15=GetAccountRequest
+PROFILE.LDAP.sequence.16=GetAllEffectiveRightsRequest
