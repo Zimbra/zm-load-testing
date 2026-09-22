@@ -1,0 +1,16 @@
+PROFILE.LDAP.type=sequence
+PROFILE.LDAP.sequence.1=AuthRequest(AUTHTYPE=admin)
+PROFILE.LDAP.sequence.2=GetInfoRequest
+PROFILE.LDAP.sequence.3=GetAccountMembershipRequest
+PROFILE.LDAP.sequence.4=SearchDirectoryRequest
+PROFILE.LDAP.sequence.5=GetDistributionListRequest
+PROFILE.LDAP.sequence.6=GetDistributionListMembershipRequest
+PROFILE.LDAP.sequence.7=AuthRequest(AUTHTYPE=user)
+PROFILE.LDAP.sequence.8=GetAccountInfoRequest
+PROFILE.LDAP.sequence.9=GetRightsRequest
+PROFILE.LDAP.sequence.10=GetShareInfoRequest
+PROFILE.LDAP.sequence.11=GetCosRequest
+PROFILE.LDAP.sequence.12=SearchRequest(SEARCHTYPE=message,SEARCH=test)
+PROFILE.LDAP.sequence.13=SyncGalRequest
+PROFILE.LDAP.sequence.14=GetAccountRequest
+PROFILE.LDAP.sequence.15=GetAllEffectiveRightsRequest

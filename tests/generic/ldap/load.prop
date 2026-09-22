@@ -1,0 +1,10 @@
+LOAD.duration=600
+LOAD.delay=0
+LOAD.LDAP.users=50
+LOAD.LDAP.userduration=100
+LOAD.LDAP.rampup=1
+LOAD.LDAP.rampdown=1
+LOAD.LDAP.loopcount=-1
+LOAD.RPS.start=10
+LOAD.RPS.end=10
+LOAD.RPS.duration=600
