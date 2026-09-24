@@ -12,3 +12,5 @@ PROFILE.ZSOAP.sequence.10=GetAllServersRequest
 PROFILE.ZSOAP.sequence.11=SearchDirectoryRequest
 PROFILE.ZSOAP.sequence.12=GetLicenseRequest
 PROFILE.ZSOAP.sequence.13=GetAllConfigRequest
+PROFILE.ZSOAP.sequence.14=GetServiceStatusRequest
+PROFILE.ZSOAP.sequence.15=GetCertRequest

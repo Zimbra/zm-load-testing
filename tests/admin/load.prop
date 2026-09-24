@@ -1,0 +1,6 @@
+LOAD.duration=300
+LOAD.delay=0
+LOAD.ADMIN.users=10
+LOAD.ADMIN.userduration=0
+LOAD.ADMIN.rampup=0
+LOAD.ADMIN.loopcount=-1
