@@ -1,0 +1,15 @@
+PROFILE.ZSOAP.type=sequence
+PROFILE.ZSOAP.sequence.1=AuthRequest(AUTHTYPE=admin)
+PROFILE.ZSOAP.sequence.2=GetInfoRequest
+PROFILE.ZSOAP.sequence.3=GetAdminExtensionZimletsRequest
+PROFILE.ZSOAP.sequence.4=GetEffectiveRightsRequest
+PROFILE.ZSOAP.sequence.5=GetAccountMembershipRequest
+PROFILE.ZSOAP.sequence.6=GetGrantsRequest
+PROFILE.ZSOAP.sequence.7=GetAllEffectiveRightsRequest
+PROFILE.ZSOAP.sequence.8=GetAdminConsoleUICompRequest
+PROFILE.ZSOAP.sequence.9=GetAdminSavedSearchesRequest
+PROFILE.ZSOAP.sequence.10=GetAllServersRequest
+PROFILE.ZSOAP.sequence.11=SearchDirectoryRequest
+PROFILE.ZSOAP.sequence.12=GetLicenseRequest
+PROFILE.ZSOAP.sequence.13=GetAllConfigRequest
+PROFILE.ZSOAP.sequence.14=GetServiceStatusRequest
