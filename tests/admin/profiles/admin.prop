@@ -1,0 +1,16 @@
+PROFILE.ADMIN.type=sequence
+PROFILE.ADMIN.sequence.1=AuthRequest(AUTHTYPE=admin)
+PROFILE.ADMIN.sequence.2=GetInfoRequest
+PROFILE.ADMIN.sequence.3=GetAdminExtensionZimletsRequest
+PROFILE.ADMIN.sequence.4=GetEffectiveRightsRequest
+PROFILE.ADMIN.sequence.5=GetAccountMembershipRequest
+PROFILE.ADMIN.sequence.6=GetGrantsRequest
+PROFILE.ADMIN.sequence.7=GetAllEffectiveRightsRequest
+PROFILE.ADMIN.sequence.8=GetAdminConsoleUICompRequest
+PROFILE.ADMIN.sequence.9=GetAdminSavedSearchesRequest
+PROFILE.ADMIN.sequence.10=GetAllServersRequest
+PROFILE.ADMIN.sequence.11=SearchDirectoryRequest
+PROFILE.ADMIN.sequence.12=GetLicenseRequest
+PROFILE.ADMIN.sequence.13=GetAllConfigRequest
+PROFILE.ADMIN.sequence.14=GetServiceStatusRequest
+PROFILE.ADMIN.sequence.15=GetCertRequest

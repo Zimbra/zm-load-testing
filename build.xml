@@ -77,6 +77,7 @@
     <antcall target="generic-autocomplete"/>
     <antcall target="generic-mail-recall"/>
     <antcall target="generic-ldap"/>
+    <antcall target="generic-admin"/>
   </target>
   <target name="CSP2">
     <antcall target="CSP2-zsoap"/>
@@ -162,6 +163,17 @@
       <jmeterarg value="-q${basedir}/${env}"/>
       <jmeterarg value="-q${basedir}/tests/generic/ldap/load.prop"/>
       <jmeterarg value="-q${basedir}/tests/generic/ldap/profiles/ldap.prop"/>
+    </jmeter>
+  </target>
+  <target name="generic-admin" depends="src,logs">
+    <jmeter jmeterhome="${jmeter.home}"
+    testplan="${basedir}/tests/admin/admin.jmx"
+            jmeterlogfile="${logs}/generic-admin-jmeter.log"
+            resultlog="${logs}/generic-admin-requests.log">
+      <property name="user.classpath" value="${zjmeter}"/>
+      <jmeterarg value="-q${basedir}/${env}"/>
+      <jmeterarg value="-q${basedir}/tests/admin/load.prop"/>
+      <jmeterarg value="-q${basedir}/tests/admin/profiles/admin.prop"/>
     </jmeter>
   </target>
   <target name="generic-imap" depends="src,logs">
