@@ -360,19 +360,17 @@ if (commands.size() == 0) {
                       <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
   &lt;soap:Header&gt;&#xd;
     &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
-      &lt;authToken&gt;${ADMINAUTHTOKEN}&lt;/authToken&gt;&#xd;
+      &lt;authToken/&gt;&#xd;
       &lt;nosession/&gt;&#xd;
       &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
     &lt;/context&gt;&#xd;
   &lt;/soap:Header&gt;&#xd;
   &lt;soap:Body&gt;&#xd;
-	&lt;GetDomainInfoRequest xmlns=&quot;urn:zimbraAdmin&quot;&gt;&#xd;
-		&lt;domain xmlns=&quot;&quot; by=&quot;virtualHostname&quot;&gt;${__P(HTTP.server)}&lt;/domain&gt;&#xd;
-	&lt;/GetDomainInfoRequest&gt;&#xd;
-  &lt;/soap:Body&gt;&#xd;
-&lt;/soap:Envelope&gt;&#xd;
-&#xd;
-</stringProp>
+    &lt;GetDomainInfoRequest xmlns=&quot;urn:zimbraAdmin&quot;&gt;&#xd;
+      &lt;domain xmlns=&quot;&quot; by=&quot;virtualHostname&quot;&gt;${__P(HTTP.server)}&lt;/domain&gt;&#xd;
+    &lt;/GetDomainInfoRequest&gt;&#xd;
+   &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                     </elementProp>
                   </collectionProp>
