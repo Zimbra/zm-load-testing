@@ -7,7 +7,7 @@
   <property name="env" value="config/env.prop"/>
   <property name="users" location="config/users.csv"/>
   <property name="distribution_list" location="config/distribution_list.csv"/>
-  <property name="content" location="config/Autocomplete/content.csv"/
+  <property name="content" location="config/Autocomplete/content.csv"/>
   <property name="chat_users" location="config/chat_users.csv"/>
   <property name="message" location="config/message.csv"/>
   <property name="emoji" location="config/Chat/emoji.csv"/>
