@@ -377,10 +377,7 @@ if (commands.size() == 0) {
                     </elementProp>
                   </collectionProp>
                 </elementProp>
-                <stringProp name="HTTPSampler.domain">qesit-zcs101-rocky8-8n-proxy.zimbraeng.com</stringProp>
-                <stringProp name="HTTPSampler.port">9071</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
-                <stringProp name="HTTPSampler.path">service/admin/soap/GetDomainInfoRequest</stringProp>
+                <stringProp name="HTTPSampler.path">${ADMIN}</stringProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
