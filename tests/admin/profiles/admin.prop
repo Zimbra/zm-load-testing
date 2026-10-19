@@ -18,3 +18,5 @@ PROFILE.ADMIN.sequence.16=GetCertRequest
 PROFILE.ADMIN.sequence.17=GetMailQueueInfoRequest
 PROFILE.ADMIN.sequence.18=BackupQueryRequest
 PROFILE.ADMIN.sequence.19=GetSessionsRequest
+PROFILE.ADMIN.sequence.20=GetCreateObjectAttrsRequest
+PROFILE.ADMIN.sequence.21=DelegateAuthRequest
