@@ -1172,7 +1172,7 @@ if (commands.size() == 0) {
                   <stringProp name="BoundaryExtractor.rboundary">&lt;/a&gt;</stringProp>
                   <stringProp name="BoundaryExtractor.default">NA</stringProp>
                   <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
-                  <stringProp name="BoundaryExtractor.match_number">4</stringProp>
+                  <stringProp name="BoundaryExtractor.match_number">0</stringProp>
                 </BoundaryExtractor>
                 <hashTree/>
               </hashTree>
