@@ -20,3 +20,5 @@ PROFILE.ADMIN.sequence.18=BackupQueryRequest
 PROFILE.ADMIN.sequence.19=GetSessionsRequest
 PROFILE.ADMIN.sequence.20=GetCreateObjectAttrsRequest
 PROFILE.ADMIN.sequence.21=DelegateAuthRequest
+PROFILE.ADMIN.sequence.22=GetAvailableLocalesRequest
+PROFILE.ADMIN.sequence.23=GetAllUCServicesRequest
