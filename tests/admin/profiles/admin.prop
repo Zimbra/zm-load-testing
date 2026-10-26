@@ -22,3 +22,5 @@ PROFILE.ADMIN.sequence.20=GetCreateObjectAttrsRequest
 PROFILE.ADMIN.sequence.21=DelegateAuthRequest
 PROFILE.ADMIN.sequence.22=GetAvailableLocalesRequest
 PROFILE.ADMIN.sequence.23=GetAllUCServicesRequest
+PROFILE.ADMIN.sequence.24=GetAllSkinsRequest
+PROFILE.ADMIN.sequence.25=GetAllRightsRequest
