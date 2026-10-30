@@ -1,0 +1,9 @@
+LOAD.OAUTH.duration=3600
+LOAD.OAUTH.delay=0
+LOAD.OAUTH.users=10000
+LOAD.OAUTH.rampup=900
+LOAD.OAUTH.loopcount=1
+LOAD.REFRESH.loopcount=24
+LOAD.RPS.start=20
+LOAD.RPS.end=20
+LOAD.RPS.duration=3600
