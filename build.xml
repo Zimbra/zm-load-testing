@@ -79,6 +79,7 @@
     <antcall target="generic-ldap"/>
     <antcall target="generic-admin"/>
     <antcall target="generic-oauth"/>		
+    <antcall target="generic-notification"/>
   </target>
   <target name="CSP2">
     <antcall target="CSP2-zsoap"/>
@@ -331,6 +332,18 @@
               <property name="PROFILE.ZSOAP.type" value="none"/>
               <jmeterarg value="-q${basedir}/${env}"/>
               <jmeterarg value="-q${basedir}/tests/generic/oauth/load.prop"/>
+            </jmeter>
+          </target>
+          <target name="generic-notification" depends="src,logs">
+            <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/generic/notification/push_notification.jmx"
+                    jmeterlogfile="${logs}/generic-notification-jmeter.log"
+                    resultlog="${logs}/generic-notification-requests.csv">
+              <property name="ACCOUNTS.csv" value="${users}"/>
+              <property name="user.classpath" value="${zjmeter}"/>
+              <property name="PROFILE.ZSOAP.type" value="none"/>
+              <jmeterarg value="-q${basedir}/${env}"/>
+              <jmeterarg value="-q${basedir}/tests/generic/notification/load.prop"/>
             </jmeter>
           </target>
 	  <target name="generic-zsoap-all" depends="src,logs,generic-zsoap">
