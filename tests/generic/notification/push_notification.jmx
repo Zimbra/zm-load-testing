@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.2">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Zimbra Mobile Notification Extension APIs" enabled="true">
+      <stringProp name="TestPlan.comments">JMeter test suite for AddDeviceToken, RemoveDeviceToken, and GetFCMDetails SOAP/JSON APIs</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="ZM_AUTH_TOKEN" elementType="Argument">
+            <stringProp name="Argument.name">ZM_AUTH_TOKEN</stringProp>
+            <stringProp name="Argument.value">${__P(auth_token,)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="ZM_CSRF_TOKEN" elementType="Argument">
+            <stringProp name="Argument.name">ZM_CSRF_TOKEN</stringProp>
+            <stringProp name="Argument.value">${__P(csrf_token,)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">false</boolProp>
+    </TestPlan>
+    <hashTree>
+      <ConfigTestElement guiclass="SimpleConfigGui" testclass="ConfigTestElement" testname="Simple Config Element" enabled="true">
+        <stringProp name="soaptest_folderName">soaptest</stringProp>
+        <stringProp name="soaptest_tagName">soaptag</stringProp>
+        <stringProp name="soaptest_SearchFolderName">soapsearchtest</stringProp>
+        <stringProp name="endDate">0</stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Global HTTP Header Manager" enabled="true">
+        <collectionProp name="HeaderManager.headers">
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">Content-Type</stringProp>
+            <stringProp name="Header.value">application/json</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">Accept</stringProp>
+            <stringProp name="Header.value">application/json</stringProp>
+          </elementProp>
+        </collectionProp>
+      </HeaderManager>
+      <hashTree/>
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="PUSH HTTP Config" enabled="true">
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+        <stringProp name="HTTPSampler.domain">${__P(HTTP.server)}</stringProp>
+        <stringProp name="HTTPSampler.port">${__P(HTTP.port)}</stringProp>
+        <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+        <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="PUSH Setup" enabled="true">
+        <stringProp name="filename"></stringProp>
+        <stringProp name="parameters"></stringProp>
+        <boolProp name="resetInterpreter">false</boolProp>
+        <stringProp name="script">import com.zimbra.jmeter.Zimbra;
+
+// 1. Safe Property Retrieval &amp; Trimming
+String server = props.get(&quot;HTTP.server&quot;);
+if (server == null) {
+    server = props.get(&quot;ZSOAP.server&quot;);
+}
+if (server != null) {
+    server = server.trim();
+}
+
+String httpPort = props.get(&quot;HTTP.port&quot;);
+httpPort = (httpPort != null) ? httpPort.trim() : &quot;443&quot;;
+
+String adminPort = props.get(&quot;HTTP.admin.port&quot;);
+adminPort = (adminPort != null) ? adminPort.trim() : &quot;7071&quot;;
+
+// Ensure ZSOAP properties are populated in props so Zimbra constructor doesn&apos;t fail
+if (props.get(&quot;ZSOAP.server&quot;) == null) props.put(&quot;ZSOAP.server&quot;, server);
+if (props.get(&quot;ZSOAP.port&quot;) == null) props.put(&quot;ZSOAP.port&quot;, httpPort);
+
+// 2. Instantiate Zimbra helper safely
+try {
+    Zimbra soap = new Zimbra(props, &quot;ZSOAP&quot;);
+    vars.putObject(&quot;ZSOAP&quot;, soap);
+} catch (Throwable t) {
+    log.error(&quot;Error initializing Zimbra SOAP helper: &quot; + t.getMessage(), t);
+}
+
+// 3. Build URLs cleanly
+String baseUrl = &quot;https://&quot; + server;
+String adminUrl = baseUrl + &quot;:&quot; + adminPort + &quot;/service/admin/soap&quot;;
+String soapUrl = baseUrl;
+if (!httpPort.equals(&quot;&quot;) &amp;&amp; !httpPort.equals(&quot;443&quot;)) {
+    soapUrl = soapUrl + &quot;:&quot; + httpPort;
+}
+soapUrl = soapUrl + &quot;/service/soap&quot;;
+
+vars.put(&quot;ADMIN&quot;, adminUrl);
+vars.put(&quot;URL&quot;, soapUrl);
+
+// 4. Time Shift without JMeter Function syntax error
+long now = System.currentTimeMillis();
+long startEpoch = now - (5L * 24 * 60 * 60 * 1000);  // -5 days
+long endEpoch   = now + (14L * 24 * 60 * 60 * 1000); // +14 days
+
+vars.put(&quot;searchStartEpochTime&quot;, String.valueOf(startEpoch));
+vars.put(&quot;searchEndEpochTime&quot;, String.valueOf(endEpoch));</stringProp>
+      </BeanShellPreProcessor>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Mobile Notification API" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <stringProp name="LoopController.loops">${__P(LOAD.PUSH.loopcount)}</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(LOAD.PUSH.users)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(LOAD.PUSH.rampup)}</stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(LOAD.PUSH.duration)}</stringProp>
+        <stringProp name="ThreadGroup.delay">${__P(LOAD.PUSH.delay)}</stringProp>
+        <boolProp name="ThreadGroup.delayedStart">false</boolProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Accounts" enabled="true">
+          <stringProp name="filename">${__P(ACCOUNTS.csv)}</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames">username,password</stringProp>
+          <boolProp name="ignoreFirstLine">false</boolProp>
+          <stringProp name="delimiter">,</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="Per-User Device Variables" enabled="true">
+          <collectionProp name="UserParameters.names">
+            <stringProp name="1109191185">deviceId</stringProp>
+            <stringProp name="780988929">deviceToken</stringProp>
+            <stringProp name="1874684019">platformType</stringProp>
+          </collectionProp>
+          <collectionProp name="UserParameters.thread_values">
+            <collectionProp name="-315805018">
+              <stringProp name="827364123">${__UUID()}</stringProp>
+              <stringProp name="609973189">${__groovy(def chars = &apos;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-&apos;; def rnd = java.util.concurrent.ThreadLocalRandom.current(); def p = (1..22).collect { chars[rnd.nextInt(chars.length())] }.join(); def s = (1..134).collect { chars[rnd.nextInt(chars.length())] }.join(); return p + &apos;:APA91b&apos; + s;)}</stringProp>
+              <stringProp name="104461">ios</stringProp>
+            </collectionProp>
+          </collectionProp>
+          <boolProp name="UserParameters.per_iteration">true</boolProp>
+        </UserParameters>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="START" enabled="true">
+          <stringProp name="BeanShellSampler.query">String server = props.get(&quot;HTTP.server&quot;);
+if (server == null) {
+    server = props.get(&quot;ZSOAP.server&quot;);
+}
+
+String httpPort = props.get(&quot;HTTP.port&quot;);
+httpPort = (httpPort != null) ? httpPort.trim() : &quot;443&quot;;
+
+String url = &quot;https://&quot; + server;
+if (!httpPort.equals(&quot;&quot;) &amp;&amp; !httpPort.equals(&quot;443&quot;)) {
+    url = url + &quot;:&quot; + httpPort;
+}
+url = url + &quot;/service/soap&quot;;
+
+log.info(&quot;Constructed SOAP URL: &quot; + url);
+vars.put(&quot;URL&quot;, url);</stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AuthRequest" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&#xd;
+  &lt;soap:Header&gt;&#xd;
+    &lt;context xmlns=&quot;urn:zimbra&quot;&gt;&#xd;
+       &lt;session format=&quot;DEFAULT&quot;/&gt;&#xd;
+       &lt;userAgent name=&quot;jmeter-soap&quot;/&gt;&#xd;
+    &lt;/context&gt;&#xd;
+  &lt;/soap:Header&gt;&#xd;
+  &lt;soap:Body&gt;&#xd;
+   &lt;AuthRequest xmlns=&quot;urn:zimbraAccount&quot; csrfTokenSecured=&quot;1&quot;&gt;&#xd;
+     &lt;account by=&quot;name&quot;&gt;${username}&lt;/account&gt;&#xd;
+     &lt;password&gt;${password}&lt;/password&gt;&#xd;
+   &lt;/AuthRequest&gt;&#xd;
+  &lt;/soap:Body&gt;&#xd;
+&lt;/soap:Envelope&gt;</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.path">${URL}</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+          <boolProp name="HTTPSampler.image_parser">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <boolProp name="HTTPSampler.md5">false</boolProp>
+          <intProp name="HTTPSampler.ipSourceType">0</intProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="Extract ZM_AUTH_TOKEN" enabled="true">
+            <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+            <stringProp name="BoundaryExtractor.refname">ZM_AUTH_TOKEN</stringProp>
+            <stringProp name="BoundaryExtractor.lboundary">&lt;authToken&gt;</stringProp>
+            <stringProp name="BoundaryExtractor.rboundary">&lt;/authToken&gt;</stringProp>
+            <stringProp name="BoundaryExtractor.default">NA</stringProp>
+            <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+            <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+          </BoundaryExtractor>
+          <hashTree/>
+          <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="Extract ZM_CSRF_TOKEN" enabled="true">
+            <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+            <stringProp name="BoundaryExtractor.refname">ZM_CSRF_TOKEN</stringProp>
+            <stringProp name="BoundaryExtractor.lboundary">&lt;csrfToken&gt;</stringProp>
+            <stringProp name="BoundaryExtractor.rboundary">&lt;/csrfToken&gt;</stringProp>
+            <stringProp name="BoundaryExtractor.default">NA</stringProp>
+            <boolProp name="BoundaryExtractor.default_empty_value">false</boolProp>
+            <stringProp name="BoundaryExtractor.match_number">1</stringProp>
+          </BoundaryExtractor>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert Auth Success" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-582581719">AuthResponse</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message">Authentication failed</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Notification APIs Flow" enabled="true"/>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Auth &amp; CSRF Headers" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Cookie</stringProp>
+                <stringProp name="Header.value">ZM_AUTH_TOKEN=${ZM_AUTH_TOKEN}; ZM_TEST=true;</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">x-zimbra-csrf-token</stringProp>
+                <stringProp name="Header.value">${ZM_CSRF_TOKEN}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AddDeviceTokenRequest" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+    &quot;Body&quot;: {&#xd;
+        &quot;AddDeviceTokenRequest&quot;: {&#xd;
+            &quot;_jsns&quot;: &quot;urn:zimbraAccount&quot;,&#xd;
+            &quot;deviceToken&quot;: &quot;${deviceToken}&quot;,&#xd;
+            &quot;deviceId&quot;: &quot;${deviceId}&quot;,&#xd;
+            &quot;deviceType&quot;: &quot;MOBILE&quot;,&#xd;
+            &quot;pushProvider&quot;: &quot;FCM&quot;,&#xd;
+            &quot;appId&quot;: &quot;com.zimbra.mobile&quot;,&#xd;
+       	  &quot;appVersion&quot;: &quot;10.1.0&quot;,&#xd;
+      	  &quot;deviceOSName&quot;: &quot;Android&quot;,&#xd;
+      	  &quot;deviceOSVersion&quot;: &quot;14&quot;&#xd;
+        }&#xd;
+    }&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.path">${URL}</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+            <boolProp name="HTTPSampler.image_parser">false</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <boolProp name="HTTPSampler.md5">false</boolProp>
+            <intProp name="HTTPSampler.ipSourceType">0</intProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Assert AddDeviceToken status == success" enabled="true">
+              <stringProp name="JSON_PATH">$.Body.AddDeviceTokenResponse.status[0]._content</stringProp>
+              <stringProp name="EXPECTED_VALUE">success</stringProp>
+              <boolProp name="JSONVALIDATION">true</boolProp>
+              <boolProp name="EXPECT_NULL">false</boolProp>
+              <boolProp name="INVERT">false</boolProp>
+              <boolProp name="ISREGEX">false</boolProp>
+            </JSONPathAssertion>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetFCMDetailsRequest" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+    &quot;Body&quot;: {&#xd;
+        &quot;GetFCMDetailsRequest&quot;: {&#xd;
+            &quot;_jsns&quot;: &quot;urn:zimbraAccount&quot;,&#xd;
+            &quot;platformType&quot;: &quot;${platformType}&quot;&#xd;
+        }&#xd;
+    }&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.path">${URL}</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+            <boolProp name="HTTPSampler.image_parser">false</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <boolProp name="HTTPSampler.md5">false</boolProp>
+            <intProp name="HTTPSampler.ipSourceType">0</intProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Assert GetFCMDetailsResponse" enabled="true">
+              <stringProp name="JSON_PATH">$.Body.GetFCMDetailsResponse</stringProp>
+              <stringProp name="EXPECTED_VALUE"></stringProp>
+              <boolProp name="JSONVALIDATION">false</boolProp>
+              <boolProp name="EXPECT_NULL">false</boolProp>
+              <boolProp name="INVERT">false</boolProp>
+              <boolProp name="ISREGEX">true</boolProp>
+            </JSONPathAssertion>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="RemoveDeviceTokenRequest" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+    &quot;Body&quot;: {&#xd;
+        &quot;RemoveDeviceTokenRequest&quot;: {&#xd;
+            &quot;_jsns&quot;: &quot;urn:zimbraAccount&quot;,&#xd;
+            &quot;deviceToken&quot;: &quot;${deviceToken}&quot;,&#xd;
+            &quot;deviceId&quot;: &quot;${deviceId}&quot;&#xd;
+        }&#xd;
+    }&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.path">${URL}</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+            <boolProp name="HTTPSampler.image_parser">false</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <boolProp name="HTTPSampler.md5">false</boolProp>
+            <intProp name="HTTPSampler.ipSourceType">0</intProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Assert RemoveDeviceToken status == success" enabled="true">
+              <stringProp name="JSON_PATH">$.Body.RemoveDeviceTokenResponse.status[0]._content</stringProp>
+              <stringProp name="EXPECTED_VALUE">success</stringProp>
+              <boolProp name="JSONVALIDATION">true</boolProp>
+              <boolProp name="EXPECT_NULL">false</boolProp>
+              <boolProp name="INVERT">false</boolProp>
+              <boolProp name="ISREGEX">false</boolProp>
+            </JSONPathAssertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>false</threadName>
+              <dataType>false</dataType>
+              <encoding>false</encoding>
+              <assertions>false</assertions>
+              <subresults>false</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <url>true</url>
+            </value>
+          </objProp>
+          <objProp>
+            <name></name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>false</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>false</threadName>
+              <dataType>false</dataType>
+              <encoding>false</encoding>
+              <assertions>false</assertions>
+              <subresults>false</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <threadCounts>true</threadCounts>
+            </value>
+          </objProp>
+          <stringProp name="filename">${__P(jmetercsv,${__P(REQUEST.log)})}</stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

@@ -1,0 +1,5 @@
+LOAD.PUSH.duration=60
+LOAD.PUSH.delay=0
+LOAD.PUSH.users=10
+LOAD.PUSH.rampup=10
+LOAD.PUSH.loopcount=1
