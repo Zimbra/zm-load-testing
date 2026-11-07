@@ -80,6 +80,7 @@
     <antcall target="generic-admin"/>
     <antcall target="generic-oauth"/>		
     <antcall target="generic-notification"/>
+    <antcall target="generic-modernui"/>
   </target>
   <target name="CSP2">
     <antcall target="CSP2-zsoap"/>
@@ -344,6 +345,18 @@
               <property name="PROFILE.ZSOAP.type" value="none"/>
               <jmeterarg value="-q${basedir}/${env}"/>
               <jmeterarg value="-q${basedir}/tests/generic/notification/load.prop"/>
+            </jmeter>
+          </target>
+	  <target name="generic-modernui" depends="src,logs">
+            <jmeter jmeterhome="${jmeter.home}"
+            testplan="${basedir}/tests/generic/modernui/CSP.jmx"
+                    jmeterlogfile="${logs}/generic-modernui-jmeter.log"
+                    resultlog="${logs}/generic-modernui-requests.csv">
+              <property name="ACCOUNTS.csv" value="${users}"/>
+              <property name="user.classpath" value="${zjmeter}"/>
+              <property name="PROFILE.ZSOAP.type" value="none"/>
+              <jmeterarg value="-q${basedir}/${env}"/>
+              <jmeterarg value="-q${basedir}/tests/generic/modernui/load.prop"/>
             </jmeter>
           </target>
 	  <target name="generic-zsoap-all" depends="src,logs,generic-zsoap">
