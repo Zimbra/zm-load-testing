@@ -1,0 +1,8 @@
+LOAD.CSP.duration=3600
+LOAD.CSP.delay=0
+LOAD.CSP.users=10
+LOAD.CSP.rampup=10
+LOAD.CSP.loopcount=-1
+LOAD.RPS.start=10
+LOAD.RPS.end=10
+LOAD.RPS.duration=3600
