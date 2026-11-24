@@ -1,0 +1,30 @@
+{
+  "id": "a1b2c3d4-e5f6-47a8-b901-112233445503",
+  "name": "09.3-ropc-refresh-token",
+  "priority": 1,
+  "request": {
+    "urlPath": "/oauth2/v1/token",
+    "method": "POST",
+    "bodyPatterns": [
+      {
+        "contains": "grant_type=refresh_token"
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "token_type": "Bearer",
+      "expires_in": 3600,
+      "access_token": "eyJraWQiOiJzMDlfdG90cF90ZXN0X2tleSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJyZWZyZXNoZWRfdXNlciJ9.dummy_sig",
+      "refresh_token": "00s09_totp_refresh_token_valid",
+      "id_token": "eyJraWQiOiJzMDkiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJyZWZyZXNoIn0.dummy_id",
+      "scope": "openid profile email"
+    },
+    "fixedDelayMilliseconds": 20
+  }
+}
+
