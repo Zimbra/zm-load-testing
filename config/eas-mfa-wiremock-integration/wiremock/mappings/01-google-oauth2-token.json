@@ -1,0 +1,26 @@
+{
+  "id": "e0a1b2c3-d4e5-4f6a-8b9c-012345678901",
+  "name": "01-google-oauth2-token",
+  "priority": 1,
+  "request": {
+    "urlPathPattern": "/(token|oauth2/v1/token)",
+    "method": "POST",
+    "bodyPatterns": [
+      {
+        "contains": "grant-type%3Ajwt-bearer"
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "access_token": "ya29.mock_fcm_access_token_for_load_testing",
+      "token_type": "Bearer",
+      "expires_in": 3600
+    },
+    "fixedDelayMilliseconds": 20
+  }
+}
