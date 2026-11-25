@@ -1,0 +1,47 @@
+{
+  "id": "e0a1b2c3-d4e5-4f6a-8b9c-012345678901",
+  "name": "01-google-oauth2-token",
+  "priority": 1,
+  "request": {
+    "urlPathPattern": "/(token|oauth2/v1/token)",
+    "method": "POST",
+    "bodyPatterns": [
+      {
+        "contains": "grant-type%3Ajwt-bearer"
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "access_token": "ya29.mock_fcm_access_token_for_load_testing",
+      "token_type": "Bearer",
+      "expires_in": 3600
+    },
+    "fixedDelayMilliseconds": 20
+  }
+}
+root@qa-perf-wiremock:/home/ubuntu/TOTP/eas-mfa-perf-kit/wiremock/mappings# cat 02-fcm-send-success.json
+{
+  "id": "e0a1b2c3-d4e5-4f6a-8b9c-012345678902",
+  "name": "02-fcm-send-success",
+  "priority": 1,
+  "request": {
+    "urlPathPattern": "/v1/projects/.*/messages:send",
+    "method": "POST"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "name": "projects/mock-zimbra-project/messages/mock_msg_id_0123456789"
+    },
+    "fixedDelayMilliseconds": 20
+  }
+}
+
